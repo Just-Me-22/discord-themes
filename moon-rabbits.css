@@ -1,0 +1,1756 @@
+/**
+ * Moon Rabbits Dream About Virtual, the rules.
+ * Based on Tsukino Mito Album Presentation by zuzumi-f. Local canary port.
+ *
+ * Every colour, size and toggle lives in the .theme.css that imports this,
+ * so that file is the only one anyone has to edit.
+*/
+
+/* Selection text color */
+::selection {
+    background-color: var(--selected-text-bg);
+    color: var(--selected-text-color);
+}
+
+
+/*=====================================================================
+   tsukino-mito-base.css
+=====================================================================*/
+:root {
+    /* old color pattern
+    --blurple-50: hsl(var(--H), var(--S), var(--L));
+    
+    --brand-100: hsl(var(--H), var(--S), calc(2*var(--L)));
+    --brand-130: hsl(var(--H), var(--S), calc(1.92*var(--L)));
+    --brand-160: hsl(var(--H), var(--S), calc(1.85*var(--L)));
+    --brand-200: hsl(var(--H), var(--S), calc(1.78*var(--L)));
+    --brand-230: hsl(var(--H), var(--S), calc(1.71*var(--L)));
+    --brand-260: hsl(var(--H), var(--S), calc(1.63*var(--L)));
+    --brand-300: hsl(var(--H), var(--S), calc(1.56*var(--L)));
+    --brand-330: hsl(var(--H), var(--S), calc(1.49*var(--L)));
+    --brand-345: hsl(var(--H), var(--S), calc(1.42*var(--L)));
+    --brand-360: hsl(var(--H), var(--S), calc(1.35*var(--L)));
+    --brand-400: hsl(var(--H), var(--S), calc(1.28*var(--L)));
+    --brand-430: hsl(var(--H), var(--S), calc(1.21*var(--L)));
+    --brand-460: hsl(var(--H), var(--S), calc(1.14*var(--L)));
+    --brand-500: hsl(var(--H), var(--S), calc(1*var(--L)));
+    --brand-530: hsl(var(--H), calc(0.75*var(--S)), calc(0.99*var(--L)));
+    --brand-560: hsl(var(--H), calc(0.60*var(--S)), calc(0.91*var(--L)));
+    --brand-600: hsl(var(--H), calc(0.54*var(--S)), calc(0.83*var(--L)));
+    --brand-630: hsl(var(--H), calc(0.54*var(--S)), calc(0.74*var(--L)));
+    --brand-660: hsl(var(--H), calc(0.54*var(--S)), calc(0.66*var(--L)));
+    --brand-700: hsl(var(--H), calc(0.54*var(--S)), calc(0.58*var(--L)));
+    --brand-730: hsl(var(--H), calc(0.54*var(--S)), calc(0.49*var(--L)));
+    --brand-760: hsl(var(--H), calc(0.54*var(--S)), calc(0.41*var(--L)));
+    --brand-800: hsl(var(--H), calc(0.54*var(--S)), calc(0.33*var(--L)));
+    --brand-830: hsl(var(--H), calc(0.54*var(--S)), calc(0.24*var(--L)));
+    --brand-860: hsl(var(--H), calc(0.54*var(--S)), calc(0.16*var(--L)));
+    --brand-900: hsl(var(--H), calc(0.54*var(--S)), calc(0*var(--L))); */
+
+    --blurple-1-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 95.294%;
+    --blurple-2-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 94.51%;
+    --blurple-3-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 93.725%;
+    --blurple-4-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 93.137%;
+    --blurple-5-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 92.353%;
+    --blurple-6-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 91.765%;
+    --blurple-7-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 90.98%;
+    --blurple-8-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 90.392%;
+    --blurple-9-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 89.608%;
+    --blurple-10-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 89.02%;
+    --blurple-11-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 88.235%;
+    --blurple-12-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 87.647%;
+    --blurple-13-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 87.059%;
+    --blurple-14-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 86.275%;
+    --blurple-15-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 85.686%;
+    --blurple-16-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 85.098%;
+    --blurple-17-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 84.314%;
+    --blurple-18-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 83.725%;
+    --blurple-19-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 83.137%;
+    --blurple-20-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 82.549%;
+    --blurple-21-hsl: var(--H) calc(var(--saturation-factor, 1)*97.849%) 81.765%;
+    --blurple-22-hsl: var(--H) calc(var(--saturation-factor, 1)*97.938%) 80.98%;
+    --blurple-23-hsl: var(--H) calc(var(--saturation-factor, 1)*98%) 80.392%;
+    --blurple-24-hsl: var(--H) calc(var(--saturation-factor, 1)*96.154%) 79.608%;
+    --blurple-25-hsl: var(--H) calc(var(--saturation-factor, 1)*96.262%) 79.02%;
+    --blurple-26-hsl: var(--H) calc(var(--saturation-factor, 1)*96.364%) 78.431%;
+    --blurple-27-hsl: var(--H) calc(var(--saturation-factor, 1)*94.737%) 77.647%;
+    --blurple-28-hsl: var(--H) calc(var(--saturation-factor, 1)*94.872%) 77.059%;
+    --blurple-29-hsl: var(--H) calc(var(--saturation-factor, 1)*93.333%) 76.471%;
+    --blurple-30-hsl: var(--H) calc(var(--saturation-factor, 1)*93.496%) 75.882%;
+    --blurple-31-hsl: var(--H) calc(var(--saturation-factor, 1)*93.651%) 75.294%;
+    --blurple-32-hsl: var(--H) calc(var(--saturation-factor, 1)*92.308%) 74.51%;
+    --blurple-33-hsl: var(--H) calc(var(--saturation-factor, 1)*92.481%) 73.922%;
+    --blurple-34-hsl: var(--H) calc(var(--saturation-factor, 1)*91.176%) 73.333%;
+    --blurple-35-hsl: var(--H) calc(var(--saturation-factor, 1)*91.367%) 72.745%;
+    --blurple-36-hsl: var(--H) calc(var(--saturation-factor, 1)*90.21%) 71.961%;
+    --blurple-37-hsl: var(--H) calc(var(--saturation-factor, 1)*90.345%) 71.569%;
+    --blurple-38-hsl: var(--H) calc(var(--saturation-factor, 1)*89.262%) 70.784%;
+    --blurple-39-hsl: var(--H) calc(var(--saturation-factor, 1)*89.474%) 70.196%;
+    --blurple-40-hsl: var(--H) calc(var(--saturation-factor, 1)*88.387%) 69.608%;
+    --blurple-41-hsl: var(--H) calc(var(--saturation-factor, 1)*88.608%) 69.02%;
+    --blurple-42-hsl: var(--H) calc(var(--saturation-factor, 1)*87.578%) 68.431%;
+    --blurple-43-hsl: var(--H) calc(var(--saturation-factor, 1)*87.73%) 68.039%;
+    --blurple-44-hsl: var(--H) calc(var(--saturation-factor, 1)*86.826%) 67.255%;
+    --blurple-45-hsl: var(--H) calc(var(--saturation-factor, 1)*86.982%) 66.863%;
+    --blurple-46-hsl: var(--H) calc(var(--saturation-factor, 1)*86.047%) 66.275%;
+    --blurple-47-hsl: var(--H) calc(var(--saturation-factor, 1)*86.286%) 65.686%;
+    --blurple-48-hsl: var(--H) calc(var(--saturation-factor, 1)*85.393%) 65.098%;
+    --blurple-49-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --blurple-50-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --blurple-51-hsl: var(--H) calc(var(--saturation-factor, 1)*79.787%) 63.137%;
+    --blurple-52-hsl: var(--H) calc(var(--saturation-factor, 1)*74.49%) 61.569%;
+    --blurple-53-hsl: var(--H) calc(var(--saturation-factor, 1)*69.608%) 60%;
+    --blurple-54-hsl: var(--H) calc(var(--saturation-factor, 1)*65.877%) 58.627%;
+    --blurple-55-hsl: var(--H) calc(var(--saturation-factor, 1)*61.644%) 57.059%;
+    --blurple-56-hsl: var(--H) calc(var(--saturation-factor, 1)*58.407%) 55.686%;
+    --blurple-57-hsl: var(--H) calc(var(--saturation-factor, 1)*55.365%) 54.314%;
+    --blurple-58-hsl: var(--H) calc(var(--saturation-factor, 1)*52.5%) 52.941%;
+    --blurple-59-hsl: var(--H) calc(var(--saturation-factor, 1)*49.194%) 51.373%;
+    --blurple-60-hsl: var(--H) calc(var(--saturation-factor, 1)*46.667%) 50%;
+    --blurple-61-hsl: var(--H) calc(var(--saturation-factor, 1)*46.774%) 48.627%;
+    --blurple-62-hsl: var(--H) calc(var(--saturation-factor, 1)*47.107%) 47.451%;
+    --blurple-63-hsl: var(--H) calc(var(--saturation-factor, 1)*47.234%) 46.078%;
+    --blurple-64-hsl: var(--H) calc(var(--saturation-factor, 1)*47.368%) 44.706%;
+    --blurple-65-hsl: var(--H) calc(var(--saturation-factor, 1)*47.511%) 43.333%;
+    --blurple-66-hsl: var(--H) calc(var(--saturation-factor, 1)*47.907%) 42.157%;
+    --blurple-67-hsl: var(--H) calc(var(--saturation-factor, 1)*48.077%) 40.784%;
+    --blurple-68-hsl: var(--H) calc(var(--saturation-factor, 1)*48.515%) 39.608%;
+    --blurple-69-hsl: var(--H) calc(var(--saturation-factor, 1)*48.718%) 38.235%;
+    --blurple-70-hsl: var(--H) calc(var(--saturation-factor, 1)*49.206%) 37.059%;
+    --blurple-71-hsl: var(--H) calc(var(--saturation-factor, 1)*49.727%) 35.882%;
+    --blurple-72-hsl: var(--H) calc(var(--saturation-factor, 1)*50%) 34.51%;
+    --blurple-73-hsl: var(--H) calc(var(--saturation-factor, 1)*50.588%) 33.333%;
+    --blurple-74-hsl: var(--H) calc(var(--saturation-factor, 1)*51.22%) 32.157%;
+    --blurple-75-hsl: var(--H) calc(var(--saturation-factor, 1)*50.943%) 31.176%;
+    --blurple-76-hsl: var(--H) calc(var(--saturation-factor, 1)*51.316%) 29.804%;
+    --blurple-77-hsl: var(--H) calc(var(--saturation-factor, 1)*52.055%) 28.627%;
+    --blurple-78-hsl: var(--H) calc(var(--saturation-factor, 1)*52.857%) 27.451%;
+    --blurple-79-hsl: var(--H) calc(var(--saturation-factor, 1)*53.731%) 26.275%;
+    --blurple-80-hsl: var(--H) calc(var(--saturation-factor, 1)*54.688%) 25.098%;
+    --blurple-81-hsl: var(--H) calc(var(--saturation-factor, 1)*54.472%) 24.118%;
+    --blurple-82-hsl: var(--H) calc(var(--saturation-factor, 1)*55.556%) 22.941%;
+    --blurple-83-hsl: var(--H) calc(var(--saturation-factor, 1)*57.143%) 21.961%;
+    --blurple-84-hsl: var(--H) calc(var(--saturation-factor, 1)*57.009%) 20.98%;
+    --blurple-85-hsl: var(--H) calc(var(--saturation-factor, 1)*58.416%) 19.804%;
+    --blurple-86-hsl: var(--H) calc(var(--saturation-factor, 1)*60%) 18.627%;
+    --blurple-87-hsl: var(--H) calc(var(--saturation-factor, 1)*60%) 17.647%;
+    --blurple-88-hsl: var(--H) calc(var(--saturation-factor, 1)*62.353%) 16.667%;
+    --blurple-89-hsl: var(--H) calc(var(--saturation-factor, 1)*62.5%) 15.686%;
+    --blurple-90-hsl: var(--H) calc(var(--saturation-factor, 1)*64.865%) 14.51%;
+    --blurple-91-hsl: var(--H) calc(var(--saturation-factor, 1)*65.714%) 13.725%;
+    --blurple-92-hsl: var(--H) calc(var(--saturation-factor, 1)*68.75%) 12.549%;
+    --blurple-93-hsl: var(--H) calc(var(--saturation-factor, 1)*69.492%) 11.569%;
+    --blurple-94-hsl: var(--H) calc(var(--saturation-factor, 1)*73.585%) 10.392%;
+    --blurple-95-hsl: var(--H) calc(var(--saturation-factor, 1)*74.468%) 9.216%;
+    --blurple-96-hsl: var(--H) calc(var(--saturation-factor, 1)*75.61%) 8.039%;
+    --blurple-97-hsl: var(--H) calc(var(--saturation-factor, 1)*76.471%) 6.667%;
+    --blurple-98-hsl: var(--H) calc(var(--saturation-factor, 1)*76%) 4.902%;
+    --blurple-99-hsl: var(--H) calc(var(--saturation-factor, 1)*84.615%) 2.549%;
+    --blurple-100-hsl: var(--H) calc(var(--saturation-factor, 1)*0%) 0%;
+
+    --blue-new-1-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 95.098%;
+    --blue-new-2-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 94.118%;
+    --blue-new-3-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 93.333%;
+    --blue-new-4-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 92.353%;
+    --blue-new-5-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 91.569%;
+    --blue-new-6-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 90.588%;
+    --blue-new-7-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 89.804%;
+    --blue-new-8-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 89.02%;
+    --blue-new-9-hsl: var(--H) calc(var(--saturation-factor, 1)*96.774%) 87.843%;
+    --blue-new-10-hsl: var(--H) calc(var(--saturation-factor, 1)*96.97%) 87.059%;
+    --blue-new-11-hsl: var(--H) calc(var(--saturation-factor, 1)*94.366%) 86.078%;
+    --blue-new-12-hsl: var(--H) calc(var(--saturation-factor, 1)*94.737%) 85.098%;
+    --blue-new-13-hsl: var(--H) calc(var(--saturation-factor, 1)*92.593%) 84.118%;
+    --blue-new-14-hsl: var(--H) calc(var(--saturation-factor, 1)*92.941%) 83.333%;
+    --blue-new-15-hsl: var(--H) calc(var(--saturation-factor, 1)*91.209%) 82.157%;
+    --blue-new-16-hsl: var(--H) calc(var(--saturation-factor, 1)*91.579%) 81.373%;
+    --blue-new-17-hsl: var(--H) calc(var(--saturation-factor, 1)*90%) 80.392%;
+    --blue-new-18-hsl: var(--H) calc(var(--saturation-factor, 1)*90.385%) 79.608%;
+    --blue-new-19-hsl: var(--H) calc(var(--saturation-factor, 1)*88.991%) 78.627%;
+    --blue-new-20-hsl: var(--H) calc(var(--saturation-factor, 1)*89.474%) 77.647%;
+    --blue-new-21-hsl: var(--H) calc(var(--saturation-factor, 1)*88.235%) 76.667%;
+    --blue-new-22-hsl: var(--H) calc(var(--saturation-factor, 1)*87.097%) 75.686%;
+    --blue-new-23-hsl: var(--H) calc(var(--saturation-factor, 1)*87.5%) 74.902%;
+    --blue-new-24-hsl: var(--H) calc(var(--saturation-factor, 1)*86.466%) 73.922%;
+    --blue-new-25-hsl: var(--H) calc(var(--saturation-factor, 1)*85.507%) 72.941%;
+    --blue-new-26-hsl: var(--H) calc(var(--saturation-factor, 1)*85.915%) 72.157%;
+    --blue-new-27-hsl: var(--H) calc(var(--saturation-factor, 1)*85.034%) 71.176%;
+    --blue-new-28-hsl: var(--H) calc(var(--saturation-factor, 1)*84.314%) 70%;
+    --blue-new-29-hsl: var(--H) calc(var(--saturation-factor, 1)*84.713%) 69.216%;
+    --blue-new-30-hsl: var(--H) calc(var(--saturation-factor, 1)*83.951%) 68.235%;
+    --blue-new-31-hsl: var(--H) calc(var(--saturation-factor, 1)*83.234%) 67.255%;
+    --blue-new-32-hsl: var(--H) calc(var(--saturation-factor, 1)*82.558%) 66.275%;
+    --blue-new-33-hsl: var(--H) calc(var(--saturation-factor, 1)*82.955%) 65.49%;
+    --blue-new-34-hsl: var(--H) calc(var(--saturation-factor, 1)*82.32%) 64.51%;
+    --blue-new-35-hsl: var(--H) calc(var(--saturation-factor, 1)*81.818%) 63.333%;
+    --blue-new-36-hsl: var(--H) calc(var(--saturation-factor, 1)*81.25%) 62.353%;
+    --blue-new-37-hsl: var(--H) calc(var(--saturation-factor, 1)*81.633%) 61.569%;
+    --blue-new-38-hsl: var(--H) calc(var(--saturation-factor, 1)*81.188%) 60.392%;
+    --blue-new-39-hsl: var(--H) calc(var(--saturation-factor, 1)*80.676%) 59.412%;
+    --blue-new-40-hsl: var(--H) calc(var(--saturation-factor, 1)*80.282%) 58.235%;
+    --blue-new-41-hsl: var(--H) calc(var(--saturation-factor, 1)*79.817%) 57.255%;
+    --blue-new-42-hsl: var(--H) calc(var(--saturation-factor, 1)*80.269%) 56.275%;
+    --blue-new-43-hsl: var(--H) calc(var(--saturation-factor, 1)*79.913%) 55.098%;
+    --blue-new-44-hsl: var(--H) calc(var(--saturation-factor, 1)*79.661%) 53.725%;
+    --blue-new-45-hsl: var(--H) calc(var(--saturation-factor, 1)*79.424%) 52.353%;
+    --blue-new-46-hsl: var(--H) calc(var(--saturation-factor, 1)*79.2%) 50.98%;
+    --blue-new-47-hsl: var(--H) calc(var(--saturation-factor, 1)*81.746%) 49.412%;
+    --blue-new-48-hsl: var(--H) calc(var(--saturation-factor, 1)*88.43%) 47.451%;
+    --blue-new-49-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --blue-new-50-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --blue-new-51-hsl: var(--H) calc(var(--saturation-factor, 1)*98.214%) 43.922%;
+    --blue-new-52-hsl: var(--H) calc(var(--saturation-factor, 1)*96.364%) 43.137%;
+    --blue-new-53-hsl: var(--H) calc(var(--saturation-factor, 1)*95.37%) 42.353%;
+    --blue-new-54-hsl: var(--H) calc(var(--saturation-factor, 1)*94.34%) 41.569%;
+    --blue-new-55-hsl: var(--H) calc(var(--saturation-factor, 1)*94.203%) 40.588%;
+    --blue-new-56-hsl: var(--H) calc(var(--saturation-factor, 1)*94.059%) 39.608%;
+    --blue-new-57-hsl: var(--H) calc(var(--saturation-factor, 1)*93.909%) 38.627%;
+    --blue-new-58-hsl: var(--H) calc(var(--saturation-factor, 1)*93.75%) 37.647%;
+    --blue-new-59-hsl: var(--H) calc(var(--saturation-factor, 1)*94.624%) 36.471%;
+    --blue-new-60-hsl: var(--H) calc(var(--saturation-factor, 1)*94.475%) 35.49%;
+    --blue-new-61-hsl: var(--H) calc(var(--saturation-factor, 1)*95.455%) 34.51%;
+    --blue-new-62-hsl: var(--H) calc(var(--saturation-factor, 1)*96.471%) 33.333%;
+    --blue-new-63-hsl: var(--H) calc(var(--saturation-factor, 1)*97.576%) 32.353%;
+    --blue-new-64-hsl: var(--H) calc(var(--saturation-factor, 1)*98.742%) 31.176%;
+    --blue-new-65-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 30.196%;
+    --blue-new-66-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 29.412%;
+    --blue-new-67-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 28.431%;
+    --blue-new-68-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 27.647%;
+    --blue-new-69-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 26.863%;
+    --blue-new-70-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 26.078%;
+    --blue-new-71-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 25.294%;
+    --blue-new-72-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 24.51%;
+    --blue-new-73-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 23.725%;
+    --blue-new-74-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 22.941%;
+    --blue-new-75-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 22.157%;
+    --blue-new-76-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 21.373%;
+    --blue-new-77-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 20.588%;
+    --blue-new-78-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 19.804%;
+    --blue-new-79-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 19.02%;
+    --blue-new-80-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 18.431%;
+    --blue-new-81-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 17.647%;
+    --blue-new-82-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 16.863%;
+    --blue-new-83-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 16.078%;
+    --blue-new-84-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 15.49%;
+    --blue-new-85-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 14.706%;
+    --blue-new-86-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 13.922%;
+    --blue-new-87-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 13.333%;
+    --blue-new-88-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 12.549%;
+    --blue-new-89-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 11.961%;
+    --blue-new-90-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 11.176%;
+    --blue-new-91-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 10.588%;
+    --blue-new-92-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 9.804%;
+    --blue-new-93-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 9.216%;
+    --blue-new-94-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 8.431%;
+    --blue-new-95-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 7.451%;
+    --blue-new-96-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 6.471%;
+    --blue-new-97-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 5.49%;
+    --blue-new-98-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 4.118%;
+    --blue-new-99-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 2.157%;
+    --blue-new-100-hsl: var(--H) calc(var(--saturation-factor, 1)*0%) 0%;
+
+    --opacity-blue-1-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-4-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-8-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-12-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-16-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-20-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-24-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-28-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-32-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-36-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-40-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-44-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-48-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-52-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-56-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-60-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-64-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-68-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-72-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-76-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-80-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-84-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-88-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-92-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+    --opacity-blue-96-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 44.51%;
+
+    --opacity-blurple-1-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-4-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-8-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-12-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-16-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-20-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-24-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-28-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-32-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-36-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-40-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-44-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-48-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-52-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-56-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-60-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-64-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-68-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-72-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-76-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-80-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-84-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-88-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-92-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+    --opacity-blurple-96-hsl: var(--H) calc(var(--saturation-factor, 1)*85.556%) 64.706%;
+}
+
+/* All App */
+#app-mount .bar_c38106:not(.systemBar_c38106) {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    min-height: 36px;
+    border: var(--border-width) solid var(--border-color);
+    /* the content below carries the rest of the frame, so a bottom edge here drew a
+       second line straight across the top of the chat */
+    border-bottom: none;
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+}
+
+/* the strip and the content are siblings that together draw one frame, so any space
+   between them is a hole in the left and right edges rather than a gap between boxes */
+#app-mount .content__5e434:not(:has(.fullScreen_cb9592)) {
+    margin-top: 0;
+    /* the box itself paints nothing, so a pixel of the page gradient was showing between
+       the frame and the chat wherever the children did not reach the edge */
+    background-color: var(--border-color);
+    border-top: none !important;
+    border: var(--border-width) solid var(--border-color);
+    border-bottom-left-radius: var(--round-corners);
+    border-bottom-right-radius: var(--round-corners);
+}
+
+#app-mount .sidebar__5e434 {
+    border-bottom-right-radius: var(--round-corners);
+}
+#app-mount .page__5e434:not(:has(.fullScreen_cb9592)) {
+    border-bottom-left-radius: var(--round-corners);
+}
+
+/* Like Another Window */
+#app-mount .base__5e434:not(:has(.fullScreen_cb9592)) {
+    /* left = gutter 12 + card + its borders + 18 of gap, so the chat card follows the dm card */
+    /* the layer is already 24 in, so this is card + its borders + a 20px gap */
+    margin: var(--chat-top) var(--chat-right) var(--chat-bottom) var(--chat-left);
+}
+#app-mount .winButtons_c38106 {
+    left: calc(calc((308px + (var(--border-width)*2)) + 18px) + (14px + var(--border-width)));
+    top: calc(36px + (var(--border-width)*2));
+}
+
+/* Fullscreen */
+#app-mount .content__5e434:has(.fullScreen_cb9592) {
+    box-shadow: var(--frame);
+    border-radius: var(--round-corners);
+}
+
+#app-mount .page__5e434:has(.fullScreen_cb9592) {
+    border-radius: var(--round-corners);
+}
+
+#app-mount .base__5e434:has(.fullScreen_cb9592) {
+    margin: 12px;
+}
+
+/* the buttons and the --custom-text title were fixed to the top of the WINDOW while
+   the bar they belong on sits inside the app, so the two drifted apart by however much
+   was stacked above. anchoring both to the bar itself keeps the strip joined to the
+   chat and stops it moving when the window resizes. */
+#app-mount .bar_c38106 {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+/* the buttons live inside .trailing, so trailing has to stay unpositioned or the
+   buttons anchor to it and end up on the right. */
+#app-mount .title_c38106,
+#app-mount .bar_c38106 .trailing_c38106 {
+    position: static;
+}
+#app-mount .winButtons_c38106 {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+ /* discord's own 32px system bar at the very top carries a second copy of the window
+   buttons. the themed ones live on the chat bar, so these are hidden. channeltabs draws
+   its tab row into that bar's space, so only the channeltabs strip gets painted. */
+#app-mount .systemBar_c38106 .winButtons_c38106 {
+    display: none;
+}
+/* the bar is 32px of nothing sitting at z-index 999999 across the whole top row, and
+   the tab row channeltabs draws underneath it is exactly that tall, so every tab was
+   only clickable on the few pixels below the bar. the themed drag strip on .bar_c38106
+   is what moves the window, so this one has no work left to do. */
+#app-mount .systemBar_c38106 {
+    pointer-events: none;
+}
+
+/* the strip sits in discord's title bar row, which is 32px, and channeltabs stacks a tab
+   row and a bookmark row into it. overflow:hidden was here to keep the corners rounded
+   and it clipped the strip to that 32px: measured on 2026-09-10, the bookmark bar was at
+   y -5 inside the container and the tab row above it was cut off entirely. clipping only
+   the corners leaves the rest to spill the way channeltabs expects. */
+.vc-channeltabs-container {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    border-radius: var(--round-corners) var(--round-corners) 0 0;
+    height: auto;
+    overflow: visible;
+}
+/* channeltabs draws every tab on a near-white ground with a grey 1px border, which on
+   the pink strip reads as a white box. these follow the theme's own colours instead. */
+#app-mount /* channeltabs puts its strip in the app's notice slot at z-index 102, which paints over
+   discord's popout layer: the top of the profile popout was disappearing under it. the
+   strip has that whole grid row to itself, so it does not need to win on z-index, and
+   dropping it lets popouts and modals come out on top again. */
+.vc-channeltabs-container-top {
+    z-index: auto;
+}
+
+/* both tints were mixed toward white, which on the dark strip made the selected tab a
+   pale slab with unreadable text on it. mixing from --text-default instead means the tab
+   lifts off whatever the strip is: light on a dark ground, dark on a pale one. */
+.vc-channeltabs-tab {
+    border-radius: calc(var(--round-corners) - 6px);
+    border-color: color-mix(in srgb, var(--border-color) 40%, transparent) !important;
+    background-color: color-mix(in srgb, var(--text-default) 8%, transparent) !important;
+}
+#app-mount .vc-channeltabs-tab-selected {
+    background-color: color-mix(in srgb, var(--text-default) 16%, transparent) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* the nameplate picture is made for a 300px wide panel. cover keeps its shape when the
+   panel is wider instead of stretching it. */
+#app-mount .accountPopoutButtonWrapper__37e49.plated img,
+#app-mount .accountPopoutButtonWrapper__37e49.plated video {
+    object-fit: cover;
+    object-position: right center;
+}
+
+/* WinButtons */
+.winButtons_c38106 {
+    position: fixed;
+    left: calc(9px + var(--border-width));
+    top: calc(12px + (var(--border-width)*2));
+    flex-direction: row-reverse;
+    -webkit-app-region: no-drag;
+}
+.leading_c38106,
+.winButtonsWithDivider_c38106:before {
+    display: none;
+}
+
+.winButton_c38106 {
+    color: transparent !important;
+    border-radius: 50%;
+    width: 12px !important;
+    height: 12px !important;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.winButton_c38106:nth-child(3) {
+    background: var(--close-color);
+}
+.winButton_c38106:nth-child(2) {
+    background: var(--max-color);
+}
+.winButton_c38106:nth-child(1) {
+    background: var(--min-color);
+}
+
+.winButton_c38106:nth-child(3):hover,
+.winButton_c38106:nth-child(2):hover,
+.winButton_c38106:nth-child(1):hover {
+    transform: scale(1.14);
+}
+
+/* User Bar */
+/* the drag strip was a static block with a min-height and no anchor, so canary
+   stretched it to the full height of the card and discord's own list painted over
+   it. both cards are position:fixed, so an absolute 32px strip sits where it should.
+   only these two are changed: the other four pseudo elements with this shape are on
+   popouts and modals nobody has looked at yet. */
+.panels__5e434::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 1px solid var(--seam);
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+    -webkit-app-region: drag;
+}
+/* the same width as the dm list above it, so the two cards line up. it used to be
+   332px, which is the whole gutter, so it stuck out past the list and under the app. */
+#app-mount .panels__5e434 {
+    width: var(--card-width) !important;
+    border-radius: var(--round-corners);
+}
+
+/* discord washes every nameplate with a dark neutral so its own text stays readable.
+   on a light theme that reads as a grey block over the art, so it is turned off on the
+   user panel and on the dm rows. the value is set inline, hence the !important. */
+#app-mount .accountPopoutButtonWrapper__37e49.plated,
+#app-mount .link__972a0 {
+    --custom-nameplate-neutral: transparent !important;
+    --custom-nameplate-neutral-hovered: transparent !important;
+}
+
+/* the chat used to paint discord's white under the picture, so any opacity below 1
+   washed it out. the picture sits on the card itself now and the knobs above do
+   the lightening. */
+#app-mount .chatContent_f75fb0 {
+    background: transparent;
+}
+
+/* chat text picks its colour from --bg-dark: light text on a dark picture, discord's
+   own dark text on a light one. only the chat card is touched, the rest of the light
+   theme stays as it is. */
+#app-mount .chat_f75fb0 {
+    --on-picture: color-mix(in srgb, #f2f3f5 calc(var(--bg-dark) * 100%), #313d40);
+    --text-default: var(--on-picture);
+    --text-strong: var(--on-picture);
+    --text-subtle: color-mix(in srgb, var(--on-picture) 80%, transparent);
+    --text-muted: color-mix(in srgb, var(--on-picture) 65%, transparent);
+    --interactive-text-default: color-mix(in srgb, var(--on-picture) 80%, transparent);
+    --interactive-text-hover: var(--on-picture);
+    --interactive-text-active: var(--on-picture);
+    --interactive-icon-default: color-mix(in srgb, var(--on-picture) 80%, transparent);
+    --interactive-icon-hover: var(--on-picture);
+    --interactive-icon-active: var(--on-picture);
+}
+/* the white fade discord paints behind the typing row, gone so the picture shows */
+#app-mount .form_f75fb0::before {
+    background: none;
+}
+
+/* the name row's nameplate runs square into the card's rounded corners */
+/* the row is 56px inside a taller card, so the nameplate stopped short and left the
+   card's own colour showing under it. filling the height takes the art to the bottom. */
+#app-mount .panels__5e434 .container__37e49 {
+    border-radius: 0 0 var(--round-corners) var(--round-corners);
+    height: 100%;
+    align-items: center;
+}
+
+/* New Style */
+/* the dm list and the user bar are both lifted out of the app and fixed into the
+   gutter on the left. neither had a top or a bottom, so they kept whatever vertical
+   position the old layout gave them, and canary moved it: the list started halfway
+   down the window and ran off the bottom. both are anchored properly now.
+   --custom-app-panels-height is discord's own measurement of the user panel, live: it
+   read 271.65px with spotify playing and the lyric line up. a previous pass here noted
+   it as gone, which was wrong. it is what sizes the dm list, so the list gives up
+   exactly what the panel takes and no figure has to be guessed. */
+#app-mount .sidebarList__5e434 {
+    position: fixed;
+    left: 24px;
+    /* level with the chat window's own top edge: both are --chat-top plus whatever is
+       stacked above the app, so moving the chat moves the cards with it. */
+    top: calc(var(--chat-top) + var(--top-offset) + var(--sidebar-drop));
+    /* the 32px is the drag strip: discord measures its own panel, and the card is that
+       much taller because of the padding the strip sits in. without it the gap below
+       goes to nothing. */
+    height: calc(100vh - (var(--chat-top) + var(--top-offset) + var(--sidebar-drop))
+                 - var(--custom-app-panels-height, var(--panel-height)) - 32px
+                 - var(--card-gap) - var(--app-bottom) - var(--sidebar-lift));
+    width: var(--card-width) !important;
+    margin-bottom: 0;
+    /* the drag strip used to be a block in normal flow, so it pushed the search box
+       down by its own height. making it absolute took that push away and the search
+       box slid up under it. this puts the 32px back. */
+    padding-top: 32px;
+}
+.sidebarResizeHandle__5e434 {
+    display: none;
+}
+
+.panels__5e434 {
+    position: fixed;
+    left: 24px;
+    top: auto !important;
+    height: auto !important;
+    bottom: var(--app-bottom) !important;
+    min-height: var(--panel-height);
+    /* the album cover bleeds past the player so the blur has material to work with.
+       the card is what trims the surplus. */
+    overflow: hidden;
+    /* the drag strip is absolute, so the padding keeps the avatar row out from under it */
+    padding-top: 32px;
+    box-sizing: border-box;
+}
+.content__5e434 {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.sidebar__5e434 {
+    width: calc(69px + var(--border-width));
+}
+
+/* betterfolders replaces the server rail with its own container and gives it an
+   inline width, so the theme's rules for .wrapper_ef3116 land inside a box that is
+   already the wrong size and nothing moves. this sizes betterfolders' container
+   instead, which is what actually decides where the rail sits. the sidebar has to
+   be positioned for the absolute to have something to measure against.
+   if you ever disable betterfolders, this block does nothing and can go. */
+#app-mount .sidebar__5e434 {
+    position: relative !important;
+}
+#app-mount .vc-betterFolders-sidebar {
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    height: auto !important;
+}
+.wrapper_ef3116 {
+    top: 0px;
+    height: 100%;
+    position: absolute;
+    padding-top: 8px;
+}
+
+/* the drag strip was a static block with a min-height and no anchor, so canary
+   stretched it to the full height of the card and discord's own list painted over
+   it. both cards are position:fixed, so an absolute 32px strip sits where it should.
+   only these two are changed: the other four pseudo elements with this shape are on
+   popouts and modals nobody has looked at yet. */
+.sidebarList__5e434::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 1px solid var(--seam);
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+    -webkit-app-region: drag;
+}
+.sidebarList__5e434 {
+    border-radius: var(--round-corners);
+}
+
+.bannerVisible_f37cb1 .headerEllipseForeground_f37cb1 {
+    display: none;
+}
+
+.content_f75fb0:not(:has(.outer_c0bea0)){
+    flex-direction: row-reverse;
+}
+
+/* the ground behind everything. the tint is a flat layer over the picture, so the blur
+   leaves it alone and only softens what is underneath. the scale pushes the blur's soft
+   rim off the edges of the window, where it would otherwise show as a pale border. */
+.bg__960e4 {
+    background:
+        linear-gradient(var(--glass-tint), var(--glass-tint)),
+        var(--page-bg) center / var(--page-bg-size) no-repeat fixed;
+    filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    transform: scale(1.1);
+}
+
+/* Top Icons */
+#app-mount .bar_c38106 .trailing_c38106 {
+    margin-left: auto;
+    margin-right: calc(13px + var(--border-width));
+}
+#app-mount .bar_c38106 svg:not(.winButtons_c38106 svg) {
+    color: #fff;
+}
+
+#app-mount .title_c38106::before {
+    content: var(--custom-text);
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+#app-mount .title_c38106 div,
+#app-mount .title_c38106 svg {
+    display: none;
+}
+
+/* Server List */
+#app-mount .wrapper_ef3116 {
+    left: unset;
+    right: 0;
+}
+#app-mount .wrapper_ef3116 .wrapper__58105 {
+    left: 60px;
+    flex-direction: row-reverse;
+}
+#app-mount .wrapper_ef3116 .item__58105 {
+    border-radius: 4px;
+    margin-left: unset;
+    width: 4px;
+}
+
+.sidebar__5e434:after {
+    height: 15px;
+}
+
+/* Bar Alert */
+#app-mount .notice__6e2b9 {
+    border-radius: 100px;
+    width: 50%;
+    justify-self: center;
+    top: calc(13px + (var(--border-width)*2));
+}
+
+/* DM List */
+#app-mount .scroller__99e7c {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Server Name */
+.guildDropdown_f37cb1:not(.hasBanner_f37cb1.bannerVisible_f37cb1 .guildDropdown_f37cb1) {
+    background-color: var(--name-bg) !important;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: none;
+}
+.header_f37cb1 .name_f37cb1 {
+    color: #fff !important;
+}
+.header_f37cb1 .headerChildren_f37cb1 path {
+    fill: #fff !important;
+}
+.header_f37cb1 .guildBadgeAndName_f37cb1::before {
+    opacity: 1;
+    content: ">";
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    margin-right: 4px;
+    left: 0;
+    transition: all 200ms;
+}
+.header_f37cb1:hover .guildBadgeAndName_f37cb1::before {
+    left: 3px;
+    transition: all 200ms;
+}
+
+/* Channel List */
+#app-mount .scroller__629e4 {
+    margin-bottom: 0;
+}
+
+#app-mount .container__2637a {
+    padding-bottom: 0;
+}
+
+#app-mount .bottom__7aaec {
+    bottom: 0;
+}
+
+/* Browse Channels page */
+.pageBody__41ed7 {
+    max-width: calc(100% - var(--space-16));
+}
+
+/* Mini Profile */
+.layerContainer__59d0d .user-profile-popout {
+    margin: 0 26px 0 0;
+    height: calc(100% - 24px);
+}
+
+#app-mount .profileEffects__0dd08,
+#app-mount .profileEffects__0dd08 .inner__0dd08 {
+    border-radius: var(--round-corners);
+}
+
+/* same drag strip fix as the two left hand cards: a static block with only a
+   min-height had nothing anchoring its top and nothing capping its height, so it
+   grew to the whole popout and the content painted over it. the popout gets
+   position:relative so the strip anchors to the popout rather than to whatever
+   discord happens to have positioned further up the tree. */
+.popoutContainer_ce8328 .outer_c0bea0::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+    right: 0;
+    width: auto;
+    z-index: 1;
+    border-bottom: 1px solid var(--seam);
+    border-radius: var(--round-corners) var(--round-corners) 0 0;
+    -webkit-app-region: drag;
+}
+/* the banner's own corners are square and cut into the frame's curve */
+.popoutContainer_ce8328 .header__5be3e {
+    border-radius: var(--round-corners) var(--round-corners) 0 0;
+    overflow: hidden;
+}
+/* the avatar sits 15px below the card top and the drag strip is 32px, so the strip cut
+   across the top of the profile frame. moving the avatar down is not the answer: discord
+   layers it over the name block on purpose, and shifting it walks it into the display
+   name. letting it paint over the strip keeps the layout and clears the frame. */
+.popoutContainer_ce8328 .avatar__75742 {
+    z-index: 2;
+}
+
+.popoutContainer_ce8328 .outer_c0bea0 {
+    position: relative;
+    box-shadow: var(--frame);
+    border-radius: var(--round-corners);
+}
+
+:root .custom-user-profile-theme.user-profile-modal,
+:root .custom-user-profile-theme.user-profile-popout {
+    --custom-user-profile-theme-padding: 0 !important;
+}
+
+#app-mount .inner_c0bea0 {
+    border-radius: 0 0 var(--round-corners) var(--round-corners);
+}
+
+/* a profile with custom colours gets a 60% BLACK wash over its gradient, set inline as
+   --profile-gradient-overlay-color, so the popout came out near black while every other
+   surface is light. the theme already had a white wash under the old name discord used,
+   --profile-gradient-overlay, which nothing reads any more. white here instead.
+   the cap keeps a tall profile from running up over the channeltabs strip. */
+#app-mount .custom-user-profile-theme {
+    --profile-gradient-overlay-color: var(--profile-wash) !important;
+    --profile-gradient-section-box: var(--profile-widget) !important;
+    --profile-gradient-note-background: var(--profile-widget) !important;
+}
+/* the overlay does not wash the user's colours, it replaces them: discord builds the
+   ground as color-mix(overlay <amount>, the user's colour) and hands that mix 100%,
+   measured 2026-09-08. feeding it a flat blend of their two colours stopped the card
+   going black but flattened it: measured 2026-09-10, the card was solid #8C1E3E down to
+   the banner's edge and solid #625B9A for the whole body, a hard line with no ramp.
+   so the overlay is cleared and the gradient is drawn here instead, off the same two
+   colours discord hands us. */
+html.theme-dark #app-mount .custom-user-profile-theme {
+    background: linear-gradient(var(--profile-gradient-primary-color), var(--profile-gradient-secondary-color));
+}
+/* discord's profile wash is translucent by design, so whatever sits behind a profile
+   card shows through it: the chat in the modal, and a near black rgb(45, 6, 18) on the
+   widgets column. a solid ground under the wash fills it without flattening the user's
+   own colours, which setting the wash to full opacity would. */
+#app-mount .outer_c0bea0 {
+    background: var(--modal-ground);
+    max-height: calc(100vh - var(--top-offset) - 56px) !important;
+}
+
+/* the widget cards in the profile modal are near white, which glares next to the pink
+   everywhere else. a wash of the drag gradient takes the edge off and still leaves the
+   cards distinct from the column behind them. */
+#app-mount .widgetContainer__0ea1a .root__01fb0 {
+    background: color-mix(in srgb, var(--drag-gradient2) var(--profile-card-tint), var(--profile-card-base));
+    border-radius: var(--widget-corners);
+    overflow: hidden;
+}
+#app-mount .banner__68edb {
+    border-radius: 0;
+}
+
+/* the effect was pushed 32px down and cut 32px short so the drag strip would not paint
+   over it. the strip sits at z-index 1 now, so the clamp was costing the effect the top
+   of the card for nothing. full height, and above the strip. 3 is discord's own top
+   layer, which keeps it under the avatar frame at 4. */
+#app-mount .profileEffects__0dd08 {
+    top: 0;
+    height: 100%;
+    z-index: 3;
+}
+
+.userTagUsername__26b1f {
+    background-color: var(--name-bg);
+    border-radius: 2px;
+    padding-right: 6px;
+    padding-left: 9px;
+}
+.userTagUsername__26b1f::before {
+    opacity: 1;
+    content: ">";
+    color: #fff;
+    right: 4px;
+    position: relative;
+}
+
+/* Big Profile */
+#app-mount .user-profile-modal-v2 .profile__9c3be {
+    border-radius: var(--round-corners);
+}
+#app-mount .user-profile-modal-v2 .profileHeader__9c3be {
+    border-radius: 0;
+}
+
+/* the last three drag strips, same fix as the cards and the popout. each container
+   gets position:relative so the strip anchors to it rather than to whatever discord
+   has positioned further up. */
+/* measured: the profile card runs x=808..1214 and the widgets column x=1172..2013, both
+   inside .layoutContainer__9c3be at x=832..2034. the frame and the strip used to be on
+   the widgets column alone, which left the card outside them. */
+/* measured on the open modal, 2026-09-08:
+     .layoutContainer__9c3be   1500 wide, x 683..2183
+     .editingPanel__9c3be      242 wide,  x 646..887   an <aside>, overhangs 37px left
+     .outer_c0bea0            1252 wide,  x 887..2140  holds the profile and the widgets
+     .profile__9c3be           403 wide,  x 935..1338  first column inside that card
+   the container's own box matches neither child, which is why framing it never lined up.
+   so it frames nothing, and the two boxes that do hold content become the two windows. */
+#app-mount .layoutContainer__9c3be {
+    position: relative;
+    border: none;
+    border-radius: 0;
+    background: none;
+    padding: 0;
+    overflow: visible;
+}
+
+#app-mount .layoutContainer__9c3be .outer_c0bea0,
+#app-mount .layoutContainer__9c3be .editingPanel__9c3be {
+    position: relative;
+    box-shadow: var(--frame);
+    border-radius: var(--round-corners);
+    background: var(--modal-ground);
+    padding-top: 32px;
+}
+
+/* the profile effect is drawn well outside the card on purpose: discord hands it
+   --custom-profile-frame-overflow-top: 304 and 56 to each side, so the card is never clipped
+   and the box inside it carries the curve instead. bottom corners only: this box's top edge
+   sits under the drag strip, mid card, and rounding it there cut two notches that showed the
+   ground through. the banner behind takes the same curve rather than being clipped, since
+   clipping here would cut the frame overflow off again. */
+#app-mount .layoutContainer__9c3be .inner_c0bea0,
+#app-mount .layoutContainer__9c3be .backgroundImage__9c3be {
+    border-radius: 0 0 var(--round-corners) var(--round-corners);
+}
+
+/* the settings panel sat flush against the card. moved with a transform so it costs no
+   layout, which matters here because this modal is already expensive to lay out. */
+#app-mount .layoutContainer__9c3be .editingPanel__9c3be {
+    transform: translateX(-16px);
+    width: var(--editor-panel-width);
+    flex: 0 0 var(--editor-panel-width);
+}
+
+#app-mount .layoutContainer__9c3be .outer_c0bea0::before,
+#app-mount .layoutContainer__9c3be .editingPanel__9c3be::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    z-index: 1;
+    border-bottom: 1px solid var(--seam);
+    /* the strip is a square block sitting in a rounded card, so without this its two top
+       corners cut across the curve and leave a wedge of the ground showing at each one.
+       16 minus the 3px border is exactly the curve the inside of the frame follows. */
+    border-radius: var(--round-corners) var(--round-corners) 0 0;
+    -webkit-app-region: drag;
+}
+
+/* the profile column and the widgets sat flush, so a hairline was parting them. a gap
+   parts them better and needs no line. moved with a transform for the same reason as the
+   settings panel: this modal is expensive to lay out and a transform costs it nothing.
+   measured 2026-09-08: the column starts 48px inside the card, so it has room to move. */
+/* the strip only has to sit above the card's own ground. everything the card holds
+   belongs in front of it, and the frame overflows the top by 304px so it is the one
+   thing that meets the strip at all. the card pads its content down by 32, so lifting
+   the children does not hide the strip. */
+#app-mount .layoutContainer__9c3be .outer_c0bea0 > * {
+    z-index: 2;
+}
+
+#app-mount .layoutContainer__9c3be .profile__9c3be {
+    transform: translateX(calc(var(--profile-gap) * -1));
+    /* a transform makes this a stacking context, so the effect's own z-index stops at
+       the column's edge and the drag strip above it cut the frame off. lifting the
+       whole column carries the effect with it. */
+    z-index: 2;
+}
+
+#app-mount .user-profile-modal-v2 {
+    border: none;
+    border-radius: 0;
+}
+
+/* discord works the whole modal out from these, including how wide each column gets,
+   so growing it is one number rather than three hand set widths that fight each other */
+#app-mount .layoutContainer__9c3be {
+    --custom-modal-v2-width: var(--modal-width);
+    --custom-modal-v2-height: min(var(--modal-height), calc(100vh - 96px));
+}
+
+#app-mount .user-profile-modal-v2 .inner_c0bea0 {
+    height: calc(100% - 32px);
+    padding-top: 0;
+}
+
+#app-mount .user-profile-modal-v2 .tabBarPanel__37bfc {
+    padding: 0;
+}
+
+#app-mount .user-profile-modal-v2 .tabBarPanel__37bfc .imageGridPositioner__01fb0 {
+    height: 240px;
+}
+#app-mount .user-profile-modal-v2 .tabBarPanel__37bfc .image__01fb0 {
+    width: auto;
+    height: 100%;
+    right: 0;
+    position: absolute;
+}
+
+#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be {
+    z-index: 9;
+}
+#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be .editingPanel__9c3be {
+    box-shadow: var(--frame);
+    border-radius: var(--round-corners);
+}
+#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be .editingPanel__9c3be::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 1px solid var(--seam);
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+    -webkit-app-region: drag;
+}
+#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be .editingPanel__9c3be .panelInner_b08638 {
+    padding-top: 32px;
+}
+
+.editingPanelExpandButtonDefaultContainer__9c3be {
+    position: fixed;
+    left: -53px;
+}
+.modalHeaderButtons_b92f52 {
+    top: -20px;
+    right: -40px;
+}
+
+/* DM profile */
+.content_f75fb0 .user-profile-sidebar::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 1px solid var(--seam);
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+    -webkit-app-region: drag;
+}
+.content_f75fb0 .user-profile-sidebar {
+    position: relative;
+    box-shadow: var(--frame);
+    border-radius: var(--round-corners);
+}
+#app-mount .user-profile-sidebar .inner_c0bea0 {
+    border-radius: 0 0 var(--round-corners) var(--round-corners);
+}
+
+/* Settings */
+.modalContent_e44912:has(.container_a28278)::before {
+    background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
+    display: block;
+    content: "";
+    top: 0;
+    min-height: 32px;
+    width: 100%;
+    border-bottom: 1px solid var(--seam);
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+    -webkit-app-region: drag;
+}
+#app-mount .modalContent_e44912:has(.container_a28278) {
+    box-shadow: var(--frame);
+    border-radius: var(--round-corners);
+}
+
+.modalContentInner_e44912 {
+    height: calc(100% - 32px);
+}
+#app-mount .container_a28278 .contentBody__43da9 {
+    border-bottom-right-radius: var(--round-corners);
+}
+#app-mount .modalContentInner_e44912:has(.container_a28278) {
+    height: calc(100% - 32px);
+}
+
+/* Chat */
+.chat_f75fb0 .search__49676 {
+    position: absolute;
+    left: 0;
+    margin: 0 8px;
+}
+.chat_f75fb0 .search__49676 .searchBar_c322aa {
+    width: 248px;
+}
+.chat_f75fb0 .children__9293f:not(.noChat_cb9592 .children__9293f, .fullScreen_cb9592 .children__9293f) {
+    margin-left: calc(248px + 8px);
+}
+
+/* Chatbar */
+#app-mount .chatGradient__36d07 {
+    background: transparent;
+}
+#app-mount .channelTextArea__74017 {
+    background: transparent;
+    border: none;
+}
+#app-mount .channelTextArea__74017 .themedBackground__74017 {
+    background: var(--textarea-background);
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+    margin: 0 8px 8px;
+    transition: box-shadow 180ms ease-out, border-color 180ms ease-out;
+}
+#app-mount .channelTextArea__74017 .themedBackground__74017:hover {
+    border-color: color-mix(in srgb, var(--border-color) 70%, #fff);
+}
+#app-mount .channelTextArea__74017 .themedBackground__74017:focus-within {
+    border-color: color-mix(in srgb, var(--border-color) 45%, #fff);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-color) 38%, transparent);
+}
+
+#app-mount .channelTextArea__74017 .slateTextArea_ec4baf {
+    font-weight: 500;
+    caret-color: var(--text-color);
+    color: var(--text-color);
+}
+
+#app-mount .channelTextArea__74017 svg:not(.stackedBars__74017 svg) {
+    color: var(--icon-color);
+}
+#app-mount .channelTextArea__74017 .spriteGreyscale__04eed {
+    background-color: var(--icon-color);
+}
+
+#app-mount .channelTextArea__74017 .stackedBars__74017 {
+    margin: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--round-corners);
+}
+#app-mount .channelTextArea__74017 .clipContainer__841c8 {
+    padding: 0;
+}
+
+/* Settings switch */
+.switchIndicator_a28278[style*="background-color: rgb(88, 101, 242)"] {
+    background-color: var(--blue-new-30) !important;
+}
+
+/*=====================================================================
+   window-mode.css
+   recovered from commit 62d4e5b, deleted upstream 2026-09-05.
+   this is the one that makes the app sit inside its own window.
+=====================================================================*/
+/* Like Another Window */
+#app-mount .typeWindows__421ed {
+    margin: var(--chat-top) var(--chat-right) 0;
+}
+#app-mount .typeWindows__421ed::after {
+    top: calc(30px + var(--border-width));
+    width: calc((100% - var(--border-width)*2) - 24px*2);
+}
+/* the shadow came from when the whole app was one window. the cards are their own
+   boxes now, so it only showed as a faint rectangle behind them. */
+#app-mount .layers__960e4 > [class*="layer_"]:first-child {
+    /* the 24px on the left is the gutter's own edge, where the two cards start, not the
+       chat's. the chat clears them with --chat-left. */
+    margin: 0 var(--chat-right) var(--chat-bottom) 24px;
+    box-shadow: none;
+}
+
+/* MacOS window */
+#app-mount .typeMacOS__421ed {
+    margin-top: 24px;
+    margin-left: 24px;
+    border-top-left-radius: var(--round-corners);
+    border-top-right-radius: var(--round-corners);
+    width: calc(100% - (48px + var(--border-width)*2));
+}
+
+/* the betterdiscord notice rule and the "did you know?" splash rule are dropped.
+   the first is a betterdiscord element equicord never renders, and the second hung
+   off a container_ class with 648 namesakes on canary, which is not worth the risk
+   for a screen you see once at startup. */
+
+/*=====================================================================
+   reverse.css - removed, not ported
+   its whole job was putting the server list on the right, and the base file
+   already does that through .content__5e434, which is a class canary still
+   ships. all thirteen of its own classes were dead. nothing was lost.
+=====================================================================*/
+
+/*=====================================================================
+   pop.css - partially ported
+   recovered from commit 8687e88. hover scale on rows and buttons.
+   twenty of its classes were dead. the four below had exactly one candidate
+   on canary so they are certain. the rest are prefixes discord reuses dozens
+   of times, and a hover rule is the worst place to guess, so those rules are
+   dropped rather than left matching nothing. click the element with the
+   inspect lens if you want them back.
+=====================================================================*/
+:root {
+    --HoverScale: 1.025;
+    --TransitionTime: 0.25s;
+    --EaseType: cubic-bezier(0, 0.75, 0, 1.75);
+}
+
+/* Settings List Items */ .side_a0 .item_a0:hover,
+/* Active now card */ .itemCard__7e549:hover,
+/* Activity button */ .buttonSize__124c8:hover,
+/* Friendlist */ .peopleListItem_cc6179:hover {
+    transform-origin: center;
+    transform: scale(var(--HoverScale));
+    box-shadow: var(--elevation-high);
+}
+
+/* Settings List Items */ .side_a0 .item_a0,
+/* Active now card */ .itemCard__7e549,
+/* Activity button */ .buttonSize__124c8,
+/* Friendlist */ .peopleListItem_cc6179 {
+    transition: var(--EaseType) var(--TransitionTime);
+    box-shadow: none;
+}
+
+/*=====================================================================
+   background-image.css
+   the picture behind the chat. --bg-opacity above is its knob.
+=====================================================================*/
+/* Chat Background */
+#app-mount .chatContent_f75fb0::before {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    opacity: var(--bg-opacity);
+    filter: blur(var(--bg-blur)) brightness(var(--bg-brightness));
+    z-index: 0;
+}
+
+/* discord keeps the sidebar and the server rail on their own dark theme class even with the light theme
+   and dark sidebar off. these are the light theme's values for every variable that
+   differs, so the dm list, rail and user panel read as light like the reference. */
+html:not(.theme-dark) #app-mount .theme-dark {
+    --ansi-blue: color-mix(in oklab,hsl(339 calc(1*80.269%) 56.275%/1) 100%,#000 0%);
+    --ansi-bright-blue: color-mix(in oklab,hsl(234.935 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --ansi-bright-cyan: color-mix(in oklab,hsl(185.077 calc(1*100%) 25.49%/1) 100%,#000 0%);
+    --ansi-bright-green: color-mix(in oklab,hsl(149.048 calc(1*79.747%) 30.98%/1) 100%,#000 0%);
+    --ansi-bright-magenta: color-mix(in oklab,hsl(309.787 calc(1*64.977%) 42.549%/1) 100%,#000 0%);
+    --ansi-bright-red: color-mix(in oklab,hsl(355.472 calc(1*64.898%) 48.039%/1) 100%,#000 0%);
+    --ansi-bright-yellow: color-mix(in oklab,hsl(30.137 calc(1*100%) 42.941%/1) 100%,#000 0%);
+    --ansi-cyan: color-mix(in oklab,hsl(184.049 calc(1*100%) 31.961%/1) 100%,#000 0%);
+    --ansi-green: color-mix(in oklab,hsl(142.041 calc(1*46.226%) 41.569%/1) 100%,#000 0%);
+    --ansi-magenta: color-mix(in oklab,hsl(315.375 calc(1*74.766%) 58.039%/1) 100%,#000 0%);
+    --ansi-red: color-mix(in oklab,hsl(0 calc(1*74.869%) 62.549%/1) 100%,#000 0%);
+    --ansi-yellow: color-mix(in oklab,hsl(36.875 calc(1*100%) 37.647%/1) 100%,#000 0%);
+    --app-frame-background: color-mix(in oklab,hsl(240 calc(1*4.545%) 91.373%/1) 100%,#000 0%);
+    --app-frame-border: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2784313725490196) 100%,hsl(0 0% 0%/0.2784313725490196) 0%);
+    --background-accent: color-mix(in oklab,hsl(234 calc(1*4.425%) 44.314%/1) 100%,#000 0%);
+    --background-base-low: color-mix(in oklab,hsl(0 calc(1*0%) 98.431%/1) 100%,#000 0%);
+    --background-base-lower: color-mix(in oklab,hsl(0 calc(1*0%) 98.431%/1) 100%,#000 0%);
+    --background-base-lowest: color-mix(in oklab,hsl(240 calc(1*4.348%) 95.49%/1) 100%,#000 0%);
+    --background-code: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/0.0392156862745098) 100%,hsl(0 0% 0%/0.0392156862745098) 0%);
+    --background-feedback-notification: hsl(355.636 calc(1*64.706%) 50%/1);
+    --background-mod-strong: hsl(240 calc(1*4%) 60.784%/0.23921568627450981);
+    --background-scrim: color-mix(in oklab,hsl(0 calc(1*0%) 0%/0.5215686274509804) 100%,hsl(0 0% 0%/0.5215686274509804) 0%);
+    --background-secondary-alt: color-mix(in oklab,hsl(210 calc(1*5.263%) 92.549%/1) 100%,#000 0%);
+    --background-surface-high: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --background-surface-higher: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --background-surface-highest: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --background-tile-gradient-pink-end: color-mix(in oklab,hsl(312 calc(1*96.154%) 79.608%/0.3) 100%,hsl(0 0% 0%/0.3) 0%);
+    --background-tile-gradient-pink-start: color-mix(in oklab,hsl(290.4 calc(1*100%) 95.098%/0.3) 100%,hsl(0 0% 0%/0.3) 0%);
+    --badge-common-text: hsl(234.545 calc(1*5.473%) 39.412%/1);
+    --badge-epic-text: hsl(264.275 calc(1*59.817%) 42.941%/1);
+    --badge-expressive-background-default: hsl(339 calc(1*85.556%) 64.706%/1);
+    --badge-expressive-text-default: hsl(0 calc(1*0%) 100%/1);
+    --badge-mythic-text: hsl(21.391 calc(1*90.551%) 49.804%/1);
+    --badge-notification-background: hsl(355.636 calc(1*64.706%) 50%/1);
+    --badge-rare-text: hsl(236.25 calc(1*58.716%) 42.745%/1);
+    --badge-text-default: hsl(240 calc(1*5.882%) 16.667%/1);
+    --bg-surface-raised: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --border-feedback-critical: color-mix(in oklab,hsl(355.068 calc(1*65.179%) 43.922%/1) 100%,#000 0%);
+    --border-feedback-info: color-mix(in oklab,hsl(339 calc(1*93.75%) 37.647%/1) 100%,#000 0%);
+    --border-feedback-positive: color-mix(in oklab,hsl(150.536 calc(1*98.246%) 22.353%/1) 100%,#000 0%);
+    --border-feedback-warning: color-mix(in oklab,hsl(33.649 calc(1*100%) 29.02%/1) 100%,#000 0%);
+    --border-focus: color-mix(in oklab,hsl(339 calc(1*80.282%) 58.235%/1) 100%,#000 0%);
+    --border-muted: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --border-normal: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.4) 100%,hsl(0 0% 0%/0.4) 0%);
+    --border-strong: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.5215686274509804) 100%,hsl(0 0% 0%/0.5215686274509804) 0%);
+    --border-subtle: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2784313725490196) 100%,hsl(0 0% 0%/0.2784313725490196) 0%);
+    --brightness: calc(0.5 + 1*0.5);
+    --button-outline-primary-text: hsl(0 calc(1*0%) 0%/1);
+    --card-background-default: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --card-border-default: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2784313725490196) 100%,hsl(0 0% 0%/0.2784313725490196) 0%);
+    --card-primary-pressed-bg: color-mix(in oklab,hsl(210 calc(1*5.263%) 92.549%/1) 100%,#000 0%);
+    --card-secondary-pressed-bg: color-mix(in oklab,hsl(210 calc(1*5.263%) 92.549%/1) 100%,#000 0%);
+    --channel-background-default: color-mix(in oklab,hsl(0 calc(1*0%) 98.431%/1) 100%,#000 0%);
+    --channel-icon: color-mix(in oklab,hsl(234 calc(1*4.673%) 41.961%/1) 100%,#000 0%);
+    --channel-text-area-placeholder: color-mix(in oklab,hsl(233.333 calc(1*3.797%) 53.529%/1) 100%,#000 0%);
+    --channels-default: color-mix(in oklab,hsl(234 calc(1*4.673%) 41.961%/1) 100%,#000 0%);
+    --channeltextarea-background: color-mix(in oklab,hsl(210 calc(1*5.263%) 92.549%/1) 100%,#000 0%);
+    --chart-brand: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --chart-categorical-1: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --chart-mono-1: color-mix(in oklab,hsl(339 calc(1*100%) 95.294%/1) 100%,#000 0%);
+    --chart-mono-2: color-mix(in oklab,hsl(339 calc(1*100%) 85.686%/1) 100%,#000 0%);
+    --chart-mono-3: color-mix(in oklab,hsl(339 calc(1*93.496%) 75.882%/1) 100%,#000 0%);
+    --chart-mono-4: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --chart-mono-5: color-mix(in oklab,hsl(339 calc(1*46.667%) 50%/1) 100%,#000 0%);
+    --chart-mono-6: color-mix(in oklab,hsl(339 calc(1*49.727%) 35.882%/1) 100%,#000 0%);
+    --chart-mono-7: color-mix(in oklab,hsl(339 calc(1*57.143%) 21.961%/1) 100%,#000 0%);
+    --chart-mono-text-1: color-mix(in oklab,hsl(231.429 calc(1*6.195%) 22.157%/1) 100%,#000 0%);
+    --chart-mono-text-2: color-mix(in oklab,hsl(225 calc(1*6.897%) 11.373%/1) 100%,#000 0%);
+    --chart-mono-text-3: color-mix(in oklab,hsl(0 calc(1*0%) 0%/1) 100%,#000 0%);
+    --chart-mono-text-5: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --chart-mono-text-6: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --chart-mono-text-7: color-mix(in oklab,hsl(225 calc(1*4.878%) 83.922%/1) 100%,#000 0%);
+    --chart-negative: color-mix(in oklab,hsl(355.636 calc(1*64.706%) 50%/1) 100%,#000 0%);
+    --chat-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --chat-background-default: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --chat-border: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2784313725490196) 100%,hsl(0 0% 0%/0.2784313725490196) 0%);
+    --chat-text-muted: color-mix(in oklab,hsl(234 calc(1*4.274%) 45.882%/1) 100%,#000 0%);
+    --checkbox-background-default: hsl(0 calc(1*0%) 0%/0.0392156862745098);
+    --checkbox-background-hover: hsl(0 calc(1*0%) 0%/0.0392156862745098);
+    --checkbox-border-active: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --checkbox-border-default: hsl(233.333 calc(1*3.797%) 53.529%/1);
+    --checkbox-border-hover: hsl(234.545 calc(1*5.641%) 38.235%/1);
+    --checkbox-border-selected-default: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --checkbox-border-selected-hover: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --context-menu-backdrop-background: color-mix(in oklab,hsl(0 calc(1*0%) 0%/0.5215686274509804) 100%,hsl(0 0% 0%/0.5215686274509804) 0%);
+    --control-brand-foreground: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --control-brand-foreground-new: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --control-expressive-background-hover: hsl(339 calc(1*46.667%) 50%/1);
+    --control-expressive-border-active: hsl(0 calc(1*0%) 100%/0.0784313725490196);
+    --control-expressive-border-default: hsl(0 calc(1*0%) 100%/0.0784313725490196);
+    --control-expressive-border-hover: hsl(0 calc(1*0%) 100%/0.0784313725490196);
+    --control-expressive-icon-active: hsl(0 calc(1*0%) 100%/1);
+    --control-expressive-icon-default: hsl(0 calc(1*0%) 100%/1);
+    --control-expressive-icon-hover: hsl(0 calc(1*0%) 100%/1);
+    --control-expressive-text-active: hsl(0 calc(1*0%) 100%/1);
+    --control-expressive-text-default: hsl(0 calc(1*0%) 100%/1);
+    --control-expressive-text-hover: hsl(0 calc(1*0%) 100%/1);
+    --control-icon-only-background-active: hsl(240 calc(1*4%) 60.784%/0.23921568627450981);
+    --control-icon-only-border-active: hsl(240 calc(1*4%) 60.784%/0.2);
+    --control-icon-only-border-hover: hsl(240 calc(1*4%) 60.784%/0.2);
+    --control-icon-only-icon-active: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-icon-only-icon-default: hsl(234 calc(1*5.319%) 36.863%/1);
+    --control-icon-only-icon-hover: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-secondary-background-active: hsl(240 calc(1*4%) 60.784%/0.23921568627450981);
+    --control-secondary-border-active: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --control-secondary-border-default: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --control-secondary-border-hover: hsl(240 calc(1*4%) 60.784%/0.2);
+    --control-secondary-icon-active: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-secondary-icon-default: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-secondary-icon-hover: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-secondary-text-active: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-secondary-text-default: hsl(240 calc(1*5.882%) 16.667%/1);
+    --control-secondary-text-hover: hsl(240 calc(1*5.882%) 16.667%/1);
+    --creator-revenue-icon-gradient-end: color-mix(in oklab,hsl(184.586 calc(1*100%) 30.784%/1) 100%,#000 0%);
+    --creator-revenue-icon-gradient-start: color-mix(in oklab,hsl(184.839 calc(1*50.82%) 47.843%/1) 100%,#000 0%);
+    --creator-revenue-locked-channel-icon: color-mix(in oklab,hsl(184.586 calc(1*100%) 30.784%/1) 100%,#000 0%);
+    --creator-revenue-progress-bar: color-mix(in oklab,hsl(184.839 calc(1*50.82%) 47.843%/1) 100%,#000 0%);
+    --elevation-high: 0 8px 16px hsl(0 calc(1*0%) 0%/0.16);
+    --elevation-low: 0 1px 0 hsl(240 calc(1*9.091%) 2.157%/0.1),0 1.5px 0 hsl(240 calc(1*20%) 0.98%/0.025),0 2px 0 hsl(240 calc(1*9.091%) 2.157%/0.025);
+    --elevation-medium: 0 4px 4px hsl(0 calc(1*0%) 0%/0.08);
+    --elevation-stroke: 0 0 0 1px hsl(240 calc(1*9.091%) 2.157%/0.08);
+    --embed-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --embed-background-alternate: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --expressive-gradient-blue-end: color-mix(in oklab,hsl(234 calc(1*90%) 80.392%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-blue-start: color-mix(in oklab,hsl(235.2 calc(1*100%) 95.098%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-green-end: color-mix(in oklab,hsl(143.67 calc(1*87.2%) 75.49%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-green-start: color-mix(in oklab,hsl(145.385 calc(1*100%) 94.902%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-nitro-green-end: color-mix(in oklab,hsl(234.935 calc(1*85.556%) 64.706%/0.9) 100%,hsl(0 0% 0%/0.9) 0%);
+    --expressive-gradient-nitro-pink-end: color-mix(in oklab,hsl(234.935 calc(1*85.556%) 64.706%/0.9) 100%,hsl(0 0% 0%/0.9) 0%);
+    --expressive-gradient-pink-end: color-mix(in oklab,hsl(312 calc(1*96.154%) 79.608%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-pink-start: color-mix(in oklab,hsl(290.4 calc(1*100%) 95.098%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-purple-end: color-mix(in oklab,hsl(269.011 calc(1*88.35%) 79.804%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --expressive-gradient-purple-start: color-mix(in oklab,hsl(271.2 calc(1*100%) 95.098%/0.8) 100%,hsl(0 0% 0%/0.8) 0%);
+    --gradient-progress-pill-background: color-mix(in oklab,hsl(240 calc(1*4%) 75.49%/1) 100%,#000 0%);
+    --guild-header-text-shadow: 0 1px 1px hsl(0 calc(1*0%) 100%/0.4);
+    --home-background: color-mix(in oklab,hsl(0 calc(1*0%) 98.431%/1) 100%,#000 0%);
+    --icon-default: color-mix(in oklab,hsl(240 calc(1*6.122%) 19.216%/1) 100%,#000 0%);
+    --icon-feedback-critical: color-mix(in oklab,hsl(355.068 calc(1*65.179%) 43.922%/1) 100%,#000 0%);
+    --icon-feedback-info: color-mix(in oklab,hsl(339 calc(1*93.75%) 37.647%/1) 100%,#000 0%);
+    --icon-feedback-notification: hsl(355.636 calc(1*64.706%) 50%/1);
+    --icon-feedback-positive: color-mix(in oklab,hsl(150.536 calc(1*98.246%) 22.353%/1) 100%,#000 0%);
+    --icon-feedback-warning: color-mix(in oklab,hsl(33.649 calc(1*100%) 29.02%/1) 100%,#000 0%);
+    --icon-invert: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --icon-link: color-mix(in oklab,hsl(339 calc(1*95.37%) 42.353%/1) 100%,#000 0%);
+    --icon-muted: color-mix(in oklab,hsl(234 calc(1*4.425%) 44.314%/1) 100%,#000 0%);
+    --icon-status-dnd: color-mix(in oklab,hsl(355.636 calc(1*64.706%) 50%/1) 100%,#000 0%);
+    --icon-status-idle: color-mix(in oklab,hsl(40.8 calc(1*100%) 49.02%/1) 100%,#000 0%);
+    --icon-status-offline: color-mix(in oklab,hsl(234.545 calc(1*5.473%) 39.412%/1) 100%,#000 0%);
+    --icon-status-online: color-mix(in oklab,hsl(150.756 calc(1*98.347%) 23.725%/1) 100%,#000 0%);
+    --icon-strong: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --icon-subtle: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --icon-voice-connected: color-mix(in oklab,hsl(150.756 calc(1*98.347%) 23.725%/1) 100%,#000 0%);
+    --icon-voice-disconnected: color-mix(in oklab,hsl(355.068 calc(1*65.179%) 43.922%/1) 100%,#000 0%);
+    --icon-voice-muted: hsl(355.636 calc(1*64.706%) 50%/1);
+    --icon-voice-speaking: color-mix(in oklab,hsl(145.234 calc(1*58.47%) 35.882%/1) 100%,#000 0%);
+    --inlinenotice-border-critical: color-mix(in oklab,hsl(355.636 calc(1*64.706%) 50%/0.6) 100%,hsl(0 0% 0%/0.6) 0%);
+    --inlinenotice-border-info: color-mix(in oklab,hsl(339 calc(1*100%) 44.51%/0.6) 100%,hsl(0 0% 0%/0.6) 0%);
+    --inlinenotice-border-positive: color-mix(in oklab,hsl(151.128 calc(1*100%) 26.078%/0.6) 100%,hsl(0 0% 0%/0.6) 0%);
+    --inlinenotice-border-warning: color-mix(in oklab,hsl(39.435 calc(1*100%) 48.627%/0.3607843137254902) 100%,hsl(0 0% 0%/0.3607843137254902) 0%);
+    --input-background-default: color-mix(in oklab,hsl(0 calc(1*0%) 0%/0.0196078431372549) 100%,hsl(0 0% 0%/0.0196078431372549) 0%);
+    --input-border-default: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.4) 100%,hsl(0 0% 0%/0.4) 0%);
+    --input-border-error-default: color-mix(in oklab,hsl(355.068 calc(1*65.179%) 43.922%/1) 100%,#000 0%);
+    --input-border-hover: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.4) 100%,hsl(0 0% 0%/0.4) 0%);
+    --input-border-readonly: color-mix(in oklab,hsl(0 calc(1*0%) 0%/0.0392156862745098) 100%,hsl(0 0% 0%/0.0392156862745098) 0%);
+    --input-icon-default: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --input-placeholder-text-default: color-mix(in oklab,hsl(234 calc(1*4.545%) 43.137%/1) 100%,#000 0%);
+    --input-text-default: color-mix(in oklab,hsl(240 calc(1*6.122%) 19.216%/1) 100%,#000 0%);
+    --input-text-error-default: color-mix(in oklab,hsl(240 calc(1*6.122%) 19.216%/1) 100%,#000 0%);
+    --interactive-background-selected: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.23921568627450981) 100%,hsl(0 0% 0%/0.23921568627450981) 0%);
+    --interactive-icon-active: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --interactive-icon-default: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --interactive-icon-hover: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --interactive-muted: color-mix(in oklab,hsl(228 calc(1*4.854%) 79.804%/1) 100%,#000 0%);
+    --interactive-text-active: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --interactive-text-default: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --interactive-text-hover: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --keyword-highlight-background: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.23921568627450981) 100%,hsl(0 0% 0%/0.23921568627450981) 0%);
+    --legacy-elevation-border: 0 0 0 1px hsl(228 calc(1*4.854%) 79.804%/0.3);
+    --legacy-elevation-high: 0 2px 10px 0 hsl(0 calc(1*0%) 0%/0.0784313725490196);
+    --legacy-elevation-low: 0 1px 5px hsl(0 calc(1*0%) 0%/0.2);
+    --logo-primary: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/1) 100%,#000 0%);
+    --mention-foreground: color-mix(in oklab,hsl(339 calc(1*49.727%) 35.882%/1) 100%,#000 0%);
+    --message-highlight-background-hover: color-mix(in oklab,hsl(339 calc(1*85.556%) 64.706%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --message-mentioned-background-hover: color-mix(in oklab,hsl(39.435 calc(1*100%) 48.627%/0.12156862745098039) 100%,hsl(0 0% 0%/0.12156862745098039) 0%);
+    --mobile-guildbar-icon-default: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --mobile-text-heading-primary: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --modal-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --modal-footer-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --navigator-header-tint: color-mix(in oklab,hsl(234.545 calc(1*6.509%) 33.137%/1) 100%,#000 0%);
+    --nitro-tab-gradient-center: hsl(312 calc(1*96.154%) 79.608%/1);
+    --nitro-tab-gradient-inner-ring: hsl(234 calc(1*90%) 80.392%/0.25);
+    --nitro-tab-gradient-outer-ring: hsl(0 calc(1*0%) 100%/0);
+    --notice-background-critical: hsl(1.765 calc(1*100%) 93.333%/1);
+    --notice-background-info: hsl(339 calc(1*100%) 95.098%/1);
+    --notice-background-positive: hsl(137.455 calc(1*100%) 89.216%/1);
+    --notice-background-warning: hsl(30 calc(1*100%) 90.588%/1);
+    --notice-text-critical: hsl(351.25 calc(1*84.211%) 22.353%/1);
+    --notice-text-info: hsl(339 calc(1*100%) 21.373%/1);
+    --notice-text-positive: hsl(146.571 calc(1*100%) 13.725%/1);
+    --notice-text-warning: hsl(24.894 calc(1*100%) 18.431%/1);
+    --panel-bg: color-mix(in oklab,hsl(0 calc(1*0%) 98.431%/1) 100%,#000 0%);
+    --polls-normal-image-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --polls-victor-fill: color-mix(in oklab,hsl(145.234 calc(1*58.47%) 35.882%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --premium-nitro-pink-text: color-mix(in oklab,hsl(315.319 calc(1*55.294%) 50%/1) 100%,#000 0%);
+    --profile-gradient-note-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/0.3) 100%,hsl(0 0% 0%/0.3) 0%);
+    --profile-gradient-overlay: color-mix(in oklab,hsl(0 calc(1*0%) 100%/0.6) 100%,hsl(0 0% 0%/0.6) 0%);
+    --profile-gradient-role-pill-border: color-mix(in oklab,hsl(240 calc(1*6.494%) 15.098%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --profile-gradient-section-box: color-mix(in oklab,hsl(0 calc(1*0%) 100%/0.45) 100%,hsl(0 0% 0%/0.45) 0%);
+    --progressbar-track-background: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.23921568627450981) 100%,hsl(0 0% 0%/0.23921568627450981) 0%);
+    --radio-background-default: hsl(240 calc(1*4%) 60.784%/0.0392156862745098);
+    --radio-background-hover: hsl(240 calc(1*4%) 60.784%/0.0392156862745098);
+    --radio-border-active: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --radio-border-default: hsl(233.333 calc(1*3.797%) 53.529%/1);
+    --radio-border-hover: hsl(234.545 calc(1*5.641%) 38.235%/1);
+    --radio-border-selected-default: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --radio-border-selected-hover: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --radio-foreground-default: hsl(240 calc(1*4%) 60.784%/0.0392156862745098);
+    --radio-foreground-hover: hsl(240 calc(1*4%) 60.784%/0.0392156862745098);
+    --reaction-background-active: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.23921568627450981) 100%,hsl(0 0% 0%/0.23921568627450981) 0%);
+    --reaction-border-active: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.5215686274509804) 100%,hsl(0 0% 0%/0.5215686274509804) 0%);
+    --reaction-border-default: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2784313725490196) 100%,hsl(0 0% 0%/0.2784313725490196) 0%);
+    --reaction-border-hover: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+    --reaction-text-active: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --reaction-text-default: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --reaction-text-hover: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --reaction-text-reacted-default: color-mix(in oklab,hsl(339 calc(1*50.943%) 31.176%/1) 100%,#000 0%);
+    --redesign-button-tertiary-text: color-mix(in oklab,hsl(240 calc(1*6.122%) 19.216%/1) 100%,#000 0%);
+    --scrollbar-auto-thumb: color-mix(in oklab,hsl(232.5 calc(1*3.704%) 57.647%/1) 100%,#000 0%);
+    --scrollbar-thin-thumb: color-mix(in oklab,hsl(233.333 calc(1*4.036%) 56.275%/1) 100%,#000 0%);
+    --shadow-border: 0 0 0 1px hsl(none 0% 0%/0.08);
+    --shadow-border-filter: drop-shadow(0 0 1px hsl(none 0% 0%/0.08));
+    --shadow-high: 0 12px 36px 0 hsl(none 0% 0%/0.12);
+    --shadow-high-filter: drop-shadow(0 12px 36px hsl(none 0% 0%/0.12));
+    --shadow-ledge: 0 2px 0 0 hsl(none 0% 0%/0.03),0 1.5px 0 0 hsl(none 0% 0%/0.03),0 1px 0 0 hsl(none 0% 0%/0.08);
+    --shadow-ledge-filter: drop-shadow(0 1.5px 0 hsl(none 0% 0%/0.12));
+    --shadow-low: 0 1px 4px 0 hsl(none 0% 0%/0.08);
+    --shadow-low-active: 0 0 4px 0 hsl(none 0% 0%/0.08);
+    --shadow-low-active-filter: drop-shadow(0 0 4px hsl(none 0% 0%/0.08));
+    --shadow-low-filter: drop-shadow(0 1px 4px hsl(none 0% 0%/0.08));
+    --shadow-low-hover: 0 4px 8px 0 hsl(none 0% 0%/0.08);
+    --shadow-low-hover-filter: drop-shadow(0 4px 8px hsl(none 0% 0%/0.08));
+    --shadow-medium: 0 4px 8px 0 hsl(none 0% 0%/0.08);
+    --shadow-medium-filter: drop-shadow(0 4px 8px hsl(none 0% 0%/0.08));
+    --shadow-mobile-navigator-x: 0 0 9px 0 hsl(none 0% 0%/0.13);
+    --shadow-mobile-navigator-x-filter: drop-shadow(0 0 9px hsl(none 0% 0%/0.13));
+    --shadow-top-high: 0 -12px 36px 0 hsl(none 0% 0%/0.12);
+    --shadow-top-high-filter: drop-shadow(0 -12px 36px hsl(none 0% 0%/0.12));
+    --shadow-top-ledge: 0 -2px 0 0 hsl(none 0% 0%/0.03),0 -1.5px 0 0 hsl(none 0% 0%/0.03),0 -1px 0 0 hsl(none 0% 0%/0.08);
+    --shadow-top-ledge-filter: drop-shadow(0 -1.5px 0 hsl(none 0% 0%/0.12));
+    --shadow-top-low: 0 -1px 4px 0 hsl(none 0% 0%/0.08);
+    --shadow-top-low-filter: drop-shadow(0 -1px 4px hsl(none 0% 0%/0.08));
+    --slider-track-background: color-mix(in oklab,hsl(228 calc(1*4.505%) 78.235%/1) 100%,#000 0%);
+    --spine-default: color-mix(in oklab,hsl(228 calc(1*4.505%) 78.235%/1) 100%,#000 0%);
+    --spoiler-hidden-background: color-mix(in oklab,hsl(232.5 calc(1*3.704%) 57.647%/1) 100%,#000 0%);
+    --spoiler-hidden-background-hover: color-mix(in oklab,hsl(234 calc(1*4.274%) 45.882%/1) 100%,#000 0%);
+    --spoiler-revealed-background: color-mix(in oklab,hsl(210 calc(1*5.263%) 92.549%/1) 100%,#000 0%);
+    --standard-tab-gradient-center: hsl(234 calc(1*90%) 80.392%/1);
+    --standard-tab-gradient-inner-ring: hsl(234.737 calc(1*90.476%) 87.647%/0.25);
+    --standard-tab-gradient-outer-ring: hsl(234.737 calc(1*90.476%) 87.647%/0);
+    --status-danger: hsl(356.625 calc(1*66.116%) 52.549%/1);
+    --status-online: hsl(145.234 calc(1*58.47%) 35.882%/1);
+    --status-positive: hsl(145.234 calc(1*58.47%) 35.882%/1);
+    --status-warning: hsl(36.898 calc(1*100%) 36.667%/1);
+    --status-warning-background: hsl(36.898 calc(1*100%) 36.667%/1);
+    --status-warning-text: hsl(0 calc(1*0%) 100%/1);
+    --steam-review-text-mixed: color-mix(in oklab,hsl(31.765 calc(1*100%) 26.667%/1) 100%,#000 0%);
+    --steam-review-text-negative: color-mix(in oklab,hsl(355.636 calc(1*64.706%) 50%/1) 100%,#000 0%);
+    --steam-review-text-positive: color-mix(in oklab,hsl(339 calc(1*95.37%) 42.353%/1) 100%,#000 0%);
+    --switch-background-default: hsl(0 calc(1*0%) 0%/0.0196078431372549);
+    --switch-background-hover: hsl(0 calc(1*0%) 0%/0.0196078431372549);
+    --switch-border-default: hsl(0 calc(1*0%) 0%/0.1607843137254902);
+    --switch-border-hover: hsl(0 calc(1*0%) 0%/0.4392156862745098);
+    --switch-border-selected-default: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --switch-border-selected-hover: hsl(240 calc(1*4%) 60.784%/0.2784313725490196);
+    --switch-thumb-background-default: hsl(234.545 calc(1*5.314%) 40.588%/1);
+    --switch-thumb-icon-default: hsl(0 calc(1*0%) 100%/1);
+    --text-brand: color-mix(in oklab,hsl(339 calc(1*69.608%) 60%/1) 100%,#000 0%);
+    --text-code: color-mix(in oklab,hsl(232.5 calc(1*6.897%) 22.745%/1) 100%,#000 0%);
+    --text-code-addition: color-mix(in oklab,hsl(150.316 calc(1*100%) 18.627%/1) 100%,#000 0%);
+    --text-code-attribute: color-mix(in oklab,hsl(339 calc(1*96.471%) 33.333%/1) 100%,#000 0%);
+    --text-code-builtin: color-mix(in oklab,hsl(31.765 calc(1*100%) 26.667%/1) 100%,#000 0%);
+    --text-code-bullet: color-mix(in oklab,hsl(339 calc(1*96.471%) 33.333%/1) 100%,#000 0%);
+    --text-code-comment: color-mix(in oklab,hsl(234 calc(1*4.545%) 43.137%/1) 100%,#000 0%);
+    --text-code-decorator: color-mix(in oklab,hsl(31.765 calc(1*100%) 26.667%/1) 100%,#000 0%);
+    --text-code-deletion: color-mix(in oklab,hsl(354.803 calc(1*67.196%) 37.059%/1) 100%,#000 0%);
+    --text-code-error: color-mix(in oklab,hsl(355.075 calc(1*65.686%) 40%/1) 100%,#000 0%);
+    --text-code-escape: color-mix(in oklab,hsl(315 calc(1*59.794%) 38.039%/1) 100%,#000 0%);
+    --text-code-keyword: color-mix(in oklab,hsl(355.075 calc(1*65.686%) 40%/1) 100%,#000 0%);
+    --text-code-link: color-mix(in oklab,hsl(339 calc(1*96.471%) 33.333%/1) 100%,#000 0%);
+    --text-code-namespace: color-mix(in oklab,hsl(339 calc(1*96.471%) 33.333%/1) 100%,#000 0%);
+    --text-code-number: color-mix(in oklab,hsl(22.857 calc(1*96.078%) 30%/1) 100%,#000 0%);
+    --text-code-operator: color-mix(in oklab,hsl(354.59 calc(1*67.778%) 35.294%/1) 100%,#000 0%);
+    --text-code-property: color-mix(in oklab,hsl(186 calc(1*100%) 21.569%/1) 100%,#000 0%);
+    --text-code-regexp: color-mix(in oklab,hsl(150.291 calc(1*100%) 20.196%/1) 100%,#000 0%);
+    --text-code-section: color-mix(in oklab,hsl(355.075 calc(1*65.686%) 40%/1) 100%,#000 0%);
+    --text-code-string: color-mix(in oklab,hsl(150.291 calc(1*100%) 20.196%/1) 100%,#000 0%);
+    --text-code-tag: color-mix(in oklab,hsl(315 calc(1*59.794%) 38.039%/1) 100%,#000 0%);
+    --text-code-title: color-mix(in oklab,hsl(339 calc(1*47.107%) 47.451%/1) 100%,#000 0%);
+    --text-code-type: color-mix(in oklab,hsl(315 calc(1*59.794%) 38.039%/1) 100%,#000 0%);
+    --text-code-variable: color-mix(in oklab,hsl(232.5 calc(1*6.897%) 22.745%/1) 100%,#000 0%);
+    --text-default: color-mix(in oklab,hsl(240 calc(1*6.122%) 19.216%/1) 100%,#000 0%);
+    --text-feedback-critical: color-mix(in oklab,hsl(355.068 calc(1*65.179%) 43.922%/1) 100%,#000 0%);
+    --text-feedback-info: color-mix(in oklab,hsl(339 calc(1*93.75%) 37.647%/1) 100%,#000 0%);
+    --text-feedback-positive: color-mix(in oklab,hsl(150.536 calc(1*98.246%) 22.353%/1) 100%,#000 0%);
+    --text-feedback-warning: color-mix(in oklab,hsl(33.649 calc(1*100%) 29.02%/1) 100%,#000 0%);
+    --text-invert: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --text-link: color-mix(in oklab,hsl(339 calc(1*95.37%) 42.353%/1) 100%,#000 0%);
+    --text-muted: color-mix(in oklab,hsl(234 calc(1*4.425%) 44.314%/1) 100%,#000 0%);
+    --text-status-dnd: color-mix(in oklab,hsl(355.636 calc(1*64.706%) 50%/1) 100%,#000 0%);
+    --text-status-idle: color-mix(in oklab,hsl(40.8 calc(1*100%) 49.02%/1) 100%,#000 0%);
+    --text-status-offline: color-mix(in oklab,hsl(234.545 calc(1*5.473%) 39.412%/1) 100%,#000 0%);
+    --text-status-online: color-mix(in oklab,hsl(150.756 calc(1*98.347%) 23.725%/1) 100%,#000 0%);
+    --text-strong: color-mix(in oklab,hsl(240 calc(1*5.882%) 16.667%/1) 100%,#000 0%);
+    --text-subtle: color-mix(in oklab,hsl(234 calc(1*5.319%) 36.863%/1) 100%,#000 0%);
+    --text-voice-connected: color-mix(in oklab,hsl(150.756 calc(1*98.347%) 23.725%/1) 100%,#000 0%);
+    --text-voice-disconnected: color-mix(in oklab,hsl(355.068 calc(1*65.179%) 43.922%/1) 100%,#000 0%);
+    --text-voice-speaking: color-mix(in oklab,hsl(145.234 calc(1*58.47%) 35.882%/1) 100%,#000 0%);
+    --textbox-markdown-syntax: color-mix(in oklab,hsl(233.333 calc(1*6.475%) 27.255%/1) 100%,#000 0%);
+    --thread-channel-spine: color-mix(in oklab,hsl(228 calc(1*4.854%) 79.804%/1) 100%,#000 0%);
+    --togglebutton-critical-icon-selected: color-mix(in oklab,hsl(355.636 calc(1*64.706%) 50%/1) 100%,#000 0%);
+    --user-profile-border: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2784313725490196) 100%,hsl(0 0% 0%/0.2784313725490196) 0%);
+    --user-profile-note-background-focus: color-mix(in oklab,hsl(240 calc(1*4.348%) 95.49%/1) 100%,#000 0%);
+    --user-profile-overlay-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --user-profile-toolbar-background: color-mix(in oklab,hsl(0 calc(1*0%) 100%/1) 100%,#000 0%);
+    --user-profile-toolbar-border: color-mix(in oklab,hsl(240 calc(1*4%) 60.784%/0.2) 100%,hsl(0 0% 0%/0.2) 0%);
+}
+
+/* discord washes a message that mentions you in amber, which is the one colour left in
+   the client that has nothing to do with this theme. the knob at the top of the file was
+   declared and never read; it drives the wash now.
+   the four --background-mentioned / --message-mentioned tokens were tried first and none
+   of them paint this, so the class carries it directly. the bar down the left reads
+   --info-warning-foreground, which warning banners and icons share, so that token is
+   scoped to the row rather than overridden for the whole client. */
+#app-mount .mentioned__5126c {
+    background-color: hsla(var(--mentioned-color), 0.1);
+    --info-warning-foreground: hsl(var(--mentioned-color));
+}
+#app-mount .mentioned__5126c:hover {
+    background-color: hsla(var(--mentioned-color), 0.16);
+}
+/* the 2px bar down the left edge. discord sets it on a shared rule with the automod and
+   ephemeral notices, so the colour has to be taken back here rather than on the token. */
+#app-mount .mentioned__5126c::before {
+    background-color: hsl(var(--mentioned-color));
+}
+
+/* musiccontrols paints the album cover on the player's own ::after. quickcss gives that
+   pseudo its content and the blur; the size and the cover itself belong to the theme, so
+   each one can place it in its own card. the negative inset is bleed for the blur, and
+   the player clips it, which is what keeps the soft rim off the card's edge. */
+section[class*="panels_"] #vc-spotify-player {
+    position: relative;
+    background: transparent !important;
+    border: 0 !important;
+}
+section[class*="panels_"] #vc-spotify-player::after {
+    content: "" !important;
+    position: absolute !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    filter: blur(var(--cover-blur)) !important;
+    top: -72px !important;
+    right: -24px !important;
+    bottom: -24px !important;
+    left: -24px !important;
+    width: auto !important;
+    height: auto !important;
+    background:
+        linear-gradient(color-mix(in srgb, var(--drag-gradient1) var(--cover-wash), transparent),
+                        color-mix(in srgb, var(--drag-gradient2) var(--cover-wash), transparent)),
+        var(--vc-spotify-track-image) center / cover no-repeat !important;
+}
+/* the player's own rows sit above the artwork rather than under it */
+section[class*="panels_"] #vc-spotify-player > * {
+    position: relative;
+    z-index: 1;
+}
+/* the lyric line and the account row belong above the artwork, not under it */
+section[class*="panels_"] .vc-spotify-lyrics,
+section[class*="panels_"] > [class*="container_"] {
+    position: relative;
+    z-index: 1;
+}
+/* two lines, always. a long line wraps instead of being cut, a short one does not
+   change the card's height, and hovering the player stops resizing the whole card. */
+section[class*="panels_"] .vc-spotify-lyrics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 36px;
+    max-height: none;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+}
+section[class*="panels_"] .vc-spotify-lyrics-prev,
+section[class*="panels_"] .vc-spotify-lyrics-next {
+    display: none;
+}
+
+/* the heading over the dm list. content on the element itself is the tidy way to swap
+   the words and this build ignores it, so the text is hidden and the pseudo carries the
+   replacement. the pseudo inherits the font, so discord's size, weight and letter
+   spacing all still apply. */
+#app-mount .privateChannelsHeaderContainer__99e7c .headerText__99e7c {
+    visibility: hidden;
+    position: relative;
+}
+#app-mount .privateChannelsHeaderContainer__99e7c .headerText__99e7c::before {
+    content: var(--dm-header);
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+}
+
+/* the five status colours at the top of the file were declared and never read, so the
+   dots stayed discord's own. offline in particular is a mid grey-blue that vanished on
+   the tab strip. */
+:root,
+.theme-dark,
+.theme-light,
+html:not(.theme-dark) #app-mount .theme-dark {
+    --icon-status-online: var(--online-color);
+    --icon-status-idle: var(--idle-color);
+    --icon-status-dnd: var(--dnd-color);
+    --icon-status-offline: var(--offline-color);
+}
+
+/* musiccontrols, the rest of it. these lived in quickcss, which does not travel with the
+   theme file, so anyone this is sent to would have got the cover and none of the polish.
+
+   the plugin's own rules use `#vc-spotify-progress-bar > [slider]` and discord has since
+   put container__ and control__ between the two, so every rule written that way stopped
+   matching. no child combinator here for that reason. */
+#vc-spotify-progress-bar [class*="bar_"],
+#vc-spotify-progress-bar [class*="barFill"] {
+    opacity: 0 !important;
+}
+
+/* the seek handle is the only part of the slider left showing, and only while you are
+   pointing at it. the silhouette behind it is the plugin's own. */
+#vc-spotify-progress-bar [class*="grabber"] {
+    opacity: 0 !important;
+    transform: scale(0.6);
+    transition: opacity 140ms ease-out, transform 140ms ease-out;
+}
+#vc-spotify-progress-bar:hover [class*="grabber"] {
+    opacity: 1 !important;
+    transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+    #vc-spotify-progress-bar [class*="grabber"] {
+        transition: none;
+    }
+}
+
+/* the transport takes the sleeve's colour. the plugin samples the current cover and
+   publishes it as --vc-spotify-cover-color, and --vc-spotify-green is its own hook for
+   the shuffle and repeat lit states, so pointing that at the same value covers them. */
+#vc-spotify-player {
+    --vc-spotify-green: var(--vc-spotify-cover-color, #1db954);
+}
+
+/* the glyph takes the colour outright rather than inheriting it: the icon is an
+   <svg fill="currentColor">, so it resolves against its own colour, and setting colour
+   on the button alone only tinted the plate behind it. */
+#vc-spotify-player .vc-spotify-button,
+#vc-spotify-player .vc-spotify-button svg,
+#vc-spotify-player .vc-spotify-button svg * {
+    color: var(--vc-spotify-cover-color, var(--interactive-icon-default)) !important;
+    fill: currentColor !important;
+}
+#vc-spotify-player .vc-spotify-button:hover,
+#vc-spotify-player .vc-spotify-button:hover svg,
+#vc-spotify-player .vc-spotify-button:hover svg * {
+    color: #fff !important;
+}
+#vc-spotify-player .vc-spotify-button:hover {
+    background: color-mix(in srgb, var(--vc-spotify-cover-color, #fff) 22%, transparent) !important;
+}
+

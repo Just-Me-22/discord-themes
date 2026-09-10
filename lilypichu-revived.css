@@ -1,0 +1,2106 @@
+/**
+ * LilyPichu Revived, the rules.
+ * Nyria's theme ported to current Discord. Original design by @Melonturtle_.
+ *
+ * Every colour, size and toggle lives in the .theme.css that imports this.
+*/
+
+
+/* ---- DERIVED. NOTHING TO CONFIGURE BELOW THIS LINE ----
+   each palette colour paired with the opacity that surface uses. change the
+   colour or the opacity above; these only multiply the two together. */
+:root {
+  /* the corners where two panels meet. css has no "if", so min() does it: at seam 0
+     this is 0 and the block reads as one shape, and the moment the seam opens it
+     saturates at the full radius so every panel becomes its own rounded card. */
+  --lp-inner: min(calc(var(--lp-seam) * 100), var(--lp-radius));
+
+  --lp-1a: color-mix(in srgb, var(--lp-1) var(--lp-panel-list), transparent);
+  --lp-2a: color-mix(in srgb, var(--lp-2) var(--lp-panel), transparent);
+  --lp-3a: color-mix(in srgb, var(--lp-3) var(--lp-panel), transparent);
+  --lp-shell-a: color-mix(in srgb, var(--lp-shell) var(--lp-panel-list), transparent);
+  --lp-list-a: color-mix(in srgb, var(--lp-list-bg) var(--lp-panel-list), transparent);
+  --lp-composer-a: color-mix(in srgb, var(--lp-composer-bg) var(--lp-composer), transparent);
+  --lp-card-a: color-mix(in srgb, var(--lp-3) var(--lp-card), transparent);
+  --lp-userpanel-a: color-mix(in srgb, var(--lp-2) var(--lp-userpanel), transparent);
+}
+
+/* light mode mixes its own, and it has to be written AFTER the block above: both match
+   the same element and both are one class deep, so the later one wins. the light block
+   further up sets the palette, not these. the percentages are higher on purpose - dark
+   ink over a dark wallpaper needs a denser panel to stay readable. */
+.theme-light,
+.theme-light .theme-dark {
+  --lp-1a: color-mix(in srgb, var(--lp-1) var(--lp-panel-light), transparent);
+  --lp-2a: color-mix(in srgb, var(--lp-2) var(--lp-panel-light), transparent);
+  --lp-3a: color-mix(in srgb, var(--lp-3) var(--lp-panel-light), transparent);
+  --lp-shell-a: color-mix(in srgb, var(--lp-shell) var(--lp-panel-light), transparent);
+  --lp-list-a: color-mix(in srgb, var(--lp-list-bg) var(--lp-panel-light), transparent);
+  --lp-userpanel-a: color-mix(in srgb, var(--lp-2) var(--lp-panel-light), transparent);
+  --lp-card-a: color-mix(in srgb, var(--lp-3) var(--lp-panel-light), transparent);
+  --lp-composer-a: color-mix(in srgb, var(--lp-composer-bg) var(--lp-panel-light), transparent);
+}
+
+/* the original wrote the 2022 token names only, which is half of why it stopped
+   landing. both families are set here so the palette survives either build. */
+:root,
+.theme-dark,
+.theme-light {
+  --background-primary: var(--lp-1);
+  --background-secondary: var(--lp-2);
+  --background-secondary-alt: var(--lp-3);
+  --background-tertiary: var(--lp-shell);
+  --background-floating: var(--lp-float);
+  --background-accent: var(--lp-accent);
+  --background-mobile-primary: var(--lp-1);
+  --background-mobile-secondary: var(--lp-2);
+  --background-modifier-hover: var(--lp-hover);
+  --background-modifier-active: var(--lp-active);
+  --background-modifier-selected: var(--lp-selected);
+
+  --bg-base-primary: var(--lp-1);
+  --bg-base-secondary: var(--lp-2);
+  /* these three are the ambient "whatever is behind everything" tokens. pointing
+     them at the frame colour is what leaked pale blue into every surface discord
+     paints with them - the decoration, effect and nameplate pickers came out as
+     light tiles on a dark modal. the frame itself does not need them: the wallpaper
+     rule paints those elements by hand. */
+  --bg-base-tertiary: var(--lp-ambient);
+  --bg-surface-overlay: var(--lp-float);
+  --bg-surface-raised: var(--lp-3);
+  --background-base-lowest: var(--lp-ambient);
+  --background-base-lower: var(--lp-3);
+  --background-base-low: var(--lp-2);
+  --chat-background: var(--lp-1a);
+  --app-frame-background: var(--lp-ambient);
+  --modal-background: var(--lp-modal);
+  --modal-footer-background: var(--lp-modal);
+
+  --text-normal: var(--lp-text);
+  --text-default: var(--lp-text);
+  --text-muted: var(--lp-dim);
+  --text-link: var(--lp-accent);
+  --header-primary: var(--lp-text);
+  --header-secondary: var(--lp-dim);
+  --interactive-normal: var(--lp-icon);
+  --interactive-hover: var(--lp-dim);
+  --interactive-active: var(--lp-dim);
+  --interactive-muted: var(--lp-faint);
+  --channels-default: var(--lp-text);
+  --channel-icon: var(--lp-icon);
+
+  --brand-500: var(--lp-accent);
+  --brand-experiment: var(--lp-accent);
+  --button-filled-brand-background: var(--lp-accent);
+  --button-filled-brand-background-hover: var(--lp-accent-hover);
+
+  --toast-background: var(--lp-1a);
+  --toast-header: var(--lp-3);
+  --toast-contents: var(--lp-2);
+  --toast-border: var(--lp-2);
+
+  /* discord draws its own separators from these, and the theme never bound them, so
+     they fell through to its grey defaults and showed as stripes down the rail, around
+     the channel list and under the channel name. */
+  --border-faint: var(--lp-border);
+  --border-subtle: var(--lp-border);
+  --border-normal: var(--lp-border);
+  --border-strong: var(--lp-border);
+  --background-modifier-accent: var(--lp-border);
+
+  --scrollbar-auto-thumb: var(--lp-shell);
+  --scrollbar-auto-track: var(--lp-3);
+  --scrollbar-thin-thumb: var(--lp-shell);
+  --scrollbar-thin-track: transparent;
+
+  --radius-xs: var(--lp-radius);
+  --radius-sm: var(--lp-radius);
+  --radius-md: var(--lp-radius);
+  --radius-lg: var(--lp-radius);
+  --radius-xl: var(--lp-radius);
+  --border-radius: var(--lp-radius);
+
+  --font-primary: var(--lp-font);
+  --font-display: var(--lp-font);
+}
+
+/* the wallpaper goes on every element that paints the frame, and is anchored to the
+   viewport rather than to each box, so the layers line up into one image instead of
+   one copy per panel. with the knob at none this is just the flat frame colour.
+   base__ is scoped through baseLayer_ because a second module shares the name: the app
+   root is one element, the other is eight of them elsewhere, and unscoped they were all
+   being handed the wallpaper and the shell padding. */
+body,
+[class*="app_"],
+[class*="appMount"],
+[class*="baseLayer_"],
+[class*="layers_"],
+[class*="baseLayer_"] > div[class*="base__"] {
+  font-family: var(--lp-font) !important;
+  background-color: var(--lp-frame) !important;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, var(--lp-wallpaper-light)), rgba(255, 255, 255, var(--lp-wallpaper-light))),
+    linear-gradient(rgba(0, 0, 0, var(--lp-wallpaper-dim)), rgba(0, 0, 0, var(--lp-wallpaper-dim))),
+    var(--lp-wallpaper) !important;
+  background-position: center, center, var(--lp-wallpaper-x) var(--lp-wallpaper-y) !important;
+  background-size: cover, cover, var(--lp-wallpaper-fit) !important;
+  background-repeat: no-repeat !important;
+  background-attachment: var(--lp-wallpaper-fix) !important;
+}
+
+/* the channel tabs sit above base__, so they take the frame inset by hand rather
+   than inheriting the grid's padding, and stop where the block does */
+.vc-channeltabs-container {
+  margin-left: var(--lp-shell-gap) !important;
+  margin-right: calc(var(--lp-shell-gap) + var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)) !important;
+  border-radius: 0 0 var(--lp-radius) var(--lp-radius) !important;
+  background-color: var(--lp-2a) !important;
+  box-shadow: none !important;
+}
+
+/* the bar rests as just the bookmarks; the tab row folds away and drops back down
+   while the cursor is on the bar. motion is gated behind hover rather than running
+   on its own. */
+/* a real height rather than max-height: an over-large max-height spends the first
+   part of the transition covering distance the row does not have, which is what
+   makes the open read as laggy and the close as a snap. the row's own padding and
+   the column gap go too, or they hold a sliver of it open at rest. */
+.vc-channeltabs-tab-container {
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  transform: translateY(-6px);
+  transition:
+    height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease !important;
+}
+
+.vc-channeltabs-container {
+  gap: 0 !important;
+}
+
+/* the separator is 1px of rule between 4px margins, so it holds 9px of the bar open
+   on its own once the tab row is folded away */
+.vc-channeltabs-separator {
+  height: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  transition:
+    height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    margin 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease !important;
+}
+
+.vc-channeltabs-container:hover .vc-channeltabs-tab-container {
+  height: 44px !important;
+  opacity: 1 !important;
+  transform: none;
+}
+
+.vc-channeltabs-container:hover .vc-channeltabs-separator {
+  height: 1px !important;
+  margin: 4px auto !important;
+  opacity: 1 !important;
+}
+
+/* ---- THE COMBINED BLOCK ---- */
+
+/* the rail, the channel list and the chat are one card with a single rounded
+   outline and the frame showing all the way round it. the inset goes on the grid
+   rather than on the columns, so the betterFolders column - a grid item of its
+   own, not a child of sidebar_ - moves in with them. */
+/* the lift goes on the grid's bottom padding rather than on each column, so the
+   rail, the channel list, the chat and the tab bar all rise together and stay
+   aligned. the member column and the DM card sit inside the chat, so they would
+   rise with it - both subtract the lift back out to hold their own bottom edge. */
+[class*="baseLayer_"] > div[class*="base__"] {
+  position: relative !important;
+  padding: var(--lp-shell-gap) !important;
+}
+
+/* the title bar is the grid's own first row, spanning every column, so it takes a
+   card of its own across the top. left on the frame its arrows, its title and the
+   window buttons are all pale ink on pink. it stops where the block does, rather
+   than reaching over the member strip. */
+div[class*="base__"] > div[class*="bar_"] {
+  margin-top: var(--lp-chat-drop) !important;
+  margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)) !important;
+  margin-bottom: var(--lp-seam) !important;
+  border-radius: var(--lp-radius) var(--lp-radius) var(--lp-inner) var(--lp-inner) !important;
+  overflow: hidden !important;
+  background: var(--lp-2a) !important;
+}
+
+/* sidebarList is the column that actually paints in the betterFolders layout;
+   sidebar_ > container_ has no path to it */
+/* the three outer columns are cards in their own right, so they carry the radius.
+   their inner scrollers and headers stay square - a rounded box inside a rounded box
+   reads as a double edge. */
+nav[class*="guilds_"] {
+  margin: 0 !important;
+  border-radius: var(--lp-inner) var(--lp-inner) var(--lp-inner) var(--lp-radius) !important;
+  overflow: hidden !important;
+  background: var(--lp-3a) !important;
+}
+
+div[class*="sidebarList"],
+nav[class*="privateChannels_"] {
+  margin: 0 !important;
+  margin-left: var(--lp-seam) !important;
+  border-radius: var(--lp-inner) !important;
+  overflow: hidden !important;
+  background: var(--lp-3a) !important;
+}
+
+div[class*="sidebarList"] > [class*="container_"],
+div[class*="sidebar_"] > [class*="container_"],
+div[class*="sidebarList"] :is(h3,header)[class*="header_"],
+nav[class*="privateChannels_"] :is(h3,header)[class*="header_"] {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: var(--lp-3a) !important;
+}
+
+nav[class*="guilds_"] {
+  background: var(--lp-shell-a) !important;
+}
+
+/* the outer columns take the frost, at whatever --lp-blur says */
+nav[class*="guilds_"],
+div[class*="sidebarList"],
+nav[class*="privateChannels_"],
+div[class*="base__"] > [class*="content__"] > div[class*="chat_"],
+main[class*="chatContent"] + [class*="container"] {
+  backdrop-filter: var(--lp-material) !important;
+}
+
+
+
+/* sidebar__ is a subgrid over the app's "72px 1fr" columns, holding the server rail
+   and the channel list. two tracks, and the strip between them is the grid's own
+   column gap rather than padding on either side - which is why it sat there whether
+   or not a folder was open.
+   betterFolders adds a third child to that row, and a subgrid cannot grow a track
+   for it, so its sidebar landed on top of the channel list. laid out as a flex row
+   instead, with order set explicitly - the plugin injects its sidebar into a render
+   array beside discord's own, so DOM order does not match visual order.
+   the min-width/max-width pair is the important part: discord pins this block at a
+   fixed 432px, so it cannot widen and the folder column could only take its space
+   from the channel list. releasing both is what lets the block grow instead.
+   scoped through base__ > content__ because the settings modal's own nav is an
+   <aside class="sidebar__409aa">, and a bare [class*="sidebar__"] laid that out as a
+   row too, pushing its list 200px past the aside's edge where it was clipped. */
+div[class*="base__"] > [class*="content__"] > [class*="sidebar__"] {
+  display: flex !important;
+  flex-direction: row !important;
+  column-gap: 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 0 0 auto !important;
+}
+
+div[class*="base__"] > [class*="content__"] > [class*="sidebar__"] > nav[class*="guilds__"] {
+  order: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+div[class*="base__"] > [class*="content__"] > [class*="sidebar__"] > .vc-betterFolders-sidebar {
+  order: 1 !important;
+  flex: 0 0 auto !important;
+}
+
+/* a fixed width rather than flex: 1, so the folder column cannot take its space */
+div[class*="base__"] > [class*="content__"] > [class*="sidebar__"] > [class*="sidebarList__"] {
+  order: 2 !important;
+  flex: 0 0 var(--lp-channels-w) !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+/* content__ holds the block and the chat. as a flex row the block sizes to its own
+   columns and the chat takes whatever is left, so opening a folder pushes the chat
+   rather than squeezing the list.
+   the child combinator on base__ is load-bearing: every channel and dm row carries a
+   content__ of its own, and a bare [class*="content__"] turned those into rows too,
+   which put the message peek text beside the name instead of under it. */
+div[class*="base__"] > [class*="content__"] {
+  display: flex !important;
+  flex-direction: row !important;
+  column-gap: 0 !important;
+}
+
+div[class*="base__"] > [class*="content__"] > div[class*="chat_"] {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+
+/* discord fakes the notch in a guild icon, and the strip under the list, by
+   painting them in the ambient background token rather than by cutting anything -
+   and this theme points that token at the frame. so they came out frame-coloured
+   and tracked the wallpaper. rebound per region to whatever that region paints. */
+[class*="content_"] > div[class*="sidebar_"] {
+  --bg-base-tertiary: var(--lp-list-a);
+  --background-base-lowest: var(--lp-list-a);
+  --app-frame-background: var(--lp-list-a);
+}
+
+nav[class*="guilds_"],
+.vc-betterFolders-sidebar {
+  --bg-base-tertiary: var(--lp-shell-a);
+  --background-base-lowest: var(--lp-shell-a);
+  --app-frame-background: var(--lp-shell-a);
+}
+
+/* betterFolders' column is a grid item of its own, so it keeps its own corners
+   and inset unless told otherwise, and reads as a card sitting in the block */
+.vc-betterFolders-sidebar,
+.vc-betterFolders-sidebar nav[class*="guilds_"] {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+
+/* the block's left half. sidebar_ is already overflow:hidden, so the radius here
+   clips the rail and the channel list without either needing one of its own. only
+   the bottom corner rounds: the title bar caps the top of the same shape. */
+/* the column comes up ~8px short of the grid row it shares with the chat, so its
+   bottom edge steps above the chat's. its own ground is painted here as well, so
+   that the list inside it never has to reach the corner itself. */
+/* the grid leaves a few px between the sidebar's right edge and the chat's left,
+   and the frame shows through it as a hairline. the column's ground is run on
+   underneath the chat so there is nothing for it to show through. */
+[class*="content_"] > div[class*="sidebar_"] {
+  height: auto !important;
+  height: calc(100% - var(--lp-chat-lift) - var(--lp-chat-drop)) !important;
+  margin-top: var(--lp-chat-drop) !important;
+  margin-right: -6px !important;
+  border-radius: 0 0 0 var(--lp-radius) !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(var(--lp-list-a), var(--lp-list-a)),
+    linear-gradient(var(--lp-list-a), var(--lp-list-a)) !important;
+}
+
+/* the block's right half, flush against the channel list. only the outer chat_ is
+   a card: carding chatContent as well nests a second one inside it and pushes the
+   channel header out onto the frame. */
+div[class*="chat_"],
+[class*="peopleColumn_"] {
+  margin: 0 !important;
+  border-radius: var(--lp-inner) var(--lp-inner) var(--lp-radius) var(--lp-inner) !important;
+  background: var(--lp-1a) !important;
+}
+
+/* the member column is lifted out of the chat card into a reserved strip of frame
+   down the right, with the user panel pinned under it. the strip is held open in
+   DMs too, where there is no member list, so the block keeps one width. */
+/* the card cannot clip to its own corners, because the member column is a
+   descendant and would be clipped with them. the two children that actually reach
+   a corner carry the rounding instead. */
+/* discord starts the chat's box 5px left of where the channel column ends, so the two
+   genuinely overlap - measured with probedeck's panel overlap check, not guessed. paint
+   order alone only hid it, so the box is nudged across by exactly that much instead.
+   the depth in the selector is what picks the main chat only: it sits two levels under
+   page__, while discord's popout chat is four levels down inside chatLayerWrapper__.
+   unscoped, this handed the popout a 534px right margin and squashed it.
+   the width lines exist for the thread view: opening one makes discord write an inline
+   width on the chat for its own side-by-side split, and with the thread docked in the
+   rail that split just left a gulf of wallpaper. the sidebar itself floats; an unnamed
+   spacer div beside the chat is what actually reserves its room, and the rule below
+   collapses that spacer whenever the chat carries the threadSidebarOpen_ state. */
+[class*="page__"] > * > div[class*="chat_"] {
+  position: relative !important;
+  margin-top: var(--lp-chat-drop) !important;
+  margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
+  margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)) !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 1 1 auto !important;
+  height: calc(100% - var(--lp-chat-lift) - var(--lp-chat-drop)) !important;
+  overflow: visible !important;
+}
+
+/* the composer runs tight, and down to the card's bottom edge so it finishes level
+   with the sidebar. the form's bottom padding is discord's typing-indicator
+   reserve, which is what held it up off the edge. */
+main[class*="chatContent"] form[class*="form_"] {
+  padding-bottom: 0 !important;
+}
+
+/* discord fades the messages out behind the composer with a gradient on the form's own
+   ::before. over a translucent card it reads as a dark band framing the typing box. */
+main[class*="chatContent"] form[class*="form_"]::before {
+  background-image: none !important;
+}
+
+/* three stacked rgba(0,0,0,.05) shadows sit right on the composer's top edge. faint on
+   discord's opaque chat, a dark rim on a translucent card. */
+div[class*="chat_"] > [class*="content_"]::before {
+  box-shadow: none !important;
+}
+
+/* the slate editor writes its own height inline, taller than the text it holds, so no
+   amount of padding shrinks the box. an important declaration is what outranks it. */
+div[class*="channelTextArea"] div[class*="textArea_"] {
+  height: auto !important;
+}
+
+/* the slate editor keeps its own band above and below the line, on top of whatever the
+   box around it is doing. this is the padding that actually sets the pill's height. */
+div[class*="channelTextArea"] div[class*="editor_"] {
+  padding-top: var(--lp-composer-pad) !important;
+  padding-bottom: var(--lp-composer-pad) !important;
+}
+
+/* two separate scrims fade messages out behind the composer. both go: they are
+   opaque bands laid over the wallpaper, so with the panels translucent they read
+   as a black bar across the top of the bar rather than as a fade. */
+main[class*="chatContent"] form[class*="form_"]::before,
+[class*="chatGradient"] {
+  display: none !important;
+}
+
+div[class*="channelBottomBarArea"],
+[class*="attachWrapper"],
+[class*="attachButton"] {
+  background: transparent !important;
+}
+
+div[class*="channelTextArea"] {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+div[class*="channelTextArea"] div[class*="scrollableContainer"],
+div[class*="channelTextArea"] div[class*="editor_"],
+div[class*="channelTextArea"] div[class*="slateContainer"] {
+  min-height: 0 !important;
+}
+
+div[class*="channelTextArea"] div[class*="textArea_"] {
+  padding-top: var(--lp-composer-pad) !important;
+  padding-bottom: var(--lp-composer-pad) !important;
+}
+
+/* discord's composer got an inner input field inset a few px inside the pill, with a
+   ground of its own - which reads as a pill inside the pill. the capsule paints once,
+   on scrollableContainer; everything inside goes bare. */
+div[class*="channelTextArea"] [class*="inner_"] {
+  padding: 0 var(--lp-composer-x) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+div[class*="channelTextArea"] div[class*="textArea_"],
+div[class*="channelTextArea"] [class*="themedBackground"]:not(div[class*="scrollableContainer"]) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* the bar's height comes from the button row, not from the text, so the buttons are
+   what has to come down for it to read as tighter */
+div[class*="channelTextArea"] div[class*="buttons_"] {
+  padding: 0 !important;
+}
+
+div[class*="channelTextArea"] div[class*="buttons_"] button {
+  height: var(--lp-composer-h) !important;
+  width: var(--lp-composer-h) !important;
+}
+
+/* discord gives every composer button a filled disc. invisible on its own dark input,
+   a row of grey coins once the box is light. */
+div[class*="channelTextArea"] div[class*="buttons_"] button,
+div[class*="channelTextArea"] div[class*="buttons_"] button::before,
+div[class*="channelTextArea"] [class*="attachButton"],
+div[class*="channelTextArea"] div[class*="buttonWrapper"] {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+/* the buttons centre themselves in the row and the text column does not, so the line
+   you type rides against the pill's top edge with the slack all underneath it. */
+div[class*="channelTextArea"] [class*="inner_"] {
+  align-items: center !important;
+}
+
+/* the editor's own line box is taller than the text in it, which is what makes the
+   caret overshoot the glyphs. */
+div[class*="channelTextArea"] div[class*="editor_"],
+div[class*="channelTextArea"] div[class*="slateContainer"],
+div[class*="channelTextArea"] div[class*="textArea_"] {
+  line-height: var(--lp-composer-line) !important;
+}
+
+/* discord places the prompt on a box of its own, below the editor's line rather than
+   on it, so it reads low even once the typed text is centred. centred on the editor
+   instead, with the editor made the containing block so the 50% has something to bind
+   to. pinning it to top:0 reads high - the editor's box is taller than the glyphs. */
+div[class*="channelTextArea"] div[class*="editor_"] {
+  position: relative !important;
+}
+
+/* the prompt is only worth showing when you go for the box */
+div[class*="channelTextArea"] div[class*="placeholder"] {
+  position: absolute !important;
+  top: 50% !important;
+  bottom: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: var(--lp-composer-hint-align) !important;
+  transform: translateY(calc(-50% + var(--lp-composer-hint-drop))) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: var(--lp-composer-line) !important;
+  opacity: var(--lp-composer-hint) !important;
+  transition: opacity 0.15s ease, transform 0.2s ease !important;
+}
+
+div[class*="channelTextArea"] div[class*="scrollableContainer"]:hover div[class*="placeholder"] {
+  opacity: 1 !important;
+}
+
+/* clicking in dismisses it: it drops away rather than just cutting out. after the
+   hover rule on purpose - same specificity, so source order is what decides. */
+div[class*="channelTextArea"] div[class*="scrollableContainer"]:focus-within div[class*="placeholder"] {
+  opacity: 0 !important;
+  transform: translateY(calc(-50% + var(--lp-composer-hint-drop) + 7px)) !important;
+}
+
+/* the text and the icons follow the box, not the theme's own light-on-dark palette */
+div[class*="channelTextArea"] div[class*="editor_"],
+div[class*="channelTextArea"] div[class*="placeholder"],
+div[class*="channelTextArea"] div[class*="buttons_"],
+div[class*="channelTextArea"] [class*="attachButton"] {
+  color: var(--lp-composer-text) !important;
+}
+
+
+/* ---- COMPOSE CARD ---- */
+
+/* the text takes a line of its own and the tools drop underneath it. wrap rather
+   than column: the attach button and the button cluster have to share the second
+   line, and a column would give each of them a line of their own. */
+div[class*="channelTextArea"] [class*="inner_"] {
+  flex-wrap: wrap !important;
+  padding: var(--lp-composer-card) !important;
+}
+
+div[class*="channelTextArea"] div[class*="textArea_"] {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  order: -1 !important;
+  flex: 1 0 100% !important;
+  width: 100% !important;
+  min-height: var(--lp-composer-min) !important;
+  padding-bottom: var(--lp-composer-gap) !important;
+  margin-bottom: var(--lp-composer-tools-y) !important;
+  border-bottom: 1px solid var(--lp-composer-divider) !important;
+}
+
+/* the icons sit next to the plus and only send keeps the far end. buttons_ holds the
+   whole cluster including send, so the cluster is stretched across the row and send's
+   own container - the last one in the collapsibleui row - is what gets pushed over. */
+div[class*="channelTextArea"] div[class*="buttons_"] {
+  margin-left: var(--lp-composer-tools-x) !important;
+  flex: 1 1 auto !important;
+}
+
+.vc-collapsible-ui-chat-buttons {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.vc-collapsible-ui-chat-buttons-items {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 1 auto !important;
+  width: 100% !important;
+}
+
+/* discord's own buttons lead, plugin buttons follow, send keeps the far end. ordered by
+   aria-label because the row interleaves buttons with spacers, so nth-child lands wrong.
+   english client assumption, as with the send button above. */
+.vc-collapsible-ui-chat-buttons-items > * {
+  order: 2 !important;
+}
+
+.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="gift" i]),
+.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="gif" i]),
+.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="sticker" i]),
+.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="emoji" i]),
+.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="app" i]) {
+  order: 1 !important;
+}
+
+.vc-collapsible-ui-chat-buttons-items > div:has([aria-label="Send Message"]) {
+  order: 3 !important;
+  margin-left: auto !important;
+}
+
+div[class*="channelTextArea"] div[class*="editor_"] {
+  font-size: var(--lp-composer-size) !important;
+}
+
+div[class*="channelTextArea"] div[class*="scrollableContainer"][class][class] {
+  border: 1px solid transparent !important;
+  transition: background var(--lp-composer-ease),
+              border-color var(--lp-composer-ease) !important;
+}
+
+div[class*="channelTextArea"] div[class*="scrollableContainer"]:focus-within {
+  border-color: var(--lp-composer-focus) !important;
+}
+
+/* discord ships its own separator immediately before send. the rule under the text
+   already does that job, so it would read as a second divider. */
+div[class*="channelTextArea"] [class*="separator_"] {
+  display: none !important;
+}
+
+/* send becomes a labelled pill. it is a div rather than a button, which is why the
+   button rules above never reached it. */
+div[class*="channelTextArea"] [aria-label="Send Message"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  width: auto !important;
+  height: var(--lp-composer-h) !important;
+  padding: 0 12px !important;
+  border-radius: 999px !important;
+  background: var(--lp-composer-send-rest) !important;
+  color: var(--lp-faint) !important;
+  transition: background var(--lp-composer-ease), color var(--lp-composer-ease),
+              transform var(--lp-composer-ease) !important;
+}
+
+/* ::before, not ::after: discord's arrow is already in the box, and the design puts
+   the word ahead of it */
+div[class*="channelTextArea"] [aria-label="Send Message"]::before {
+  content: var(--lp-composer-send-label);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* discord marks that button disabled whenever the box is empty, on the same element
+   that carries the label - so lighting it up costs no :has() against the editor */
+div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]) {
+  background: var(--lp-composer-send) !important;
+  color: var(--lp-3) !important;
+}
+
+div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]):hover {
+  transform: translateY(-1px) !important;
+}
+
+div[class*="chat_"] > [class*="content_"] {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* DMs have no member list, so the strip would otherwise be bare frame. the card is
+   drawn here instead of on the column, empty, and the real list covers it exactly
+   wherever there is one. positioned on the same box the column resolves against,
+   so the two can never drift apart. */
+/* the card normally lives on the member column, which is a real element and can take
+   a ring and a label - see MEMBER LIST below. but discord does not render that column
+   at all in a one-to-one DM, so there is nothing there to be the card. paint one here
+   in that case only, keyed on the column's absence so the two can never both draw. */
+div[class*="chat_"] > [class*="content_"]:not(:has(main[class*="chatContent"] + [class*="container"]))::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--lp-members-top) + var(--lp-empty-trim) + var(--lp-strip-drop));
+  right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift));
+  bottom: var(--lp-music-stop);
+  width: var(--lp-rail);
+  border-radius: var(--lp-radius);
+  background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
+  pointer-events: none;
+}
+
+/* chat_ has to keep overflow visible so the member column can escape it, so the card
+   cannot clip to its own corners - chatContent carries them instead. */
+div[class*="chat_"] main[class*="chatContent"] {
+  border-radius: var(--lp-inner) var(--lp-inner) var(--lp-radius) var(--lp-inner) !important;
+  overflow: hidden !important;
+}
+
+main[class*="chatContent"] {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* the chat card owns its own header rather than the header floating separately.
+   the header is a sibling above the message list, not a child of it, so it takes
+   the chat's own ground rather than transparent - transparent would put it on the
+   wallpaper and leave it reading lighter than the chat under it. */
+div[class*="chat_"] [class*="chatHeader"],
+div[class*="chat_"] section[class*="title_"] {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+/* ---- MEMBER LIST ---- */
+
+/* the reference gives it a titled card of its own, headed "Member list" and
+   closed off with a dashed rule */
+/* the card goes on the column discord sizes, not on membersWrap_. narrowing the
+   wrap leaves its inner list at discord's own width and start offset, so the
+   list runs past the wrap's right edge and gets clipped. this anchor is the one
+   the original theme used: the container that follows chatContent. */
+/* the column carries an explicit height, so margins alone are ignored and it
+   runs the full window. releasing the height is what lets the margins size it. */
+/* pulled clear of the chat card by exactly the strip that was reserved for it, so
+   the card's own right margin and this offset always agree */
+main[class*="chatContent"] + [class*="container"] {
+  position: absolute !important;
+  z-index: 1 !important;
+  top: calc(var(--lp-members-top) + var(--lp-strip-drop)) !important;
+  right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift)) !important;
+  bottom: var(--lp-music-stop) !important;
+  left: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  width: var(--lp-rail) !important;
+  min-width: var(--lp-rail) !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  border-radius: var(--lp-radius) !important;
+  background:
+    repeating-linear-gradient(90deg, var(--lp-dim) 0 6px, transparent 6px 13px)
+      center bottom calc(var(--lp-member-strip-h) + 14px) / calc(100% - 28px) 2px no-repeat,
+    var(--lp-2a) !important;
+}
+
+/* with no member list inside it, the column is the DM card: it takes the picture and
+   the trim, and drops the dashed rule that belongs to a list of members. */
+main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_"])) {
+  top: calc(var(--lp-members-top) + var(--lp-empty-trim) + var(--lp-strip-drop)) !important;
+  background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a) !important;
+}
+
+/* the wrap paints nothing now - the column above is the card. this only holds the
+   rows and clips them to the card's corners, which the column cannot do itself
+   because it has to let the label hang outside.
+   no margins here: narrowing the wrap is what clipped its inner list before. */
+[class*="membersWrap_"] {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding-top: var(--lp-member-head) !important;
+  padding-bottom: calc(var(--lp-member-strip-h) + 24px) !important;
+  border-radius: var(--lp-radius) !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+/* discord paints the ground on a child, not the wrap, so the card stayed pink
+   with dark rows floating in it */
+[class*="membersWrap_"] > *,
+[class*="membersWrap_"] [class*="members_"],
+[class*="membersWrap_"] [class*="scroller"] {
+  background: transparent !important;
+}
+
+/* the inner list keeps discord's own width and start offset, so once the wrap
+   is narrowed into a card the list runs past its right edge and gets clipped */
+/* the rows stop short of the card's right edge twice over: the scroller reserves a
+   gutter for its scrollbar, and its content pads in again on top of that. the
+   scroller and the content both run the full width, so neither shows it. */
+[class*="membersWrap_"] [class*="scroller"] {
+  scrollbar-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+[class*="membersWrap_"] [class*="scroller"] > * {
+  padding-right: var(--lp-gap) !important;
+  padding-left: var(--lp-gap) !important;
+}
+
+/* and the row carries discord's own 240px, so it stays that wide in a card of any
+   width no matter what the boxes around it do. the activity card is capped the same
+   way, by max-width rather than width. */
+[class*="membersWrap_"] div[class*="member_"],
+[class*="membersWrap_"] [class*="openOnHover"] {
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* the rows take a ground of their own. a nameplate paints on a child, so it still
+   covers this and the video is untouched - the knob only reaches the rows that have
+   no plate. --custom-nameplate is discord's scrim over the plate, a flat black
+   rather than the plate's own hue, and clearing it is what makes the plate read. */
+[class*="membersWrap_"] div[class*="member_"] {
+  --custom-nameplate: transparent;
+  background: color-mix(in srgb, var(--lp-3) var(--lp-member-row), transparent) !important;
+  border-radius: calc(var(--lp-radius) * 0.5) !important;
+}
+
+/* the activity cards read as glass over the list rather than as solid tiles */
+[class*="membersWrap_"] [class*="openOnHover"] {
+  background: color-mix(in srgb, var(--lp-3a) 55%, transparent) !important;
+  backdrop-filter: var(--lp-glass) !important;
+}
+
+[class*="membersWrap_"] [class*="members_"] {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* the card's name hangs on the column wrapper rather than on the card itself: the two
+   share a top edge, but the card has to clip its own content and would cut the label
+   off with it. styled with the others down in the hover ring section. */
+main[class*="chatContent"] + [class*="container"]::before {
+  content: var(--lp-label-members);
+  top: -0.5em;
+  left: var(--lp-radius);
+}
+
+/* the dashed rule rides on the card's own background so that ::after is free to be
+   a real box here - the band needs a corner radius, which a background layer cannot
+   carry on its own. */
+[class*="membersWrap_"]::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  left: 14px;
+  height: var(--lp-member-strip-h);
+  border-radius: calc(var(--lp-radius) * 0.5);
+  background: var(--lp-member-strip);
+}
+
+/* ---- USER PANEL UNDER THE MEMBER LIST ---- */
+
+/* the reference lifts the panel out of the sidebar entirely and parks it below
+   the member list, so the two read as one column of floating cards */
+/* the doubled attribute is not a typo: CollapsibleUI sets width:auto on
+   section[panels_] at (0,2,0), which beats a plain class selector even with
+   !important. stacking [class] twice outranks it. */
+section[class*="panels_"][class][class] {
+  position: fixed !important;
+  right: calc(var(--lp-shell-gap) + var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
+  bottom: calc(var(--lp-shell-gap) + var(--lp-chat-lift) - var(--lp-strip-drop)) !important;
+  left: auto !important;
+  z-index: 100 !important;
+  width: var(--lp-rail) !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: var(--lp-panel-h) !important;
+  margin: 0 !important;
+  border-radius: var(--lp-radius) !important;
+  background: var(--lp-userpanel-a) !important;
+  overflow: hidden !important;
+  transition: transform var(--lp-userpanel-ease) cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow var(--lp-userpanel-ease) cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* it lifts where it stands. widening it reached into whatever panel sits beside it,
+   and nothing that changes size can be made safe there. */
+section[class*="panels_"][class][class]:hover {
+  transform: translateY(calc(-1 * var(--lp-userpanel-lift))) !important;
+}
+
+/* musiccontrols stacks lyrics and a player inside the card while spotify plays. the
+   card grows to hold them and the member list gives up the same room. keyed on the
+   player, which unmounts with the track, so nothing moves while music is off.
+
+   this used to sit on :root and set an inherited variable. a :has() on the root is
+   rechecked on any change anywhere, and an inherited property means every element in
+   the document recomputes when it does, so a ticking progress bar was costing about
+   5000ms of main thread every 30 seconds. writing bottom straight onto the two boxes
+   that use it keeps the recompute to those two. */
+div[class*="base__"]:has(#vc-spotify-player) div[class*="chat_"] > [class*="content_"]:not(:has(main[class*="chatContent"] + [class*="container"]))::after,
+div[class*="base__"]:has(#vc-spotify-player) main[class*="chatContent"] + [class*="container"] {
+  bottom: calc(var(--lp-music-stop) + var(--lp-music-room)) !important;
+}
+
+/* discord measures the panel and reserves that much under the channel and dm lists.
+   the panel is not in that column here, and with the player in it the reservation
+   went from 60px to 200-odd. hold it at the idle height */
+div[class*="base__"] {
+  --custom-app-panels-height: var(--lp-panel-h) !important;
+}
+
+/* the player brings its own slab and rounded top. inside the card that is a box in a box.
+   the cover behind it comes from the Better SpotifyControls theme link, which reads these
+   two variables. the extra selector is what lets a local file outrank a theme link */
+section[class*="panels_"] #vc-spotify-player {
+  --blur-amount: var(--lp-cover-blur);
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* the cover is painted by the player's ::after, so it stops at the player's edges. run it
+   past them: up over the lyric line (the card's own edge trims the surplus), and out by
+   more than the blur so the blur's soft rim falls outside the card instead of inside it.
+   the lyric line and the account row are lifted above it. the theme link washes the cover
+   with black, which turns a pale cover into a grey slab; the card's own colour keeps it
+   in the palette */
+section[class*="panels_"] #vc-spotify-player::after {
+  top: -60px !important;
+  left: -20px !important;
+  right: -20px !important;
+  bottom: -20px !important;
+  width: auto !important;
+  height: auto !important;
+  background:
+    linear-gradient(color-mix(in srgb, var(--lp-2) var(--lp-cover-wash), transparent),
+                    color-mix(in srgb, var(--lp-2) var(--lp-cover-wash), transparent)),
+    var(--vc-spotify-track-image) center / cover no-repeat !important;
+}
+section[class*="panels_"] .vc-spotify-lyrics,
+section[class*="panels_"][class][class] > [class*="container_"] {
+  position: relative !important;
+  z-index: 1 !important;
+}
+/* a fixed two-line box, so a long line wraps instead of being cut and a short one does
+   not change the card's height. the member list is spaced for this height */
+section[class*="panels_"] .vc-spotify-lyrics {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: calc(2 * 18px) !important;   /* two lines of discord's 14/18 small text. the plugin's own padding sits outside this */
+  max-height: none !important;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+}
+section[class*="panels_"] .vc-spotify-lyrics-current {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* the no-lyrics note wiggles on its own forever. nothing should animate unprompted */
+section[class*="panels_"] .vc-spotify-lyrics-music-note {
+  animation: none !important;
+}
+
+/* one lyric line, the current one. the full sheet is still there in the click-to-open modal */
+section[class*="panels_"] .vc-spotify-lyrics-prev,
+section[class*="panels_"] .vc-spotify-lyrics-next {
+  display: none !important;
+}
+
+/* at this width the avatar, nameplate and three buttons take everything and the
+   name block collapses to nothing, so it has to be told to hold its ground */
+section[class*="panels_"][class][class] [class*="nameTag"],
+section[class*="panels_"][class][class] [class*="panelTitleContainer"] {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+section[class*="panels_"][class][class] [class*="avatar_"] {
+  flex: 0 0 auto !important;
+}
+
+/* ---- THE ROUNDING ---- */
+
+[class*="membersWrap_"],
+div[class*="chat_"] [class*="chatHeader"],
+[class*="embedFull"],
+[class*="embedWrapper"],
+[class*="imageWrapper"],
+div[class*="attachment"],
+div[class*="channelTextArea"] div[class*="scrollableContainer"],
+[class*="menu_"],
+[class*="autocomplete"] {
+  border-radius: var(--lp-radius) !important;
+}
+
+[class*="reaction_"] {
+  border-radius: 999px !important;
+}
+
+/* ---- SERVER RAIL ---- */
+
+/* discord clips guild icons with an svg mask so the pill can notch into them.
+   the theme wants plain rounded squares, so the mask goes and the radius lands
+   on the image itself. */
+nav[class*="guilds_"] foreignObject,
+nav[class*="guilds_"] [class*="wrapper_"] svg mask,
+nav[class*="guilds_"] [class*="wrapper_"] svg rect[fill="black"] {
+  mask: none !important;
+}
+
+nav[class*="guilds_"] [class*="wrapper_"] img,
+nav[class*="guilds_"] [class*="wrapper_"] div[class*="childWrapper"] {
+  border-radius: var(--lp-radius) !important;
+  transition: border-radius 0.15s ease-out !important;
+}
+
+/* folders take a full pill so they read as a group rather than another tile */
+nav[class*="guilds_"] div[class*="folderIcon"],
+nav[class*="guilds_"] [class*="expandedFolderBackground"] {
+  border-radius: 999px !important;
+  transition: border-radius 0.15s ease-out !important;
+}
+
+/* the tiles carry side margins tuned to discord's own rail width, so they sit off
+   centre as soon as that width changes */
+nav[class*="guilds_"] div[class*="listItem_"] {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+nav[class*="guilds_"] [class*="wrapper_"]:hover img,
+nav[class*="guilds_"] [class*="wrapper_"]:hover div[class*="childWrapper"],
+nav[class*="guilds_"] div[class*="folderIcon"]:hover {
+  border-radius: calc(var(--lp-radius) - var(--lp-icon-squeeze)) !important;
+}
+
+/* the rail's scroller is not under nav[class*="guilds_"] any more, it hangs off tree_.
+   without the bottom padding the last icon sits against the clipped edge of a rail
+   the theme has already shortened, so it can never be scrolled fully into view. */
+nav[class*="guilds_"] [class*="scroller"],
+[class*="tree_"] > [class*="scroller"] {
+  padding: 8px 8px 130px !important;
+}
+
+/* the count badges size themselves off the font's line box rather than a fixed
+   height, so the nunito swap grew every one of them. pinned back to discord's own
+   dimensions. */
+div[class*="numberBadge"] {
+  height: 16px !important;
+  min-width: 16px !important;
+  padding: 0 4px !important;
+  font-size: 11px !important;
+  line-height: 16px !important;
+}
+
+/* ---- PANELS ---- */
+
+main[class*="chatContent"],
+nav[class*="privateChannels_"],
+div[class*="sidebar_"] > [class*="container_"] {
+  background: var(--lp-2a) !important;
+}
+
+/* one painted layer for the whole card. discord starts the header 2px below the card's
+   own top edge, so painting chatContent left that strip showing the card underneath -
+   which is the hairline that sat under the title bar. */
+[class*="page__"] > * > div[class*="chat_"] {
+  background: var(--lp-1a) !important;
+}
+
+main[class*="chatContent"] {
+  background: transparent !important;
+}
+
+/* the DM column resolved --lp-2 to the LIGHT palette's pale pink even though the
+   sidebar around it reports theme-dark, so it painted pink on pink. the lists are
+   dark on pink in this theme either way, so their ground is its own knob rather
+   than something that follows the light/dark palette. */
+/* the ground goes on the column above and nowhere else. this box and that one are the
+   same size to within a pixel, so painting both stacked two translucent layers and any
+   row of pixels only the outer one covered came out a shade lighter - the hairline
+   under the title bar. the two layers it used to take are now two gradients on the one
+   element, which reads identically and cannot mismatch. clearing this one takes an
+   explicit rule: its ground comes from --app-frame-background, which the theme rebinds
+   to the same colour, so dropping the theme's own rule just handed it back. */
+div[class*="sidebarList"][class] {
+  background: transparent !important;
+}
+
+nav[class*="privateChannels_"][class],
+nav[class*="privateChannels_"][class] > [class*="scroller"],
+div[class*="sidebarList"][class] > [class*="container_"] {
+  background: transparent !important;
+}
+
+/* the row sizes to its own content, so padding here is what makes it taller and the
+   hover fill grows with it. scoped to li[class*="channel__"] rather than to
+   layout__ on its own, which is a name shared well outside the lists. */
+li[class*="channel__"] [class*="layout__"] {
+  padding-top: var(--lp-row-pad) !important;
+  padding-bottom: var(--lp-row-pad) !important;
+}
+
+/* the profile card is exempt: `user-profile-popout` itself contains the substring
+   `popout`, so a bare [class*="popout"] > div also catches the card's inner_ and
+   paints a flat fill over everything the popout stylesheet does. */
+/* the edit-profile modal paints its own ground: backgroundImage__ carries the
+   banner and scrim_ tints it, and every column sits on that. the customisation
+   rail is the one box that takes --modal-background instead, which is what made it
+   a black slab against the purple. cleared so it sits on the same ground. */
+/* the columns sit on top of backgroundImage__ and scrim_, which already span the
+   whole card. the customisation rail is the one column that paints itself from
+   --modal-background, so clearing the token there drops it onto the same banner and
+   tint the rest of the editor sits on - no colour to match by hand, and it tracks
+   whatever banner is set. */
+[class*="profileContentInner"],
+[class*="profileContentColumns"] {
+  --modal-background: transparent;
+}
+
+/* the rail declares its own ground, so clearing the token on an ancestor never
+   reached it. scoped to the columns on purpose - a bare div[class*="sidebar_"] is the
+   app's channel column. */
+[class*="profileContentColumns"] div[class*="sidebar_"] {
+  background: transparent !important;
+}
+
+/* the decoration, effect and nameplate pickers: smoked glass tiles rather than the
+   flat squares discord paints from the ambient token. the fill goes on the tile and
+   its children are cleared, or the token-painted child covers it. */
+/* matched on the shared GridItem suffix rather than on decorationGridItem, so the
+   three pickers are covered by one rule. the capital G is load-bearing - attribute
+   selectors are case sensitive, and a lowercase "gridItem" matches none of them. */
+div[class*="GridItem"] {
+  border-radius: calc(var(--lp-radius) * 0.5) !important;
+  background: color-mix(in srgb, var(--lp-ambient) var(--lp-tile), transparent) !important;
+  overflow: hidden !important;
+  transition: opacity 140ms ease-out, transform 140ms ease-out !important;
+}
+
+/* a spotlight while the cursor is in the grid: the tile under it comes forward and the
+   rest step back, so you are looking at one decoration rather than twenty-four.
+   the grids are virtualised - every tile carries an inline left/top/width/height that
+   react rewrites on each scroll frame - so transform and opacity are the only
+   properties a theme owns here. the list_ ancestor is only there to keep the two hover
+   rules at equal specificity, so source order decides which wins. */
+[class*="list__"]:hover div[class*="GridItem"] {
+  opacity: var(--lp-pick-dim) !important;
+}
+
+[class*="list__"] div[class*="GridItem"]:hover,
+[class*="list__"] div[class*="GridItem"]:focus-visible {
+  opacity: 1 !important;
+  transform: scale(var(--lp-pick-lift)) !important;
+  z-index: 1 !important;
+}
+
+/* the one already applied stays legible while you sweep past it */
+[class*="list__"]:hover div[class*="GridItem"][aria-pressed="true"] {
+  opacity: 0.75 !important;
+}
+
+/* presses down slightly, so a click feels like it landed */
+[class*="list__"] div[class*="GridItem"]:active {
+  transform: scale(0.98) !important;
+}
+
+/* the grid runs the height of the window instead of discord's 420px well. height is the
+   only geometry lever left in css here: the column count, the tile size and the gutters
+   are all javascript props on the virtualiser, read off it with probedeck as
+   columns:3, itemGutter:12, paddingHorizontal:12. nothing in a stylesheet moves those. */
+[class*="list__"][class*="scrollbarGutterStable__"] {
+  height: var(--lp-pick-height) !important;
+  max-height: var(--lp-pick-height) !important;
+}
+
+/* the modal has to be allowed to grow with it. a raised cap rather than a set height, so
+   every other medium modal keeps whatever size its own content asks for. */
+[class*="modal_"][class*="root__"][class*="medium__"] {
+  max-height: 94vh !important;
+}
+
+/* the tile's ground pulled in from its own edges. this reads as a wider gap without
+   touching the gutters, which cannot be changed. the click target stays the full tile,
+   so the inset ring is still clickable - that is deliberate, not an oversight. */
+div[class*="GridItem"] {
+  box-shadow: inset 0 0 0 var(--lp-pick-inset) var(--lp-modal) !important;
+}
+
+div[class*="GridItem"] > * {
+  background: transparent !important;
+}
+
+/* the preview card only takes the corner. it paints itself from the profile's own
+   theme colours, so a fill here - or clearing its children - blanks that out and
+   the card comes back flat. */
+[class*="modal"] [class*="preview"] {
+  border-radius: calc(var(--lp-radius) * 0.5) !important;
+  overflow: hidden !important;
+}
+
+/* the preview column stretches to the height of the tile grid beside it, which
+   leaves the card floating at the top of a tall empty panel. shrunk to its own
+   content instead.
+   scoped to the modal: the shop reuses previewContainer for its product cards, 22 of
+   them on the featured page, and unscoped this was collapsing every one. */
+[class*="modal_"] [class*="previewContainer"] {
+  align-self: flex-start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+[class*="menu_"],
+[class*="popout"]:not(.user-profile-popout) > div {
+  background: color-mix(in srgb, var(--lp-float) 82%, transparent) !important;
+  backdrop-filter: var(--lp-glass) !important;
+}
+
+/* the command list carries the chat's own ground so it reads as part of the block,
+   with the blur doing the work of keeping the rows legible over the wallpaper. its
+   children paint their own grounds on top, which is what put a dark slab behind
+   every description line, so they are cleared down to the one surface. */
+[class*="autocomplete"] {
+  background: var(--lp-1a) !important;
+  backdrop-filter: var(--lp-glass) !important;
+  overflow: hidden !important;
+}
+
+[class*="autocomplete"] > *,
+[class*="autocomplete"] [class*="scroller"],
+[class*="autocomplete"] [class*="categoryHeader"],
+[class*="autocomplete"] :is(h3,header)[class*="header_"] {
+  background: transparent !important;
+}
+
+/* ---- FROSTED SURFACES ---- */
+
+/* the toolbar that rides over a message on hover, and the cards inside the profile
+   card - activity, the repo widget, and the buttons on the activity card - all take
+   the same glass as the member list's activity tiles. the couve stylesheet lays
+   those cards out and is meant to be released on its own, so the frosting is here
+   rather than in it. */
+/* the toolbar's own ground is a box two levels inside buttonContainer, with a third
+   filling it edge to edge; painting the pill alone leaves that third one covering
+   it, so it is cleared. addressed by position rather than by class - the boxes
+   carry no name worth matching. */
+[class*="buttonContainer"] > * > * > * {
+  background: transparent !important;
+}
+
+/* the identity block is a classless div exactly like the panels are, so it has to
+   be excluded by hand - the couve stylesheet carries the same exclusion. left in,
+   it takes a panel's ground and blur, and that ground covers the cut in the banner
+   behind it. */
+[class*="buttonContainer"] > * > *,
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > section,
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:not([class]):not(:has(> [class*="usernameAndPronounsRow"])),
+.user-profile-popout [class*="card__"] button,
+.user-profile-popout [class*="footer_"] button {
+  background: var(--lp-card-a) !important;
+  backdrop-filter: var(--lp-glass) !important;
+  border: 0 !important;
+  border-radius: var(--lp-radius) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* ---- USER PANEL ---- */
+
+/* the banner sits behind the whole panel, blurred and faded out downward, which
+   is where the theme gets its soft look */
+[class*="panels_"] [class*="bannerImage"],
+[class*="panels_"] [class*="banner_"] {
+  filter: blur(6px) !important;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 92%) !important;
+}
+
+[class*="panels_"] [class*="avatar_"] img,
+[class*="panels_"] [class*="avatar_"] foreignObject {
+  border-radius: calc(var(--lp-radius) * 0.6) !important;
+  mask: none !important;
+}
+
+/* ---- MESSAGES ---- */
+
+/* the reference leaves plain messages flat on the chat ground and cards only the
+   embeds, so the row's own block goes. mentions keep theirs. */
+li[class*="messageListItem"]:not([class*="mentioned"]),
+li[class*="messageListItem"] > div[class*="message_"]:not([class*="mentioned"]) {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* the reference packs the list far tighter than discord's default: rows sit close
+   and a new group opens with a small step rather than a 17px one */
+li[class*="messageListItem"] {
+  margin-top: 0 !important;
+}
+
+li[class*="messageListItem"] div[class*="message_"] {
+  padding-top: var(--lp-msg-gap) !important;
+  padding-bottom: var(--lp-msg-gap) !important;
+}
+
+li[class*="messageListItem"] div[class*="groupStart"] {
+  margin-top: 10px !important;
+}
+
+li[class*="messageListItem"] div[class*="message_"]:hover {
+  background: var(--lp-hover) !important;
+  border-radius: var(--lp-radius) !important;
+}
+
+div[class*="repliedMessage"] {
+  border-radius: var(--lp-radius) !important;
+  background: var(--lp-hover) !important;
+}
+
+/* the trailing underscore is what keeps the pill on the individual reaction. without
+   it the selector also matches the reactions_ container that holds them all, and
+   the whole row turns into one long slab with the pills invisible inside it. */
+[class*="reaction_"] {
+  background: var(--lp-3a) !important;
+  border: 0 !important;
+}
+
+[class*="reactions_"] {
+  background: transparent !important;
+}
+
+[class*="reactionSelected"] {
+  background: var(--lp-accent) !important;
+}
+
+/* ---- BUTTONS + INPUTS ---- */
+
+button[class*="lookFilled"][class*="colorBrand"] {
+  background: var(--lp-accent) !important;
+  border-radius: var(--lp-radius) !important;
+}
+
+button[class*="lookFilled"][class*="colorBrand"]:hover {
+  background: var(--lp-accent-hover) !important;
+}
+
+button[class*="lookOutlined"] {
+  color: var(--lp-accent) !important;
+  border-color: var(--lp-accent) !important;
+  border-radius: var(--lp-radius) !important;
+}
+
+input,
+textarea,
+[class*="inputDefault"],
+[class*="searchBar"] {
+  border-radius: var(--lp-radius) !important;
+  background: var(--lp-3a) !important;
+  font-family: var(--lp-font) !important;
+}
+
+/* a search bar is a painted container WITH an input inside it, and both match above.
+   a translucent colour composites twice where they stack, which reads as a second
+   pill floating inside the first. the container keeps the paint, the input goes bare. */
+[class*="searchBar"] input,
+[class*="searchBar"] [class*="inputDefault"],
+[class*="searchBar"] textarea {
+  background: transparent !important;
+}
+
+/* zeroing the dm header's margin above takes the search bar's inset with it, so the
+   pill ends up flush against both panel edges - about two pixels of clearance. it
+   gets its own inset back rather than the header's, which also carries the rows. */
+nav[class*="privateChannels_"] [class*="searchBar"] {
+  margin-left: var(--lp-search-x) !important;
+  margin-right: var(--lp-search-x) !important;
+  width: auto !important;
+}
+
+/* the composer is a pill of its own inside the chat card. a fixed radius rather
+   than 999px: the browser clamps a radius to half the box's height, so at one line
+   this is still a full pill, and once the box grows for a long message or an
+   attachment it settles into the theme's corner instead of biting a quarter-circle
+   out of each end. */
+/* scrollableContainer only. the slash-command popout is a direct div child of the
+   same form, so `form > div` painted that too - and at (0,1,2) against the popout
+   rule's (0,1,0) it won, which is what left the popout as bare wallpaper. */
+div[class*="channelTextArea"] div[class*="scrollableContainer"][class][class] {
+  border-radius: var(--lp-radius) !important;
+  background: var(--lp-composer-a) !important;
+  backdrop-filter: var(--lp-composer-material) !important;
+}
+
+/* discord pads the pill top and bottom on top of whatever the text needs, which is
+   the empty band above and below the line you are typing */
+div[class*="channelTextArea"] div[class*="scrollableContainer"] {
+  padding-top: var(--lp-composer-pad) !important;
+  padding-bottom: var(--lp-composer-pad) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ---- SCROLLBARS --------------------------------------------------------- */
+
+/* one bar everywhere discord already shows one, and only while you are in there: the
+   DM and channel lists, settings,
+   popouts, and the decoration, nameplate and effect pickers. chromium ignores the
+   ::-webkit-scrollbar pseudo elements on any element whose scrollbar-width or
+   scrollbar-color is set, and discord sets both, so they are handed back to auto
+   first and the look is done with the pseudo elements. matching thin_ and auto_
+   rather than scroller_ is what keeps it off the scrollers discord hides. */
+:root {
+  --lp-scrollbar-w: 9px;       /* the gutter the bar sits in */
+  --lp-scrollbar-inset: 2px;   /* trimmed off each side: the pill is w - 2 x inset */
+  --lp-scrollbar-rest: 40%;    /* the thumb once the cursor is inside the list */
+  --lp-scrollbar-hover: 72%;   /* and while the cursor is on the thumb itself */
+}
+
+[class*="thin_"],
+[class*="auto_"],
+[class*="scrollbarGutterStable"],
+[class*="modal_"] [class*="list__"] {
+  scrollbar-width: auto !important;
+  scrollbar-color: auto !important;
+}
+
+/* the typing box keeps discord's own bar. handing scrollbar-color back is what does
+   it - the pseudo elements below stop applying to anything that has one. */
+div[class*="channelTextArea"] div[class*="scrollableContainer"],
+div[class*="channelTextArea"] div[class*="editor_"] {
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--scrollbar-thin-thumb) var(--scrollbar-thin-track) !important;
+}
+
+::-webkit-scrollbar {
+  width: var(--lp-scrollbar-w) !important;
+  height: var(--lp-scrollbar-w) !important;
+}
+
+/* the transparent border plus the padding-box clip is what makes the gutter paint as
+   a narrower pill, so it stays clear of the rows without being hard to grab */
+::-webkit-scrollbar-thumb {
+  border: var(--lp-scrollbar-inset) solid transparent !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  background-clip: padding-box !important;
+}
+
+/* the bar only exists while the cursor is inside the thing that scrolls. a bare :hover
+   is the whole hover chain, so the scroller under the cursor is always in it, and it
+   costs nothing to match - unlike the [class*=] hooks the rest of this file leans on.
+   the :active arm keeps the thumb painted while you drag it off the list. */
+:hover::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--lp-icon) var(--lp-scrollbar-rest), transparent) !important;
+  background-clip: padding-box !important;
+}
+
+:hover::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: color-mix(in srgb, var(--lp-icon) var(--lp-scrollbar-hover), transparent) !important;
+  background-clip: padding-box !important;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+
+/* ---- SETTINGS NAV -------------------------------------------------------- */
+
+/* the buttons down the left of user settings. item_ is the row, active_ is the page
+   you are on, and the icon is a bare svg beside the label. hover gated, so nothing
+   here runs while you are just reading a settings page. */
+[class*="navScroller__"] span[class*="item_"] {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--lp-radius) * 0.4);
+  transition: background 220ms ease, color 220ms ease;
+}
+
+[class*="navScroller__"] span[class*="item_"]:hover {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--lp-petal) 26%, transparent), transparent 72%),
+    var(--lp-hover);
+}
+
+[class*="navScroller__"] span[class*="item_"] svg {
+  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[class*="navScroller__"] span[class*="item_"]::after {
+  content: "¼0";
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  color: var(--lp-petal);
+  font-size: 11px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [class*="navScroller__"] span[class*="item_"]:hover svg {
+    transform: translateY(-2px) rotate(-9deg) scale(1.14);
+  }
+
+  [class*="navScroller__"] span[class*="item_"]:hover::after {
+    animation: lp-petal-drift var(--lp-petal-fall) ease-in-out infinite;
+  }
+}
+
+/* it sways on the way down rather than dropping straight, and is fully faded by the
+   time it reaches the bottom so the loop has nothing to snap back from */
+@keyframes lp-petal-drift {
+  0% { opacity: 0; transform: translate(0, -10px) rotate(0deg); }
+  14% { opacity: 0.95; }
+  50% { transform: translate(-9px, 13px) rotate(95deg); }
+  82% { opacity: 0.85; }
+  100% { opacity: 0; transform: translate(-2px, 34px) rotate(195deg); }
+}
+
+
+/* ---- SETTINGS WINDOW ----------------------------------------------------- */
+
+/* two panes rather than one: the page is a thin sheet across the whole window and
+   the nav is a heavier one sitting in front of it, so the nav reads as nearer.
+   the aside selector is the settings nav specifically - the app's own sidebar__ is
+   a div, this one is the only <aside> that carries the name. */
+:root {
+  --lp-settings-blur: 10px;      /* the page, the pane further back */
+  --lp-settings-tint: 20%;
+  --lp-settings-nav-blur: 26px;  /* the nav, the pane in front */
+  --lp-settings-nav-tint: 62%;
+}
+
+/* the pane goes on the outer box, not on modalContent_ inside it: a translucent
+   child over an opaque parent only ever shows the parent. modal_ and modalContent_
+   are one module, and "modal_" is not a substring of "modalContent_". */
+[class*="modal_"] {
+  background: color-mix(in srgb, var(--lp-2) var(--lp-settings-tint), transparent) !important;
+  backdrop-filter: blur(var(--lp-settings-blur)) !important;
+}
+
+/* the boxes between that pane and the two columns each paint a ground of their own */
+[class*="modalContent_"],
+[class*="modalContent_"] > div,
+[class*="modalContent_"] > div > div,
+aside[class*="sidebar__"] + div,
+aside[class*="sidebar__"] + div > div {
+  background: transparent !important;
+}
+
+aside[class*="sidebar__"] {
+  background: color-mix(in srgb, var(--lp-3) var(--lp-settings-nav-tint), transparent) !important;
+  backdrop-filter: blur(var(--lp-settings-nav-blur)) !important;
+}
+
+
+/* the name and the handle beside it take discord's own header size, which reads large
+   against the message text. sized on the username element rather than on the plugin's
+   container: the plugin nests inside it, so setting both would compound. */
+div[class*="message_"] span[class*="username"] {
+  font-size: var(--lp-name-size) !important;
+}
+
+div[class*="message_"] span[class*="username"] .smyn-affix,
+div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
+  font-size: var(--lp-affix-size) !important;
+}
+
+
+/* ---- SHOP ---------------------------------------------------------------- */
+
+/* the shop is a page, not a modal: it renders into page__ where the chat normally
+   goes, so it takes the chat's own ground rather than a modal's. the card is the
+   view wrapper; the scroller and every block inside it paint their own ground and
+   have to be cleared or they cover it.
+   shop__ names TWO boxes: the outer one under page__ holding the header and the feed,
+   and an inner one inside the scroller. the card goes on the outer one - putting it on
+   the wrapper left a translucent box sitting over its own opaque parent, which looks
+   exactly like the rule never applied.
+   both edges come off the knobs the chat and the channel column already use, so the
+   shop sits flush with the message panel and the title bar and stays that way if those
+   knobs change. it has to be width and height rather than margins: this box takes a
+   full-size rule, so a margin pushes it past the edge instead of shrinking it, which is
+   the opposite of how the channel column behaves.
+   the corners match the chat exactly: only the bottom right is rounded. the left side
+   meets the dm list and the top meets the title bar, so three corners stay square.
+   the flex line is what makes the width stick: page__ lays this out as a growing flex
+   item, so an explicit width only sets its basis and flex-grow puts it straight back.
+   height needs no such help - an explicit height already beats stretch. */
+[class*="page__"] > [class*="shop__"] {
+  flex: 0 0 auto !important;
+  width: calc(100% - (var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim))) !important;
+  height: calc(100% - var(--lp-chat-lift) - var(--lp-chat-drop)) !important;
+  margin-top: var(--lp-chat-drop) !important;
+  border-radius: 0 0 var(--lp-radius) 0 !important;
+  overflow: hidden !important;
+  background: var(--lp-1a) !important;
+  backdrop-filter: var(--lp-glass) !important;
+}
+
+[class*="shopViewWrapper__"],
+[class*="shopScroll__"],
+[class*="shopViewWrapper__"] [class*="shop__"],
+[class*="shopViewWrapper__"] div[class*="mainContent__"],
+[class*="shopViewWrapper__"] [class*="blockContainer__"] {
+  background: transparent !important;
+}
+
+/* naming the boxes stopped covering it - the header, the feed and the filter column all
+   paint through discord's own background tokens, five levels deep in places. rebinding
+   the tokens on the shop card clears every one of them at once and costs a single rule,
+   where a descendant sweep would have to walk five levels of `*`.
+   the product tiles read the same tokens, so they lose their ground with everything
+   else and are given it back by name. */
+[class*="page__"] > [class*="shop__"] {
+  --background-base-low: transparent;
+  --background-base-lower: transparent;
+  --background-base-lowest: transparent;
+  --background-base-low-alt: transparent;
+  --bg-base-primary: transparent;
+  --bg-base-secondary: transparent;
+  --bg-base-tertiary: transparent;
+}
+
+[class*="page__"] > [class*="shop__"] [class*="previewContainer"] {
+  background: var(--lp-card-a) !important;
+}
+
+
+/* the dm list stops short of its own panel, leaving an empty strip along the bottom
+   that reads as a small rectangle beside the server rail. discord sizes the scroller
+   to leave room for the user panel, and this theme moves that panel out to the right,
+   so the strip is simply unclaimed. the scroller takes it back. */
+nav[class*="privateChannels_"] > [class*="scroller_"] {
+  flex: 1 1 auto !important;
+  height: auto !important;
+}
+
+
+/* ---- REPLY BAR ----------------------------------------------------------- */
+
+/* "replying to X" and the "follow this chain of N replies" nudge stack above the
+   composer as two flat slabs with square corners, so they read as separate boxes sitting
+   on top of the pill. clipContainer_ > container_ holds both; painting that one box with
+   the composer's own surface and rounding only its top corners turns the three into a
+   single stacked pill. the bars themselves go transparent so the tint is not doubled. */
+[class*="clipContainer_"] {
+  background: transparent !important;
+}
+
+/* stackedBars runs 1px past clipContainer's bottom, and that slack is an unpainted
+   line between the bar and the pill. zeroed here rather than overlapped: a -1px pull
+   on translucent surfaces would composite double and draw a dark line instead. */
+/* the bar sits a couple of px inside the pill's edges, so the pill's square top
+   corners stick out past it as a step. the wrappers give up their side insets so the
+   bar's corners land exactly on the pill's. the painted container keeps its own
+   padding - that is the text's inset, not the box's. */
+[class*="stackedBars"],
+[class*="stackedBars"] > *,
+[class*="stackedBars"] [class*="clipContainer_"] {
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  width: 100% !important;
+}
+
+[class*="clipContainer_"] > [class*="container_"] {
+  border-radius: var(--lp-radius) var(--lp-radius) 0 0 !important;
+  margin-bottom: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+  background: var(--lp-composer-a) !important;
+  backdrop-filter: var(--lp-glass) !important;
+  /* the 1px of stackedBars below this box stays unpainted whatever the margins do, and
+     reads as a pale line across the join. the shadow fills exactly that row in the bar's
+     own colour - laid on the card rather than over the bar, so it tints once and cannot
+     draw the dark line an overlap would. discord's own divider went with the border. */
+  box-shadow: 0 1px 0 0 var(--lp-composer-a) !important;
+}
+
+[class*="clipContainer_"] [class*="replyBar_"],
+[class*="clipContainer_"] > [class*="container_"] > * {
+  background: transparent !important;
+}
+
+
+/* ---- THREAD PANEL -------------------------------------------------------- */
+
+/* a thread opens as a bare column pinned to the far right of the window, outside the
+   frame entirely. docked into the rail instead, it takes the same box the member list
+   uses, which is free anyway because discord swaps the two.
+   resize: horizontal is what gives the drag handle; it needs a non-visible overflow to
+   work at all, and because the box is anchored by its right edge it grows leftward.
+   the column matches the chat exactly, top edge and bottom edge, with the column gap
+   between them. its top corners are square because the title bar card ends flush above
+   it, so the two connect the way the chat and the title bar do. the user panel floats over its lower corner, as it does the member
+   list's. */
+:root {
+  --lp-thread-w: var(--lp-rail);   /* how wide the docked thread column starts out */
+  --lp-thread-top: 88px;           /* level with the top of the chat card */
+  --lp-thread-min: 240px;          /* narrowest the drag handle will let it go */
+  --lp-thread-a: var(--lp-1a);     /* the column's material, same as the chat and dm panels */
+  --lp-thread-name-a: var(--lp-2a);/* the bar behind the thread's name. transparent merges it in */
+}
+
+/* discord's own thread sidebar is a floating layer plus an in-flow spacer holding its
+   width (chatTarget carries it as an inline style). the layer is docked into the rail,
+   so the spacer would only hold the chat narrow for nothing. */
+[class*="threadSidebarOpen_"] ~ div:not([class]) {
+  width: 0 !important;
+  min-width: 0 !important;
+  flex: 0 0 0px !important;
+}
+
+[class*="chatLayerWrapper_"] {
+  position: fixed !important;
+  top: var(--lp-thread-top) !important;
+  right: calc(var(--lp-shell-gap) + var(--lp-chat-trim) + var(--lp-rail) + var(--lp-column-gap)) !important;
+  bottom: calc(var(--lp-shell-gap) + var(--lp-chat-lift)) !important;
+  left: auto !important;
+  z-index: 2 !important;
+  width: var(--lp-thread-w) !important;
+  min-width: var(--lp-thread-min) !important;
+  max-width: none !important;
+  height: auto !important;
+  border-radius: 0 0 var(--lp-radius) var(--lp-radius) !important;
+  overflow: hidden !important;
+  resize: horizontal !important;
+  background: var(--lp-thread-a) !important;
+}
+
+[class*="chatLayerWrapper_"] > *,
+[class*="chatLayerWrapper_"] > * > section[class*="container_"],
+[class*="chatLayerWrapper_"] div[class*="chat_"],
+[class*="chatLayerWrapper_"] [class*="messagesWrapper"],
+[class*="chatLayerWrapper_"] [class*="messagesWrapper"] > form[class*="form_"] {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+/* the bar carrying the thread's name and its close button. it is the section's first
+   child, above the chat, so it needs no name of its own */
+[class*="chatLayerWrapper_"] > * > section[class*="container_"] > :first-child {
+  background: var(--lp-thread-name-a) !important;
+  box-shadow: none !important;
+}
+
+/* the composer joins the column instead of banding it */
+[class*="chatLayerWrapper_"] div[class*="channelTextArea"],
+[class*="chatLayerWrapper_"] div[class*="channelTextArea"] div[class*="scrollableContainer"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[class*="chatLayerWrapper_"] div[class*="channelTextArea"] div[class*="scrollableContainer"] {
+  scrollbar-width: none !important;
+}
+
+/* with a thread open the chat hands the thread its column: the margin grows by the
+   thread's width plus a gap, the thread slots in between, and the rail keeps the
+   member list's spot. */
+[class*="page__"] > * > div[class*="chat_"][class*="threadSidebarOpen_"] {
+  margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)
+                     + var(--lp-thread-w) + var(--lp-column-gap)) !important;
+}
+
+/* the member list keeps its rail card with a thread open, and so does the empty card
+   behind it. both offsets are re-measured from the thinner chat so they land beside
+   the thread rather than under it. */
+[class*="threadSidebarOpen_"] > [class*="content_"]::after,
+[class*="threadSidebarOpen_"] main[class*="chatContent"] + [class*="container"] {
+  right: calc(-1 * (2 * var(--lp-column-gap) + var(--lp-thread-w) + var(--lp-rail))) !important;
+}
+
+
+/* ---- SEPARATORS ---------------------------------------------------------- */
+
+/* the tokens above cover the hairlines discord draws from variables. these three
+   carry a hard-coded shadow or border of their own instead. */
+div[class*="base__"] > div[class*="bar_"],
+div[class*="chat_"] section[class*="title_"],
+nav[class*="guilds_"],
+div[class*="sidebarList"],
+nav[class*="privateChannels_"] {
+  border-color: var(--lp-border) !important;
+  box-shadow: none !important;
+}
+
+/* --lp-border clears the colour and leaves the width, and these boxes clip their
+   background to the padding box - so a transparent border is a gap the wallpaper shows
+   through, one pixel lighter than the panel. the width is the part that has to go. */
+div[class*="base__"] > div[class*="bar_"],
+div[class*="chat_"] section[class*="title_"],
+nav[class*="guilds_"],
+div[class*="sidebarList"],
+nav[class*="privateChannels_"] {
+  border-width: 0 !important;
+}
+
+/* ---- HOVER RING ---------------------------------------------------------- */
+
+/* the rail, the channel list and the chat are one card, so they take one ring around
+   the whole block instead of three. drawn on the grid, using the same top drop and
+   right inset the title bar uses, so it stops where the block does. */
+[class*="baseLayer_"] > div[class*="base__"]::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--lp-shell-gap) + var(--lp-chat-drop));
+  left: var(--lp-shell-gap);
+  bottom: calc(var(--lp-shell-gap) + var(--lp-chat-lift));
+  right: calc(var(--lp-shell-gap) + var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim));
+  box-shadow: inset 0 0 0 var(--lp-ring-size) var(--lp-ring);
+  border-radius: var(--lp-radius);
+  opacity: 0;
+  transition: opacity var(--lp-ring-ease);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* the panels are named one by one rather than hovering the grid, which is the whole
+   window. the member column and the user panel are deliberately absent: both sit in
+   the right-hand column visually, but in the DOM one is a sibling of the messages and
+   the other lives inside the sidebar, so neither can be excluded any other way. */
+[class*="baseLayer_"] > div[class*="base__"]:has(
+  > div[class*="bar_"]:hover,
+  nav[class*="guilds_"]:hover,
+  div[class*="sidebarList"]:hover,
+  nav[class*="privateChannels_"]:hover,
+  div[class*="chat_"] section[class*="title_"]:hover,
+  main[class*="chatContent"]:hover
+)::after {
+  opacity: 1;
+}
+
+/* the member column and the tab bar are cards of their own, so they ring themselves.
+   an inset shadow rather than a border, so nothing inside them shifts. */
+main[class*="chatContent"] + [class*="container"],
+.vc-channeltabs-container {
+  box-shadow: inset 0 0 0 var(--lp-ring-size) transparent !important;
+  transition: box-shadow var(--lp-ring-ease) !important;
+}
+
+main[class*="chatContent"] + [class*="container"]:hover,
+.vc-channeltabs-container:hover {
+  box-shadow: inset 0 0 0 var(--lp-ring-size) var(--lp-ring) !important;
+}
+
+/* the area names ride on the outline itself, punching through it the way a fieldset
+   legend does - the panel colour behind the text is what breaks the line. */
+.vc-channeltabs-container {
+  position: relative !important;
+}
+
+[class*="baseLayer_"] > div[class*="base__"]::before,
+.vc-channeltabs-container::before,
+main[class*="chatContent"] + [class*="container"]::before {
+  position: absolute;
+  z-index: 4;
+  padding: 0 6px;
+  background: var(--lp-2a);
+  color: var(--lp-label);
+  font-size: var(--lp-label-size);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: color var(--lp-ring-ease);
+}
+
+[class*="baseLayer_"] > div[class*="base__"]::before {
+  content: var(--lp-label-block);
+  top: calc(var(--lp-shell-gap) + var(--lp-chat-drop) - 0.5em);
+  left: calc(var(--lp-shell-gap) + var(--lp-radius));
+}
+
+.vc-channeltabs-container::before {
+  content: var(--lp-label-tabs);
+  bottom: -0.5em;
+  left: var(--lp-radius);
+}
+
+/* each name lights with its own outline */
+[class*="baseLayer_"] > div[class*="base__"]:has(
+  > div[class*="bar_"]:hover,
+  nav[class*="guilds_"]:hover,
+  div[class*="sidebarList"]:hover,
+  nav[class*="privateChannels_"]:hover,
+  div[class*="chat_"] section[class*="title_"]:hover,
+  main[class*="chatContent"]:hover
+)::before,
+.vc-channeltabs-container:hover::before,
+main[class*="chatContent"] + [class*="container"]:hover::before {
+  color: var(--lp-ring);
+}
+
+/* the user panel carries its lift shadow at rest and the ring in the same list. its
+   own transition already covers box-shadow. */
+section[class*="panels_"][class][class] {
+  box-shadow: inset 0 0 0 var(--lp-ring-size) transparent, var(--lp-userpanel-shadow) !important;
+}
+
+section[class*="panels_"][class][class]:hover {
+  box-shadow: inset 0 0 0 var(--lp-ring-size) var(--lp-ring), var(--lp-userpanel-shadow) !important;
+}
+
+/* the nameplate is sized for discord's own panel height, so raising --lp-panel-h left
+   it floating in a taller box. covering the panel lets it follow whatever height the
+   knob is set to, image or video. */
+/* --lp-panel-h makes the panel taller than the row discord puts in it, so the plate
+   stopped 9px short of the bottom and the panel's own ground showed as a band under it.
+   the boxes between the panel and the plate have to grow with it. */
+/* the plate lands a fraction short of the panel, which shows as a hairline of the
+   panel's own ground along the top and bottom edges. rounding, so no exact height
+   fixes it - the plate is run past the edge instead and the panel's overflow trims
+   it. costs a pixel of the image and nothing else. */
+/* the card is auto height now so it can hold the spotify player, so the account row
+   takes the knob directly instead of 100% of a box that no longer has a fixed size */
+section[class*="panels_"][class][class] > [class*="container_"] {
+  height: calc(var(--lp-panel-h) + var(--lp-plate-bleed) * 2) !important;
+  margin-top: calc(-1 * var(--lp-plate-bleed)) !important;
+  margin-bottom: calc(-1 * var(--lp-plate-bleed)) !important;
+}
+
+section[class*="panels_"] [class*="fitInAccount"],
+section[class*="panels_"] div[class*="videoContainer_"] {
+  height: calc(100% + var(--lp-plate-bleed) * 2) !important;
+  margin-top: calc(-1 * var(--lp-plate-bleed)) !important;
+}
+
+section[class*="panels_"] [class*="img_"],
+section[class*="panels_"] div[class*="videoContainer_"] video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* the art sits a hair high inside the plate. it is safe to shift because the box above
+   already bleeds past the panel top and bottom and the panel trims it, so moving the
+   image down never opens a gap at the top - it just takes a pixel more off the bottom.
+   translate rather than transform, so it composes with anything else set here later. */
+section[class*="panels_"] [class*="img_"],
+section[class*="panels_"] div[class*="videoContainer_"] video {
+  translate: 0 var(--lp-plate-drop) !important;
+}
+
+
+/* the title row was given min-width:0 so it can shrink and the subtext row never was,
+   so the status text overflowed into the platform icons instead of truncating */
+section[class*="panels_"][class][class] [class*="panelSubtextContainer"] {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+section[class*="panels_"][class][class] [class*="panelSubtextContainer"] > *:not(.vc-platform-indicator) {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* the icons hold their size; only the text gives way */
+section[class*="panels_"][class][class] .vc-platform-indicator {
+  flex: 0 0 auto !important;
+}
+
+/* translate, not transform: discord's hover roll already sets one on this element */
+section[class*="panels_"][class][class] [class*="panelSubtextContainer"] [class*="hoverRoll_"] [class*="hovered_"] {
+  translate: 0 calc(-1 * var(--lp-username-lift)) !important;
+}
+
+/* the screen-reader-only "Online" leaks into view here and paints under the emoji,
+   the platform icons and the dot between them */
+section[class*="panels_"][class][class] [class*="panelSubtextContainer"] [class*="hiddenVisually_"] {
+  display: none !important;
+}
+
+
+
+/* ---- COMPOSER SURROUND ---------------------------------------------------- */
+
+/* the form and the bar behind the composer paint their own dark ground, which shows
+   as a black band either side of the pill - the magenta and cyan of the probe. cleared
+   so the chat card's own surface runs behind the composer instead. */
+main[class*="chatContent"] > form[class*="form_"] {
+  padding-bottom: var(--lp-composer-drop) !important;
+}
+
+/* the outer wrapper paints discord's own ground - invisible dark-on-dark, a white slab
+   behind the reply bar and the pill in light mode. floatingBars is the old name for
+   stackedBars, kept while both builds exist. */
+main[class*="chatContent"] > form[class*="form_"],
+div[class*="channelBottomBarArea"],
+div[class*="channelTextArea"],
+div[class*="channelTextArea"] > [class*="floatingBars"],
+div[class*="channelTextArea"] > [class*="stackedBars"] {
+  background: transparent !important;
+}
+
+/* with a reply or upload bar stacked above it, the pill gives up its top corners so the
+   two read as one shape - same seam idea as the panels. */
+/* the doubled [class] is what keeps this ahead of the pill's own radius rule, which
+   carries the same trick and would otherwise round all four corners straight back -
+   which is exactly what left the reply bar sitting on a notched composer. */
+div[class*="channelTextArea"] [class*="stackedBars"] ~ div[class*="scrollableContainer"][class][class] {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  margin-top: 0 !important;
+}
+
+
+/* ---- PANEL MATERIAL ------------------------------------------------------- */
+
+/* one knob decides whether a panel is a flat tint or a sheet of frosted glass. the
+   shop and the typing box carry their own frost either way, so `none` here leaves
+   the theme exactly as it looks today. */
+[class*="page__"] > * > div[class*="chat_"],
+div[class*="chat_"] > [class*="content_"]::after,
+div[class*="chat_"] [class*="chatHeader"],
+div[class*="chat_"] section[class*="title_"],
+div[class*="base__"] > div[class*="bar_"],
+div[class*="sidebarList"][class],
+main[class*="chatContent"] + [class*="container"],
+[class*="chatLayerWrapper_"],
+nav[class*="guilds_"],
+section[class*="panels_"][class][class] {
+  backdrop-filter: var(--lp-material) !important;
+}
+
+
+/* ---- NEW MESSAGES BAR ----------------------------------------------------- */
+
+/* discord runs it the full width of the chat as a solid blurple band. shrunk to a
+   floating pill centred over the messages, on the same glass as the hover cards. */
+[class*="newMessagesBar"] {
+  left: 50% !important;
+  right: auto !important;
+  width: max-content !important;
+  max-width: calc(100% - 2 * var(--lp-gap)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-top: var(--lp-gap) !important;
+  padding: 1px 12px !important;
+  transform: translateX(-50%) !important;
+  border-radius: 999px !important;
+  background: var(--lp-card-a) !important;
+  backdrop-filter: var(--lp-glass) !important;
+  font-size: 11px !important;
+}
+
+
+/* the sidebar draws its own ground on ::after, taking --background-base-lowest, which
+   this theme rebinds to a SOLID colour. the panels above it are translucent, so it read
+   as a slab washing over the last rows of the list and the last icons of the rail.
+   nothing can click it and painting the sidebar a flat colour does not cover it. */
+[class*="content_"] > div[class*="sidebar_"]::after {
+  background-color: transparent !important;
+}
+
+/* the rail fades its own top and bottom behind a mask, which dims the first and last
+   icons rather than the theme dimming them */
+nav[class*="guilds_"] {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
