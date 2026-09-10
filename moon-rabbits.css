@@ -17,35 +17,7 @@
    tsukino-mito-base.css
 =====================================================================*/
 :root {
-    /* old color pattern
-    --blurple-50: hsl(var(--H), var(--S), var(--L));
-    
-    --brand-100: hsl(var(--H), var(--S), calc(2*var(--L)));
-    --brand-130: hsl(var(--H), var(--S), calc(1.92*var(--L)));
-    --brand-160: hsl(var(--H), var(--S), calc(1.85*var(--L)));
-    --brand-200: hsl(var(--H), var(--S), calc(1.78*var(--L)));
-    --brand-230: hsl(var(--H), var(--S), calc(1.71*var(--L)));
-    --brand-260: hsl(var(--H), var(--S), calc(1.63*var(--L)));
-    --brand-300: hsl(var(--H), var(--S), calc(1.56*var(--L)));
-    --brand-330: hsl(var(--H), var(--S), calc(1.49*var(--L)));
-    --brand-345: hsl(var(--H), var(--S), calc(1.42*var(--L)));
-    --brand-360: hsl(var(--H), var(--S), calc(1.35*var(--L)));
-    --brand-400: hsl(var(--H), var(--S), calc(1.28*var(--L)));
-    --brand-430: hsl(var(--H), var(--S), calc(1.21*var(--L)));
-    --brand-460: hsl(var(--H), var(--S), calc(1.14*var(--L)));
-    --brand-500: hsl(var(--H), var(--S), calc(1*var(--L)));
-    --brand-530: hsl(var(--H), calc(0.75*var(--S)), calc(0.99*var(--L)));
-    --brand-560: hsl(var(--H), calc(0.60*var(--S)), calc(0.91*var(--L)));
-    --brand-600: hsl(var(--H), calc(0.54*var(--S)), calc(0.83*var(--L)));
-    --brand-630: hsl(var(--H), calc(0.54*var(--S)), calc(0.74*var(--L)));
-    --brand-660: hsl(var(--H), calc(0.54*var(--S)), calc(0.66*var(--L)));
-    --brand-700: hsl(var(--H), calc(0.54*var(--S)), calc(0.58*var(--L)));
-    --brand-730: hsl(var(--H), calc(0.54*var(--S)), calc(0.49*var(--L)));
-    --brand-760: hsl(var(--H), calc(0.54*var(--S)), calc(0.41*var(--L)));
-    --brand-800: hsl(var(--H), calc(0.54*var(--S)), calc(0.33*var(--L)));
-    --brand-830: hsl(var(--H), calc(0.54*var(--S)), calc(0.24*var(--L)));
-    --brand-860: hsl(var(--H), calc(0.54*var(--S)), calc(0.16*var(--L)));
-    --brand-900: hsl(var(--H), calc(0.54*var(--S)), calc(0*var(--L))); */
+
 
     --blurple-1-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 95.294%;
     --blurple-2-hsl: var(--H) calc(var(--saturation-factor, 1)*100%) 94.51%;
@@ -359,10 +331,9 @@
     margin: 12px;
 }
 
-/* the buttons and the --custom-text title were fixed to the top of the WINDOW while
-   the bar they belong on sits inside the app, so the two drifted apart by however much
-   was stacked above. anchoring both to the bar itself keeps the strip joined to the
-   chat and stops it moving when the window resizes. */
+/* the buttons and the --custom-text title were fixed to the top of the WINDOW while the
+   bar they belong on sits inside the app, so the two drifted apart by however much was
+   stacked above. */
 #app-mount .bar_c38106 {
     position: relative;
     display: flex;
@@ -387,19 +358,16 @@
 #app-mount .systemBar_c38106 .winButtons_c38106 {
     display: none;
 }
-/* the bar is 32px of nothing sitting at z-index 999999 across the whole top row, and
-   the tab row channeltabs draws underneath it is exactly that tall, so every tab was
-   only clickable on the few pixels below the bar. the themed drag strip on .bar_c38106
-   is what moves the window, so this one has no work left to do. */
+/* the bar is 32px of nothing sitting at z-index 999999 across the whole top row, and the
+   tab row channeltabs draws underneath it is exactly that tall, so every tab was only
+   clickable on the few... */
 #app-mount .systemBar_c38106 {
     pointer-events: none;
 }
 
 /* the strip sits in discord's title bar row, which is 32px, and channeltabs stacks a tab
    row and a bookmark row into it. overflow:hidden was here to keep the corners rounded
-   and it clipped the strip to that 32px: measured on 2026-09-10, the bookmark bar was at
-   y -5 inside the container and the tab row above it was cut off entirely. clipping only
-   the corners leaves the rest to spill the way channeltabs expects. */
+   and it clipped the strip... */
 .vc-channeltabs-container {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     border-radius: var(--round-corners) var(--round-corners) 0 0;
@@ -409,9 +377,8 @@
 /* channeltabs draws every tab on a near-white ground with a grey 1px border, which on
    the pink strip reads as a white box. these follow the theme's own colours instead. */
 #app-mount /* channeltabs puts its strip in the app's notice slot at z-index 102, which paints over
-   discord's popout layer: the top of the profile popout was disappearing under it. the
-   strip has that whole grid row to itself, so it does not need to win on z-index, and
-   dropping it lets popouts and modals come out on top again. */
+    discord's popout layer: the top of the profile popout was disappearing under it. the
+    strip has that whole grid... */
 .vc-channeltabs-container-top {
     z-index: auto;
 }
@@ -476,11 +443,9 @@
 }
 
 /* User Bar */
-/* the drag strip was a static block with a min-height and no anchor, so canary
-   stretched it to the full height of the card and discord's own list painted over
-   it. both cards are position:fixed, so an absolute 32px strip sits where it should.
-   only these two are changed: the other four pseudo elements with this shape are on
-   popouts and modals nobody has looked at yet. */
+/* the drag strip was a static block with a min-height and no anchor, so canary stretched
+   it to the full height of the card and discord's own list painted over it. both cards
+   are position:fixed, so... */
 .panels__5e434::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
@@ -550,14 +515,9 @@
 }
 
 /* New Style */
-/* the dm list and the user bar are both lifted out of the app and fixed into the
-   gutter on the left. neither had a top or a bottom, so they kept whatever vertical
-   position the old layout gave them, and canary moved it: the list started halfway
-   down the window and ran off the bottom. both are anchored properly now.
-   --custom-app-panels-height is discord's own measurement of the user panel, live: it
-   read 271.65px with spotify playing and the lyric line up. a previous pass here noted
-   it as gone, which was wrong. it is what sizes the dm list, so the list gives up
-   exactly what the panel takes and no figure has to be guessed. */
+/* the dm list and the user bar are both lifted out of the app and fixed into the gutter
+   on the left. --custom-app-panels-height is discord's own measurement of the user
+   panel, live: it read 271.65px... */
 #app-mount .sidebarList__5e434 {
     position: fixed;
     left: 24px;
@@ -603,12 +563,9 @@
     width: calc(69px + var(--border-width));
 }
 
-/* betterfolders replaces the server rail with its own container and gives it an
-   inline width, so the theme's rules for .wrapper_ef3116 land inside a box that is
-   already the wrong size and nothing moves. this sizes betterfolders' container
-   instead, which is what actually decides where the rail sits. the sidebar has to
-   be positioned for the absolute to have something to measure against.
-   if you ever disable betterfolders, this block does nothing and can go. */
+/* betterfolders replaces the server rail with its own container and gives it an inline
+   width, so the theme's rules for .wrapper_ef3116 land inside a box that is already the
+   wrong size and nothing moves. */
 #app-mount .sidebar__5e434 {
     position: relative !important;
 }
@@ -625,11 +582,9 @@
     padding-top: 8px;
 }
 
-/* the drag strip was a static block with a min-height and no anchor, so canary
-   stretched it to the full height of the card and discord's own list painted over
-   it. both cards are position:fixed, so an absolute 32px strip sits where it should.
-   only these two are changed: the other four pseudo elements with this shape are on
-   popouts and modals nobody has looked at yet. */
+/* the drag strip was a static block with a min-height and no anchor, so canary stretched
+   it to the full height of the card and discord's own list painted over it. both cards
+   are position:fixed, so... */
 .sidebarList__5e434::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
@@ -784,11 +739,9 @@
     border-radius: var(--round-corners);
 }
 
-/* same drag strip fix as the two left hand cards: a static block with only a
-   min-height had nothing anchoring its top and nothing capping its height, so it
-   grew to the whole popout and the content painted over it. the popout gets
-   position:relative so the strip anchors to the popout rather than to whatever
-   discord happens to have positioned further up the tree. */
+/* same drag strip fix as the two left hand cards: a static block with only a min-height
+   had nothing anchoring its top and nothing capping its height, so it grew to the whole
+   popout and the content... */
 .popoutContainer_ce8328 .outer_c0bea0::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     content: "";
@@ -809,9 +762,7 @@
     overflow: hidden;
 }
 /* the avatar sits 15px below the card top and the drag strip is 32px, so the strip cut
-   across the top of the profile frame. moving the avatar down is not the answer: discord
-   layers it over the name block on purpose, and shifting it walks it into the display
-   name. letting it paint over the strip keeps the layout and clears the frame. */
+   across the top of the profile frame. */
 .popoutContainer_ce8328 .avatar__75742 {
     z-index: 2;
 }
@@ -833,9 +784,7 @@
 
 /* a profile with custom colours gets a 60% BLACK wash over its gradient, set inline as
    --profile-gradient-overlay-color, so the popout came out near black while every other
-   surface is light. the theme already had a white wash under the old name discord used,
-   --profile-gradient-overlay, which nothing reads any more. white here instead.
-   the cap keeps a tall profile from running up over the channeltabs strip. */
+   surface is light. */
 #app-mount .custom-user-profile-theme {
     --profile-gradient-overlay-color: var(--profile-wash) !important;
     --profile-gradient-section-box: var(--profile-widget) !important;
@@ -843,18 +792,13 @@
 }
 /* the overlay does not wash the user's colours, it replaces them: discord builds the
    ground as color-mix(overlay <amount>, the user's colour) and hands that mix 100%,
-   measured 2026-09-08. feeding it a flat blend of their two colours stopped the card
-   going black but flattened it: measured 2026-09-10, the card was solid #8C1E3E down to
-   the banner's edge and solid #625B9A for the whole body, a hard line with no ramp.
-   so the overlay is cleared and the gradient is drawn here instead, off the same two
-   colours discord hands us. */
+   measured 2026-09-08. feeding it... */
 html.theme-dark #app-mount .custom-user-profile-theme {
     background: linear-gradient(var(--profile-gradient-primary-color), var(--profile-gradient-secondary-color));
 }
 /* discord's profile wash is translucent by design, so whatever sits behind a profile
    card shows through it: the chat in the modal, and a near black rgb(45, 6, 18) on the
-   widgets column. a solid ground under the wash fills it without flattening the user's
-   own colours, which setting the wash to full opacity would. */
+   widgets column. */
 #app-mount .outer_c0bea0 {
     background: var(--modal-ground);
     max-height: calc(100vh - var(--top-offset) - 56px) !important;
@@ -874,8 +818,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 
 /* the effect was pushed 32px down and cut 32px short so the drag strip would not paint
    over it. the strip sits at z-index 1 now, so the clamp was costing the effect the top
-   of the card for nothing. full height, and above the strip. 3 is discord's own top
-   layer, which keeps it under the avatar frame at 4. */
+   of the card for nothing. */
 #app-mount .profileEffects__0dd08 {
     top: 0;
     height: 100%;
@@ -910,13 +853,9 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* measured: the profile card runs x=808..1214 and the widgets column x=1172..2013, both
    inside .layoutContainer__9c3be at x=832..2034. the frame and the strip used to be on
    the widgets column alone, which left the card outside them. */
-/* measured on the open modal, 2026-09-08:
-     .layoutContainer__9c3be   1500 wide, x 683..2183
-     .editingPanel__9c3be      242 wide,  x 646..887   an <aside>, overhangs 37px left
-     .outer_c0bea0            1252 wide,  x 887..2140  holds the profile and the widgets
-     .profile__9c3be           403 wide,  x 935..1338  first column inside that card
-   the container's own box matches neither child, which is why framing it never lined up.
-   so it frames nothing, and the two boxes that do hold content become the two windows. */
+/* measured on the open modal, 2026-09-08: .layoutContainer__9c3be 1500 wide, x 683..2183
+   .editingPanel__9c3be 242 wide, x 646..887 an <aside>, overhangs 37px left
+   .outer_c0bea0 1252 wide, x... */
 #app-mount .layoutContainer__9c3be {
     position: relative;
     border: none;
@@ -936,11 +875,8 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 }
 
 /* the profile effect is drawn well outside the card on purpose: discord hands it
-   --custom-profile-frame-overflow-top: 304 and 56 to each side, so the card is never clipped
-   and the box inside it carries the curve instead. bottom corners only: this box's top edge
-   sits under the drag strip, mid card, and rounding it there cut two notches that showed the
-   ground through. the banner behind takes the same curve rather than being clipped, since
-   clipping here would cut the frame overflow off again. */
+   --custom-profile-frame-overflow-top: 304 and 56 to each side, so the card is never
+   clipped and the box inside it... */
 #app-mount .layoutContainer__9c3be .inner_c0bea0,
 #app-mount .layoutContainer__9c3be .backgroundImage__9c3be {
     border-radius: 0 0 var(--round-corners) var(--round-corners);
@@ -972,14 +908,11 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     -webkit-app-region: drag;
 }
 
-/* the profile column and the widgets sat flush, so a hairline was parting them. a gap
-   parts them better and needs no line. moved with a transform for the same reason as the
-   settings panel: this modal is expensive to lay out and a transform costs it nothing.
-   measured 2026-09-08: the column starts 48px inside the card, so it has room to move. */
+/* the profile column and the widgets sat flush, so a hairline was parting them. measured
+   2026-09-08: the column starts 48px inside the card, so it has room to move. */
 /* the strip only has to sit above the card's own ground. everything the card holds
    belongs in front of it, and the frame overflows the top by 304px so it is the one
-   thing that meets the strip at all. the card pads its content down by 32, so lifting
-   the children does not hide the strip. */
+   thing that meets the strip at all. */
 #app-mount .layoutContainer__9c3be .outer_c0bea0 > * {
     z-index: 2;
 }
@@ -1174,11 +1107,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     background-color: var(--blue-new-30) !important;
 }
 
-/*=====================================================================
-   window-mode.css
-   recovered from commit 62d4e5b, deleted upstream 2026-09-05.
-   this is the one that makes the app sit inside its own window.
-=====================================================================*/
+
 /* Like Another Window */
 #app-mount .typeWindows__421ed {
     margin: var(--chat-top) var(--chat-right) 0;
@@ -1205,27 +1134,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     width: calc(100% - (48px + var(--border-width)*2));
 }
 
-/* the betterdiscord notice rule and the "did you know?" splash rule are dropped.
-   the first is a betterdiscord element equicord never renders, and the second hung
-   off a container_ class with 648 namesakes on canary, which is not worth the risk
-   for a screen you see once at startup. */
 
-/*=====================================================================
-   reverse.css - removed, not ported
-   its whole job was putting the server list on the right, and the base file
-   already does that through .content__5e434, which is a class canary still
-   ships. all thirteen of its own classes were dead. nothing was lost.
-=====================================================================*/
-
-/*=====================================================================
-   pop.css - partially ported
-   recovered from commit 8687e88. hover scale on rows and buttons.
-   twenty of its classes were dead. the four below had exactly one candidate
-   on canary so they are certain. the rest are prefixes discord reuses dozens
-   of times, and a hover rule is the worst place to guess, so those rules are
-   dropped rather than left matching nothing. click the element with the
-   inspect lens if you want them back.
-=====================================================================*/
 :root {
     --HoverScale: 1.025;
     --TransitionTime: 0.25s;
@@ -1249,10 +1158,8 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     box-shadow: none;
 }
 
-/*=====================================================================
-   background-image.css
-   the picture behind the chat. --bg-opacity above is its knob.
-=====================================================================*/
+/* ===================================================================== background-
+   image.css the picture behind the chat. */
 /* Chat Background */
 #app-mount .chatContent_f75fb0::before {
     display: block;
@@ -1600,12 +1507,7 @@ html:not(.theme-dark) #app-mount .theme-dark {
 }
 
 /* discord washes a message that mentions you in amber, which is the one colour left in
-   the client that has nothing to do with this theme. the knob at the top of the file was
-   declared and never read; it drives the wash now.
-   the four --background-mentioned / --message-mentioned tokens were tried first and none
-   of them paint this, so the class carries it directly. the bar down the left reads
-   --info-warning-foreground, which warning banners and icons share, so that token is
-   scoped to the row rather than overridden for the whole client. */
+   the client that has nothing to do with this theme. */
 #app-mount .mentioned__5126c {
     background-color: hsla(var(--mentioned-color), 0.1);
     --info-warning-foreground: hsl(var(--mentioned-color));
@@ -1619,10 +1521,7 @@ html:not(.theme-dark) #app-mount .theme-dark {
     background-color: hsl(var(--mentioned-color));
 }
 
-/* musiccontrols paints the album cover on the player's own ::after. quickcss gives that
-   pseudo its content and the blur; the size and the cover itself belong to the theme, so
-   each one can place it in its own card. the negative inset is bleed for the blur, and
-   the player clips it, which is what keeps the soft rim off the card's edge. */
+/* musiccontrols paints the album cover on the player's own ::after. */
 section[class*="panels_"] #vc-spotify-player {
     position: relative;
     background: transparent !important;
@@ -1671,10 +1570,7 @@ section[class*="panels_"] .vc-spotify-lyrics-next {
     display: none;
 }
 
-/* the heading over the dm list. content on the element itself is the tidy way to swap
-   the words and this build ignores it, so the text is hidden and the pseudo carries the
-   replacement. the pseudo inherits the font, so discord's size, weight and letter
-   spacing all still apply. */
+/* the heading over the dm list. */
 #app-mount .privateChannelsHeaderContainer__99e7c .headerText__99e7c {
     visibility: hidden;
     position: relative;
@@ -1701,12 +1597,7 @@ html:not(.theme-dark) #app-mount .theme-dark {
     --icon-status-offline: var(--offline-color);
 }
 
-/* musiccontrols, the rest of it. these lived in quickcss, which does not travel with the
-   theme file, so anyone this is sent to would have got the cover and none of the polish.
 
-   the plugin's own rules use `#vc-spotify-progress-bar > [slider]` and discord has since
-   put container__ and control__ between the two, so every rule written that way stopped
-   matching. no child combinator here for that reason. */
 #vc-spotify-progress-bar [class*="bar_"],
 #vc-spotify-progress-bar [class*="barFill"] {
     opacity: 0 !important;
