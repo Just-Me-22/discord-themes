@@ -1087,8 +1087,15 @@ li[class*="channel__"] [class*="layout__"] {
 div[class*="GridItem"] {
   border-radius: calc(var(--lp-radius) * 0.5) !important;
   background: color-mix(in srgb, var(--lp-ambient) var(--lp-tile), transparent) !important;
-  overflow: hidden !important;
   transition: opacity 140ms ease-out, transform 140ms ease-out !important;
+}
+
+/* a profile frame is drawn well outside its box on purpose, the same way an avatar
+   decoration is, so clipping the tile cut the art off. the radius still rounds the
+   tile's own ground, and the children take it too so nothing paints square corners
+   over it. */
+div[class*="GridItem"] > * {
+  border-radius: inherit;
 }
 
 /* a spotlight while the cursor is in the grid: the tile under it comes forward and the
