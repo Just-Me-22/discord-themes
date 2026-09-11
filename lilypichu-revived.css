@@ -845,16 +845,27 @@ main[class*="chatContent"] + [class*="container"]::before {
   stroke-width: 6px;
 }
 
-/* and if it hangs off the wrap itself rather than off something inside the scroller, the
-   counts can go where the band used to be: the wrap is a flex column, so order moves them
-   with none of the positioning that anchors to the scroll content when they sit deeper.
-   written as a direct child so that it simply does not apply in the other case. */
-[class*="membersWrap_"] > .vc-membercount-widget {
-  order: 1;
-  margin: 8px 0 0;
-  padding: 8px 16px 0;
+/* membercount injects straight into the scroller, so neither order nor absolute keeps the
+   counts out of the scrolling content - absolute anchors to it and lands them on a member.
+   sticky is the one thing that pins them to the foot of the visible list, and the negative
+   margin takes back the row of space their flow position holds open at the top. */
+[class*="membersWrap_"] > [class*="members_"] > .vc-membercount-widget {
+  position: sticky;
+  z-index: 3;
+  bottom: 0;
+  height: var(--lp-member-strip-h);
+  margin: 0 0 calc(-1 * var(--lp-member-strip-h));
+  padding: 0 16px;
+  align-items: center;
   border-top: 1px solid color-mix(in srgb, var(--lp-dim) 16%, transparent);
   border-bottom: 0;
+  background: color-mix(in srgb, var(--lp-2) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+/* so the last member does not end up underneath it */
+[class*="membersWrap_"] > [class*="members_"] {
+  padding-bottom: calc(var(--lp-member-strip-h) + 6px) !important;
 }
 
 /* ---- USER PANEL UNDER THE MEMBER LIST ---- */
