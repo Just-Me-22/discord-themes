@@ -1612,7 +1612,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
    card shares the width, so the box does not change size when mod view opens. */
 :root {
   --lp-modview-w: var(--lp-rail);
-  --lp-modview-inset: 8px;   /* discord's own padding inside the drawer */
+  --lp-modview-inset: 8px;   /* discord pads the drawer on its left edge only */
   --lp-modview-gap: 28px;    /* clearance above the user panel. raise to part them further */
   --lp-modview-clear: 64px;  /* space between the members table and the strip */
 }
@@ -1688,11 +1688,11 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 [class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) {
   position: absolute !important;
   z-index: 1 !important;
-  top: calc(var(--lp-chat-drop) - var(--lp-modview-inset)) !important;
-  right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) - var(--lp-modview-inset)) !important;
-  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop) + var(--lp-modview-gap) - var(--lp-modview-inset)) !important;
+  top: var(--lp-chat-drop) !important;
+  right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
+  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop) + var(--lp-modview-gap)) !important;
   left: auto !important;
-  width: calc(var(--lp-modview-w) + 2 * var(--lp-modview-inset)) !important;
+  width: calc(var(--lp-modview-w) + var(--lp-modview-inset)) !important;
   min-width: 0 !important;
   max-width: none !important;
   margin: 0 !important;
@@ -1705,6 +1705,14 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   --bg-base-primary: transparent;
   --bg-base-secondary: transparent;
   --bg-base-tertiary: transparent;
+}
+
+/* discord rounds the panel's inner corners and leaves the outer two square, because in
+   its own layout that edge is the window's. rounded and clipped here, where all four
+   corners are on show. */
+[class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) [class*="sidebarContainer__"] {
+  border-radius: var(--lp-radius) !important;
+  overflow: hidden !important;
 }
 
 /* while it is open the drawer is the card, so the empty one underneath it goes. */
