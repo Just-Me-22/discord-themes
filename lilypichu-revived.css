@@ -1094,9 +1094,15 @@ li[class*="channel__"] [class*="layout__"] {
    three pickers are covered by one rule. the capital G is load-bearing - attribute
    selectors are case sensitive, and a lowercase "gridItem" matches none of them. */
 div[class*="GridItem"] {
+  transition: opacity 140ms ease-out, transform 140ms ease-out !important;
+}
+
+/* the frame tiles are left out of every rule that paints: their art reads flatter than
+   discord's own once anything else is under it, so that grid keeps discord's ground,
+   corners and ring. the hover grow and the spotlight still apply, those only move it. */
+div[class*="GridItem"]:not([class*="frameGridItem"]) {
   border-radius: calc(var(--lp-radius) * 0.5) !important;
   background: color-mix(in srgb, var(--lp-ambient) var(--lp-tile), transparent) !important;
-  transition: opacity 140ms ease-out, transform 140ms ease-out !important;
 }
 
 /* a profile frame is drawn well outside its box on purpose, the same way an avatar
@@ -1146,7 +1152,7 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
 /* the tile's ground pulled in from its own edges. this reads as a wider gap without
    touching the gutters, which cannot be changed. the click target stays the full tile,
    so the inset ring is still clickable - that is deliberate, not an oversight. */
-div[class*="GridItem"]:not([class*="selected"]):not([aria-pressed="true"]) {
+div[class*="GridItem"]:not([class*="frameGridItem"]):not([class*="selected"]):not([aria-pressed="true"]) {
   box-shadow: inset 0 0 0 var(--lp-pick-inset) var(--lp-modal) !important;
 }
 
