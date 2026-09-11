@@ -1658,18 +1658,25 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 }
 
 /* mod view is a drawer beside the table rather than an overlay over it: discord makes
-   the two flex children of page__. sharing a row with a table this theme has already
-   narrowed by the width of the strip left it nothing, and it rendered at no width at
-   all. it takes the strip instead, on the same box as the empty card above. */
-[class*="page__"] > div:has(> [class*="sidebarContainer__"]) {
+   the two flex children of page__. in flow it would not size - given the row to itself
+   it still came out at no width, and the table simply grew into the strip and ran under
+   the user panel. out of flow it goes, onto the box the empty card already proved, so
+   the table never moves whether mod view is open or shut. */
+[class*="page__"]:has(> div > [class*="sidebarContainer__"]) {
   position: relative !important;
+}
+
+[class*="page__"] > div:has(> [class*="sidebarContainer__"]) {
+  position: absolute !important;
   z-index: 1 !important;
-  flex: 0 0 auto !important;
+  top: var(--lp-chat-drop) !important;
+  right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
+  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
+  left: auto !important;
   width: var(--lp-rail) !important;
   min-width: 0 !important;
-  margin-top: var(--lp-chat-drop) !important;
-  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
-  margin-bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
+  max-width: none !important;
+  margin: 0 !important;
   border-radius: var(--lp-radius) !important;
   overflow: hidden !important;
   background: var(--lp-2a) !important;
@@ -1681,13 +1688,6 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   --bg-base-primary: transparent;
   --bg-base-secondary: transparent;
   --bg-base-tertiary: transparent;
-}
-
-/* the table gives up exactly what the drawer occupies, so its right edge sits in the
-   same place whether mod view is open or shut. asked of the page rather than of the
-   table's next sibling: nothing says the drawer is the element straight after it. */
-[class*="page__"]:has(> div > [class*="sidebarContainer__"]) > div[class*="chat_"] {
-  margin-right: calc(var(--lp-column-gap) + var(--lp-strip-shift)) !important;
 }
 
 /* while it is open the drawer is the card, so the empty one underneath it goes. */
