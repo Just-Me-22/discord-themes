@@ -1606,12 +1606,12 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 
 /* ---- MEMBER SAFETY PAGE --------------------------------------------------- */
 
-/* as wide as the strip goes before it closes the gap to the table. the drawer and the
-   empty card share it, so the box does not change size when mod view opens, and both are
-   placed by their right edge, so the extra width grows inwards and the user panel below
-   stays lined up. */
+/* it reaches from the table's right edge to the strip's, so the two join into one block
+   the way --lp-seam joins the rest of them. the drawer and the empty card share the
+   width, so the box does not change size when mod view opens, and both are placed by
+   their right edge, so the user panel below stays lined up. */
 :root {
-  --lp-modview-w: calc(var(--lp-rail) + var(--lp-strip-shift));
+  --lp-modview-w: calc(var(--lp-rail) + var(--lp-strip-shift) + var(--lp-column-gap));
 }
 
 /* another page rather than a modal. discord renders the members dashboard into page__
