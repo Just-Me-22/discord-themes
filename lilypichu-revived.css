@@ -1666,7 +1666,12 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   position: relative !important;
 }
 
-[class*="page__"] > div:has(> [class*="sidebarContainer__"]) {
+/* :not([class]) is not decoration. the thread panel zeroes discord's unclassed spacer
+   with `[class*="threadSidebarOpen_"] ~ div:not([class])`, the members page carries
+   threadSidebarOpen_ on its chat, and this wrapper is an unclassed sibling - so that
+   rule matched it too. tied on specificity it won on order and held the drawer at
+   width 0. this outranks it rather than relying on which rule comes last. */
+[class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) {
   position: absolute !important;
   z-index: 1 !important;
   top: var(--lp-chat-drop) !important;
