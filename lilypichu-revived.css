@@ -1604,6 +1604,44 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 }
 
 
+/* ---- MEMBER SAFETY PAGE --------------------------------------------------- */
+
+/* another page rather than a modal. discord renders the members dashboard into page__
+   where the chat normally goes, and as a direct child, so the chat card's own rule
+   (page__ > * > chat_) never reaches it and it sat unsized on the frame. */
+/* the values are the chat card's, so if this selector ever did catch the real chat it
+   would change nothing - which is why there is no :has() guard keeping it off. */
+[class*="page__"] > div[class*="chat_"] {
+  margin-top: var(--lp-chat-drop) !important;
+  margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
+  margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)) !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 1 1 auto !important;
+  height: calc(100% - var(--lp-chat-lift) - var(--lp-chat-drop)) !important;
+  backdrop-filter: var(--lp-glass) !important;
+
+  /* the table paints through discord's own ground tokens rather than through a class of
+     its own, the same way the shop does, so naming the boxes is not enough. */
+  --background-base-low: transparent;
+  --background-base-lower: transparent;
+  --background-base-lowest: transparent;
+  --background-base-low-alt: transparent;
+  --bg-base-primary: transparent;
+  --bg-base-secondary: transparent;
+  --bg-base-tertiary: transparent;
+}
+
+/* the scroller and the box inside it each paint a ground, and the inner one is what was
+   showing as an opaque slab that stopped short of the card's bottom edge. */
+[class*="page__"] > div[class*="chat_"] > [class*="scroller"],
+[class*="page__"] > div[class*="chat_"] > [class*="scroller"] > [class*="content_"] {
+  background: transparent !important;
+}
+
+
+
 /* the dm list stops short of its own panel, leaving an empty strip along the bottom that
    reads as a small rectangle beside the server rail. */
 nav[class*="privateChannels_"] > [class*="scroller_"] {
