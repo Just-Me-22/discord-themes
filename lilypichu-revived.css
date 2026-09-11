@@ -1606,12 +1606,12 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 
 /* ---- MEMBER SAFETY PAGE --------------------------------------------------- */
 
-/* it reaches from the table's right edge to the strip's, so the two join into one block
-   the way --lp-seam joins the rest of them. the drawer and the empty card share the
-   width, so the box does not change size when mod view opens, and both are placed by
-   their right edge, so the user panel below stays lined up. */
+/* the same width as the user panel below it, so the strip reads as one column, and the
+   table's own margin is pulled in to meet it rather than to the chat card's edge: the
+   panel and the drawer are seen together, the chat card is on another screen. the empty
+   card shares the width, so the box does not change size when mod view opens. */
 :root {
-  --lp-modview-w: calc(var(--lp-rail) + var(--lp-strip-shift) + var(--lp-column-gap));
+  --lp-modview-w: var(--lp-rail);
 }
 
 /* another page rather than a modal. discord renders the members dashboard into page__
@@ -1624,7 +1624,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   overflow: visible !important;
   margin-top: var(--lp-chat-drop) !important;
   margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
-  margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)) !important;
+  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) + var(--lp-modview-w)) !important;
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
@@ -1657,7 +1657,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   content: "";
   position: absolute;
   top: 0;
-  right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift));
+  right: calc(-1 * var(--lp-modview-w));
   bottom: var(--lp-music-stop);
   width: var(--lp-modview-w);
   border-radius: var(--lp-radius);
