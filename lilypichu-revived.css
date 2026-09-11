@@ -1613,6 +1613,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 :root {
   --lp-modview-w: var(--lp-rail);
   --lp-modview-inset: 8px;   /* discord's own padding inside the drawer */
+  --lp-modview-gap: 12px;    /* clearance above the user panel. raise to part them further */
 }
 
 /* another page rather than a modal. discord renders the members dashboard into page__
@@ -1659,7 +1660,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   position: absolute;
   top: 0;
   right: calc(-1 * (var(--lp-modview-w) + var(--lp-column-gap)));
-  bottom: var(--lp-music-stop);
+  bottom: calc(var(--lp-music-stop) + var(--lp-modview-gap));
   width: var(--lp-modview-w);
   border-radius: var(--lp-radius);
   background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
@@ -1688,7 +1689,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   z-index: 1 !important;
   top: calc(var(--lp-chat-drop) - var(--lp-modview-inset)) !important;
   right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) - var(--lp-modview-inset)) !important;
-  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop) - var(--lp-modview-inset)) !important;
+  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop) + var(--lp-modview-gap) - var(--lp-modview-inset)) !important;
   left: auto !important;
   width: calc(var(--lp-modview-w) + 2 * var(--lp-modview-inset)) !important;
   min-width: 0 !important;
