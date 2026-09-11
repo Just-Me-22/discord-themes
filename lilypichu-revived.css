@@ -1612,6 +1612,8 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 /* the values are the chat card's, so if this selector ever did catch the real chat it
    would change nothing - which is why there is no :has() guard keeping it off. */
 [class*="page__"] > div[class*="chat_"] {
+  position: relative !important;
+  overflow: visible !important;
   margin-top: var(--lp-chat-drop) !important;
   margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
   margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)) !important;
@@ -1638,6 +1640,21 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 [class*="page__"] > div[class*="chat_"] > [class*="scroller"],
 [class*="page__"] > div[class*="chat_"] > [class*="scroller"] > [class*="content_"] {
   background: transparent !important;
+}
+
+/* the strip this page reserves has nothing in it, so it takes the same empty card the
+   DMs get. anchored on chat_ rather than on content_ like the DM one: this page nests a
+   scroller in between, so there is no content_ child to hang it off. */
+[class*="page__"] > div[class*="chat_"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift));
+  bottom: var(--lp-music-stop);
+  width: var(--lp-rail);
+  border-radius: var(--lp-radius);
+  background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
+  pointer-events: none;
 }
 
 
