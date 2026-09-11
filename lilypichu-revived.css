@@ -725,7 +725,10 @@ main[class*="chatContent"] + [class*="container"] {
   margin: 0 !important;
   overflow: visible !important;
   border-radius: var(--lp-radius) !important;
-  background: var(--lp-2a) !important;
+  background:
+    repeating-linear-gradient(90deg, var(--lp-dim) 0 6px, transparent 6px 13px)
+      center bottom calc(var(--lp-member-strip-h) + 14px) / calc(100% - 28px) 2px no-repeat,
+    var(--lp-2a) !important;
 }
 
 /* with no member list inside it, the column is the DM card: it takes the picture and
@@ -825,43 +828,6 @@ main[class*="chatContent"] + [class*="container"]::before {
   height: var(--lp-member-strip-h);
   border-radius: calc(var(--lp-radius) * 0.5);
   background: var(--lp-member-strip);
-}
-
-/* membercount already counts the room, but it renders above the list where it reads as a
-   heading. moved onto the band, the band stops being a stripe that ran out of content -
-   which is also why the dashed rule that used to fence it off is gone. */
-[class*="membersWrap_"] .vc-membercount-widget {
-  position: absolute;
-  z-index: 2;
-  right: 14px;
-  bottom: 8px;
-  left: 14px;
-  height: var(--lp-member-strip-h);
-  margin: 0;
-  padding: 0 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-
-  --color-online: var(--lp-dim);
-  --color-total: var(--lp-accent);
-  --color-voice: var(--lp-dim);
-}
-
-/* discord's own status green stays on the dot, so online still reads as online at a
-   glance without the number having to carry it. */
-[class*="membersWrap_"] .vc-membercount-widget [class*="-count"],
-[class*="membersWrap_"] .vc-membercount-widget [class*="voice-icon"] {
-  width: 9px;
-  height: 9px;
-}
-
-[class*="membersWrap_"] .vc-membercount-widget [class*="total-count"] {
-  stroke-width: 6px;
 }
 
 /* ---- USER PANEL UNDER THE MEMBER LIST ---- */
