@@ -1624,7 +1624,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   overflow: visible !important;
   margin-top: var(--lp-chat-drop) !important;
   margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
-  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) + var(--lp-modview-w)) !important;
+  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) + var(--lp-modview-w) + var(--lp-column-gap)) !important;
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
@@ -1657,7 +1657,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   content: "";
   position: absolute;
   top: 0;
-  right: calc(-1 * var(--lp-modview-w));
+  right: calc(-1 * (var(--lp-modview-w) + var(--lp-column-gap)));
   bottom: var(--lp-music-stop);
   width: var(--lp-modview-w);
   border-radius: var(--lp-radius);
@@ -1701,13 +1701,6 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   --bg-base-primary: transparent;
   --bg-base-secondary: transparent;
   --bg-base-tertiary: transparent;
-}
-
-/* discord insets the panel 8px from every edge of the drawer, which leaves the card
-   narrower than the user panel directly under it. the wrapper is already the card here,
-   so the inset only breaks the column. */
-[class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) [class*="innerContainer__"] {
-  padding: 0 !important;
 }
 
 /* while it is open the drawer is the card, so the empty one underneath it goes. */
