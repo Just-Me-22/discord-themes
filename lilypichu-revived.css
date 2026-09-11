@@ -1114,6 +1114,23 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
   border-radius: inherit;
 }
 
+/* the frame bands scaled on their own, so the ring grows without the card growing with
+   it. discord clips each band to the card's shape with a mask and clips the preview on
+   top of that, and both have to go or the bigger band is just cut back down. picker
+   tiles only, the real profile card keeps discord's own treatment. */
+div[class*="frameGridItem"] [class*="previewContainer"] {
+  overflow: visible;
+}
+
+div[class*="frameGridItem"] [class*="profileFrameMask"] {
+  -webkit-mask: none;
+  mask: none;
+}
+
+div[class*="frameGridItem"] [class*="profileFrameLayer"] {
+  transform: scale(var(--lp-frame-layer-scale, 1));
+}
+
 /* --lp-border maps discord's four hairline tokens to transparent, which also strips the
    1.33px outline off the sample profile card the frame is drawn around. without an edge
    the tile is a solid block and the frame has nothing to sit against. measured off
