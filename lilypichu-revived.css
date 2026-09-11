@@ -1657,6 +1657,41 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   pointer-events: none;
 }
 
+/* mod view is a drawer beside the table rather than an overlay over it: discord makes
+   the two flex children of page__. sharing a row with a table this theme has already
+   narrowed by the width of the strip left it nothing, and it rendered at no width at
+   all. it takes the strip instead, on the same box as the empty card above. */
+[class*="page__"] > div:has(> [class*="sidebarContainer__"]) {
+  flex: 0 0 auto !important;
+  width: var(--lp-rail) !important;
+  min-width: 0 !important;
+  margin-top: var(--lp-chat-drop) !important;
+  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
+  margin-bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
+  border-radius: var(--lp-radius) !important;
+  overflow: hidden !important;
+  background: var(--lp-2a) !important;
+
+  --background-base-low: transparent;
+  --background-base-lower: transparent;
+  --background-base-lowest: transparent;
+  --background-base-low-alt: transparent;
+  --bg-base-primary: transparent;
+  --bg-base-secondary: transparent;
+  --bg-base-tertiary: transparent;
+}
+
+/* the table gives up exactly what the drawer occupies, so its right edge sits in the
+   same place whether mod view is open or shut. */
+[class*="page__"] > div[class*="chat_"]:has(+ div > [class*="sidebarContainer__"]) {
+  margin-right: calc(var(--lp-column-gap) + var(--lp-strip-shift)) !important;
+}
+
+/* while it is open the drawer is the card, so the empty one underneath it goes. */
+[class*="page__"] > div[class*="chat_"]:has(+ div > [class*="sidebarContainer__"])::after {
+  display: none;
+}
+
 
 
 /* the dm list stops short of its own panel, leaving an empty strip along the bottom that
