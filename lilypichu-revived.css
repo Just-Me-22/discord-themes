@@ -725,10 +725,7 @@ main[class*="chatContent"] + [class*="container"] {
   margin: 0 !important;
   overflow: visible !important;
   border-radius: var(--lp-radius) !important;
-  background:
-    repeating-linear-gradient(90deg, var(--lp-dim) 0 6px, transparent 6px 13px)
-      center bottom calc(var(--lp-member-strip-h) + 14px) / calc(100% - 28px) 2px no-repeat,
-    var(--lp-2a) !important;
+  background: var(--lp-2a) !important;
 }
 
 /* with no member list inside it, the column is the DM card: it takes the picture and
@@ -746,7 +743,7 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   height: 100% !important;
   margin: 0 !important;
   padding-top: var(--lp-member-head) !important;
-  padding-bottom: calc(var(--lp-member-strip-h) + 24px) !important;
+  padding-bottom: 14px !important;
   border-radius: var(--lp-radius) !important;
   overflow: hidden !important;
   background: transparent !important;
@@ -816,18 +813,36 @@ main[class*="chatContent"] + [class*="container"]::before {
   left: var(--lp-radius);
 }
 
-/* the dashed rule rides on the card's own background so that ::after is free to be
-   a real box here - the band needs a corner radius, which a background layer cannot
-   carry on its own. */
-[class*="membersWrap_"]::after {
-  content: "";
-  position: absolute;
-  right: 14px;
-  bottom: 8px;
-  left: 14px;
-  height: var(--lp-member-strip-h);
-  border-radius: calc(var(--lp-radius) * 0.5);
-  background: var(--lp-member-strip);
+/* membercount already counts the room and draws it at the top of the list. a rule under
+   it turns that into the card's header, which is what lets the band that used to sit at
+   the foot go: it held nothing, so it read as content that had failed to load. it cannot
+   move down there instead - discord injects it inside the virtualised scroller, where
+   anything taken out of flow anchors to the scroll content and rides the list. */
+[class*="membersWrap_"] .vc-membercount-widget {
+  justify-content: flex-start;
+  gap: 14px;
+  margin: 0 0 6px;
+  padding: 2px 16px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  border-bottom: 1px solid color-mix(in srgb, var(--lp-dim) 16%, transparent);
+
+  --color-online: var(--lp-dim);
+  --color-total: var(--lp-accent);
+  --color-voice: var(--lp-dim);
+}
+
+/* discord's own status green stays on the dot, so online reads as online without the
+   number having to carry it. at 18px they were badges rather than marks. */
+[class*="membersWrap_"] .vc-membercount-widget [class*="-count"],
+[class*="membersWrap_"] .vc-membercount-widget [class*="voice-icon"] {
+  width: 9px;
+  height: 9px;
+}
+
+[class*="membersWrap_"] .vc-membercount-widget [class*="total-count"] {
+  stroke-width: 6px;
 }
 
 /* ---- USER PANEL UNDER THE MEMBER LIST ---- */
