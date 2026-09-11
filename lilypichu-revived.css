@@ -1093,7 +1093,12 @@ li[class*="channel__"] [class*="layout__"] {
 /* matched on the shared GridItem suffix rather than on decorationGridItem, so the
    three pickers are covered by one rule. the capital G is load-bearing - attribute
    selectors are case sensitive, and a lowercase "gridItem" matches none of them. */
+/* a tile scrolled out of the grid costs nothing to keep: the browser skips its style,
+   layout and paint until it comes back into view. auto in contain-intrinsic-size means
+   the last real size is remembered, so the scrollbar does not jump. */
 div[class*="GridItem"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 83px auto 80px;
   transition: opacity 140ms ease-out, transform 140ms ease-out !important;
 }
 
