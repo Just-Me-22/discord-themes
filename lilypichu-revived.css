@@ -1114,6 +1114,14 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
   border-radius: inherit;
 }
 
+/* discord draws the frame art in the preview's padding: 8.75px top, 7.31px bottom and
+   2.56px each side, which is all the art you get at tile size. the tile is 80 tall and
+   the preview 68, so it can take 1.17 before it meets the edge. transform rather than a
+   size, so nothing reflows and the grid keeps discord's own positions. */
+div[class*="frameGridItem"] [class*="previewContainer"] {
+  transform: scale(var(--lp-frame-scale, 1));
+}
+
 /* a spotlight while the cursor is in the grid: the tile under it comes forward and the
    rest step back, so you are looking at one decoration rather than twenty-four. */
 [class*="list__"]:hover div[class*="GridItem"] {
