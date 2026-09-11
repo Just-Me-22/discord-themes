@@ -1606,6 +1606,14 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 
 /* ---- MEMBER SAFETY PAGE --------------------------------------------------- */
 
+/* as wide as the strip goes before it closes the gap to the table. the drawer and the
+   empty card share it, so the box does not change size when mod view opens, and both are
+   placed by their right edge, so the extra width grows inwards and the user panel below
+   stays lined up. */
+:root {
+  --lp-modview-w: calc(var(--lp-rail) + var(--lp-strip-shift));
+}
+
 /* another page rather than a modal. discord renders the members dashboard into page__
    where the chat normally goes, and as a direct child, so the chat card's own rule
    (page__ > * > chat_) never reaches it and it sat unsized on the frame. */
@@ -1651,7 +1659,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   top: 0;
   right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift));
   bottom: var(--lp-music-stop);
-  width: var(--lp-rail);
+  width: var(--lp-modview-w);
   border-radius: var(--lp-radius);
   background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
   pointer-events: none;
@@ -1678,7 +1686,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
   bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
   left: auto !important;
-  width: var(--lp-rail) !important;
+  width: var(--lp-modview-w) !important;
   min-width: 0 !important;
   max-width: none !important;
   margin: 0 !important;
