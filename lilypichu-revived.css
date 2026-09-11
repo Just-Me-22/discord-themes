@@ -1118,8 +1118,11 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
    it. discord clips each band to the card's shape with a mask and clips the preview on
    top of that, and both have to go or the bigger band is just cut back down. picker
    tiles only, the real profile card keeps discord's own treatment. */
-div[class*="frameGridItem"] [class*="previewContainer"] {
-  overflow: visible;
+div[class*="frameGridItem"] [class*="previewContainer"],
+div[class*="frameGridItem"] [class*="profileFrameContainer"],
+div[class*="frameGridItem"] [class*="profileFrame__"] {
+  overflow: visible !important;
+  border-radius: 0 !important;
 }
 
 div[class*="frameGridItem"] [class*="profileFrameMask"] {
@@ -1198,7 +1201,7 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
 /* the preview card only takes the corner. it paints itself from the profile's own
    theme colours, so a fill here - or clearing its children - blanks that out and
    the card comes back flat. */
-[class*="modal"] [class*="preview"] {
+[class*="modal"] [class*="preview"]:not(div[class*="GridItem"] *) {
   border-radius: calc(var(--lp-radius) * 0.5) !important;
   overflow: hidden !important;
 }
