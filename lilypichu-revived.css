@@ -1114,6 +1114,14 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
   border-radius: inherit;
 }
 
+/* --lp-border maps discord's four hairline tokens to transparent, which also strips the
+   1.33px outline off the sample profile card the frame is drawn around. without an edge
+   the tile is a solid block and the frame has nothing to sit against. measured off
+   discord with the theme disabled: oklab(0.678923 0.00325 -0.01116 / 0.239). */
+img[class*="sampleProfile"] {
+  border-color: rgb(151 151 159 / 0.24);
+}
+
 /* discord draws the frame art in the preview's padding: 8.75px top, 7.31px bottom and
    2.56px each side, which is all the art you get at tile size. the tile is 80 tall and
    the preview 68, so it can take 1.17 before it meets the edge. transform rather than a
