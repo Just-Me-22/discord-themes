@@ -1703,6 +1703,13 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   --bg-base-tertiary: transparent;
 }
 
+/* discord insets the panel 8px from every edge of the drawer, which leaves the card
+   narrower than the user panel directly under it. the wrapper is already the card here,
+   so the inset only breaks the column. */
+[class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) [class*="innerContainer__"] {
+  padding: 0 !important;
+}
+
 /* while it is open the drawer is the card, so the empty one underneath it goes. */
 [class*="page__"]:has(> div > [class*="sidebarContainer__"]) > div[class*="chat_"]::after {
   display: none;
