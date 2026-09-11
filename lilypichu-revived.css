@@ -1612,6 +1612,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
    card shares the width, so the box does not change size when mod view opens. */
 :root {
   --lp-modview-w: var(--lp-rail);
+  --lp-modview-inset: 8px;   /* discord's own padding inside the drawer */
 }
 
 /* another page rather than a modal. discord renders the members dashboard into page__
@@ -1665,6 +1666,9 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   pointer-events: none;
 }
 
+/* the wrapper is a carrier, not a card: discord's panel sits --lp-modview-inset inside
+   it, so a ground here shows as a band down the side of the panel. the box is grown by
+   that inset and left unpainted, which puts discord's own card on the strip exactly. */
 /* mod view is a drawer beside the table rather than an overlay over it: discord makes
    the two flex children of page__. in flow it would not size - given the row to itself
    it still came out at no width, and the table simply grew into the strip and ran under
@@ -1682,17 +1686,15 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 [class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) {
   position: absolute !important;
   z-index: 1 !important;
-  top: var(--lp-chat-drop) !important;
-  right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
-  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
+  top: calc(var(--lp-chat-drop) - var(--lp-modview-inset)) !important;
+  right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) - var(--lp-modview-inset)) !important;
+  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop) - var(--lp-modview-inset)) !important;
   left: auto !important;
-  width: var(--lp-modview-w) !important;
+  width: calc(var(--lp-modview-w) + 2 * var(--lp-modview-inset)) !important;
   min-width: 0 !important;
   max-width: none !important;
   margin: 0 !important;
-  border-radius: var(--lp-radius) !important;
-  overflow: hidden !important;
-  background: var(--lp-2a) !important;
+  background: transparent !important;
 
   --background-base-low: transparent;
   --background-base-lower: transparent;
