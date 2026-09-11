@@ -1613,7 +1613,6 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 :root {
   --lp-modview-w: var(--lp-rail);
   --lp-modview-inset: 8px;   /* discord pads the drawer on its left edge only */
-  --lp-modview-gap: 28px;    /* clearance above the user panel. raise to part them further */
   --lp-modview-clear: 64px;  /* space between the members table and the strip */
 }
 
@@ -1661,7 +1660,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   position: absolute;
   top: 0;
   right: calc(-1 * (var(--lp-modview-w) + var(--lp-modview-clear)));
-  bottom: calc(var(--lp-music-stop) + var(--lp-modview-gap));
+  bottom: var(--lp-music-stop);
   width: var(--lp-modview-w);
   border-radius: var(--lp-radius);
   background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
@@ -1690,7 +1689,7 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   z-index: 1 !important;
   top: var(--lp-chat-drop) !important;
   right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
-  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop) + var(--lp-modview-gap)) !important;
+  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
   left: auto !important;
   width: calc(var(--lp-modview-w) + var(--lp-modview-inset)) !important;
   min-width: 0 !important;
