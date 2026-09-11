@@ -1662,6 +1662,8 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
    narrowed by the width of the strip left it nothing, and it rendered at no width at
    all. it takes the strip instead, on the same box as the empty card above. */
 [class*="page__"] > div:has(> [class*="sidebarContainer__"]) {
+  position: relative !important;
+  z-index: 1 !important;
   flex: 0 0 auto !important;
   width: var(--lp-rail) !important;
   min-width: 0 !important;
@@ -1682,13 +1684,14 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 }
 
 /* the table gives up exactly what the drawer occupies, so its right edge sits in the
-   same place whether mod view is open or shut. */
-[class*="page__"] > div[class*="chat_"]:has(+ div > [class*="sidebarContainer__"]) {
+   same place whether mod view is open or shut. asked of the page rather than of the
+   table's next sibling: nothing says the drawer is the element straight after it. */
+[class*="page__"]:has(> div > [class*="sidebarContainer__"]) > div[class*="chat_"] {
   margin-right: calc(var(--lp-column-gap) + var(--lp-strip-shift)) !important;
 }
 
 /* while it is open the drawer is the card, so the empty one underneath it goes. */
-[class*="page__"] > div[class*="chat_"]:has(+ div > [class*="sidebarContainer__"])::after {
+[class*="page__"]:has(> div > [class*="sidebarContainer__"]) > div[class*="chat_"]::after {
   display: none;
 }
 
