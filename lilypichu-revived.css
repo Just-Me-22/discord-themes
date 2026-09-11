@@ -1098,6 +1098,15 @@ div[class*="GridItem"] > * {
   border-radius: inherit;
 }
 
+/* the frame picker is the one grid whose tiles hold a sample profile card, and discord
+   paints that card at oklab 0.18. on the near black tile every picker gets from
+   --lp-ambient it had nothing to read against, so the frames looked like empty squares.
+   a pale tile here only. the :has runs over the two dozen tiles of one modal, never on
+   a hover or scroll path. */
+div[class*="GridItem"]:has(img[class*="sampleProfile"]) {
+  background: color-mix(in srgb, var(--lp-text) 26%, transparent) !important;
+}
+
 /* a spotlight while the cursor is in the grid: the tile under it comes forward and the
    rest step back, so you are looking at one decoration rather than twenty-four. */
 [class*="list__"]:hover div[class*="GridItem"] {
