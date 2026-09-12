@@ -809,6 +809,14 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   border-radius: 50% !important;
 }
 
+/* the svg reserves its spare 8px on the right and the bottom, for the dot that used to
+   sit there, and clips everything else. a ring set outside the avatar has nothing to draw
+   into on the left, so it came out with a slice missing. */
+svg[class*="avatar_"],
+[class*="avatar_"] svg {
+  overflow: visible !important;
+}
+
 /* the svg reserves 8px beyond the avatar for the dot it used to draw, so the avatar's
    own square is 8px inside it. the inset then moves the ring off that edge, negative
    outwards, and the stroke straddles wherever it lands. */
