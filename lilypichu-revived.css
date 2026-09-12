@@ -815,13 +815,13 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 [class*="avatar_"] rect[mask*="status-"] {
   mask: none !important;
   fill: none !important;
-  x: var(--lp-ring-inset);
-  y: var(--lp-ring-inset);
-  width: calc(100% - 8px - 2 * var(--lp-ring-inset));
-  height: calc(100% - 8px - 2 * var(--lp-ring-inset));
+  x: var(--lp-status-ring-inset);
+  y: var(--lp-status-ring-inset);
+  width: calc(100% - 8px - 2 * var(--lp-status-ring-inset));
+  height: calc(100% - 8px - 2 * var(--lp-status-ring-inset));
   rx: 50%;
   ry: 50%;
-  stroke-width: var(--lp-ring-width);
+  stroke-width: var(--lp-status-ring-width);
 }
 
 /* the status is named in the mask the rect was shaped with, which is the only place it
