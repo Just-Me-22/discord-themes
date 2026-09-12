@@ -843,12 +843,12 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 [class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
 [class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
 
-/* typing is a status like the others as far as the mask is concerned, so it takes the
-   ring too - and then breathes, because the whole point of it is that it is happening
-   right now. discord drops the state the moment they stop, so nothing here animates for
-   longer than someone is actually typing. */
-[class*="avatar_"] rect[mask*="typing"] {
-  stroke: var(--lp-status-typing);
+/* typing is not a status as far as the markup is concerned: discord swaps the whole rect
+   for a pill with three dots in it, shaped by a mask with a generated id and coloured by
+   a fill, so there is nothing here for a ring to hang off. the dots are the one thing
+   unique to it, so the pill breathes instead - and only while they are actually typing,
+   because discord takes the element away the moment they stop. */
+[class*="avatar_"] svg[class*="dots__"] {
   animation: lp-status-breathe var(--lp-status-breathe) ease-in-out infinite;
 }
 
@@ -857,7 +857,7 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [class*="avatar_"] rect[mask*="typing"] { animation: none; }
+  [class*="avatar_"] svg[class*="dots__"] { animation: none; }
 }
 
 /* the activity cards read as glass over the list rather than as solid tiles */
