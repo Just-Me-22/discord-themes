@@ -795,15 +795,42 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   background: color-mix(in srgb, var(--lp-3) var(--lp-member-row-hover), transparent) !important;
 }
 
-/* the avatar is masked to cut a notch for the status dot, and that same mask is what
-   rounds it - drop the mask on its own and you get a square. decorations are drawn to ring
-   a full circle, so a bite taken out from under one reads as damage rather than as status. */
-[class*="membersWrap_"] [class*="avatar_"] foreignObject,
-[class*="membersWrap_"] [class*="avatar_"] img {
+/* ---- STATUS RING --------------------------------------------------------- */
+
+/* discord marks status with a dot bitten out of the avatar's corner. the ring puts it
+   back as a full circle and moves the status onto the edge, which is also what stops
+   avatar decorations sitting over a bite taken out from under them.
+   the dot and the ring are the same <rect>: the mask that shapes it into a dot is
+   dropped, the fill goes, and it is grown to the avatar's own square and stroked. */
+[class*="avatar_"] foreignObject,
+[class*="avatar_"] img {
   mask: none !important;
   clip-path: none !important;
   border-radius: 50% !important;
 }
+
+/* the svg reserves 8px beyond the avatar for the dot it used to draw, so the avatar's
+   own square is 8px inside it. the inset then moves the ring off that edge, negative
+   outwards, and the stroke straddles wherever it lands. */
+[class*="avatar_"] rect[mask*="status-"] {
+  mask: none !important;
+  fill: none !important;
+  x: var(--lp-ring-inset);
+  y: var(--lp-ring-inset);
+  width: calc(100% - 8px - 2 * var(--lp-ring-inset));
+  height: calc(100% - 8px - 2 * var(--lp-ring-inset));
+  rx: 50%;
+  ry: 50%;
+  stroke-width: var(--lp-ring-width);
+}
+
+/* the status is named in the mask the rect was shaped with, which is the only place it
+   is readable from css - the alternative is :has() on every avatar in a scrolling list. */
+[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
+[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--lp-status-idle); }
+[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--lp-status-dnd); }
+[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
+[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
 
 /* the activity cards read as glass over the list rather than as solid tiles */
 [class*="membersWrap_"] [class*="openOnHover"] {
