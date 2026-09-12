@@ -813,7 +813,9 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
    sit there, and clips everything else. a ring set outside the avatar has nothing to draw
    into on the left, so it came out with a slice missing. */
 svg[class*="avatar_"],
-[class*="avatar_"] svg {
+[class*="avatar_"],
+[class*="avatar_"] svg,
+[class*="avatar_"] [class*="wrapper__"] {
   overflow: visible !important;
 }
 
