@@ -811,6 +811,13 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   clip-path: circle(50%) !important;
 }
 
+/* the svg keeps its spare room on the right and the bottom, so a ring set outside the
+   avatar has nothing to draw into on the left or the top and comes out with a slice
+   missing. this is what lets the inset go below half the stroke width. */
+[class*="avatar_"] svg {
+  overflow: visible !important;
+}
+
 /* the dot and the ring are one rect. the mask shaping it into a dot goes, the fill goes,
    and it grows to the avatar's own square - which is 8px inside the svg, because that
    spare width was reserved for the dot it used to draw. */
