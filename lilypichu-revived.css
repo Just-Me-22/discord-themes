@@ -831,6 +831,8 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
    wrong needs its own line here and nothing else. */
 [class*="avatar_"] svg[width="138"] rect[mask*="status-"] {
   --lp-status-ring-pad: 18px;
+  --lp-status-ring-inset: calc(var(--lp-status-popout-width) / 2);
+  stroke-width: var(--lp-status-popout-width);
 }
 
 /* the status is named in the mask the rect was shaped with, which is the only place css
@@ -840,6 +842,23 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 [class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--lp-status-dnd); }
 [class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
 [class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
+
+/* typing is a status like the others as far as the mask is concerned, so it takes the
+   ring too - and then breathes, because the whole point of it is that it is happening
+   right now. discord drops the state the moment they stop, so nothing here animates for
+   longer than someone is actually typing. */
+[class*="avatar_"] rect[mask*="typing"] {
+  stroke: var(--lp-status-typing);
+  animation: lp-status-breathe var(--lp-status-breathe) ease-in-out infinite;
+}
+
+@keyframes lp-status-breathe {
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="avatar_"] rect[mask*="typing"] { animation: none; }
+}
 
 /* the activity cards read as glass over the list rather than as solid tiles */
 [class*="membersWrap_"] [class*="openOnHover"] {
