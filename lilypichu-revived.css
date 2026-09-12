@@ -795,6 +795,16 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   background: color-mix(in srgb, var(--lp-3) var(--lp-member-row-hover), transparent) !important;
 }
 
+/* the avatar is masked to cut a notch for the status dot, and that same mask is what
+   rounds it - drop the mask on its own and you get a square. decorations are drawn to ring
+   a full circle, so a bite taken out from under one reads as damage rather than as status. */
+[class*="membersWrap_"] [class*="avatar_"] foreignObject,
+[class*="membersWrap_"] [class*="avatar_"] img {
+  mask: none !important;
+  clip-path: none !important;
+  border-radius: 50% !important;
+}
+
 /* the activity cards read as glass over the list rather than as solid tiles */
 [class*="membersWrap_"] [class*="openOnHover"] {
   background: color-mix(in srgb, var(--lp-3a) 55%, transparent) !important;
