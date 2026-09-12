@@ -830,16 +830,6 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 /* the svg keeps its spare room on the right and the bottom, so a ring set outside the
    avatar has nothing to draw into on the left or the top and comes out with a slice
    missing. this is what lets the inset go below half the stroke width. */
-/* a phone or controller glyph used to sit in a notch cut out of the picture, and the
-   clip-path leaves no notch for it, so it needs an edge of its own to read against the
-   avatar. the halo follows the glyph because the shape comes from a mask. */
-[class*="avatar_"] svg[class*="cursorDefault"] {
-  filter:
-    drop-shadow(0 0 1px var(--lp-status-notch))
-    drop-shadow(0 0 1px var(--lp-status-notch))
-    drop-shadow(0 0 2px var(--lp-status-notch));
-}
-
 /* the popout draws a pale circle into the notch, for the edit affordance, and counts on
    the mask to keep it out of sight. with the mask gone it is a blob on the picture. */
 [class*="wrapper__"] > svg > circle {
