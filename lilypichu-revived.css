@@ -801,7 +801,7 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
    fattens every time the picture grows. */
 /* the extra [class*="avatar_"] is not decoration: without it this ties with the ring's own
    rule at (0,2,1) and loses on source order, because that one is further down the file. */
-[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"] {
+[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"]:not([mask*="mobile"]) {
   stroke-width: calc(var(--lp-member-ring-width) / var(--lp-member-avatar));
 }
 
@@ -830,6 +830,16 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 /* the svg keeps its spare room on the right and the bottom, so a ring set outside the
    avatar has nothing to draw into on the left or the top and comes out with a slice
    missing. this is what lets the inset go below half the stroke width. */
+/* a phone or controller glyph used to sit in a notch cut out of the picture, and the
+   clip-path leaves no notch for it, so it needs an edge of its own to read against the
+   avatar. the halo follows the glyph because the shape comes from a mask. */
+[class*="avatar_"] svg[class*="cursorDefault"] {
+  filter:
+    drop-shadow(0 0 1px var(--lp-status-notch))
+    drop-shadow(0 0 1px var(--lp-status-notch))
+    drop-shadow(0 0 2px var(--lp-status-notch));
+}
+
 /* the popout draws a pale circle into the notch, for the edit affordance, and counts on
    the mask to keep it out of sight. with the mask gone it is a blob on the picture. */
 [class*="wrapper__"] > svg > circle {
@@ -865,19 +875,22 @@ svg[class*="avatar_"] {
 /* the reserve is a fifth of the svg at every size that appears in a list: 25 holds 20, 40
    holds 32, both keeping 20%. the profile popout is the exception, 138 holding 120, so it
    gets a measured value of its own. */
-[class*="avatar_"] svg[width="138"] rect[mask*="status-"] {
+[class*="avatar_"] svg[width="138"] rect[mask*="status-"]:not([mask*="mobile"]) {
   --lp-status-ring-pad: 18px;
   --lp-status-ring-inset: calc(var(--lp-status-popout-width) / 2);
   stroke-width: var(--lp-status-popout-width);
 }
 
 /* the status is named in the mask the rect was shaped with, which is the only place css
-   can read it - the alternative is :has() on every avatar in a scrolling list. */
-[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
-[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--lp-status-idle); }
-[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--lp-status-dnd); }
-[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
-[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
+   can read it - the alternative is :has() on every avatar in a scrolling list.
+   mobile is excluded throughout: its mask is named for the shape rather than the state,
+   so someone on do not disturb from a phone carries "status-online-mobile" and would take
+   a green ring. those keep discord's glyph, which is coloured by fill and correct. */
+[class*="avatar_"] rect[mask*="status-online"]:not([mask*="mobile"]) { stroke: var(--lp-status-online); }
+[class*="avatar_"] rect[mask*="status-idle"]:not([mask*="mobile"]) { stroke: var(--lp-status-idle); }
+[class*="avatar_"] rect[mask*="status-dnd"]:not([mask*="mobile"]) { stroke: var(--lp-status-dnd); }
+[class*="avatar_"] rect[mask*="status-offline"]:not([mask*="mobile"]) { stroke: var(--lp-status-offline); }
+[class*="avatar_"] rect[mask*="status-streaming"]:not([mask*="mobile"]) { stroke: var(--lp-status-streaming); }
 
 /* typing is not a status as far as the markup is concerned: discord swaps the whole rect
    for a pill with three dots in it, shaped by a mask with a generated id and coloured by
