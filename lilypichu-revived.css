@@ -819,6 +819,15 @@ svg[class*="avatar_"],
   overflow: visible !important;
 }
 
+/* a decoration is a second svg in the same wrapper, drawn after the avatar's, so it paints
+   over the ring everywhere except the hole its own mask leaves for the dot discord used to
+   put there - which is why the ring survived at the bottom right and nowhere else. lifting
+   the avatar's svg puts the ring back in front of it. */
+[class*="avatar_"] [class*="wrapper__"] > svg:not([class*="Decoration"]) {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
 /* the svg reserves 8px beyond the avatar for the dot it used to draw, so the avatar's
    own square is 8px inside it. the inset then moves the ring off that edge, negative
    outwards, and the stroke straddles wherever it lands. */
