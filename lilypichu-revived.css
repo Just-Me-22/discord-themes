@@ -801,7 +801,7 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
    fattens every time the picture grows. */
 /* the extra [class*="avatar_"] is not decoration: without it this ties with the ring's own
    rule at (0,2,1) and loses on source order, because that one is further down the file. */
-[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"]:not([mask*="mobile"]) {
+[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"] {
   stroke-width: calc(var(--lp-member-ring-width) / var(--lp-member-avatar));
 }
 
@@ -875,22 +875,28 @@ svg[class*="avatar_"] {
 /* the reserve is a fifth of the svg at every size that appears in a list: 25 holds 20, 40
    holds 32, both keeping 20%. the profile popout is the exception, 138 holding 120, so it
    gets a measured value of its own. */
-[class*="avatar_"] svg[width="138"] rect[mask*="status-"]:not([mask*="mobile"]) {
+[class*="avatar_"] svg[width="138"] rect[mask*="status-"] {
   --lp-status-ring-pad: 18px;
   --lp-status-ring-inset: calc(var(--lp-status-popout-width) / 2);
   stroke-width: var(--lp-status-popout-width);
 }
 
-/* the status is named in the mask the rect was shaped with, which is the only place css
-   can read it - the alternative is :has() on every avatar in a scrolling list.
-   mobile is excluded throughout: its mask is named for the shape rather than the state,
-   so someone on do not disturb from a phone carries "status-online-mobile" and would take
-   a green ring. those keep discord's glyph, which is coloured by fill and correct. */
+/* the mask names the status, except on a phone, where it names the shape: someone on do
+   not disturb carries "status-online-mobile", so these rules leave mobile alone and it is
+   coloured from the label below instead. */
 [class*="avatar_"] rect[mask*="status-online"]:not([mask*="mobile"]) { stroke: var(--lp-status-online); }
 [class*="avatar_"] rect[mask*="status-idle"]:not([mask*="mobile"]) { stroke: var(--lp-status-idle); }
 [class*="avatar_"] rect[mask*="status-dnd"]:not([mask*="mobile"]) { stroke: var(--lp-status-dnd); }
 [class*="avatar_"] rect[mask*="status-offline"]:not([mask*="mobile"]) { stroke: var(--lp-status-offline); }
 [class*="avatar_"] rect[mask*="status-streaming"]:not([mask*="mobile"]) { stroke: var(--lp-status-streaming); }
+
+/* on a phone the state is only in the fill, which css cannot copy into a stroke - but the
+   wrapper spells it out in its aria-label, and that is an ancestor of the rect, so it
+   reads with a plain descendant selector and no hex matching. */
+[aria-label*="Online"] rect[mask*="mobile"] { stroke: var(--lp-status-online); }
+[aria-label*="Idle"] rect[mask*="mobile"] { stroke: var(--lp-status-idle); }
+[aria-label*="Do Not Disturb"] rect[mask*="mobile"] { stroke: var(--lp-status-dnd); }
+[aria-label*="Offline"] rect[mask*="mobile"] { stroke: var(--lp-status-offline); }
 
 /* typing is not a status as far as the markup is concerned: discord swaps the whole rect
    for a pill with three dots in it, shaped by a mask with a generated id and coloured by
