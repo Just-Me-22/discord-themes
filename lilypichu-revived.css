@@ -860,7 +860,9 @@ svg[class*="avatar_"] {
   mask: none !important;
   fill: none !important;
   x: var(--lp-status-ring-inset);
-  y: var(--lp-status-ring-inset);
+  /* the lift is a nudge, not maths: the reserve is symmetric on paper and still reads
+     low at some sizes, so it is left as a number to turn rather than derived. */
+  y: calc(var(--lp-status-ring-inset) - var(--lp-status-ring-lift));
   width: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
   height: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
   rx: 50%;
