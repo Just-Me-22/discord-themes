@@ -789,6 +789,14 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   border-radius: calc(var(--lp-radius) * 0.5) !important;
 }
 
+/* scaled rather than resized: the list is virtualised off a fixed row height, so giving
+   the avatar a real size makes the rows measure wrong. the transform takes the picture,
+   the ring and the decoration up together and leaves the row where it is. */
+[class*="membersWrap_"] [class*="wrapper__"] {
+  transform: scale(var(--lp-member-avatar));
+  transform-origin: center;
+}
+
 /* with --lp-member-row at 0 the list is names on the card, and the ground arrives only
    under the cursor - which is the only row it means anything on. */
 [class*="membersWrap_"] div[class*="member_"]:hover {
