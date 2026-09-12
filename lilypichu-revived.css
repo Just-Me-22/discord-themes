@@ -801,7 +801,8 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
    fattens every time the picture grows. */
 /* the extra [class*="avatar_"] is not decoration: without it this ties with the ring's own
    rule at (0,2,1) and loses on source order, because that one is further down the file. */
-[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"] {
+[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"],
+[class*="membersWrap_"] [class*="avatar_"] rect[class*="pointerEvents_"] {
   stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-member-ring-width) / var(--lp-member-avatar));
 }
 
@@ -843,26 +844,26 @@ svg[class*="avatar_"] {
   overflow: visible !important;
 }
 
-/* the dot and the ring are one rect. the mask shaping it into a dot goes, the fill goes,
-   and it grows to the avatar's own square - which is 8px inside the svg, because that
-   spare width was reserved for the dot it used to draw. */
-/* the avatar's real size is written into the mask's name - svg-mask-avatar-status-round-32
-   - and that mask sits on the foreignObject, a sibling of the status rect. so the size can
-   be read rather than guessed at, and the ring becomes the picture's own box at every
-   size, with no reserve to subtract and nothing left to nudge. */
-[class*="avatar_"] foreignObject[mask$="-16)"] ~ g rect { --lp-avatar: 16px; }
-[class*="avatar_"] foreignObject[mask$="-20)"] ~ g rect { --lp-avatar: 20px; }
-[class*="avatar_"] foreignObject[mask$="-24)"] ~ g rect { --lp-avatar: 24px; }
-[class*="avatar_"] foreignObject[mask$="-32)"] ~ g rect { --lp-avatar: 32px; }
-[class*="avatar_"] foreignObject[mask$="-40)"] ~ g rect { --lp-avatar: 40px; }
-[class*="avatar_"] foreignObject[mask$="-48)"] ~ g rect { --lp-avatar: 48px; }
-[class*="avatar_"] foreignObject[mask$="-80)"] ~ g rect { --lp-avatar: 80px; }
-[class*="avatar_"] foreignObject[mask$="-120)"] ~ g rect { --lp-avatar: 120px; }
+/* the picture's real size, read off the foreignObject that holds it. the mask's name
+   carries it too, but discord throws its named masks away while someone is typing and
+   generates anonymous ids instead, so a rule keyed on the name goes blind and stays
+   blind until the component remounts. the width attribute is there in both states.
+   needing a "~ g rect" sibling is what keeps these off the decoration's foreignObject,
+   which has a width of its own and no status rect beside it. */
+[class*="avatar_"] foreignObject[width="16"] ~ g rect { --lp-avatar: 16px; }
+[class*="avatar_"] foreignObject[width="20"] ~ g rect { --lp-avatar: 20px; }
+[class*="avatar_"] foreignObject[width="24"] ~ g rect { --lp-avatar: 24px; }
+[class*="avatar_"] foreignObject[width="32"] ~ g rect { --lp-avatar: 32px; }
+[class*="avatar_"] foreignObject[width="40"] ~ g rect { --lp-avatar: 40px; }
+[class*="avatar_"] foreignObject[width="48"] ~ g rect { --lp-avatar: 48px; }
+[class*="avatar_"] foreignObject[width="80"] ~ g rect { --lp-avatar: 80px; }
+[class*="avatar_"] foreignObject[width="120"] ~ g rect { --lp-avatar: 120px; }
 
 /* the dot and the ring are one rect: the mask shaping it into a dot goes, the fill goes,
    and it takes the picture's box. the inset and the weight are fractions of that box
    rather than lengths, so they hold from 16px to 120px. */
-[class*="avatar_"] rect[mask*="status-"] {
+[class*="avatar_"] rect[mask*="status-"],
+[class*="avatar_"] rect[class*="pointerEvents_"]:not([fill="transparent"]) {
   mask: none !important;
   fill: none !important;
   x: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-inset));
@@ -874,28 +875,31 @@ svg[class*="avatar_"] {
   stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-width));
 }
 
-/* the mask names the status, except on a phone, where it names the shape: someone on do
-   not disturb carries "status-online-mobile", so these rules leave mobile alone and it is
-   coloured from the label below instead. */
-[class*="avatar_"] rect[mask*="status-online"]:not([mask*="mobile"]) { stroke: var(--lp-status-online); }
-[class*="avatar_"] rect[mask*="status-idle"]:not([mask*="mobile"]) { stroke: var(--lp-status-idle); }
-[class*="avatar_"] rect[mask*="status-dnd"]:not([mask*="mobile"]) { stroke: var(--lp-status-dnd); }
-[class*="avatar_"] rect[mask*="status-offline"]:not([mask*="mobile"]) { stroke: var(--lp-status-offline); }
-[class*="avatar_"] rect[mask*="status-streaming"]:not([mask*="mobile"]) { stroke: var(--lp-status-streaming); }
+/* the mask names the status on a desktop, and this is the cheapest read of it. */
+[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
+[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--lp-status-idle); }
+[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--lp-status-dnd); }
+[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
+[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
 
-/* on a phone the state is only in the fill, which css cannot copy into a stroke - but the
-   wrapper spells it out in its aria-label, and that is an ancestor of the rect, so it
-   reads with a plain descendant selector and no hex matching. */
-[aria-label*="Online"] rect[mask*="mobile"] { stroke: var(--lp-status-online); }
-[aria-label*="Idle"] rect[mask*="mobile"] { stroke: var(--lp-status-idle); }
-[aria-label*="Do Not Disturb"] rect[mask*="mobile"] { stroke: var(--lp-status-dnd); }
-[aria-label*="Offline"] rect[mask*="mobile"] { stroke: var(--lp-status-offline); }
+/* the mask lies in two cases: on a phone it names the shape, so someone on do not
+   disturb carries "status-online-mobile", and after a typing episode it is a generated
+   id that names nothing at all. the wrapper's aria-label is right in both, and it is an
+   ancestor of the rect, so it reads with a plain descendant selector.
+   these tie with the rules above at (0,2,1) and win on source order, so they have to
+   stay below them. */
+[aria-label*="Online"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-online); }
+[aria-label*="Idle"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-idle); }
+[aria-label*="Do Not Disturb"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-dnd); }
+[aria-label*="Offline"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-offline); }
+[aria-label*="Streaming"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-streaming); }
 
 /* typing is not a status as far as the markup is concerned: discord swaps the whole rect
    for a pill with three dots in it, shaped by a mask with a generated id and coloured by
    a fill, so there is nothing here for a ring to hang off. the dots are the one thing
-   unique to it, so the pill breathes instead - and only while they are actually typing,
-   because discord takes the element away the moment they stop. */
+   unique to it, so the pill breathes instead. the dots go when they stop typing, but the
+   generated mask ids stay behind, which is why the ring is hooked on the rect's class as
+   well as on the mask's name. */
 [class*="avatar_"] svg[class*="dots__"] {
   animation: lp-status-breathe var(--lp-status-breathe) ease-in-out infinite;
 }
