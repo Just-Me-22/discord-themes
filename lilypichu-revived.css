@@ -814,6 +814,14 @@ img[class*="avatar"] {
   border-radius: 50% !important;
 }
 
+/* discord paints a placeholder behind every chat avatar and leaves it square, which it
+   gets away with while its own mask is clipping the corners off. a pale square is what
+   shows through until the picture arrives. */
+img[class*="avatar"]::before,
+[class*="avatar_"]::before {
+  border-radius: 50% !important;
+}
+
 /* the svg reserves its spare 8px on the right and the bottom, for the dot that used to
    sit there, and clips everything else. a ring set outside the avatar has nothing to draw
    into on the left, so it came out with a slice missing. */
