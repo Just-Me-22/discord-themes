@@ -799,8 +799,10 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 
 /* the scale takes the stroke with it, so it is divided back out - otherwise the ring
    fattens every time the picture grows. */
-[class*="membersWrap_"] rect[mask*="status-"] {
-  stroke-width: calc(var(--lp-status-ring-width) / var(--lp-member-avatar));
+/* the extra [class*="avatar_"] is not decoration: without it this ties with the ring's own
+   rule at (0,2,1) and loses on source order, because that one is further down the file. */
+[class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"] {
+  stroke-width: calc(var(--lp-member-ring-width) / var(--lp-member-avatar));
 }
 
 /* with --lp-member-row at 0 the list is names on the card, and the ground arrives only
