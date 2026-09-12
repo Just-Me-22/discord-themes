@@ -863,7 +863,7 @@ svg[class*="avatar_"] {
    and it takes the picture's box. the inset and the weight are fractions of that box
    rather than lengths, so they hold from 16px to 120px. */
 [class*="avatar_"] rect[mask*="status-"],
-[class*="avatar_"] rect[class*="pointerEvents_"]:not([fill="transparent"]) {
+[class*="avatar_"] rect[class*="pointerEvents_"] {
   mask: none !important;
   fill: none !important;
   x: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-inset));
@@ -873,6 +873,15 @@ svg[class*="avatar_"] {
   rx: 50%;
   ry: 50%;
   stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-width));
+}
+
+/* once someone has typed, discord keeps the typing container for good and paints the
+   status inside it instead of on the rect above, so the old dot comes back through it.
+   it cannot be ringed in place - it is a nested svg with its own coordinate system, sat
+   in the avatar's corner - so it is hidden and the ring stays on the rect, which shares
+   the picture's coordinates. the three dots are a sibling and survive this. */
+[class*="avatar_"] svg[class*="cursorDefault_"] > rect {
+  display: none !important;
 }
 
 /* the mask names the status on a desktop, and this is the cheapest read of it. */
@@ -897,9 +906,7 @@ svg[class*="avatar_"] {
 /* typing is not a status as far as the markup is concerned: discord swaps the whole rect
    for a pill with three dots in it, shaped by a mask with a generated id and coloured by
    a fill, so there is nothing here for a ring to hang off. the dots are the one thing
-   unique to it, so the pill breathes instead. the dots go when they stop typing, but the
-   generated mask ids stay behind, which is why the ring is hooked on the rect's class as
-   well as on the mask's name. */
+   unique to it, so the dots breathe on the rim of the ring instead. */
 [class*="avatar_"] svg[class*="dots__"] {
   animation: lp-status-breathe var(--lp-status-breathe) ease-in-out infinite;
 }
