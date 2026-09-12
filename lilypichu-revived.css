@@ -797,6 +797,12 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   transform-origin: center;
 }
 
+/* the scale takes the stroke with it, so it is divided back out - otherwise the ring
+   fattens every time the picture grows. */
+[class*="membersWrap_"] rect[mask*="status-"] {
+  stroke-width: calc(var(--lp-status-ring-width) / var(--lp-member-avatar));
+}
+
 /* with --lp-member-row at 0 the list is names on the card, and the ground arrives only
    under the cursor - which is the only row it means anything on. */
 [class*="membersWrap_"] div[class*="member_"]:hover {
