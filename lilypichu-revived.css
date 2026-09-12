@@ -805,8 +805,8 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 /* the picture itself as well as any avatar_ ancestor: a decorated avatar in the chat has
    no such ancestor, and discord rounds that one with the foreignObject's mask rather than
    a radius - so dropping the mask to lose the status notch left it square. */
-[class*="avatar_"] foreignObject,
-foreignObject[mask*="avatar"],
+[class*="avatar_"] foreignObject:not([mask*="decoration"]),
+foreignObject[mask*="avatar-status"],
 [class*="avatar_"] img,
 img[class*="avatar"] {
   mask: none !important;
