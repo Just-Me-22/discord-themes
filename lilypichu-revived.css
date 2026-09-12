@@ -1732,6 +1732,40 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 }
 
 
+/* ---- QUESTS -------------------------------------------------------------- */
+
+/* quests is a page like the shop, and it mounted unsized: its container filled page__
+   edge to edge, so the content ran on under the right-hand column and the user panel
+   sat over the top of it. the chat card's own numbers put it back inside the frame.
+   the chat's own wrapper carries no class at all, so container__ cannot reach it. */
+[class*="page__"] > div[class*="container__"] {
+  flex: 0 0 auto !important;
+  width: calc(100% - (var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim))) !important;
+  height: calc(100% - var(--lp-chat-lift) - var(--lp-chat-drop)) !important;
+  margin-top: var(--lp-chat-drop) !important;
+  border-radius: 0 0 var(--lp-radius) 0 !important;
+  overflow: hidden !important;
+  background: var(--lp-1a) !important;
+  backdrop-filter: var(--lp-glass) !important;
+
+  /* the page paints through discord's own ground tokens rather than through a class,
+     the same way the shop does, so naming the boxes is not enough. */
+  --background-base-low: transparent;
+  --background-base-lower: transparent;
+  --background-base-lowest: transparent;
+  --background-base-low-alt: transparent;
+  --bg-base-primary: transparent;
+  --bg-base-secondary: transparent;
+  --bg-base-tertiary: transparent;
+}
+
+/* the tiles take a ground back: they are the one thing here that has to read as a card,
+   and the tokens nulled above are what was painting them. */
+[class*="page__"] > div[class*="container__"] article[class*="questTile__"] {
+  background: var(--lp-card-a) !important;
+}
+
+
 /* ---- MEMBER SAFETY PAGE --------------------------------------------------- */
 
 /* the same width as the user panel below it, so the strip reads as one column, and the
