@@ -802,7 +802,7 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 /* the extra [class*="avatar_"] is not decoration: without it this ties with the ring's own
    rule at (0,2,1) and loses on source order, because that one is further down the file. */
 [class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"] {
-  stroke-width: calc(var(--lp-member-ring-width) / var(--lp-member-avatar));
+  stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-member-ring-width) / var(--lp-member-avatar));
 }
 
 /* with --lp-member-row at 0 the list is names on the card, and the ground arrives only
@@ -846,31 +846,32 @@ svg[class*="avatar_"] {
 /* the dot and the ring are one rect. the mask shaping it into a dot goes, the fill goes,
    and it grows to the avatar's own square - which is 8px inside the svg, because that
    spare width was reserved for the dot it used to draw. */
+/* the avatar's real size is written into the mask's name - svg-mask-avatar-status-round-32
+   - and that mask sits on the foreignObject, a sibling of the status rect. so the size can
+   be read rather than guessed at, and the ring becomes the picture's own box at every
+   size, with no reserve to subtract and nothing left to nudge. */
+[class*="avatar_"] foreignObject[mask$="-16)"] ~ g rect { --lp-avatar: 16px; }
+[class*="avatar_"] foreignObject[mask$="-20)"] ~ g rect { --lp-avatar: 20px; }
+[class*="avatar_"] foreignObject[mask$="-24)"] ~ g rect { --lp-avatar: 24px; }
+[class*="avatar_"] foreignObject[mask$="-32)"] ~ g rect { --lp-avatar: 32px; }
+[class*="avatar_"] foreignObject[mask$="-40)"] ~ g rect { --lp-avatar: 40px; }
+[class*="avatar_"] foreignObject[mask$="-48)"] ~ g rect { --lp-avatar: 48px; }
+[class*="avatar_"] foreignObject[mask$="-80)"] ~ g rect { --lp-avatar: 80px; }
+[class*="avatar_"] foreignObject[mask$="-120)"] ~ g rect { --lp-avatar: 120px; }
+
+/* the dot and the ring are one rect: the mask shaping it into a dot goes, the fill goes,
+   and it takes the picture's box. the inset and the weight are fractions of that box
+   rather than lengths, so they hold from 16px to 120px. */
 [class*="avatar_"] rect[mask*="status-"] {
   mask: none !important;
   fill: none !important;
-  x: var(--lp-status-ring-inset);
-  /* the lift is a nudge, not maths: the reserve is symmetric on paper and still reads
-     low at some sizes, so it is left as a number to turn rather than derived. */
-  y: calc(var(--lp-status-ring-inset) - var(--lp-status-ring-lift));
-  width: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
-  height: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
+  x: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-inset));
+  y: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-inset));
+  width: calc(var(--lp-avatar, 32px) * (1 - 2 * var(--lp-status-ring-inset)));
+  height: calc(var(--lp-avatar, 32px) * (1 - 2 * var(--lp-status-ring-inset)));
   rx: 50%;
   ry: 50%;
-  /* a percentage so the ring keeps its weight against the picture at every size: svg
-     resolves it against the viewport, and these are square, so 10% is a tenth of the
-     avatar whether that is 20px or 120. a fixed value reads fine on one size and fat on
-     every smaller one. */
-  stroke-width: var(--lp-status-ring-width);
-}
-
-/* the reserve is a fifth of the svg at every size that appears in a list: 25 holds 20, 40
-   holds 32, both keeping 20%. the profile popout is the exception, 138 holding 120, so it
-   gets a measured value of its own. */
-[class*="avatar_"] svg[width="138"] rect[mask*="status-"] {
-  --lp-status-ring-pad: 18px;
-  --lp-status-ring-inset: calc(var(--lp-status-popout-width) / 2);
-  stroke-width: var(--lp-status-popout-width);
+  stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-width));
 }
 
 /* the mask names the status, except on a phone, where it names the shape: someone on do
