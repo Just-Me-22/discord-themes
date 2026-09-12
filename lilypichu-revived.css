@@ -858,9 +858,9 @@ svg[class*="avatar_"] {
   stroke-width: var(--lp-status-ring-width);
 }
 
-/* the reserve is not a fixed ratio: a 40px svg holds a 32px avatar and keeps 8, a 138px
-   one holds 120 and keeps 18. measured rather than derived, so a size that turns up
-   wrong needs its own line here and nothing else. */
+/* the reserve is a fifth of the svg at every size that appears in a list: 25 holds 20, 40
+   holds 32, both keeping 20%. the profile popout is the exception, 138 holding 120, so it
+   gets a measured value of its own. */
 [class*="avatar_"] svg[width="138"] rect[mask*="status-"] {
   --lp-status-ring-pad: 18px;
   --lp-status-ring-inset: calc(var(--lp-status-popout-width) / 2);
