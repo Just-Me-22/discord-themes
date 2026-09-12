@@ -834,6 +834,17 @@ svg[class*="avatar_"],
   stroke-width: var(--lp-status-ring-width);
 }
 
+/* a phone or a controller is a rect shaped by a mask of its own, not a status dot, so
+   none of the above reaches it. it used to sit in a notch cut out of the avatar, and
+   dropping that mask left it lying straight on the picture. the halo follows the glyph
+   rather than its box, because the shape comes from the mask. */
+[class*="avatar_"] svg[class*="cursorDefault"] {
+  filter:
+    drop-shadow(0 0 1px var(--lp-status-notch))
+    drop-shadow(0 0 1px var(--lp-status-notch))
+    drop-shadow(0 0 2px var(--lp-status-notch));
+}
+
 /* the status is named in the mask the rect was shaped with, which is the only place it
    is readable from css - the alternative is :has() on every avatar in a scrolling list. */
 [class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
