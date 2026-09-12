@@ -795,6 +795,44 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   background: color-mix(in srgb, var(--lp-3) var(--lp-member-row-hover), transparent) !important;
 }
 
+/* ---- STATUS RING --------------------------------------------------------- */
+
+/* discord marks status with a dot bitten out of the avatar's corner. the ring puts the
+   corner back and moves the status onto the edge, which also stops avatar decorations
+   sitting over a hole. */
+
+/* the mask that shapes the avatar is the same one that bites the notch out of it, so the
+   notch cannot go without the rounding going too - and border-radius will not round an
+   svg element, which is why every attempt at this failed until clip-path. decorations are
+   left alone: their mask is a different one and they are round already. */
+[class*="avatar_"] foreignObject:not([mask*="decoration"]) {
+  mask: none !important;
+  clip-path: circle(50%) !important;
+}
+
+/* the dot and the ring are one rect. the mask shaping it into a dot goes, the fill goes,
+   and it grows to the avatar's own square - which is 8px inside the svg, because that
+   spare width was reserved for the dot it used to draw. */
+[class*="avatar_"] rect[mask*="status-"] {
+  mask: none !important;
+  fill: none !important;
+  x: var(--lp-status-ring-inset);
+  y: var(--lp-status-ring-inset);
+  width: calc(100% - 8px - 2 * var(--lp-status-ring-inset));
+  height: calc(100% - 8px - 2 * var(--lp-status-ring-inset));
+  rx: 50%;
+  ry: 50%;
+  stroke-width: var(--lp-status-ring-width);
+}
+
+/* the status is named in the mask the rect was shaped with, which is the only place css
+   can read it - the alternative is :has() on every avatar in a scrolling list. */
+[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
+[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--lp-status-idle); }
+[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--lp-status-dnd); }
+[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
+[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
+
 /* the activity cards read as glass over the list rather than as solid tiles */
 [class*="membersWrap_"] [class*="openOnHover"] {
   background: color-mix(in srgb, var(--lp-3a) 55%, transparent) !important;
