@@ -812,9 +812,20 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
    repaints the glyphs without touching color, so currentColor still carries the role. */
 [class*="membersWrap_"] div[class*="member_"] [style^="color:"] {
   -webkit-text-fill-color: var(--lp-text);
-  border-left: 2px solid currentColor;
-  padding-left: 8px;
-  margin-left: -10px;
+}
+
+/* the bar is drawn by the name but placed against the row, which is the only positioned
+   thing in the chain, so it lands on the row's edge rather than next to the text. it has
+   to hang off the name and nothing higher: the role colour exists only there. */
+[class*="membersWrap_"] div[class*="member_"] [style^="color:"]::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: currentColor;
 }
 
 /* the activity cards read as glass over the list rather than as solid tiles */
