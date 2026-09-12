@@ -818,11 +818,18 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   fill: none !important;
   x: var(--lp-status-ring-inset);
   y: var(--lp-status-ring-inset);
-  width: calc(100% - 8px - 2 * var(--lp-status-ring-inset));
-  height: calc(100% - 8px - 2 * var(--lp-status-ring-inset));
+  width: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
+  height: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
   rx: 50%;
   ry: 50%;
   stroke-width: var(--lp-status-ring-width);
+}
+
+/* the reserve is not a fixed ratio: a 40px svg holds a 32px avatar and keeps 8, a 138px
+   one holds 120 and keeps 18. measured rather than derived, so a size that turns up
+   wrong needs its own line here and nothing else. */
+[class*="avatar_"] svg[width="138"] rect[mask*="status-"] {
+  --lp-status-ring-pad: 18px;
 }
 
 /* the status is named in the mask the rect was shaped with, which is the only place css
