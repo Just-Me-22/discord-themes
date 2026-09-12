@@ -803,9 +803,10 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 
 /* the mask that shapes the avatar is the same one that bites the notch out of it, so the
    notch cannot go without the rounding going too - and border-radius will not round an
-   svg element, which is why every attempt at this failed until clip-path. decorations are
-   left alone: their mask is a different one and they are round already. */
-[class*="avatar_"] foreignObject:not([mask*="decoration"]) {
+   svg element, which is why every attempt at this failed until clip-path. the decoration
+   carries a mask of its own with the same notch bitten out of it, so it needs the same
+   treatment or the bite survives in the ring around the picture. */
+[class*="avatar_"] foreignObject {
   mask: none !important;
   clip-path: circle(50%) !important;
 }
