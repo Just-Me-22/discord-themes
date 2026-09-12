@@ -805,18 +805,6 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   border-radius: 50% !important;
 }
 
-/* the role colour comes off the name and onto a bar beside it, so a name in a pale role
-   is as readable as any other. discord writes that colour as an inline style on the name
-   itself, which is why the bar can be currentColor and no rule here has to know the role,
-   and why the name is matched on its style attribute rather than on a class. text-fill
-   repaints the glyphs without touching color, so currentColor still carries the role. */
-[class*="membersWrap_"] div[class*="member_"] [style^="color:"] {
-  -webkit-text-fill-color: var(--lp-text);
-  border-left: 2px solid currentColor;
-  padding-left: 8px;
-  margin-left: -10px;
-}
-
 /* the activity cards read as glass over the list rather than as solid tiles */
 [class*="membersWrap_"] [class*="openOnHover"] {
   background: color-mix(in srgb, var(--lp-3a) 55%, transparent) !important;
