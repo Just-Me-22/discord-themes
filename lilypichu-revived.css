@@ -814,6 +814,12 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 /* the svg keeps its spare room on the right and the bottom, so a ring set outside the
    avatar has nothing to draw into on the left or the top and comes out with a slice
    missing. this is what lets the inset go below half the stroke width. */
+/* the popout draws a pale circle into the notch, for the edit affordance, and counts on
+   the mask to keep it out of sight. with the mask gone it is a blob on the picture. */
+[class*="wrapper__"] > svg > circle {
+  display: none !important;
+}
+
 /* the outer one only: the status glyphs are svgs of their own nested inside it, and
    letting those overflow spills the typing pill out of its own box. */
 [class*="wrapper__"] > svg,
