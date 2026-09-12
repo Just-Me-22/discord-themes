@@ -855,6 +855,10 @@ svg[class*="avatar_"] {
   height: calc(100% - var(--lp-status-ring-pad) - 2 * var(--lp-status-ring-inset));
   rx: 50%;
   ry: 50%;
+  /* a percentage so the ring keeps its weight against the picture at every size: svg
+     resolves it against the viewport, and these are square, so 10% is a tenth of the
+     avatar whether that is 20px or 120. a fixed value reads fine on one size and fat on
+     every smaller one. */
   stroke-width: var(--lp-status-ring-width);
 }
 
