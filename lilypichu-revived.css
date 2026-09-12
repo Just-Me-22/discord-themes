@@ -789,6 +789,12 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
   border-radius: calc(var(--lp-radius) * 0.5) !important;
 }
 
+/* with --lp-member-row at 0 the list is names on the card, and the ground arrives only
+   under the cursor - which is the only row it means anything on. */
+[class*="membersWrap_"] div[class*="member_"]:hover {
+  background: color-mix(in srgb, var(--lp-3) var(--lp-member-row-hover), transparent) !important;
+}
+
 /* the activity cards read as glass over the list rather than as solid tiles */
 [class*="membersWrap_"] [class*="openOnHover"] {
   background: color-mix(in srgb, var(--lp-3a) 55%, transparent) !important;
