@@ -917,6 +917,20 @@ svg[class*="avatar_"] {
 [aria-label*="Offline"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-offline); }
 [aria-label*="Streaming"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-streaming); }
 
+/* the user panel is the one avatar with neither source: discord marks it aria-hidden, so
+   there is no label, and the 2026-09-13 build left its status rect with no mask either.
+   what is left is the fill on the mark this theme hides, a level further down, and
+   reaching it needs :has(). affordable only because this is a single avatar and not a
+   list - do not lift these out of the panel.
+   the hexes are discord's own, read off probes rather than from its css tokens, which
+   carry different values. streaming is the one not seen in a probe, so it may simply
+   never match, which costs a colour and breaks nothing. */
+section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-online); }
+section[class*="panels_"] g > svg:has(> rect[fill="#ffc04e"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-idle); }
+section[class*="panels_"] g > svg:has(> rect[fill="#da3e44"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-dnd); }
+section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-offline); }
+section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-streaming); }
+
 }
 
 /* the activity cards read as glass over the list rather than as solid tiles */
