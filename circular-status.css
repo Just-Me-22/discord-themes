@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.0.3
+ * @version 1.0.4
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -13,6 +13,7 @@
   --cs-dnd: var(--status-dnd, #f23f43);
   --cs-offline: var(--status-offline, #80848e);
   --cs-streaming: var(--status-streaming, #593695);
+  --cs-invisible: var(--status-offline, #80848e);
 
   --cs-typing-scrim: #000;
   --cs-typing-dim: 0.55;
@@ -78,6 +79,7 @@
 [aria-label*=", Do Not Disturb"] rect[class*="pointerEvents_"] { stroke: var(--cs-dnd); }
 [aria-label*=", Offline"] rect[class*="pointerEvents_"] { stroke: var(--cs-offline); }
 [aria-label*=", Streaming"] rect[class*="pointerEvents_"] { stroke: var(--cs-streaming); }
+[aria-label*=", Invisible"] rect[class*="pointerEvents_"] { stroke: var(--cs-invisible); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"],
 section[class*="panels_"] g > svg:has(> rect[fill="#23a55a"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-online); }
@@ -92,6 +94,9 @@ section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="poi
 section[class*="panels_"] g > svg:has(> rect[fill="#80848e"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-offline); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-streaming); }
+
+section[class*="panels_"] g > svg:has(> rect[fill="#82858f"]) ~ rect[class*="pointerEvents_"],
+section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-invisible); }
 
 [class*="avatar_"] svg[class*="dots__"] {
   overflow: visible;
