@@ -882,7 +882,7 @@ div[class*="chat_"] [class*="chatHeader"],
 div[class*="attachment"],
 div[class*="channelTextArea"] div[class*="scrollableContainer"],
 [class*="menu_"],
-[class*="autocomplete"] {
+[class*="autocomplete__"] {
   border-radius: var(--lp-radius) !important;
 }
 
@@ -1066,16 +1066,16 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
   backdrop-filter: var(--lp-glass) !important;
 }
 
-[class*="autocomplete"] {
+[class*="autocomplete__"] {
   background: var(--lp-1a) !important;
   backdrop-filter: var(--lp-glass) !important;
   overflow: hidden !important;
 }
 
-[class*="autocomplete"] > *,
-[class*="autocomplete"] [class*="scroller"],
-[class*="autocomplete"] [class*="categoryHeader"],
-[class*="autocomplete"] :is(h3,header)[class*="header_"] {
+[class*="autocomplete__"] > *,
+[class*="autocomplete__"] [class*="scroller"],
+[class*="autocomplete__"] [class*="categoryHeader"],
+[class*="autocomplete__"] :is(h3,header)[class*="header_"] {
   background: transparent !important;
 }
 
