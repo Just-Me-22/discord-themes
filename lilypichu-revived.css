@@ -1555,6 +1555,12 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
   scrollbar-width: none !important;
 }
 
+[class*="wrapper_"][class*="video_"],
+[class*="callContainer_"],
+[class*="callContainer_"] > [class*="root_"] {
+  background: transparent !important;
+}
+
 [class*="page__"] > * > div[class*="chat_"][class*="threadSidebarOpen_"] {
   margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)
                      + var(--lp-thread-w) + var(--lp-column-gap)) !important;
