@@ -1,4 +1,5 @@
 :root {
+
   --lp-inner: min(calc(var(--lp-seam) * 100), var(--lp-radius));
 
   --lp-1a: color-mix(in srgb, var(--lp-1) var(--lp-panel-list), transparent);
@@ -40,6 +41,7 @@
 
   --bg-base-primary: var(--lp-1);
   --bg-base-secondary: var(--lp-2);
+
   --bg-base-tertiary: var(--lp-ambient);
   --bg-surface-overlay: var(--lp-float);
   --bg-surface-raised: var(--lp-3);
@@ -832,11 +834,13 @@ section[class*="panels_"][class][class] > [class*="container_"] {
   position: relative !important;
   z-index: 1 !important;
 }
+
 section[class*="panels_"] .vc-spotify-lyrics {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  height: calc(2 * 18px) !important;  max-height: none !important;
+  height: calc(2 * 18px) !important;
+  max-height: none !important;
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
 }
 section[class*="panels_"] .vc-spotify-lyrics-current {
@@ -1190,7 +1194,11 @@ div[class*="channelTextArea"] div[class*="scrollableContainer"] {
 }
 
 :root {
-  --lp-scrollbar-w: 9px;  --lp-scrollbar-inset: 2px;  --lp-scrollbar-rest: 40%;  --lp-scrollbar-hover: 72%;}
+  --lp-scrollbar-w: 9px;
+  --lp-scrollbar-inset: 2px;
+  --lp-scrollbar-rest: 40%;
+  --lp-scrollbar-hover: 72%;
+}
 
 [class*="thin_"],
 [class*="auto_"],
@@ -1281,8 +1289,10 @@ div[class*="channelTextArea"] div[class*="editor_"] {
 }
 
 :root {
-  --lp-settings-blur: 10px;  --lp-settings-tint: 20%;
-  --lp-settings-nav-blur: 26px;  --lp-settings-nav-tint: 62%;
+  --lp-settings-blur: 10px;
+  --lp-settings-tint: 20%;
+  --lp-settings-nav-blur: 26px;
+  --lp-settings-nav-tint: 62%;
 }
 
 [class*="modal_"] {
@@ -1370,7 +1380,9 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 
 :root {
   --lp-modview-w: var(--lp-rail);
-  --lp-modview-inset: 8px;  --lp-modview-clear: 64px;}
+  --lp-modview-inset: 8px;
+  --lp-modview-clear: 64px;
+}
 
 [class*="page__"] > div[class*="chat_"] {
   position: relative !important;
@@ -1471,6 +1483,7 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
   overflow: hidden !important;
   background: var(--lp-composer-a) !important;
   backdrop-filter: var(--lp-glass) !important;
+
   box-shadow: 0 1px 0 0 var(--lp-composer-a) !important;
 }
 
@@ -1480,7 +1493,12 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
 }
 
 :root {
-  --lp-thread-w: var(--lp-rail);  --lp-thread-top: 88px;  --lp-thread-min: 240px;  --lp-thread-a: var(--lp-1a);  --lp-thread-name-a: var(--lp-2a);}
+  --lp-thread-w: var(--lp-rail);
+  --lp-thread-top: 88px;
+  --lp-thread-min: 240px;
+  --lp-thread-a: var(--lp-1a);
+  --lp-thread-name-a: var(--lp-2a);
+}
 
 [class*="threadSidebarOpen_"] ~ div:not([class]) {
   width: 0 !important;
