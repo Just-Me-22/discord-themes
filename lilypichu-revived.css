@@ -1493,7 +1493,7 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
 }
 
 :root {
-  --lp-thread-w: var(--lp-rail);
+  --lp-thread-w: calc(var(--lp-rail) + 60px);
   --lp-thread-top: 88px;
   --lp-thread-min: 240px;
   --lp-thread-a: var(--lp-1a);
@@ -1521,6 +1521,7 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
   overflow: hidden !important;
   resize: horizontal !important;
   background: var(--lp-thread-a) !important;
+  backdrop-filter: var(--lp-glass) !important;
 }
 
 [class*="chatLayerWrapper_"] > *,
