@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.0.6
+ * @version 1.0.7
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -129,11 +129,13 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"] {
+[class*="avatarStack__"] [class*="avatarBorder__"],
+[class*="voiceUser__"] [class*="userAvatar__"] {
   --status-speaking: var(--cs-speaking);
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]) {
+[class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]),
+[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"]:not([style*="0 0 0 0px"]) {
   animation: cs-speak var(--cs-speak-pulse) ease-in-out infinite;
 }
 
@@ -147,7 +149,8 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
     transition: none;
   }
 
-  [class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]) {
+  [class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]),
+  [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"]:not([style*="0 0 0 0px"]) {
     animation: none;
   }
 }
