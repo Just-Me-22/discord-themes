@@ -1561,6 +1561,21 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
   background: transparent !important;
 }
 
+[class*="channelChatWrapper_"],
+[class*="channelChatWrapper_"] > div {
+  background: transparent !important;
+}
+
+[class*="chatLayerWrapper_"],
+[class*="chatLayerWrapper_"] > *,
+[class*="chatLayerWrapper_"] > * > section[class*="container_"],
+[class*="channelChatWrapper_"],
+[class*="callContainer_"] {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 [class*="page__"] > * > div[class*="chat_"][class*="threadSidebarOpen_"] {
   margin-right: calc(var(--lp-rail) + var(--lp-column-gap) + var(--lp-chat-trim)
                      + var(--lp-thread-w) + var(--lp-column-gap)) !important;
