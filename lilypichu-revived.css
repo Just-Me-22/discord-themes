@@ -881,8 +881,11 @@ svg[class*="avatar_"] {
    in the avatar's corner - so the whole container goes and the ring stays on the rect,
    which shares the picture's coordinates.
    the dots go with it: nothing in the markup separates someone typing from someone who
-   has stopped, so left alone they stay on the avatar for good. */
-[class*="avatar_"] svg[class*="cursorDefault_"] {
+   has stopped, so left alone they stay on the avatar for good.
+   hooked on the shape rather than the name: it was svg.cursorDefault_ until discord
+   dropped the class in the 2026-09-13 build, and a nested svg in the status group is
+   this container in every build - the plain variant has no svg in there at all. */
+[class*="avatar_"] svg[class*="mask_"] > g > svg {
   display: none !important;
 }
 
