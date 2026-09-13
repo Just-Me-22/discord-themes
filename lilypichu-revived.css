@@ -848,16 +848,17 @@ svg[class*="avatar_"] {
    carries it too, but discord throws its named masks away while someone is typing and
    generates anonymous ids instead, so a rule keyed on the name goes blind and stays
    blind until the component remounts. the width attribute is there in both states.
-   needing a "~ g rect" sibling is what keeps these off the decoration's foreignObject,
-   which has a width of its own and no status rect beside it. */
-[class*="avatar_"] foreignObject[width="16"] ~ g rect { --lp-avatar: 16px; }
-[class*="avatar_"] foreignObject[width="20"] ~ g rect { --lp-avatar: 20px; }
-[class*="avatar_"] foreignObject[width="24"] ~ g rect { --lp-avatar: 24px; }
-[class*="avatar_"] foreignObject[width="32"] ~ g rect { --lp-avatar: 32px; }
-[class*="avatar_"] foreignObject[width="40"] ~ g rect { --lp-avatar: 40px; }
-[class*="avatar_"] foreignObject[width="48"] ~ g rect { --lp-avatar: 48px; }
-[class*="avatar_"] foreignObject[width="80"] ~ g rect { --lp-avatar: 80px; }
-[class*="avatar_"] foreignObject[width="120"] ~ g rect { --lp-avatar: 120px; }
+   needing a "~ g" sibling is what keeps these off the decoration's foreignObject, which
+   has a width of its own and no status group beside it. it is set on the group rather
+   than on the rect so everything drawn in there can read it. */
+[class*="avatar_"] foreignObject[width="16"] ~ g { --lp-avatar: 16px; }
+[class*="avatar_"] foreignObject[width="20"] ~ g { --lp-avatar: 20px; }
+[class*="avatar_"] foreignObject[width="24"] ~ g { --lp-avatar: 24px; }
+[class*="avatar_"] foreignObject[width="32"] ~ g { --lp-avatar: 32px; }
+[class*="avatar_"] foreignObject[width="40"] ~ g { --lp-avatar: 40px; }
+[class*="avatar_"] foreignObject[width="48"] ~ g { --lp-avatar: 48px; }
+[class*="avatar_"] foreignObject[width="80"] ~ g { --lp-avatar: 80px; }
+[class*="avatar_"] foreignObject[width="120"] ~ g { --lp-avatar: 120px; }
 
 /* the dot and the ring are one rect: the mask shaping it into a dot goes, the fill goes,
    and it takes the picture's box. the inset and the weight are fractions of that box
@@ -879,13 +880,12 @@ svg[class*="avatar_"] {
    status inside it instead of on the rect above, so the old dot comes back through it.
    it cannot be ringed in place - it is a nested svg with its own coordinate system, sat
    in the avatar's corner - so the whole container goes and the ring stays on the rect,
-   which shares the picture's coordinates.
-   the dots go with it: nothing in the markup separates someone typing from someone who
-   has stopped, so left alone they stay on the avatar for good.
+   which shares the picture's coordinates. the container itself stays put - the dots
+   inside it are the typing state, and the typing block below builds on them.
    hooked on the shape rather than the name: it was svg.cursorDefault_ until discord
    dropped the class in the 2026-09-13 build, and a nested svg in the status group is
    this container in every build - the plain variant has no svg in there at all. */
-[class*="avatar_"] svg[class*="mask_"] > g > svg {
+[class*="avatar_"] svg[class*="mask_"] > g > svg > rect {
   display: none !important;
 }
 
@@ -930,6 +930,50 @@ section[class*="panels_"] g > svg:has(> rect[fill="#ffc04e"]) ~ rect[class*="poi
 section[class*="panels_"] g > svg:has(> rect[fill="#da3e44"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-dnd); }
 section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-offline); }
 section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-streaming); }
+
+
+/* ---- TYPING -------------------------------------------------------------- */
+
+/* the three circles inside the dots svg are the only things discord adds when someone
+   starts typing and takes away about ten seconds after their last keystroke. everything
+   else in that subtree outlives the typing state, so the effect is built out of those
+   three alone: the first is grown into a scrim over the picture, the other two stay as
+   dots on top of it. dimming the picture itself would mean asking :has() whether each
+   avatar holds dots, on every avatar in a scrolling list, which is the one thing worth
+   going out of the way to avoid. */
+
+/* the container is a 25x15 box parked in the corner, and it clips. given the picture's
+   own box it becomes somewhere to draw. */
+[class*="avatar_"] svg[class*="mask_"] > g > svg {
+  x: 0;
+  y: 0;
+  width: var(--lp-avatar, 32px);
+  height: var(--lp-avatar, 32px);
+  overflow: visible;
+}
+
+/* the dots move to the middle of the picture. the circles are placed in this box's own
+   coordinates, so it is moved rather than resized and they keep their spacing. */
+[class*="avatar_"] svg[class*="dots__"] {
+  x: calc((var(--lp-avatar, 32px) - 17.5px) / 2);
+  y: calc((var(--lp-avatar, 32px) - 5px) / 2);
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* the first circle is the scrim. discord animates all three inline, so its opacity has
+   to be held or it pulses along with the dots. */
+[class*="avatar_"] svg[class*="dots__"] circle:first-child {
+  cx: 8.75px;
+  cy: 2.5px;
+  r: calc(var(--lp-avatar, 32px) / 2);
+  fill: var(--lp-typing-scrim, #000) !important;
+  opacity: var(--lp-typing-dim, 0.55) !important;
+}
+
+/* the two left over sit either side of centre, where three used to sit across it. */
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) { cx: 6.25px; }
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) { cx: 11.25px; }
 
 }
 
