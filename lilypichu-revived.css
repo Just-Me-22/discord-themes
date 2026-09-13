@@ -969,10 +969,12 @@ section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="poi
   opacity: var(--lp-typing-dim, 0.55) !important;
 }
 
-/* the two left over sit either side of that centre, where three used to sit across it. */
+/* the two left over sit either side of that centre, where three used to sit across it.
+   the lift is taste rather than measurement: on the maths they are already on the
+   picture's centre line, and they read low there. */
 [class*="avatar_"] svg[class*="dots__"] circle:nth-child(2),
 [class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
-  cy: calc(var(--lp-avatar, 32px) / 2 - 5px);
+  cy: calc(var(--lp-avatar, 32px) / 2 - 5px - var(--lp-typing-dots-lift, 1px));
 }
 
 [class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) {
