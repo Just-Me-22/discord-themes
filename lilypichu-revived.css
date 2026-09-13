@@ -1524,12 +1524,17 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
 }
 
 [class*="chatLayerWrapper_"] > *,
-[class*="chatLayerWrapper_"] > * > section[class*="container_"],
 [class*="chatLayerWrapper_"] div[class*="chat_"],
 [class*="chatLayerWrapper_"] [class*="messagesWrapper"],
 [class*="chatLayerWrapper_"] [class*="messagesWrapper"] > form[class*="form_"] {
   width: 100% !important;
   height: 100% !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+[class*="chatLayerWrapper_"] > * > section[class*="container_"] {
+  width: 100% !important;
   margin: 0 !important;
   background: transparent !important;
 }
