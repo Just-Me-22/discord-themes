@@ -942,38 +942,46 @@ section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="poi
    avatar holds dots, on every avatar in a scrolling list, which is the one thing worth
    going out of the way to avoid. */
 
-/* the container is a 25x15 box parked in the corner, and it clips. given the picture's
-   own box it becomes somewhere to draw. */
+/* the container clips at 25x15, which would cut the scrim down to the pill it used to
+   draw. */
 [class*="avatar_"] svg[class*="mask_"] > g > svg {
-  x: 0;
-  y: 0;
-  width: var(--lp-avatar, 32px);
-  height: var(--lp-avatar, 32px);
   overflow: visible;
 }
 
-/* the dots move to the middle of the picture. the circles are placed in this box's own
-   coordinates, so it is moved rather than resized and they keep their spacing. */
+/* chromium applies these geometry properties to svg shapes but not to a nested svg, so
+   the box holding the dots cannot be moved and the circles are placed instead. the frame
+   they are placed in is the picture's own: the outer svg is viewBox="0 0 40 40" at 40px,
+   so a user unit is a pixel, and discord's own translate(14.5, 17) - the one that parks
+   this group in the corner - is nulled above. what is left is the dots box sitting 3.75
+   across and 5 down inside the 25x15 container, which is what these subtract. */
 [class*="avatar_"] svg[class*="dots__"] {
-  x: calc((var(--lp-avatar, 32px) - 17.5px) / 2);
-  y: calc((var(--lp-avatar, 32px) - 5px) / 2);
   overflow: visible;
   pointer-events: none;
 }
 
-/* the first circle is the scrim. discord animates all three inline, so its opacity has
-   to be held or it pulses along with the dots. */
+/* the first circle is the scrim, centred on the picture. discord animates all three
+   inline, so its opacity has to be held or it pulses along with the dots. */
 [class*="avatar_"] svg[class*="dots__"] circle:first-child {
-  cx: 8.75px;
-  cy: 2.5px;
+  cx: calc(var(--lp-avatar, 32px) / 2 - 3.75px);
+  cy: calc(var(--lp-avatar, 32px) / 2 - 5px);
   r: calc(var(--lp-avatar, 32px) / 2);
   fill: var(--lp-typing-scrim, #000) !important;
   opacity: var(--lp-typing-dim, 0.55) !important;
 }
 
-/* the two left over sit either side of centre, where three used to sit across it. */
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) { cx: 6.25px; }
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) { cx: 11.25px; }
+/* the two left over sit either side of that centre, where three used to sit across it. */
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2),
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
+  cy: calc(var(--lp-avatar, 32px) / 2 - 5px);
+}
+
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) {
+  cx: calc(var(--lp-avatar, 32px) / 2 - 6.25px);
+}
+
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
+  cx: calc(var(--lp-avatar, 32px) / 2 - 1.25px);
+}
 
 }
 
