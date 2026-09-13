@@ -1522,6 +1522,14 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
   resize: horizontal !important;
   background: var(--lp-thread-a) !important;
   backdrop-filter: var(--lp-glass) !important;
+
+  --background-base-low: transparent;
+  --background-base-lower: transparent;
+  --background-base-lowest: transparent;
+  --background-base-low-alt: transparent;
+  --bg-base-primary: transparent;
+  --bg-base-secondary: transparent;
+  --bg-base-tertiary: transparent;
 }
 
 [class*="chatLayerWrapper_"] > *,
