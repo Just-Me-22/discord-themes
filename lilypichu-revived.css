@@ -1574,6 +1574,45 @@ nav[class*="privateChannels_"] > [class*="scroller_"] {
   background: transparent !important;
 }
 
+:root {
+  --lp-vc-btn-tint: var(--lp-accent);
+  --lp-vc-btn-fill: 20%;
+  --lp-vc-btn-fill-hover: 45%;
+  --lp-vc-btn-lift: -2px;
+  --lp-vc-btn-pop: 1.12;
+  --lp-vc-btn-ease: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[class*="controlSection_"] button[class*="centerButton_"] {
+  background: color-mix(in srgb, var(--lp-vc-btn-tint) var(--lp-vc-btn-fill), transparent) !important;
+  backdrop-filter: var(--lp-glass) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  transition: transform var(--lp-vc-btn-ease), background-color var(--lp-vc-btn-ease);
+}
+
+[class*="controlSection_"] button[class*="redGlow_"] {
+  --lp-vc-btn-tint: var(--lp-status-dnd, #f23f43);
+}
+
+[class*="controlSection_"] button[class*="centerButton_"]:hover {
+  background: color-mix(in srgb, var(--lp-vc-btn-tint) var(--lp-vc-btn-fill-hover), transparent) !important;
+  transform: translateY(var(--lp-vc-btn-lift)) scale(var(--lp-vc-btn-pop));
+}
+
+[class*="controlSection_"] button[class*="centerButton_"]:active {
+  transform: translateY(0) scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="controlSection_"] button[class*="centerButton_"],
+  [class*="controlSection_"] button[class*="centerButton_"]:hover,
+  [class*="controlSection_"] button[class*="centerButton_"]:active {
+    transition: none;
+    transform: none;
+  }
+}
+
 [class*="chatLayerWrapper_"],
 [class*="chatLayerWrapper_"] > *,
 [class*="chatLayerWrapper_"] > * > section[class*="container_"],
