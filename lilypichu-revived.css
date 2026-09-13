@@ -886,6 +886,15 @@ svg[class*="avatar_"] {
   display: none !important;
 }
 
+/* the same variant translates the whole status group into the corner, to put the pill
+   where the dot was, and that carried the ring down with it: built at the right size,
+   then moved 16px right and 19px down. the ring is placed from the picture's own box, so
+   there is nothing left for the translate to do. discord does not set one in the healthy
+   state, which is why this is safe to null outright. */
+[class*="avatar_"] svg[class*="mask_"] > g {
+  transform: none !important;
+}
+
 /* the mask names the status on a desktop, and this is the cheapest read of it. */
 [class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
 [class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--lp-status-idle); }
