@@ -1,13 +1,12 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.0.2
+ * @version 1.0.3
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
 :root {
   --cs-width: 0.1;
-  --cs-inset: calc(var(--cs-width) / 2);
 
   --cs-online: var(--status-online, #23a55a);
   --cs-idle: var(--status-idle, #f0b232);
@@ -33,14 +32,14 @@
   display: none !important;
 }
 
-[class*="avatar_"] foreignObject[width="16"] ~ g { --cs-avatar: 16px; }
-[class*="avatar_"] foreignObject[width="20"] ~ g { --cs-avatar: 20px; }
-[class*="avatar_"] foreignObject[width="24"] ~ g { --cs-avatar: 24px; }
-[class*="avatar_"] foreignObject[width="32"] ~ g { --cs-avatar: 32px; }
-[class*="avatar_"] foreignObject[width="40"] ~ g { --cs-avatar: 40px; }
-[class*="avatar_"] foreignObject[width="48"] ~ g { --cs-avatar: 48px; }
-[class*="avatar_"] foreignObject[width="80"] ~ g { --cs-avatar: 80px; }
-[class*="avatar_"] foreignObject[width="120"] ~ g { --cs-avatar: 120px; }
+[class*="avatar_"] foreignObject[width="16"] ~ g { --cs-avatar: 16px; --cs-scale: 0.75; }
+[class*="avatar_"] foreignObject[width="20"] ~ g { --cs-avatar: 20px; --cs-scale: 0.8; }
+[class*="avatar_"] foreignObject[width="24"] ~ g { --cs-avatar: 24px; --cs-scale: 0.85; }
+[class*="avatar_"] foreignObject[width="32"] ~ g { --cs-avatar: 32px; --cs-scale: 1; }
+[class*="avatar_"] foreignObject[width="40"] ~ g { --cs-avatar: 40px; --cs-scale: 0.9; }
+[class*="avatar_"] foreignObject[width="48"] ~ g { --cs-avatar: 48px; --cs-scale: 0.8; }
+[class*="avatar_"] foreignObject[width="80"] ~ g { --cs-avatar: 80px; --cs-scale: 0.5; }
+[class*="avatar_"] foreignObject[width="120"] ~ g { --cs-avatar: 120px; --cs-scale: 0.38; }
 
 [class*="avatar_"] svg[class*="mask_"] > g {
   transform: none !important;
@@ -48,15 +47,16 @@
 
 [class*="avatar_"] rect[mask*="status-"],
 [class*="avatar_"] rect[class*="pointerEvents_"] {
+  --cs-w: calc(var(--cs-width) * var(--cs-scale, 1));
   mask: none !important;
   fill: none !important;
-  x: calc(var(--cs-avatar, 32px) * var(--cs-inset));
-  y: calc(var(--cs-avatar, 32px) * var(--cs-inset));
-  width: calc(var(--cs-avatar, 32px) * (1 - 2 * var(--cs-inset)));
-  height: calc(var(--cs-avatar, 32px) * (1 - 2 * var(--cs-inset)));
+  x: calc(var(--cs-avatar, 32px) * var(--cs-w) / 2);
+  y: calc(var(--cs-avatar, 32px) * var(--cs-w) / 2);
+  width: calc(var(--cs-avatar, 32px) * (1 - var(--cs-w)));
+  height: calc(var(--cs-avatar, 32px) * (1 - var(--cs-w)));
   rx: 50%;
   ry: 50%;
-  stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-width));
+  stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-w));
 }
 
 [class*="avatar_"] svg[class*="mask_"] > g > svg {
