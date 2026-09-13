@@ -1,0 +1,120 @@
+/**
+ * @name Circular Status
+ * @author heart_menace
+ * @version 1.0.0
+ * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner, and shows typing as dots over a dimmed picture. CSS only.
+ */
+
+:root {
+  --cs-inset: 0.05;
+  --cs-width: 0.1;
+
+  --cs-online: var(--status-online, #23a55a);
+  --cs-idle: var(--status-idle, #f0b232);
+  --cs-dnd: var(--status-dnd, #f23f43);
+  --cs-offline: var(--status-offline, #80848e);
+  --cs-streaming: var(--status-streaming, #593695);
+
+  --cs-typing-scrim: #000;
+  --cs-typing-dim: 0.55;
+  --cs-typing-dots-lift: 1px;
+}
+
+[class*="avatar_"] foreignObject {
+  mask: none !important;
+  clip-path: circle(50%) !important;
+}
+
+[class*="avatar_"] [class*="wrapper__"] > svg {
+  overflow: visible !important;
+}
+
+[class*="avatar_"] [class*="wrapper__"] > svg > circle {
+  display: none !important;
+}
+
+[class*="avatar_"] foreignObject[width="16"] ~ g { --cs-avatar: 16px; }
+[class*="avatar_"] foreignObject[width="20"] ~ g { --cs-avatar: 20px; }
+[class*="avatar_"] foreignObject[width="24"] ~ g { --cs-avatar: 24px; }
+[class*="avatar_"] foreignObject[width="32"] ~ g { --cs-avatar: 32px; }
+[class*="avatar_"] foreignObject[width="40"] ~ g { --cs-avatar: 40px; }
+[class*="avatar_"] foreignObject[width="48"] ~ g { --cs-avatar: 48px; }
+[class*="avatar_"] foreignObject[width="80"] ~ g { --cs-avatar: 80px; }
+[class*="avatar_"] foreignObject[width="120"] ~ g { --cs-avatar: 120px; }
+
+[class*="avatar_"] svg[class*="mask_"] > g {
+  transform: none !important;
+}
+
+[class*="avatar_"] rect[mask*="status-"],
+[class*="avatar_"] rect[class*="pointerEvents_"] {
+  mask: none !important;
+  fill: none !important;
+  x: calc(var(--cs-avatar, 32px) * var(--cs-inset));
+  y: calc(var(--cs-avatar, 32px) * var(--cs-inset));
+  width: calc(var(--cs-avatar, 32px) * (1 - 2 * var(--cs-inset)));
+  height: calc(var(--cs-avatar, 32px) * (1 - 2 * var(--cs-inset)));
+  rx: 50%;
+  ry: 50%;
+  stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-width));
+}
+
+[class*="avatar_"] svg[class*="mask_"] > g > svg {
+  overflow: visible;
+}
+
+[class*="avatar_"] svg[class*="mask_"] > g > svg > rect {
+  display: none !important;
+}
+
+[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--cs-online); }
+[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--cs-idle); }
+[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--cs-dnd); }
+[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--cs-offline); }
+[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--cs-streaming); }
+
+[aria-label*=", Online"] rect[class*="pointerEvents_"] { stroke: var(--cs-online); }
+[aria-label*=", Idle"] rect[class*="pointerEvents_"] { stroke: var(--cs-idle); }
+[aria-label*=", Do Not Disturb"] rect[class*="pointerEvents_"] { stroke: var(--cs-dnd); }
+[aria-label*=", Offline"] rect[class*="pointerEvents_"] { stroke: var(--cs-offline); }
+[aria-label*=", Streaming"] rect[class*="pointerEvents_"] { stroke: var(--cs-streaming); }
+
+section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"],
+section[class*="panels_"] g > svg:has(> rect[fill="#23a55a"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-online); }
+
+section[class*="panels_"] g > svg:has(> rect[fill="#ffc04e"]) ~ rect[class*="pointerEvents_"],
+section[class*="panels_"] g > svg:has(> rect[fill="#f0b232"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-idle); }
+
+section[class*="panels_"] g > svg:has(> rect[fill="#da3e44"]) ~ rect[class*="pointerEvents_"],
+section[class*="panels_"] g > svg:has(> rect[fill="#f23f43"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-dnd); }
+
+section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="pointerEvents_"],
+section[class*="panels_"] g > svg:has(> rect[fill="#80848e"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-offline); }
+
+section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-streaming); }
+
+[class*="avatar_"] svg[class*="dots__"] {
+  overflow: visible;
+  pointer-events: none;
+}
+
+[class*="avatar_"] svg[class*="dots__"] circle:first-child {
+  cx: calc(var(--cs-avatar, 32px) / 2 - 3.75px);
+  cy: calc(var(--cs-avatar, 32px) / 2 - 5px);
+  r: calc(var(--cs-avatar, 32px) / 2);
+  fill: var(--cs-typing-scrim) !important;
+  opacity: var(--cs-typing-dim) !important;
+}
+
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2),
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
+  cy: calc(var(--cs-avatar, 32px) / 2 - 5px - var(--cs-typing-dots-lift));
+}
+
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) {
+  cx: calc(var(--cs-avatar, 32px) / 2 - 6.25px);
+}
+
+[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
+  cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
+}
