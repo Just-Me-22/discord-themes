@@ -1,7 +1,5 @@
 # discord-themes
 
-The rules for two Equicord themes. Each one is imported by a small `.theme.css` that
-holds nothing but the colours, sizes and toggles, so that file is the only one you edit.
 
 | | |
 |---|---|
@@ -15,5 +13,4 @@ Served through jsDelivr, which returns `text/css`. `raw.githubusercontent.com` r
 @import url("https://cdn.jsdelivr.net/gh/Just-Me-22/discord-themes@main/moon-rabbits.css");
 ```
 
-`@main` follows this repo. Pin a tag instead if you would rather your client stopped
-changing when this does.
+I just decided to start and maybe fix some of the old themes, all themes that weren't touched for a long time. Uh, kind of give them a revival, if you know what I mean. In the table above, there are two themes for now that I wanted to revive, and I will probably do more if I’m interested in them. Requests would also be appreciated.
