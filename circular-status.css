@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.5.1
+ * @version 1.6.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -23,9 +23,7 @@
   --cs-speak-pulse: 1400ms;
   --cs-speak-in: 200ms ease-out;
   --cs-arc: 80deg;
-  --cs-arc-w: 2px;
-  --cs-list-ring: color-mix(in srgb, var(--cs-speaking) 35%, transparent);
-  --cs-list-ring-w: 2px;
+  --cs-arc-w: 1.5px;
 }
 
 [class*="avatar_"] foreignObject {
@@ -133,23 +131,16 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"],
-[class*="voiceUser__"] [class*="userAvatar__"] {
+[class*="avatarStack__"] [class*="avatarBorder__"] {
   --status-speaking: var(--cs-speaking);
   transition: box-shadow var(--cs-speak-in) !important;
-}
-
-[class*="voiceUser__"] [class*="userAvatar__"] {
-  position: relative;
-  box-shadow: inset 0 0 0 var(--cs-list-ring-w) var(--cs-list-ring) !important;
 }
 
 [class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"]) {
   box-shadow: none !important;
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"])::before,
-[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"]::before {
+[class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"])::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -171,8 +162,7 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
     transition: none;
   }
 
-  [class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"])::before,
-  [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"]::before {
+  [class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"])::before {
     animation: none;
   }
 }
