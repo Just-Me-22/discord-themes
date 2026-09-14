@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.15.0
+ * @version 1.16.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -20,8 +20,10 @@
   --cs-typing-dots-lift: 1px;
   --cs-fade: 220ms ease;
   --cs-speaking: var(--status-speaking, #57d39b);
-  --cs-list-ring: color-mix(in srgb, var(--cs-offline) 55%, transparent);
-  --cs-list-ring-w: 1.5px;
+  --cs-ring: color-mix(in srgb, var(--cs-speaking) 35%, transparent);
+  --cs-ring-w: 1.5px;
+  --cs-arc-w: 3px;
+  --cs-arc-spin: 4000ms;
 }
 
 [class*="avatar_"] foreignObject {
@@ -129,14 +131,57 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
 }
 
+[class*="avatarStack__"] [class*="avatarBorder__"] {
+  box-shadow: none !important;
+  background: none !important;
+  box-sizing: border-box !important;
+  border: var(--cs-arc-w) solid transparent !important;
+  border-top-color: var(--cs-speaking) !important;
+  border-radius: 50% !important;
+  animation: cs-arc var(--cs-arc-spin) linear infinite;
+}
+
+section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rect[class*="pointerEvents_"] {
+  stroke: transparent !important;
+}
+
 [class*="voiceUser__"] [class*="userAvatar__"] {
-  outline: var(--cs-list-ring-w) solid var(--cs-list-ring);
-  outline-offset: calc(-1 * var(--cs-list-ring-w));
+  position: relative;
+}
+
+[class*="voiceUser__"] [class*="userAvatar__"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: var(--cs-ring-w) solid var(--cs-ring);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"] {
+  box-shadow: none !important;
+}
+
+[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
+  border-width: var(--cs-arc-w);
+  border-color: transparent;
+  border-top-color: var(--cs-speaking);
+  animation: cs-arc var(--cs-arc-spin) linear infinite;
+}
+
+@keyframes cs-arc {
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   [class*="avatar_"] rect[mask*="status-"],
   [class*="avatar_"] rect[class*="pointerEvents_"] {
     transition: none;
+  }
+
+  [class*="avatarStack__"] [class*="avatarBorder__"],
+  [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
+    animation: none;
   }
 }
