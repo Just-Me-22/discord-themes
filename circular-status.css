@@ -168,3 +168,5 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
     animation: none;
   }
 }
+
+[class*="avatarStack__"] { outline: 3px solid magenta !important; }
