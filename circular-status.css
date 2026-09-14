@@ -129,6 +129,11 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
 }
 
+[class*="voiceUser__"] [class*="userAvatar__"] {
+  outline: var(--cs-list-ring-w) solid var(--cs-list-ring);
+  outline-offset: calc(-1 * var(--cs-list-ring-w));
+}
+
 @media (prefers-reduced-motion: reduce) {
   [class*="avatar_"] rect[mask*="status-"],
   [class*="avatar_"] rect[class*="pointerEvents_"] {
