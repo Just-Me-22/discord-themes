@@ -134,8 +134,4 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   [class*="avatar_"] rect[class*="pointerEvents_"] {
     transition: none;
   }
-
-  [class*="avatarStack__"] [class*="avatarBorder__"]::before {
-    animation: none;
-  }
 }
