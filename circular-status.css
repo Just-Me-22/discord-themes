@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.3.1
+ * @version 1.4.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -21,8 +21,9 @@
   --cs-fade: 220ms ease;
   --cs-speaking: var(--status-speaking, #57d39b);
   --cs-speak-pulse: 900ms;
-  --cs-speak-reach: 12px;
   --cs-speak-in: 200ms ease-out;
+  --cs-arc: 80deg;
+  --cs-arc-w: 3px;
 }
 
 [class*="avatar_"] foreignObject {
@@ -136,42 +137,25 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   transition: box-shadow var(--cs-speak-in) !important;
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]) {
-  animation: cs-speak var(--cs-speak-pulse) cubic-bezier(0.22, 1, 0.36, 1);
+[class*="voiceUser__"] [class*="userAvatar__"] {
+  position: relative;
 }
 
-@keyframes cs-speak {
-  from {
-    box-shadow:
-      0 0 0 0 transparent,
-      inset 0 0 6px 1px var(--status-speaking),
-      inset 0 0 0 2px var(--status-speaking);
-  }
-  to {
-    box-shadow:
-      0 0 0 0 transparent,
-      inset 0 0 var(--cs-speak-reach) 4px transparent,
-      inset 0 0 0 2px var(--status-speaking);
-  }
+[class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"])::before,
+[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(var(--cs-speaking) 0 var(--cs-arc), transparent var(--cs-arc));
+  -webkit-mask: radial-gradient(circle, transparent 0 calc(50% - var(--cs-arc-w)), #000 calc(50% - var(--cs-arc-w)));
+  mask: radial-gradient(circle, transparent 0 calc(50% - var(--cs-arc-w)), #000 calc(50% - var(--cs-arc-w)));
+  animation: cs-arc var(--cs-speak-pulse) linear;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"] {
-  animation: cs-speak-ring var(--cs-speak-pulse) cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes cs-speak-ring {
-  from {
-    box-shadow:
-      0 0 6px 1px var(--status-speaking),
-      inset 0 0 0 2px var(--status-speaking),
-      inset 0 0 0 3px var(--background-base-lower);
-  }
-  to {
-    box-shadow:
-      0 0 var(--cs-speak-reach) 5px transparent,
-      inset 0 0 0 2px var(--status-speaking),
-      inset 0 0 0 3px var(--background-base-lower);
-  }
+@keyframes cs-arc {
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -180,8 +164,8 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
     transition: none;
   }
 
-  [class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]),
-  [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"] {
+  [class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"])::before,
+  [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"]::before {
     animation: none;
   }
 }
