@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.11.0
+ * @version 1.11.1
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -21,7 +21,7 @@
   --cs-fade: 220ms ease;
   --cs-speaking: var(--status-speaking, #57d39b);
   --cs-list-ring: color-mix(in srgb, var(--cs-offline) 55%, transparent);
-  --cs-list-ring-w: 2px;
+  --cs-list-ring-w: 1.5px;
 }
 
 [class*="avatar_"] foreignObject {
