@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.6.1
+ * @version 1.7.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -20,10 +20,7 @@
   --cs-typing-dots-lift: 1px;
   --cs-fade: 220ms ease;
   --cs-speaking: var(--status-speaking, #57d39b);
-  --cs-speak-pulse: 1400ms;
   --cs-speak-in: 200ms ease-out;
-  --cs-arc: 80deg;
-  --cs-arc-w: 1.5px;
 }
 
 [class*="avatar_"] foreignObject {
@@ -136,33 +133,10 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   transition: box-shadow var(--cs-speak-in) !important;
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"]) {
-  box-shadow: none !important;
-}
-
-[class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"])::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  background: conic-gradient(var(--cs-speaking) 0 var(--cs-arc), transparent var(--cs-arc));
-  -webkit-mask: radial-gradient(circle closest-side, transparent 0 calc(100% - var(--cs-arc-w)), #000 calc(100% - var(--cs-arc-w)));
-  mask: radial-gradient(circle closest-side, transparent 0 calc(100% - var(--cs-arc-w)), #000 calc(100% - var(--cs-arc-w)));
-  animation: cs-arc var(--cs-speak-pulse) linear infinite;
-}
-
-@keyframes cs-arc {
-  to { transform: rotate(360deg); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   [class*="avatar_"] rect[mask*="status-"],
   [class*="avatar_"] rect[class*="pointerEvents_"] {
     transition: none;
   }
 
-  [class*="avatarStack__"] [class*="avatarBorder__"][style*="box-shadow"]:not([style*="0 0 0 0px"])::before {
-    animation: none;
-  }
 }
