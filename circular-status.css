@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.3.0
+ * @version 1.3.1
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -21,7 +21,7 @@
   --cs-fade: 220ms ease;
   --cs-speaking: var(--status-speaking, #57d39b);
   --cs-speak-pulse: 900ms;
-  --cs-speak-reach: 10px;
+  --cs-speak-reach: 12px;
   --cs-speak-in: 200ms ease-out;
 }
 
@@ -143,15 +143,15 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
 @keyframes cs-speak {
   from {
     box-shadow:
-      0 0 0 0 var(--status-speaking),
-      inset 0 0 0 2px var(--status-speaking),
-      inset 0 0 0 3px var(--background-base-lower);
+      0 0 0 0 transparent,
+      inset 0 0 6px 1px var(--status-speaking),
+      inset 0 0 0 2px var(--status-speaking);
   }
   to {
     box-shadow:
-      0 0 0 0 var(--status-speaking),
-      inset 0 0 var(--cs-speak-reach) 1px transparent,
-      inset 0 0 0 3px var(--background-base-lower);
+      0 0 0 0 transparent,
+      inset 0 0 var(--cs-speak-reach) 4px transparent,
+      inset 0 0 0 2px var(--status-speaking);
   }
 }
 
@@ -162,13 +162,13 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
 @keyframes cs-speak-ring {
   from {
     box-shadow:
-      0 0 0 0 var(--status-speaking),
+      0 0 6px 1px var(--status-speaking),
       inset 0 0 0 2px var(--status-speaking),
       inset 0 0 0 3px var(--background-base-lower);
   }
   to {
     box-shadow:
-      0 0 var(--cs-speak-reach) 2px transparent,
+      0 0 var(--cs-speak-reach) 5px transparent,
       inset 0 0 0 2px var(--status-speaking),
       inset 0 0 0 3px var(--background-base-lower);
   }
