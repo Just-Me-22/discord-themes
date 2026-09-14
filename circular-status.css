@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.13.0
+ * @version 1.14.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -133,29 +133,25 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
 }
 
 [class*="avatarStack__"] [class*="avatarBorder__"] {
-  --status-speaking: var(--cs-speaking);
-}
-
-[class*="voiceUser__"] [class*="userAvatar__"] {
-  outline: var(--cs-list-ring-w) solid var(--cs-list-ring);
-  outline-offset: calc(-1 * var(--cs-list-ring-w));
-}
-
-[class*="avatarSpeaking"] {
   box-shadow: none !important;
   border-radius: 50%;
 }
 
-[class*="avatarSpeaking"]::before {
+[class*="avatarStack__"] [class*="avatarBorder__"]::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 1px;
   border-radius: 50%;
   pointer-events: none;
   background: conic-gradient(var(--cs-speaking) 0 var(--cs-arc), transparent var(--cs-arc));
   -webkit-mask: radial-gradient(circle closest-side, transparent 0 calc(100% - var(--cs-arc-w)), #000 calc(100% - var(--cs-arc-w)));
   mask: radial-gradient(circle closest-side, transparent 0 calc(100% - var(--cs-arc-w)), #000 calc(100% - var(--cs-arc-w)));
   animation: cs-arc var(--cs-arc-spin) linear infinite;
+}
+
+[class*="voiceUser__"] [class*="userAvatar__"] {
+  outline: var(--cs-list-ring-w) solid var(--cs-list-ring);
+  outline-offset: calc(-1 * var(--cs-list-ring-w));
 }
 
 @keyframes cs-arc {
@@ -168,7 +164,7 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
     transition: none;
   }
 
-  [class*="avatarSpeaking"]::before {
+  [class*="avatarStack__"] [class*="avatarBorder__"]::before {
     animation: none;
   }
 }
