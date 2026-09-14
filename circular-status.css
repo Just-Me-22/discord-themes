@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.2.0
+ * @version 1.2.1
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -20,8 +20,9 @@
   --cs-typing-dots-lift: 1px;
   --cs-fade: 220ms ease;
   --cs-speaking: var(--status-speaking, #57d39b);
-  --cs-speak-pulse: 600ms;
-  --cs-speak-reach: 7px;
+  --cs-speak-pulse: 900ms;
+  --cs-speak-reach: 5px;
+  --cs-speak-in: 200ms ease-out;
 }
 
 [class*="avatar_"] foreignObject {
@@ -132,10 +133,11 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
 [class*="avatarStack__"] [class*="avatarBorder__"],
 [class*="voiceUser__"] [class*="userAvatar__"] {
   --status-speaking: var(--cs-speaking);
+  transition: box-shadow var(--cs-speak-in) !important;
 }
 
 [class*="avatarStack__"] [class*="avatarBorder__"]:not([style*="0 0 0 0px"]) {
-  animation: cs-speak var(--cs-speak-pulse) ease-out;
+  animation: cs-speak var(--cs-speak-pulse) cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes cs-speak {
@@ -154,7 +156,7 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
 }
 
 [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow"] {
-  animation: cs-speak-ring var(--cs-speak-pulse) ease-out;
+  animation: cs-speak-ring var(--cs-speak-pulse) cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes cs-speak-ring {
