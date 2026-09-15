@@ -8,6 +8,11 @@ Typing moves onto the picture too. Instead of the dot stretching into a little p
 corner, the picture darkens and the dots sit in the middle of it, and everything goes back to
 normal on its own when the person stops.
 
+Group DMs get rings too. Discord draws those as two faces sharing one circle, and it crops
+both of them to fit. That crop comes off, so each face is a whole circle with a ring, and
+the back one keeps its notch where the front sits over it. There is no status on a group
+entry, so that ring is a flat colour rather than green or yellow.
+
 Speaking shows as a turning arc. When someone talks, their status ring is replaced by an
 arc that rotates around the picture, and it goes back to the ring when they stop. Voice
 channel avatars in the sidebar get a resting ring of their own so they are not bare the
@@ -66,6 +71,8 @@ Paste this into **QuickCSS**.
 | `--cs-arc-spin` | how long one full turn takes |
 | `--cs-ring` | the resting ring on voice channel avatars |
 | `--cs-ring-w` | how thick that resting ring is |
+| `--cs-group` | the ring on each face in a group DM avatar |
+| `--cs-group-w` | how thick that one is |
 
 The five colours default to Discord's own, so leaving them alone follows your theme. Set
 `--cs-typing-dim` to `0` if you want the dots without the picture darkening.
