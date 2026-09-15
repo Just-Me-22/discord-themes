@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.17.1
+ * @version 1.17.2
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -123,12 +123,12 @@ section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="poi
 section[class*="panels_"] g > svg:has(> rect[fill="#82858f"]) ~ rect[class*="pointerEvents_"],
 section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-invisible); }
 
-[class*="avatar_"] svg[class*="dots__"] {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] {
   overflow: visible;
   pointer-events: none;
 }
 
-[class*="avatar_"] svg[class*="dots__"] circle:first-child {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:first-child {
   cx: calc(var(--cs-avatar, 32px) / 2 - 3.75px);
   cy: calc(var(--cs-avatar, 32px) / 2 - 5px);
   r: calc(var(--cs-avatar, 32px) / 2);
@@ -136,16 +136,16 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   opacity: var(--cs-typing-dim) !important;
 }
 
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2),
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(2),
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(3) {
   cy: calc(var(--cs-avatar, 32px) / 2 - 5px - var(--cs-typing-dots-lift));
 }
 
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(2) {
   cx: calc(var(--cs-avatar, 32px) / 2 - 6.25px);
 }
 
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(3) {
   cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
 }
 
