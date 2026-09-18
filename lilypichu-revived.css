@@ -634,103 +634,11 @@ main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_
 
 [class*="membersWrap_"] [class*="avatar_"] rect[mask*="status-"],
 [class*="membersWrap_"] [class*="avatar_"] rect[class*="pointerEvents_"] {
-  stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-member-ring-width) / var(--lp-member-avatar));
+  stroke-width: calc(var(--cs-avatar, 32px) * var(--lp-member-ring-width) / var(--lp-member-avatar));
 }
 
 [class*="membersWrap_"] div[class*="member_"]:hover {
   background: color-mix(in srgb, var(--lp-3) var(--lp-member-row-hover), transparent) !important;
-}
-
-[class*="avatar_"] foreignObject {
-  mask: none !important;
-  clip-path: circle(50%) !important;
-}
-
-[class*="wrapper__"] > svg > circle {
-  display: none !important;
-}
-
-[class*="wrapper__"] > svg,
-svg[class*="avatar_"] {
-  overflow: visible !important;
-}
-
-[class*="avatar_"] foreignObject[width="16"] ~ g { --lp-avatar: 16px; }
-[class*="avatar_"] foreignObject[width="20"] ~ g { --lp-avatar: 20px; }
-[class*="avatar_"] foreignObject[width="24"] ~ g { --lp-avatar: 24px; }
-[class*="avatar_"] foreignObject[width="32"] ~ g { --lp-avatar: 32px; }
-[class*="avatar_"] foreignObject[width="40"] ~ g { --lp-avatar: 40px; }
-[class*="avatar_"] foreignObject[width="48"] ~ g { --lp-avatar: 48px; }
-[class*="avatar_"] foreignObject[width="80"] ~ g { --lp-avatar: 80px; }
-[class*="avatar_"] foreignObject[width="120"] ~ g { --lp-avatar: 120px; }
-
-[class*="avatar_"] rect[mask*="status-"],
-[class*="avatar_"] rect[class*="pointerEvents_"] {
-  mask: none !important;
-  fill: none !important;
-  x: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-inset));
-  y: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-inset));
-  width: calc(var(--lp-avatar, 32px) * (1 - 2 * var(--lp-status-ring-inset)));
-  height: calc(var(--lp-avatar, 32px) * (1 - 2 * var(--lp-status-ring-inset)));
-  rx: 50%;
-  ry: 50%;
-  stroke-width: calc(var(--lp-avatar, 32px) * var(--lp-status-ring-width));
-}
-
-[class*="avatar_"] svg[class*="mask_"] > g > svg > rect {
-  display: none !important;
-}
-
-[class*="avatar_"] svg[class*="mask_"] > g {
-  transform: none !important;
-}
-
-[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--lp-status-online); }
-[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--lp-status-idle); }
-[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--lp-status-dnd); }
-[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--lp-status-offline); }
-[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--lp-status-streaming); }
-
-[aria-label*="Online"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-online); }
-[aria-label*="Idle"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-idle); }
-[aria-label*="Do Not Disturb"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-dnd); }
-[aria-label*="Offline"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-offline); }
-[aria-label*="Streaming"] rect[class*="pointerEvents_"] { stroke: var(--lp-status-streaming); }
-
-section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-online); }
-section[class*="panels_"] g > svg:has(> rect[fill="#ffc04e"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-idle); }
-section[class*="panels_"] g > svg:has(> rect[fill="#da3e44"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-dnd); }
-section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-offline); }
-section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { stroke: var(--lp-status-streaming); }
-
-[class*="avatar_"] svg[class*="mask_"] > g > svg {
-  overflow: visible;
-}
-
-[class*="avatar_"] svg[class*="dots__"] {
-  overflow: visible;
-  pointer-events: none;
-}
-
-[class*="avatar_"] svg[class*="dots__"] circle:first-child {
-  cx: calc(var(--lp-avatar, 32px) / 2 - 3.75px);
-  cy: calc(var(--lp-avatar, 32px) / 2 - 5px);
-  r: calc(var(--lp-avatar, 32px) / 2);
-  fill: var(--lp-typing-scrim, #000) !important;
-  opacity: var(--lp-typing-dim, 0.55) !important;
-}
-
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2),
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
-  cy: calc(var(--lp-avatar, 32px) / 2 - 5px - var(--lp-typing-dots-lift, 1px));
-}
-
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(2) {
-  cx: calc(var(--lp-avatar, 32px) / 2 - 6.25px);
-}
-
-[class*="avatar_"] svg[class*="dots__"] circle:nth-child(3) {
-  cx: calc(var(--lp-avatar, 32px) / 2 - 1.25px);
 }
 
 [class*="membersWrap_"] [class*="openOnHover"] {
