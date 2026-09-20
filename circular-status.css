@@ -8,7 +8,7 @@
 :root {
   --cs-width: 0.1;
   --cs-radius: 50%;
-  --cs-glow: 0.09;
+  --cs-glow: 0.9;
 
   --cs-online: var(--status-online, #23a55a);
   --cs-idle: var(--status-idle, #f0b232);
@@ -85,7 +85,7 @@
   ry: var(--cs-radius);
   stroke: var(--cs-c, transparent);
   stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-w));
-  filter: drop-shadow(0 0 calc(var(--cs-avatar, 32px) * var(--cs-glow)) var(--cs-c));
+  filter: drop-shadow(0 0 calc(var(--cs-avatar, 32px) * var(--cs-w) * var(--cs-glow)) var(--cs-c));
   transition: stroke var(--cs-fade);
 }
 

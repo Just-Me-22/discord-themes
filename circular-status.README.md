@@ -59,7 +59,7 @@ Paste this into **QuickCSS**.
 |---|---|
 | `--cs-width` | how thick the ring is |
 | `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
-| `--cs-glow` | how far the ring bleeds, as a share of the avatar. `0` flattens it, `0.1` is the ceiling |
+| `--cs-glow` | how far the ring bleeds, as a share of the ring's thickness. `0` flattens it, much past `1` squares off |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |
@@ -91,12 +91,15 @@ reload needed.
 
 ## About the glow
 
-`--cs-glow` is a share of the avatar's size, not a pixel value, so the ring bleeds the same
-amount whether it is 16px in a DM list or 80px on a profile. At the default `0.09` that is
-about 3px in the member list and 7px on a popout.
+`--cs-glow` is a share of the ring's own thickness, not a pixel value. The ring is
+deliberately thinner on large avatars, dropping from a tenth of the avatar in the member
+list to under a twenty-fifth on a profile, so a glow measured against the avatar spread
+roughly two and a half times wider there and went too faint to see. Measuring it against
+the ring keeps the halo the same weight at every size. At the default `0.9` that is 2.9px
+in the member list and 4.1px on a profile.
 
-Do not push it past `0.1`. A CSS filter on an SVG element is clipped to the element's
-bounding box plus ten percent, so a wider blur hits that wall and the glow comes out as a
+Do not push it far past `1`. A CSS filter on an SVG element is clipped to the element's
+bounding box plus ten percent, so a wide blur hits that wall and the glow comes out as a
 square. Nothing can be done about it from CSS; the limit is the filter region, not overflow.
 
 The glow is a `drop-shadow`, so every avatar on screen gets its own compositing layer. On a
