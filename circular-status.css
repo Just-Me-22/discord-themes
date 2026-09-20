@@ -9,6 +9,7 @@
   --cs-width: 0.07;
   --cs-radius: 50%;
   --cs-glow: 0.1;
+  --cs-glow-core: 0.03;
 
   --cs-online: var(--status-online, #23a55a);
   --cs-idle: var(--status-idle, #f0b232);
@@ -100,7 +101,7 @@
   position: absolute;
   inset: 0;
   border-radius: var(--cs-radius);
-  box-shadow: 0 0 calc(var(--cs-glow) * 100cqw) var(--cs-c, transparent);
+  box-shadow: 0 0 calc(var(--cs-glow) * 100cqw) calc(var(--cs-glow-core) * 100cqw) var(--cs-c, transparent);
   pointer-events: none;
 }
 

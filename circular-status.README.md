@@ -60,6 +60,7 @@ Paste this into **QuickCSS**.
 | `--cs-width` | how thick the ring is |
 | `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
 | `--cs-glow` | how far the glow spreads, as a share of the avatar's width. `0` switches it off |
+| `--cs-glow-core` | how much of the glow is solid before it starts to fade, same share. Raise it on a light background |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |
@@ -107,12 +108,19 @@ that is 3.2px in the member list and 12px on a profile. The wrapper gets
 Keep it near the ring's own thickness. A halo much wider than the ring has no bright core
 to read against and goes diffuse, which is how the filter version failed.
 
+`--cs-glow-core` is the part that stays solid before the fade begins. Widening `--cs-glow`
+on its own never makes the glow stronger, only larger and fainter, because a blur spreads a
+fixed amount of colour rather than adding any. The core is the knob that makes it brighter.
+Raise it on a light background, where the same colour reads far softer than it does on
+Discord's dark one, and keep it under about `0.06` or it stops looking like light and starts
+looking like a second ring.
+
 A box-shadow draws into a layer that already exists, so unlike the drop-shadow it replaced,
 it does not promote every avatar on screen to its own compositing layer. `--cs-glow: 0`
 leaves an invisible shadow still being drawn, so to get the cost back, switch it off:
 
 ```css
-[class*="avatar_"] [class*="wrapper_"]::after {
+[class*="avatar_"] [class*="wrapper_"]::before {
   display: none;
 }
 ```
