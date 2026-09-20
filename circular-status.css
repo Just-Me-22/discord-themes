@@ -92,11 +92,13 @@
   transition: stroke var(--cs-fade);
 }
 
-[class*="avatar_"] [class*="wrapper_"] {
+[class*="avatar_"] [class*="wrapper_"],
+[class*="wrapper_"][class*="avatar_"] {
   container-type: inline-size;
 }
 
-[class*="avatar_"] [class*="wrapper_"]::before {
+[class*="avatar_"] [class*="wrapper_"]::before,
+[class*="wrapper_"][class*="avatar_"]::before {
   content: "";
   position: absolute;
   inset: 0;
