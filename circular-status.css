@@ -8,6 +8,8 @@
 :root {
   --cs-width: 0.1;
   --cs-radius: 50%;
+  --cs-glow: 3px;
+  --cs-glow-filter: drop-shadow(0 0 var(--cs-glow) var(--cs-c));
 
   --cs-online: var(--status-online, #23a55a);
   --cs-idle: var(--status-idle, #f0b232);
@@ -82,7 +84,9 @@
   height: calc(var(--cs-avatar, 32px) * (1 - var(--cs-w)));
   rx: var(--cs-radius);
   ry: var(--cs-radius);
+  stroke: var(--cs-c, transparent);
   stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-w));
+  filter: var(--cs-glow-filter);
   transition: stroke var(--cs-fade);
 }
 
@@ -94,35 +98,35 @@
   display: none !important;
 }
 
-[class*="avatar_"] rect[mask*="status-online"] { stroke: var(--cs-online); }
-[class*="avatar_"] rect[mask*="status-idle"] { stroke: var(--cs-idle); }
-[class*="avatar_"] rect[mask*="status-dnd"] { stroke: var(--cs-dnd); }
-[class*="avatar_"] rect[mask*="status-offline"] { stroke: var(--cs-offline); }
-[class*="avatar_"] rect[mask*="status-streaming"] { stroke: var(--cs-streaming); }
+[class*="avatar_"] rect[mask*="status-online"] { --cs-c: var(--cs-online); }
+[class*="avatar_"] rect[mask*="status-idle"] { --cs-c: var(--cs-idle); }
+[class*="avatar_"] rect[mask*="status-dnd"] { --cs-c: var(--cs-dnd); }
+[class*="avatar_"] rect[mask*="status-offline"] { --cs-c: var(--cs-offline); }
+[class*="avatar_"] rect[mask*="status-streaming"] { --cs-c: var(--cs-streaming); }
 
-[aria-label*=", Online"] rect[class*="pointerEvents_"] { stroke: var(--cs-online); }
-[aria-label*=", Idle"] rect[class*="pointerEvents_"] { stroke: var(--cs-idle); }
-[aria-label*=", Do Not Disturb"] rect[class*="pointerEvents_"] { stroke: var(--cs-dnd); }
-[aria-label*=", Offline"] rect[class*="pointerEvents_"] { stroke: var(--cs-offline); }
-[aria-label*=", Streaming"] rect[class*="pointerEvents_"] { stroke: var(--cs-streaming); }
-[aria-label*=", Invisible"] rect[class*="pointerEvents_"] { stroke: var(--cs-invisible); }
+[aria-label*=", Online"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
+[aria-label*=", Idle"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-idle); }
+[aria-label*=", Do Not Disturb"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-dnd); }
+[aria-label*=", Offline"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-offline); }
+[aria-label*=", Streaming"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-streaming); }
+[aria-label*=", Invisible"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#23a55a"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-online); }
+section[class*="panels_"] g > svg:has(> rect[fill="#23a55a"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#ffc04e"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#f0b232"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-idle); }
+section[class*="panels_"] g > svg:has(> rect[fill="#f0b232"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-idle); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#da3e44"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#f23f43"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-dnd); }
+section[class*="panels_"] g > svg:has(> rect[fill="#f23f43"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-dnd); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#80848e"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-offline); }
+section[class*="panels_"] g > svg:has(> rect[fill="#80848e"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-offline); }
 
-section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-streaming); }
+section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-streaming); }
 
 section[class*="panels_"] g > svg:has(> rect[fill="#82858f"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="pointerEvents_"] { stroke: var(--cs-invisible); }
+section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] {
   overflow: visible;
@@ -161,7 +165,7 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
 }
 
 section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rect[class*="pointerEvents_"] {
-  stroke: transparent !important;
+  --cs-c: transparent !important;
 }
 
 [class*="voiceUser__"] [class*="userAvatar__"] {

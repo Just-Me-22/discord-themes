@@ -59,6 +59,8 @@ Paste this into **QuickCSS**.
 |---|---|
 | `--cs-width` | how thick the ring is |
 | `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
+| `--cs-glow` | how far the ring bleeds. `0` flattens it, `6px` is heavy |
+| `--cs-glow-filter` | set it to `none` to drop the glow entirely. See the note below |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |
@@ -87,3 +89,18 @@ is quiet, and it moves with `transform` rather than layout.
 
 Changes apply live. You can edit a knob with Discord open and watch the ring change, no
 reload needed.
+
+## About the glow
+
+The glow is a `drop-shadow` on the ring, so every avatar on screen gets its own
+compositing layer. On a busy member list that is a few hundred of them, and you may feel it
+while scrolling.
+
+`--cs-glow: 0` shrinks the bleed to nothing but the filter still runs. To actually remove
+the cost, switch it off:
+
+```css
+:root {
+  --cs-glow-filter: none;
+}
+```
