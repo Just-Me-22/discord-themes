@@ -59,8 +59,7 @@ Paste this into **QuickCSS**.
 |---|---|
 | `--cs-width` | how thick the ring is |
 | `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
-| `--cs-glow` | how far the ring bleeds. `0` flattens it, `6px` is heavy |
-| `--cs-glow-filter` | set it to `none` to drop the glow entirely. See the note below |
+| `--cs-glow` | how far the ring bleeds, as a share of the avatar. `0` flattens it, `0.1` is the ceiling |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |
@@ -92,15 +91,21 @@ reload needed.
 
 ## About the glow
 
-The glow is a `drop-shadow` on the ring, so every avatar on screen gets its own
-compositing layer. On a busy member list that is a few hundred of them, and you may feel it
-while scrolling.
+`--cs-glow` is a share of the avatar's size, not a pixel value, so the ring bleeds the same
+amount whether it is 16px in a DM list or 80px on a profile. At the default `0.09` that is
+about 3px in the member list and 7px on a popout.
 
-`--cs-glow: 0` shrinks the bleed to nothing but the filter still runs. To actually remove
-the cost, switch it off:
+Do not push it past `0.1`. A CSS filter on an SVG element is clipped to the element's
+bounding box plus ten percent, so a wider blur hits that wall and the glow comes out as a
+square. Nothing can be done about it from CSS; the limit is the filter region, not overflow.
+
+The glow is a `drop-shadow`, so every avatar on screen gets its own compositing layer. On a
+busy member list that is a few hundred of them. `--cs-glow: 0` shrinks the bleed but the
+filter still runs, so to get the cost back, switch it off:
 
 ```css
-:root {
-  --cs-glow-filter: none;
+[class*="avatar_"] rect[mask*="status-"],
+[class*="avatar_"] rect[class*="pointerEvents_"] {
+  filter: none !important;
 }
 ```
