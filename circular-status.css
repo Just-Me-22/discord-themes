@@ -32,6 +32,9 @@
 
 [class*="avatar_"] foreignObject:not([mask*="facepile"]) {
   mask: none !important;
+}
+
+[class*="avatar_"] svg[class*="mask_"] > foreignObject:not([mask*="facepile"]) {
   clip-path: inset(0 round var(--cs-radius)) !important;
 }
 
@@ -92,7 +95,7 @@
   container-type: inline-size;
 }
 
-[class*="avatar_"] [class*="wrapper_"]::after {
+[class*="avatar_"] [class*="wrapper_"]::before {
   content: "";
   position: absolute;
   inset: 0;
