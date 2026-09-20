@@ -58,6 +58,7 @@ Paste this into **QuickCSS**.
 | knob | does |
 |---|---|
 | `--cs-width` | how thick the ring is |
+| `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |

@@ -7,6 +7,7 @@
 
 :root {
   --cs-width: 0.1;
+  --cs-radius: 50%;
 
   --cs-online: var(--status-online, #23a55a);
   --cs-idle: var(--status-idle, #f0b232);
@@ -30,7 +31,7 @@
 
 [class*="avatar_"] foreignObject:not([mask*="facepile"]) {
   mask: none !important;
-  clip-path: circle(50%) !important;
+  clip-path: inset(0 round var(--cs-radius)) !important;
 }
 
 [class*="avatar_"] foreignObject[mask*="facepile"]:not([mask*="back"]) {
@@ -46,7 +47,7 @@
 [class*="avatar_"] img[class*="circularImage__"] {
   box-sizing: border-box;
   border: var(--cs-group-w) solid var(--cs-group);
-  border-radius: 50%;
+  border-radius: var(--cs-radius);
 }
 
 [class*="avatar_"] [class*="wrapper__"] > svg {
@@ -79,8 +80,8 @@
   y: calc(var(--cs-avatar, 32px) * var(--cs-w) / 2);
   width: calc(var(--cs-avatar, 32px) * (1 - var(--cs-w)));
   height: calc(var(--cs-avatar, 32px) * (1 - var(--cs-w)));
-  rx: 50%;
-  ry: 50%;
+  rx: var(--cs-radius);
+  ry: var(--cs-radius);
   stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-w));
   transition: stroke var(--cs-fade);
 }
@@ -155,7 +156,7 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   box-sizing: border-box !important;
   border: var(--cs-arc-w) solid transparent !important;
   border-top-color: var(--cs-speaking) !important;
-  border-radius: 50% !important;
+  border-radius: var(--cs-radius) !important;
   animation: cs-arc var(--cs-arc-spin) linear infinite;
 }
 
@@ -173,7 +174,7 @@ section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rec
   inset: 0;
   box-sizing: border-box;
   border: var(--cs-ring-w) solid var(--cs-ring);
-  border-radius: 50%;
+  border-radius: var(--cs-radius);
   pointer-events: none;
 }
 
