@@ -59,7 +59,7 @@ Paste this into **QuickCSS**.
 |---|---|
 | `--cs-width` | how thick the ring is |
 | `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
-| `--cs-glow` | how far the ring bleeds, as a share of the ring's thickness. `0` flattens it, much past `1` squares off |
+| `--cs-glow` | how far the glow spreads, as a share of the avatar's width. `0` switches it off |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |
@@ -91,24 +91,28 @@ reload needed.
 
 ## About the glow
 
-`--cs-glow` is a share of the ring's own thickness, not a pixel value. The ring is
-deliberately thinner on large avatars, dropping from a tenth of the avatar in the member
-list to under a twenty-fifth on a profile, so a glow measured against the avatar spread
-roughly two and a half times wider there and went too faint to see. Measuring it against
-the ring keeps the halo the same weight at every size. At the default `0.9` that is 2.9px
-in the member list and 4.1px on a profile.
+The glow is a `box-shadow` on the avatar's wrapper, not a filter on the ring. It has to be.
+A CSS filter on an SVG element is clipped to that element's bounding box plus ten percent,
+and inside that ceiling there is no room for a falloff you can see. Widening the blur only
+makes it fainter, because a blur spreads a fixed amount of colour rather than adding any.
+Adding colour at that width saturates the pixels beside the ring instead, so the ring just
+looks thicker. A box-shadow on an HTML element has no filter region, so it can be as soft
+as it likes.
 
-Do not push it far past `1`. A CSS filter on an SVG element is clipped to the element's
-bounding box plus ten percent, so a wide blur hits that wall and the glow comes out as a
-square. Nothing can be done about it from CSS; the limit is the filter region, not overflow.
+`--cs-glow` is a share of the avatar's width, measured with `cqw` off the wrapper, so one
+number holds its proportions from a 20px DM row up to a 120px profile. At the default `0.1`
+that is 3.2px in the member list and 12px on a profile. The wrapper gets
+`container-type: inline-size` purely to give `cqw` something to measure.
 
-The glow is a `drop-shadow`, so every avatar on screen gets its own compositing layer. On a
-busy member list that is a few hundred of them. `--cs-glow: 0` shrinks the bleed but the
-filter still runs, so to get the cost back, switch it off:
+Keep it near the ring's own thickness. A halo much wider than the ring has no bright core
+to read against and goes diffuse, which is how the filter version failed.
+
+A box-shadow draws into a layer that already exists, so unlike the drop-shadow it replaced,
+it does not promote every avatar on screen to its own compositing layer. `--cs-glow: 0`
+leaves an invisible shadow still being drawn, so to get the cost back, switch it off:
 
 ```css
-[class*="avatar_"] rect[mask*="status-"],
-[class*="avatar_"] rect[class*="pointerEvents_"] {
-  filter: none !important;
+[class*="avatar_"] [class*="wrapper_"]::after {
+  display: none;
 }
 ```

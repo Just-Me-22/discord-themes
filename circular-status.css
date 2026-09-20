@@ -6,9 +6,9 @@
  */
 
 :root {
-  --cs-width: 0.1;
+  --cs-width: 0.07;
   --cs-radius: 50%;
-  --cs-glow: 0.9;
+  --cs-glow: 0.1;
 
   --cs-online: var(--status-online, #23a55a);
   --cs-idle: var(--status-idle, #f0b232);
@@ -85,8 +85,20 @@
   ry: var(--cs-radius);
   stroke: var(--cs-c, transparent);
   stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-w));
-  filter: drop-shadow(0 0 calc(var(--cs-avatar, 32px) * var(--cs-w) * var(--cs-glow)) var(--cs-c));
   transition: stroke var(--cs-fade);
+}
+
+[class*="avatar_"] [class*="wrapper_"] {
+  container-type: inline-size;
+}
+
+[class*="avatar_"] [class*="wrapper_"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--cs-radius);
+  box-shadow: 0 0 calc(var(--cs-glow) * 100cqw) var(--cs-c, transparent);
+  pointer-events: none;
 }
 
 [class*="avatar_"] svg[class*="mask_"] > g > svg {
@@ -110,6 +122,13 @@
 [aria-label*=", Streaming"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-streaming); }
 [aria-label*=", Invisible"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
 
+[class*="wrapper_"][aria-label*=", Online"] { --cs-c: var(--cs-online); }
+[class*="wrapper_"][aria-label*=", Idle"] { --cs-c: var(--cs-idle); }
+[class*="wrapper_"][aria-label*=", Do Not Disturb"] { --cs-c: var(--cs-dnd); }
+[class*="wrapper_"][aria-label*=", Offline"] { --cs-c: var(--cs-offline); }
+[class*="wrapper_"][aria-label*=", Streaming"] { --cs-c: var(--cs-streaming); }
+[class*="wrapper_"][aria-label*=", Invisible"] { --cs-c: var(--cs-invisible); }
+
 section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"],
 section[class*="panels_"] g > svg:has(> rect[fill="#23a55a"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
 
@@ -126,6 +145,23 @@ section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="poi
 
 section[class*="panels_"] g > svg:has(> rect[fill="#82858f"]) ~ rect[class*="pointerEvents_"],
 section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
+
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#45a366"]),
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#23a55a"]) { --cs-c: var(--cs-online); }
+
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#ffc04e"]),
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#f0b232"]) { --cs-c: var(--cs-idle); }
+
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#da3e44"]),
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#f23f43"]) { --cs-c: var(--cs-dnd); }
+
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#84858d"]),
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#80848e"]) { --cs-c: var(--cs-offline); }
+
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#593695"]) { --cs-c: var(--cs-streaming); }
+
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#82858f"]),
+section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#82838b"]) { --cs-c: var(--cs-invisible); }
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] {
   overflow: visible;
@@ -163,7 +199,8 @@ section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="poi
   animation: cs-arc var(--cs-arc-spin) linear infinite;
 }
 
-section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rect[class*="pointerEvents_"] {
+section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rect[class*="pointerEvents_"],
+section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
   --cs-c: transparent !important;
 }
 
