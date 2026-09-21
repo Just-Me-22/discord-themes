@@ -957,9 +957,22 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
 }
 
 [class*="menu_"],
-[class*="popout"]:not(.user-profile-popout) > div {
+[class*="popout"]:not(.user-profile-popout):not([class*="accountPopout__"]) > div {
   background: color-mix(in srgb, var(--lp-float) 82%, transparent) !important;
   backdrop-filter: var(--lp-glass) !important;
+}
+
+/* the account popout floats over the window rather than over lighter chrome, so the
+   82% float fill above composited to grey and the blur dulled the avatar with it.
+   discord already paints this card from the colours set in the profile editor, so the
+   fill is dropped and those colours are used instead. the two percentages are the
+   split: move them together for a harder edge, apart for a softer blend. */
+[class*="accountPopout__"] > div {
+  background: linear-gradient(
+    var(--profile-gradient-primary-color) 55%,
+    var(--profile-gradient-secondary-color) 65%
+  ) !important;
+  backdrop-filter: none !important;
 }
 
 [class*="autocomplete__"] {
