@@ -1761,3 +1761,11 @@ nav[class*="guilds_"] {
   mask-image: none !important;
   -webkit-mask-image: none !important;
 }
+
+/* discord paints a booster's name in their role colour with an inline style, which
+   outranks every rule here, and a muted role colour vanishes against the chat. this
+   keeps whose colour it is and just lifts it clear. assumes a dark chat background;
+   on a light one these want to go below 1 instead. */
+[class*="systemMessage__"] a[class*="anchor__"] {
+  filter: brightness(1.45) saturate(1.2);
+}
