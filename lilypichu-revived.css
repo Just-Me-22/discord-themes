@@ -164,6 +164,27 @@ body,
   opacity: 1 !important;
 }
 
+/* everything above draws the bar hanging from the top of the window: rounded along its
+   bottom edge, the tab row sliding down into view, the label sat on the bottom edge. with
+   the bar at the bottom all three point off the screen, so they mirror. */
+.vc-channeltabs-container:not(.vc-channeltabs-container-top) {
+  border-radius: var(--lp-radius) var(--lp-radius) 0 0 !important;
+  flex-direction: column;
+}
+
+.vc-channeltabs-container:not(.vc-channeltabs-container-top)::before {
+  top: -0.5em;
+  bottom: auto;
+}
+
+.vc-channeltabs-container:not(.vc-channeltabs-container-top) .vc-channeltabs-tab-container {
+  transform: translateY(6px);
+}
+
+.vc-channeltabs-container:not(.vc-channeltabs-container-top):hover .vc-channeltabs-tab-container {
+  transform: none;
+}
+
 [class*="baseLayer_"] > div[class*="base__"] {
   position: relative !important;
   padding: var(--lp-shell-gap) !important;
