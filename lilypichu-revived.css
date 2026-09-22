@@ -1103,7 +1103,7 @@ div[class*="channelTextArea"] div[class*="scrollableContainer"] {
 }
 
 :root {
-  --lp-scrollbar-w: 11px;
+  --lp-scrollbar-w: 14px;
 
   /* the inset is a transparent border, so it comes off the width twice over */
   --lp-scrollbar-inset: 1px;
