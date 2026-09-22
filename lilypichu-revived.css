@@ -1104,8 +1104,11 @@ div[class*="channelTextArea"] div[class*="scrollableContainer"] {
 
 :root {
   --lp-scrollbar-w: 9px;
-  --lp-scrollbar-inset: 2px;
-  --lp-scrollbar-rest: 40%;
+
+  /* the inset is a transparent border, so it comes off the width twice over */
+  --lp-scrollbar-inset: 1px;
+  --lp-scrollbar-idle: 25%;
+  --lp-scrollbar-rest: 60%;
   --lp-scrollbar-hover: 72%;
 }
 
@@ -1131,7 +1134,7 @@ div[class*="channelTextArea"] div[class*="editor_"] {
 ::-webkit-scrollbar-thumb {
   border: var(--lp-scrollbar-inset) solid transparent !important;
   border-radius: 999px !important;
-  background: transparent !important;
+  background: color-mix(in srgb, var(--lp-icon) var(--lp-scrollbar-idle), transparent) !important;
   background-clip: padding-box !important;
 }
 
