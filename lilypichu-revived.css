@@ -1103,13 +1103,17 @@ div[class*="channelTextArea"] div[class*="scrollableContainer"] {
 }
 
 :root {
-  --lp-scrollbar-w: 9px;
+  --lp-scrollbar-w: 11px;
 
   /* the inset is a transparent border, so it comes off the width twice over */
   --lp-scrollbar-inset: 1px;
-  --lp-scrollbar-idle: 25%;
-  --lp-scrollbar-rest: 60%;
-  --lp-scrollbar-hover: 72%;
+
+  /* mixed from the accent rather than --lp-icon: the icon colour is a pale pink that
+     disappears against the pale surfaces it sits on */
+  --lp-scrollbar-color: var(--lp-accent);
+  --lp-scrollbar-idle: 45%;
+  --lp-scrollbar-rest: 70%;
+  --lp-scrollbar-hover: 90%;
 }
 
 [class*="thin_"],
@@ -1134,18 +1138,18 @@ div[class*="channelTextArea"] div[class*="editor_"] {
 ::-webkit-scrollbar-thumb {
   border: var(--lp-scrollbar-inset) solid transparent !important;
   border-radius: 999px !important;
-  background: color-mix(in srgb, var(--lp-icon) var(--lp-scrollbar-idle), transparent) !important;
+  background: color-mix(in srgb, var(--lp-scrollbar-color) var(--lp-scrollbar-idle), transparent) !important;
   background-clip: padding-box !important;
 }
 
 :hover::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--lp-icon) var(--lp-scrollbar-rest), transparent) !important;
+  background: color-mix(in srgb, var(--lp-scrollbar-color) var(--lp-scrollbar-rest), transparent) !important;
   background-clip: padding-box !important;
 }
 
 :hover::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
-  background: color-mix(in srgb, var(--lp-icon) var(--lp-scrollbar-hover), transparent) !important;
+  background: color-mix(in srgb, var(--lp-scrollbar-color) var(--lp-scrollbar-hover), transparent) !important;
   background-clip: padding-box !important;
 }
 
