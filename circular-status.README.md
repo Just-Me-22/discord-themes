@@ -10,8 +10,9 @@ normal on its own when the person stops.
 
 Group DMs get rings too. Discord draws those as two faces sharing one circle, and it crops
 both of them to fit. That crop comes off, so each face is a whole circle with a ring, and
-the back one keeps its notch where the front sits over it. There is no status on a group
-entry, so that ring is a flat colour rather than green or yellow.
+the back one keeps its notch where the front sits over it. That ring is a flat colour at
+rest. When someone in the group is online, idle or on do not disturb, hovering the row
+traces the ring round in that status colour, and Discord's own dot is hidden.
 
 The two faces slide apart when you hover the row. The ring also shows the row's state: it
 gets thicker on the one you have open, lighter when there are unread messages, dashed and
@@ -112,6 +113,9 @@ The five colours default to Discord's own, so leaving them alone follows your th
 The thickness is a share of the picture rather than a pixel value, and each avatar size
 carries its own multiplier on top, so one number holds from a 16px avatar to a 120px one
 without the big ones turning into slabs.
+
+The group status is read with one `:has()` per status on each group row, which only
+re-checks when that row's dot changes, and the trace runs for half a second on hover.
 
 The ring only breathes while someone is actually speaking, so nothing runs when a channel
 is quiet. In the DM list and user panel it moves with `transform` and `opacity`. In the voice

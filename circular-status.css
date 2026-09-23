@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.18.0
+ * @version 1.19.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -81,6 +81,12 @@
   initial-value: 0;
 }
 
+@property --cs-gs-p {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
 @property --cs-call-fade {
   syntax: "<percentage>";
   inherits: true;
@@ -109,7 +115,7 @@
   border: var(--cs-group-w) solid var(--cs-group-front);
   border-radius: var(--cs-group-radius);
   transform: translate(var(--cs-pair-shift), var(--cs-pair-shift));
-  transition: --cs-group-spread 160ms ease;
+  transition: --cs-group-spread 160ms ease, border-color 300ms ease;
 }
 
 [class*="avatar_"] foreignObject[mask*="facepile-back"] img {
@@ -210,7 +216,7 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
     top: 50%;
     left: 50%;
     box-sizing: border-box;
-    background: var(--cs-pair-paint);
+    background: conic-gradient(var(--cs-gs-c, transparent) var(--cs-gs-p), transparent 0), var(--cs-pair-paint);
     pointer-events: none;
   }
 }
@@ -240,6 +246,38 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
       repeating-conic-gradient(from calc(var(--cs-seg) / 2 + 45deg), #000 0 calc(var(--cs-seg) - 14deg), transparent 0 var(--cs-seg));
     mask-composite: intersect;
   }
+}
+
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"] {
+  --cs-gs-front: var(--cs-group-front);
+  --cs-gs-back: var(--cs-group-back);
+}
+
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"] > svg[class*="mask_"] {
+  visibility: hidden;
+}
+
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] :is([style*="69, 163, 102"], [style*="35, 165, 90"])) { --cs-gs-c: var(--cs-online); --cs-gs-bump: 1.07; }
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] :is([style*="255, 192, 78"], [style*="240, 178, 50"])) { --cs-gs-c: var(--cs-idle); --cs-gs-bump: 1.07; }
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] :is([style*="218, 62, 68"], [style*="242, 63, 67"])) { --cs-gs-c: var(--cs-dnd); --cs-gs-bump: 1.07; }
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] [style*="89, 54, 149"]) { --cs-gs-c: var(--cs-streaming); --cs-gs-bump: 1.07; }
+
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]::before {
+  transition: --cs-gs-p 500ms ease-in;
+}
+
+nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > [class*="container__"]::before {
+  --cs-gs-p: 100%;
+  animation: cs-gs-bump 200ms 500ms;
+}
+
+nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > [class*="container__"] foreignObject[mask*="facepile"] img {
+  --cs-group-front: var(--cs-gs-c, var(--cs-gs-front));
+  --cs-group-back: var(--cs-gs-c, var(--cs-gs-back));
+}
+
+@keyframes cs-gs-bump {
+  50% { scale: var(--cs-gs-bump, 1); }
 }
 
 [class*="avatar_"] [class*="wrapper__"] > svg {
@@ -456,8 +494,10 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
     animation: none;
   }
 
-  [class*="avatar_"] foreignObject[mask*="facepile"] img {
+  [class*="avatar_"] foreignObject[mask*="facepile"] img,
+  nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]::before {
     transition: none;
+    animation: none;
   }
 
   nav[class*="privateChannels_"] a [class*="avatar_"] {

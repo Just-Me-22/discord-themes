@@ -9,7 +9,7 @@ Discord marks status by biting a notch out of the corner of an avatar and puttin
 - One number sets the thickness, and each avatar size carries its own multiplier so a big popout avatar does not end up with a slab around it
 - Typing moves onto the picture. It darkens, the dots sit in the middle of it, and it clears on its own when they stop
 - Speaking in voice makes the ring breathe in the speaking colour, and it settles back when they stop
-- Group DMs stop being cropped, so both faces show whole with a ring each. They slide apart on hover, and the ring shows whether the group is open, unread, muted or in a call
+- Group DMs stop being cropped, so both faces show whole with a ring each. They slide apart on hover, and the ring shows whether the group is open, unread, muted or in a call. Hover one with someone online and the ring traces round in their status colour
 - Voice channel avatars in the sidebar get a ring and a glow of their own
 - Avatar decorations keep working and sit in front, uncut
 - Edits apply live, no reload needed
