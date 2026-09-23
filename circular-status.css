@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.17.2
+ * @version 1.18.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -25,10 +25,31 @@
   --cs-speaking: var(--status-speaking, #57d39b);
   --cs-group: var(--cs-offline);
   --cs-group-w: 1.5px;
+  --cs-group-style: faces;
+  --cs-group-front: var(--cs-group);
+  --cs-group-back: var(--cs-group);
+  --cs-group-blend: 0;
+  --cs-group-radius: var(--cs-radius);
+  --cs-group-spread: 0;
+  --cs-group-spread-hover: 0.06;
+  --cs-group-back-size: 1;
+  --cs-group-gap: 0.05;
+  --cs-group-pad: 0.5px;
+  --cs-group-segments: 4;
+  --cs-group-icon-w: 4px;
+  --cs-group-selected: var(--cs-group-front);
+  --cs-group-selected-w: 2.5px;
+  --cs-group-unread: color-mix(in oklab, var(--cs-group), #fff 40%);
+  --cs-group-muted: var(--cs-offline);
+  --cs-group-call: var(--cs-speaking);
+  --cs-group-call-w: 3px;
   --cs-ring: color-mix(in srgb, var(--cs-speaking) 35%, transparent);
   --cs-ring-w: 2px;
-  --cs-arc-w: 3px;
-  --cs-arc-spin: 4000ms;
+  --cs-ring-gap: 0.75px;
+  --cs-speak-w: 2px;
+  --cs-breath: 1200ms;
+  --cs-breath-scale: 1.07;
+  --cs-breath-dim: 0.55;
 }
 
 [class*="avatar_"] foreignObject:not([mask*="facepile"]) {
@@ -48,11 +69,177 @@
   overflow: visible !important;
 }
 
-[class*="avatar_"] foreignObject[mask*="facepile"] img,
+@property --cs-vr-c {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --cs-vr-b {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --cs-call-fade {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
+@property --cs-group-spread {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 [class*="avatar_"] img[class*="circularImage__"] {
   box-sizing: border-box;
   border: var(--cs-group-w) solid var(--cs-group);
   border-radius: var(--cs-radius);
+}
+
+[class*="avatar_"] foreignObject[mask*="facepile-back"] {
+  mask: none !important;
+}
+
+[class*="avatar_"] foreignObject[mask*="facepile"] img {
+  --cs-pair-shift: calc(var(--cs-group-spread) * 150%);
+  box-sizing: border-box;
+  border: var(--cs-group-w) solid var(--cs-group-front);
+  border-radius: var(--cs-group-radius);
+  transform: translate(var(--cs-pair-shift), var(--cs-pair-shift));
+  transition: --cs-group-spread 160ms ease;
+}
+
+[class*="avatar_"] foreignObject[mask*="facepile-back"] img {
+  --cs-notch-at: calc((1 + 3 * var(--cs-group-spread)) / var(--cs-group-back-size) * 100%);
+  --cs-notch-r: calc((0.5 + 1.5 * var(--cs-group-gap)) / var(--cs-group-back-size) * 100%);
+  border-color: var(--cs-group-back);
+  transform-origin: 0 0;
+  transform: translate(calc(var(--cs-pair-shift) * -1), calc(var(--cs-pair-shift) * -1)) scale(var(--cs-group-back-size));
+  mask: radial-gradient(var(--cs-notch-r) var(--cs-notch-r) at var(--cs-notch-at) var(--cs-notch-at), transparent 98%, #000 100%);
+}
+
+[class*="interactive_"]:hover [class*="avatar_"] {
+  --cs-group-spread: var(--cs-group-spread-hover);
+}
+
+[class*="interactiveSelected_"] [class*="avatar_"] {
+  --cs-group-front: var(--cs-group-selected);
+  --cs-group-w: var(--cs-group-selected-w);
+}
+
+nav[class*="privateChannels_"] a[aria-label*="unread" i] [class*="avatar_"] {
+  --cs-group-front: var(--cs-group-unread);
+  --cs-group-back: var(--cs-group-unread);
+}
+
+nav[class*="privateChannels_"] a[aria-label*=", Muted"] [class*="avatar_"] {
+  --cs-group-front: var(--cs-group-muted);
+  --cs-group-back: var(--cs-group-muted);
+}
+
+nav[class*="privateChannels_"] a[aria-label*=", Muted"] foreignObject[mask*="facepile"] img {
+  border-style: dashed;
+}
+
+nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] {
+  --cs-group-front: color-mix(in oklab, var(--cs-group-call), transparent var(--cs-call-fade));
+  --cs-group-back: var(--cs-group-front);
+  --cs-group-w: var(--cs-group-call-w);
+  animation: cs-call var(--cs-breath) ease-in-out infinite;
+}
+
+@keyframes cs-call {
+  50% { --cs-call-fade: 60%; }
+}
+
+nav[class*="privateChannels_"] svg[class*="mask_"] > foreignObject[mask*="avatar-default"] {
+  clip-path: inset(0 round var(--cs-group-radius)) !important;
+}
+
+nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
+  box-sizing: border-box;
+  border: var(--cs-group-icon-w) double var(--cs-group-front);
+  border-radius: var(--cs-group-radius);
+}
+
+[class*="avatar_"] > [class*="container__"] {
+  --cs-pair-len: calc((0.3333 + 2 * var(--cs-group-spread)) * 1.4142 + 0.6667);
+  --cs-pair-paint: var(--cs-group-front);
+  position: relative;
+}
+
+@container style(--cs-group-blend: 1) {
+  [class*="avatar_"] > [class*="container__"] {
+    --cs-pair-paint: linear-gradient(135deg, var(--cs-group-back), var(--cs-group-front));
+  }
+
+  [class*="avatar_"] foreignObject[mask*="facepile"] img {
+    border-color: transparent;
+    background: linear-gradient(135deg, color-mix(in oklab, var(--cs-group-back), var(--cs-group-front)), var(--cs-group-front)) border-box;
+  }
+
+  [class*="avatar_"] foreignObject[mask*="facepile-back"] img {
+    background: linear-gradient(135deg, var(--cs-group-back), color-mix(in oklab, var(--cs-group-back), var(--cs-group-front))) border-box;
+  }
+}
+
+@container style(--cs-group-style: split) {
+  [class*="avatar_"] foreignObject[mask*="facepile"] img {
+    border-top-color: transparent;
+    border-left-color: transparent;
+    background: none;
+  }
+
+  [class*="avatar_"] foreignObject[mask*="facepile-back"] img {
+    border-color: var(--cs-group-back) transparent transparent var(--cs-group-back);
+  }
+}
+
+@container style(--cs-group-style: capsule) or style(--cs-group-style: segments) {
+  [class*="avatar_"] foreignObject[mask*="facepile"] img {
+    border-color: transparent;
+    background: none;
+  }
+
+  [class*="avatar_"] > [class*="container__"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    background: var(--cs-pair-paint);
+    pointer-events: none;
+  }
+}
+
+@container style(--cs-group-style: capsule) {
+  [class*="avatar_"] > [class*="container__"]::before {
+    width: calc(var(--cs-pair-len) * 100% + 2 * (var(--cs-group-pad) + var(--cs-group-w)));
+    height: calc(66.67% + 2 * (var(--cs-group-pad) + var(--cs-group-w)));
+    padding: var(--cs-group-w);
+    border-radius: 999px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
+  }
+}
+
+@container style(--cs-group-style: segments) {
+  [class*="avatar_"] > [class*="container__"]::before {
+    --cs-seg: calc(360deg / var(--cs-group-segments));
+    width: calc(var(--cs-pair-len) * 100% + 2 * (var(--cs-group-pad) + var(--cs-group-w)));
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    mask-image:
+      radial-gradient(farthest-side, transparent calc(100% - var(--cs-group-w) - 0.5px), #000 calc(100% - var(--cs-group-w))),
+      repeating-conic-gradient(from calc(var(--cs-seg) / 2 + 45deg), #000 0 calc(var(--cs-seg) - 14deg), transparent 0 var(--cs-seg));
+    mask-composite: intersect;
+  }
 }
 
 [class*="avatar_"] [class*="wrapper__"] > svg {
@@ -68,8 +255,13 @@
 [class*="avatar_"] foreignObject[width="24"] ~ g { --cs-avatar: 24px; --cs-scale: 0.85; }
 [class*="avatar_"] foreignObject[width="32"] ~ g { --cs-avatar: 32px; --cs-scale: 1; }
 [class*="avatar_"] foreignObject[width="40"] ~ g { --cs-avatar: 40px; --cs-scale: 0.9; }
+[class*="avatar_"] foreignObject[width="44"] ~ g { --cs-avatar: 44px; --cs-scale: 0.85; }
 [class*="avatar_"] foreignObject[width="48"] ~ g { --cs-avatar: 48px; --cs-scale: 0.8; }
+[class*="avatar_"] foreignObject[width="56"] ~ g { --cs-avatar: 56px; --cs-scale: 0.72; }
+[class*="avatar_"] foreignObject[width="72"] ~ g { --cs-avatar: 72px; --cs-scale: 0.56; }
 [class*="avatar_"] foreignObject[width="80"] ~ g { --cs-avatar: 80px; --cs-scale: 0.5; }
+[class*="avatar_"] foreignObject[width="96"] ~ g { --cs-avatar: 96px; --cs-scale: 0.45; }
+[class*="avatar_"] foreignObject[width="100"] ~ g { --cs-avatar: 100px; --cs-scale: 0.43; }
 [class*="avatar_"] foreignObject[width="120"] ~ g { --cs-avatar: 120px; --cs-scale: 0.38; }
 
 [class*="avatar_"] svg[class*="mask_"] > g {
@@ -92,13 +284,11 @@
   transition: stroke var(--cs-fade);
 }
 
-[class*="avatar_"] [class*="wrapper_"],
-[class*="wrapper_"][class*="avatar_"] {
+:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"]) {
   container-type: inline-size;
 }
 
-[class*="avatar_"] [class*="wrapper_"]::before,
-[class*="wrapper_"][class*="avatar_"]::before {
+:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"])::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -121,6 +311,13 @@
 [class*="avatar_"] rect[mask*="status-offline"] { --cs-c: var(--cs-offline); }
 [class*="avatar_"] rect[mask*="status-streaming"] { --cs-c: var(--cs-streaming); }
 
+rect[class*="pointerEvents_"]:is([fill="#45a366"], [fill="#23a55a"]) { --cs-c: var(--cs-online); }
+rect[class*="pointerEvents_"]:is([fill="#ffc04e"], [fill="#f0b232"]) { --cs-c: var(--cs-idle); }
+rect[class*="pointerEvents_"]:is([fill="#da3e44"], [fill="#f23f43"]) { --cs-c: var(--cs-dnd); }
+rect[class*="pointerEvents_"]:is([fill="#84858d"], [fill="#80848e"]) { --cs-c: var(--cs-offline); }
+rect[class*="pointerEvents_"][fill="#593695"] { --cs-c: var(--cs-streaming); }
+rect[class*="pointerEvents_"]:is([fill="#82858f"], [fill="#82838b"]) { --cs-c: var(--cs-invisible); }
+
 [aria-label*=", Online"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
 [aria-label*=", Idle"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-idle); }
 [aria-label*=", Do Not Disturb"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-dnd); }
@@ -135,39 +332,19 @@
 [class*="wrapper_"][aria-label*=", Streaming"] { --cs-c: var(--cs-streaming); }
 [class*="wrapper_"][aria-label*=", Invisible"] { --cs-c: var(--cs-invisible); }
 
-section[class*="panels_"] g > svg:has(> rect[fill="#45a366"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#23a55a"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
-
-section[class*="panels_"] g > svg:has(> rect[fill="#ffc04e"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#f0b232"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-idle); }
-
-section[class*="panels_"] g > svg:has(> rect[fill="#da3e44"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#f23f43"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-dnd); }
-
-section[class*="panels_"] g > svg:has(> rect[fill="#84858d"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#80848e"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-offline); }
-
+section[class*="panels_"] g > svg:has(> rect:is([fill="#45a366"], [fill="#23a55a"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
+section[class*="panels_"] g > svg:has(> rect:is([fill="#ffc04e"], [fill="#f0b232"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-idle); }
+section[class*="panels_"] g > svg:has(> rect:is([fill="#da3e44"], [fill="#f23f43"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-dnd); }
+section[class*="panels_"] g > svg:has(> rect:is([fill="#84858d"], [fill="#80848e"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-offline); }
 section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-streaming); }
+section[class*="panels_"] g > svg:has(> rect:is([fill="#82858f"], [fill="#82838b"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
 
-section[class*="panels_"] g > svg:has(> rect[fill="#82858f"]) ~ rect[class*="pointerEvents_"],
-section[class*="panels_"] g > svg:has(> rect[fill="#82838b"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
-
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#45a366"]),
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#23a55a"]) { --cs-c: var(--cs-online); }
-
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#ffc04e"]),
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#f0b232"]) { --cs-c: var(--cs-idle); }
-
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#da3e44"]),
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#f23f43"]) { --cs-c: var(--cs-dnd); }
-
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#84858d"]),
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#80848e"]) { --cs-c: var(--cs-offline); }
-
+section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#45a366"], [fill="#23a55a"])) { --cs-c: var(--cs-online); }
+section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#ffc04e"], [fill="#f0b232"])) { --cs-c: var(--cs-idle); }
+section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#da3e44"], [fill="#f23f43"])) { --cs-c: var(--cs-dnd); }
+section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#84858d"], [fill="#80848e"])) { --cs-c: var(--cs-offline); }
 section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#593695"]) { --cs-c: var(--cs-streaming); }
-
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#82858f"]),
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#82838b"]) { --cs-c: var(--cs-invisible); }
+section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#82858f"], [fill="#82838b"])) { --cs-c: var(--cs-invisible); }
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] {
   overflow: visible;
@@ -199,10 +376,9 @@ section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#82838b"]) { --cs-c
   box-shadow: none !important;
   background: none !important;
   box-sizing: border-box !important;
-  border: var(--cs-arc-w) solid transparent !important;
-  border-top-color: var(--cs-speaking) !important;
+  border: calc(32px * var(--cs-width)) solid var(--cs-speaking) !important;
   border-radius: var(--cs-radius) !important;
-  animation: cs-arc var(--cs-arc-spin) linear infinite;
+  animation: cs-breathe var(--cs-breath) ease-in-out infinite;
 }
 
 section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rect[class*="pointerEvents_"],
@@ -211,32 +387,62 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
 }
 
 [class*="voiceUser__"] [class*="userAvatar__"] {
+  --cs-vr-w: var(--cs-ring-w);
+  --cs-vr-o: calc(var(--cs-ring-gap) + max(var(--cs-ring-w), var(--cs-speak-w)) + 25cqw);
   position: relative;
+  container-type: inline-size;
+  background-size: 0 0;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"]::before {
+[class*="voiceUser__"] [class*="userAvatar__"]::before,
+[class*="voiceUser__"] [class*="userAvatar__"]::after {
   content: "";
   position: absolute;
-  inset: 0;
-  box-sizing: border-box;
-  border: var(--cs-ring-w) solid var(--cs-ring);
-  border-radius: var(--cs-radius);
+  inset: calc(-1 * var(--cs-vr-o));
+  border-radius: 50%;
   pointer-events: none;
 }
 
+[class*="voiceUser__"] [class*="userAvatar__"]::after {
+  padding: var(--cs-vr-o);
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-clip: content-box;
+}
+
+[class*="voiceUser__"] [class*="userAvatar__"]::before {
+  --cs-vr-c: var(--cs-ring);
+  --cs-vr-r: calc(50cqw + var(--cs-ring-gap) + var(--cs-vr-b) * (var(--cs-breath-scale) - 1) * (50cqw + var(--cs-ring-gap) + var(--cs-vr-w)));
+  --cs-vr-e: calc(var(--cs-vr-r) + var(--cs-vr-w) + var(--cs-glow-core) * 100cqw);
+  background: radial-gradient(circle, transparent calc(var(--cs-vr-r) - 0.6px), var(--cs-vr-c) var(--cs-vr-r), var(--cs-vr-c) var(--cs-vr-e), color-mix(in srgb, var(--cs-vr-c) 45%, transparent) calc(var(--cs-vr-e) + 0.4px), transparent calc(var(--cs-vr-e) + var(--cs-glow) * 100cqw));
+  transition: --cs-vr-c var(--cs-fade);
+}
+
 [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"] {
+  --cs-vr-w: var(--cs-speak-w);
   box-shadow: none !important;
 }
 
 [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
-  border-width: var(--cs-arc-w);
-  border-color: transparent;
-  border-top-color: var(--cs-speaking);
-  animation: cs-arc var(--cs-arc-spin) linear infinite;
+  --cs-vr-c: var(--cs-speaking);
+  animation: cs-vr-breathe var(--cs-breath) ease-in-out infinite;
 }
 
-@keyframes cs-arc {
-  to { transform: rotate(360deg); }
+@keyframes cs-breathe {
+  50% {
+    transform: scale(var(--cs-breath-scale));
+    opacity: var(--cs-breath-dim);
+  }
+}
+
+@keyframes cs-vr-breathe {
+  50% {
+    --cs-vr-b: 1;
+    opacity: var(--cs-breath-dim);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -247,6 +453,14 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
 
   [class*="avatarStack__"] [class*="avatarBorder__"],
   [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
+    animation: none;
+  }
+
+  [class*="avatar_"] foreignObject[mask*="facepile"] img {
+    transition: none;
+  }
+
+  nav[class*="privateChannels_"] a [class*="avatar_"] {
     animation: none;
   }
 }

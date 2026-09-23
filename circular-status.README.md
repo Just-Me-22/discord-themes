@@ -13,10 +13,18 @@ both of them to fit. That crop comes off, so each face is a whole circle with a 
 the back one keeps its notch where the front sits over it. There is no status on a group
 entry, so that ring is a flat colour rather than green or yellow.
 
-Speaking shows as a turning arc. When someone talks, their status ring is replaced by an
-arc that rotates around the picture, and it goes back to the ring when they stop. Voice
-channel avatars in the sidebar get a resting ring of their own so they are not bare the
-rest of the time.
+The two faces slide apart when you hover the row. The ring also shows the row's state: it
+gets thicker on the one you have open, lighter when there are unread messages, dashed and
+grey when the group is muted, and it pulses in the speaking colour while a call is going.
+A group with its own picture gets a double ring instead. `--cs-group-style` swaps the two
+rings for other shapes: `split` keeps only the outer half of each ring, `capsule` draws one
+pill around both faces, and `segments` draws a dashed circle around both.
+
+Speaking shows as a breathing ring. When someone talks, their ring turns the speaking
+colour and slowly swells and fades, and it goes back to the status ring when they stop.
+Voice channel avatars in the sidebar get a resting ring of their own so they are not bare
+the rest of the time, with a small gap and a glow, and it breathes the same way when they
+talk.
 
 Avatar decorations keep working. They carry the same notch as the picture, so they get the
 same treatment and sit in front, uncut.
@@ -69,13 +77,34 @@ Paste this into **QuickCSS**.
 | `--cs-typing-scrim` | the colour the picture darkens to while someone types |
 | `--cs-typing-dim` | how dark that gets |
 | `--cs-typing-dots-lift` | how far above centre the typing dots sit |
-| `--cs-speaking` | the arc colour while someone is talking |
-| `--cs-arc-w` | how thick the arc is |
-| `--cs-arc-spin` | how long one full turn takes |
+| `--cs-speaking` | the ring colour while someone is talking |
+| `--cs-breath` | how long one breath takes |
+| `--cs-breath-scale` | how far the ring swells at the top of a breath |
+| `--cs-breath-dim` | how faint it gets at the top of a breath |
 | `--cs-ring` | the resting ring on voice channel avatars |
 | `--cs-ring-w` | how thick that resting ring is |
+| `--cs-ring-gap` | the gap between a voice avatar and its ring |
+| `--cs-speak-w` | how thick the voice ring is while someone talks |
 | `--cs-group` | the ring on each face in a group DM avatar |
 | `--cs-group-w` | how thick that one is |
+| `--cs-group-style` | `faces`, `split`, `capsule` or `segments` |
+| `--cs-group-front` | the front face's ring |
+| `--cs-group-back` | the back face's ring |
+| `--cs-group-blend` | `1` fades the two colours into each other |
+| `--cs-group-radius` | the shape of the group faces, same as `--cs-radius` |
+| `--cs-group-spread` | how far apart the faces sit |
+| `--cs-group-spread-hover` | how far apart they slide on hover |
+| `--cs-group-back-size` | how big the back face is next to the front one |
+| `--cs-group-gap` | the gap the front face cuts out of the back one |
+| `--cs-group-pad` | the gap between the faces and a `capsule` or `segments` ring |
+| `--cs-group-segments` | how many dashes `segments` has |
+| `--cs-group-icon-w` | how thick the double ring on a group picture is |
+| `--cs-group-selected` | the ring on the group you have open |
+| `--cs-group-selected-w` | how thick that is |
+| `--cs-group-unread` | the ring when there are unread messages |
+| `--cs-group-muted` | the ring on a muted group |
+| `--cs-group-call` | the ring during a call |
+| `--cs-group-call-w` | how thick that is |
 
 The five colours default to Discord's own, so leaving them alone follows your theme. Set
 `--cs-typing-dim` to `0` if you want the dots without the picture darkening.
@@ -84,8 +113,11 @@ The thickness is a share of the picture rather than a pixel value, and each avat
 carries its own multiplier on top, so one number holds from a 16px avatar to a 120px one
 without the big ones turning into slabs.
 
-The arc only animates while someone is actually speaking, so nothing runs when a channel
-is quiet, and it moves with `transform` rather than layout.
+The ring only breathes while someone is actually speaking, so nothing runs when a channel
+is quiet. In the DM list and user panel it moves with `transform` and `opacity`. In the voice
+list it swells by redrawing a small gradient instead, because a scaled ring there drifts
+half a pixel off the picture; that costs one repaint of a 36px circle per frame, and only
+for whoever is talking.
 
 Changes apply live. You can edit a knob with Discord open and watch the ring change, no
 reload needed.
@@ -99,6 +131,10 @@ makes it fainter, because a blur spreads a fixed amount of colour rather than ad
 Adding colour at that width saturates the pixels beside the ring instead, so the ring just
 looks thicker. A box-shadow on an HTML element has no filter region, so it can be as soft
 as it likes.
+
+The glow only draws in the user panel, the DM list, profile popouts and the voice list in
+the server sidebar. Those are the places with a handful of avatars, and the member list,
+where there can be hundreds, stays free of it.
 
 `--cs-glow` is a share of the avatar's width, measured with `cqw` off the wrapper, so one
 number holds its proportions from a 20px DM row up to a 120px profile. At the default `0.1`
@@ -120,7 +156,7 @@ it does not promote every avatar on screen to its own compositing layer. `--cs-g
 leaves an invisible shadow still being drawn, so to get the cost back, switch it off:
 
 ```css
-[class*="avatar_"] [class*="wrapper_"]::before {
+:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) [class*="wrapper_"]::before {
   display: none;
 }
 ```
