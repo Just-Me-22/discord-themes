@@ -1077,6 +1077,11 @@ textarea,
   font-family: var(--lp-font) !important;
 }
 
+[class*="hasPreview__"] > input {
+  background: transparent !important;
+  font-family: inherit !important;
+}
+
 [class*="searchBar"] input,
 [class*="searchBar"] [class*="inputDefault"],
 [class*="searchBar"] textarea {
