@@ -441,19 +441,6 @@ div[class*="channelTextArea"] div[class*="buttons_"] {
   order: 2 !important;
 }
 
-.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="gift" i]),
-.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="gif" i]),
-.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="sticker" i]),
-.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="emoji" i]),
-.vc-collapsible-ui-chat-buttons-items > div:has([aria-label*="app" i]) {
-  order: 1 !important;
-}
-
-.vc-collapsible-ui-chat-buttons-items > div:has([aria-label="Send Message"]) {
-  order: 3 !important;
-  margin-left: auto !important;
-}
-
 div[class*="channelTextArea"] div[class*="editor_"] {
   font-size: var(--lp-composer-size) !important;
 }
@@ -506,18 +493,6 @@ div[class*="chat_"] > [class*="content_"] {
   overflow: visible !important;
 }
 
-div[class*="chat_"] > [class*="content_"]:not(:has(main[class*="chatContent"] + [class*="container"]))::after {
-  content: "";
-  position: absolute;
-  top: calc(var(--lp-members-top) + var(--lp-empty-trim) + var(--lp-strip-drop));
-  right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift));
-  bottom: var(--lp-music-stop);
-  width: var(--lp-rail);
-  border-radius: var(--lp-radius);
-  background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
-  pointer-events: none;
-}
-
 div[class*="chat_"] main[class*="chatContent"] {
   border-radius: var(--lp-inner) var(--lp-inner) var(--lp-radius) var(--lp-inner) !important;
   overflow: hidden !important;
@@ -550,11 +525,6 @@ main[class*="chatContent"] + [class*="container"] {
   overflow: visible !important;
   border-radius: var(--lp-radius) !important;
   background: var(--lp-2a) !important;
-}
-
-main[class*="chatContent"] + [class*="container"]:not(:has([class*="membersWrap_"])) {
-  top: calc(var(--lp-members-top) + var(--lp-empty-trim) + var(--lp-strip-drop)) !important;
-  background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a) !important;
 }
 
 [class*="membersWrap_"] {
@@ -681,7 +651,6 @@ section[class*="panels_"][class][class]:hover {
   transform: translateY(calc(-1 * var(--lp-userpanel-lift))) !important;
 }
 
-div[class*="base__"]:has(#vc-spotify-player) div[class*="chat_"] > [class*="content_"]:not(:has(main[class*="chatContent"] + [class*="container"]))::after,
 div[class*="base__"]:has(#vc-spotify-player) main[class*="chatContent"] + [class*="container"] {
   bottom: calc(var(--lp-music-stop) + var(--lp-music-room)) !important;
 }
@@ -994,7 +963,7 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
 
 [class*="buttonContainer"] > * > *,
 .user-profile-popout [class*="scrollerBase"][class*="body_"] > section,
-.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:not([class]):not(:has(> [class*="usernameAndPronounsRow"])),
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:not([class]):not(:first-child),
 .user-profile-popout [class*="card__"] button,
 .user-profile-popout [class*="footer_"] button {
   background: var(--lp-card-a) !important;
@@ -1299,18 +1268,12 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
   background: var(--lp-card-a) !important;
 }
 
-:root {
-  --lp-modview-w: var(--lp-rail);
-  --lp-modview-inset: 8px;
-  --lp-modview-clear: 64px;
-}
-
 [class*="page__"] > div[class*="chat_"] {
   position: relative !important;
   overflow: visible !important;
   margin-top: var(--lp-chat-drop) !important;
   margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
-  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift) + var(--lp-modview-w) + var(--lp-modview-clear)) !important;
+  margin-right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
@@ -1330,53 +1293,6 @@ div[class*="message_"] span[class*="username"] [class*="smyn-second"] {
 [class*="page__"] > div[class*="chat_"] > [class*="scroller"],
 [class*="page__"] > div[class*="chat_"] > [class*="scroller"] > [class*="content_"] {
   background: transparent !important;
-}
-
-[class*="page__"] > div[class*="chat_"]::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: calc(-1 * (var(--lp-modview-w) + var(--lp-modview-clear)));
-  bottom: var(--lp-music-stop);
-  width: var(--lp-modview-w);
-  border-radius: var(--lp-radius);
-  background: var(--lp-empty-art) center bottom / contain no-repeat, var(--lp-2a);
-  pointer-events: none;
-}
-
-[class*="page__"]:has(> div > [class*="sidebarContainer__"]) {
-  position: relative !important;
-}
-
-[class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) {
-  position: absolute !important;
-  z-index: 1 !important;
-  top: var(--lp-chat-drop) !important;
-  right: calc(var(--lp-chat-trim) - var(--lp-strip-shift)) !important;
-  bottom: calc(var(--lp-chat-lift) + var(--lp-music-stop)) !important;
-  left: auto !important;
-  width: calc(var(--lp-modview-w) + var(--lp-modview-inset)) !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
-  background: transparent !important;
-
-  --background-base-low: transparent;
-  --background-base-lower: transparent;
-  --background-base-lowest: transparent;
-  --background-base-low-alt: transparent;
-  --bg-base-primary: transparent;
-  --bg-base-secondary: transparent;
-  --bg-base-tertiary: transparent;
-}
-
-[class*="page__"] > div:not([class]):has(> [class*="sidebarContainer__"]) [class*="sidebarContainer__"] {
-  border-radius: var(--lp-radius) !important;
-  overflow: hidden !important;
-}
-
-[class*="page__"]:has(> div > [class*="sidebarContainer__"]) > div[class*="chat_"]::after {
-  display: none;
 }
 
 nav[class*="privateChannels_"] > [class*="scroller_"] {
@@ -1595,14 +1511,7 @@ nav[class*="privateChannels_"] {
   z-index: 3;
 }
 
-[class*="baseLayer_"] > div[class*="base__"]:has(
-  > div[class*="bar_"]:hover,
-  nav[class*="guilds_"]:hover,
-  div[class*="sidebarList"]:hover,
-  nav[class*="privateChannels_"]:hover,
-  div[class*="chat_"] section[class*="title_"]:hover,
-  main[class*="chatContent"]:hover
-)::after {
+[class*="baseLayer_"] > div[class*="base__"]:hover::after {
   opacity: 1;
 }
 
@@ -1649,14 +1558,7 @@ main[class*="chatContent"] + [class*="container"]::before {
   left: var(--lp-radius);
 }
 
-[class*="baseLayer_"] > div[class*="base__"]:has(
-  > div[class*="bar_"]:hover,
-  nav[class*="guilds_"]:hover,
-  div[class*="sidebarList"]:hover,
-  nav[class*="privateChannels_"]:hover,
-  div[class*="chat_"] section[class*="title_"]:hover,
-  main[class*="chatContent"]:hover
-)::before,
+[class*="baseLayer_"] > div[class*="base__"]:hover::before,
 .vc-channeltabs-container:hover::before,
 main[class*="chatContent"] + [class*="container"]:hover::before {
   color: var(--lp-ring);
