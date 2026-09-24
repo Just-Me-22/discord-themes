@@ -257,11 +257,6 @@ nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"] > svg
   visibility: hidden;
 }
 
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] :is([style*="69, 163, 102"], [style*="35, 165, 90"])) { --cs-gs-c: var(--cs-online); --cs-gs-bump: 1.07; }
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] :is([style*="255, 192, 78"], [style*="240, 178, 50"])) { --cs-gs-c: var(--cs-idle); --cs-gs-bump: 1.07; }
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] :is([style*="218, 62, 68"], [style*="242, 63, 67"])) { --cs-gs-c: var(--cs-dnd); --cs-gs-bump: 1.07; }
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]:has(> svg[class*="mask_"] [style*="89, 54, 149"]) { --cs-gs-c: var(--cs-streaming); --cs-gs-bump: 1.07; }
-
 nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]::before {
   transition: --cs-gs-p 500ms ease-in;
 }
@@ -322,8 +317,13 @@ nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] 
   transition: stroke var(--cs-fade);
 }
 
-:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"]) {
-  container-type: inline-size;
+section[class*="panels_"],
+nav[class*="privateChannels_"] {
+  --cs-size: 32px;
+}
+
+.user-profile-popout {
+  --cs-size: 80px;
 }
 
 :is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"])::before {
@@ -331,7 +331,7 @@ nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] 
   position: absolute;
   inset: 0;
   border-radius: var(--cs-radius);
-  box-shadow: 0 0 calc(var(--cs-glow) * 100cqw) calc(var(--cs-glow-core) * 100cqw) var(--cs-c, transparent);
+  box-shadow: 0 0 calc(var(--cs-glow) * var(--cs-size)) calc(var(--cs-glow-core) * var(--cs-size)) var(--cs-c, transparent);
   pointer-events: none;
 }
 
@@ -369,13 +369,6 @@ rect[class*="pointerEvents_"]:is([fill="#82858f"], [fill="#82838b"]) { --cs-c: v
 [class*="wrapper_"][aria-label*=", Offline"] { --cs-c: var(--cs-offline); }
 [class*="wrapper_"][aria-label*=", Streaming"] { --cs-c: var(--cs-streaming); }
 [class*="wrapper_"][aria-label*=", Invisible"] { --cs-c: var(--cs-invisible); }
-
-section[class*="panels_"] g > svg:has(> rect:is([fill="#45a366"], [fill="#23a55a"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-online); }
-section[class*="panels_"] g > svg:has(> rect:is([fill="#ffc04e"], [fill="#f0b232"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-idle); }
-section[class*="panels_"] g > svg:has(> rect:is([fill="#da3e44"], [fill="#f23f43"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-dnd); }
-section[class*="panels_"] g > svg:has(> rect:is([fill="#84858d"], [fill="#80848e"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-offline); }
-section[class*="panels_"] g > svg:has(> rect[fill="#593695"]) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-streaming); }
-section[class*="panels_"] g > svg:has(> rect:is([fill="#82858f"], [fill="#82838b"])) ~ rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
 
 section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#45a366"], [fill="#23a55a"])) { --cs-c: var(--cs-online); }
 section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#ffc04e"], [fill="#f0b232"])) { --cs-c: var(--cs-idle); }
@@ -426,9 +419,9 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
 
 [class*="voiceUser__"] [class*="userAvatar__"] {
   --cs-vr-w: var(--cs-ring-w);
-  --cs-vr-o: calc(var(--cs-ring-gap) + max(var(--cs-ring-w), var(--cs-speak-w)) + 25cqw);
+  --cs-size: 24px;
+  --cs-vr-o: calc(var(--cs-ring-gap) + max(var(--cs-ring-w), var(--cs-speak-w)) + var(--cs-size) / 4);
   position: relative;
-  container-type: inline-size;
   background-size: 0 0;
 }
 
@@ -453,9 +446,9 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
 
 [class*="voiceUser__"] [class*="userAvatar__"]::before {
   --cs-vr-c: var(--cs-ring);
-  --cs-vr-r: calc(50cqw + var(--cs-ring-gap) + var(--cs-vr-b) * (var(--cs-breath-scale) - 1) * (50cqw + var(--cs-ring-gap) + var(--cs-vr-w)));
-  --cs-vr-e: calc(var(--cs-vr-r) + var(--cs-vr-w) + var(--cs-glow-core) * 100cqw);
-  background: radial-gradient(circle, transparent calc(var(--cs-vr-r) - 0.6px), var(--cs-vr-c) var(--cs-vr-r), var(--cs-vr-c) var(--cs-vr-e), color-mix(in srgb, var(--cs-vr-c) 45%, transparent) calc(var(--cs-vr-e) + 0.4px), transparent calc(var(--cs-vr-e) + var(--cs-glow) * 100cqw));
+  --cs-vr-r: calc(var(--cs-size) / 2 + var(--cs-ring-gap) + var(--cs-vr-b) * (var(--cs-breath-scale) - 1) * (var(--cs-size) / 2 + var(--cs-ring-gap) + var(--cs-vr-w)));
+  --cs-vr-e: calc(var(--cs-vr-r) + var(--cs-vr-w) + var(--cs-glow-core) * var(--cs-size));
+  background: radial-gradient(circle, transparent calc(var(--cs-vr-r) - 0.6px), var(--cs-vr-c) var(--cs-vr-r), var(--cs-vr-c) var(--cs-vr-e), color-mix(in srgb, var(--cs-vr-c) 45%, transparent) calc(var(--cs-vr-e) + 0.4px), transparent calc(var(--cs-vr-e) + var(--cs-glow) * var(--cs-size)));
   transition: --cs-vr-c var(--cs-fade);
 }
 
