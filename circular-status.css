@@ -89,7 +89,7 @@
 
 @property --cs-call-fade {
   syntax: "<percentage>";
-  inherits: true;
+  inherits: false;
   initial-value: 0%;
 }
 
@@ -150,7 +150,7 @@ nav[class*="privateChannels_"] a[aria-label*=", Muted"] foreignObject[mask*="fac
   border-style: dashed;
 }
 
-nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] {
+nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] > div[class*="container__"] {
   --cs-group-front: color-mix(in oklab, var(--cs-group-call), transparent var(--cs-call-fade));
   --cs-group-back: var(--cs-group-front);
   --cs-group-w: var(--cs-group-call-w);
@@ -483,6 +483,7 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
   }
 
   [class*="avatarStack__"] [class*="avatarBorder__"],
+  nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] > div[class*="container__"],
   [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
     animation: none;
   }
