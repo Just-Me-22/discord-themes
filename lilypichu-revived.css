@@ -515,7 +515,7 @@ main[class*="chatContent"] + div[class*="container"] {
   z-index: 1 !important;
   top: calc(var(--lp-members-top) + var(--lp-strip-drop)) !important;
   right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift)) !important;
-  bottom: var(--lp-music-stop) !important;
+  bottom: calc(var(--lp-music-stop) + var(--lp-music-extra, 0px)) !important;
   left: auto !important;
   height: auto !important;
   min-height: 0 !important;
@@ -651,8 +651,8 @@ section[class*="panels_"][class][class]:hover {
   transform: translateY(calc(-1 * var(--lp-userpanel-lift))) !important;
 }
 
-div[class*="base__"]:has(#vc-spotify-player) main[class*="chatContent"] + [class*="container"] {
-  bottom: calc(var(--lp-music-stop) + var(--lp-music-room)) !important;
+div[class*="base__"]:has(#vc-spotify-player) {
+  --lp-music-extra: var(--lp-music-room);
 }
 
 div[class*="base__"] {
@@ -1518,7 +1518,14 @@ nav[class*="privateChannels_"] {
   z-index: 3;
 }
 
-[class*="baseLayer_"] > div[class*="base__"]:hover::after {
+[class*="baseLayer_"] > div[class*="base__"]:has(
+  > div[class*="bar_"]:hover,
+  nav[class*="guilds_"]:hover,
+  div[class*="sidebarList"]:hover,
+  nav[class*="privateChannels_"]:hover,
+  div[class*="chat_"] section[class*="title_"]:hover,
+  main[class*="chatContent"]:hover
+)::after {
   opacity: 1;
 }
 
@@ -1531,6 +1538,29 @@ main[class*="chatContent"] + div[class*="container"],
 main[class*="chatContent"] + div[class*="container"]:hover,
 .vc-channeltabs-container:hover {
   box-shadow: inset 0 0 0 var(--lp-ring-size) var(--lp-ring) !important;
+}
+
+.vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top):is(:hover, .vc-channeltabs-container-revealed) {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top) .vc-channeltabs-tab-container {
+  border-radius: var(--lp-radius) var(--lp-radius) 0 0 !important;
+}
+
+.vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top):hover {
+  box-shadow:
+    inset var(--lp-ring-size) 0 0 0 var(--lp-ring),
+    inset calc(-1 * var(--lp-ring-size)) 0 0 0 var(--lp-ring),
+    inset 0 calc(-1 * var(--lp-ring-size)) 0 0 var(--lp-ring) !important;
+}
+
+.vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top):hover .vc-channeltabs-tab-container {
+  box-shadow:
+    inset var(--lp-ring-size) 0 0 0 var(--lp-ring),
+    inset calc(-1 * var(--lp-ring-size)) 0 0 0 var(--lp-ring),
+    inset 0 var(--lp-ring-size) 0 0 var(--lp-ring);
 }
 
 .vc-channeltabs-container {
@@ -1565,7 +1595,14 @@ main[class*="chatContent"] + div[class*="container"]::before {
   left: var(--lp-radius);
 }
 
-[class*="baseLayer_"] > div[class*="base__"]:hover::before,
+[class*="baseLayer_"] > div[class*="base__"]:has(
+  > div[class*="bar_"]:hover,
+  nav[class*="guilds_"]:hover,
+  div[class*="sidebarList"]:hover,
+  nav[class*="privateChannels_"]:hover,
+  div[class*="chat_"] section[class*="title_"]:hover,
+  main[class*="chatContent"]:hover
+)::before,
 .vc-channeltabs-container:hover::before,
 main[class*="chatContent"] + div[class*="container"]:hover::before {
   color: var(--lp-ring);
