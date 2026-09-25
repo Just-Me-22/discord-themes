@@ -1141,7 +1141,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     --EaseType: cubic-bezier(0, 0.75, 0, 1.75);
 }
 
-/* Settings List Items */ .side_aa8da2 .item_aa8da2:hover,
+/* Settings List Items */ .sectionList__409aa .item_caf372:hover,
 /* Active now card */ .itemCard__7e549:hover,
 /* Activity button */ .buttonSize__124c8:hover,
 /* Friendlist */ .peopleListItem_cc6179:hover {
@@ -1150,7 +1150,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     box-shadow: var(--elevation-high);
 }
 
-/* Settings List Items */ .side_aa8da2 .item_aa8da2,
+/* Settings List Items */ .sectionList__409aa .item_caf372,
 /* Active now card */ .itemCard__7e549,
 /* Activity button */ .buttonSize__124c8,
 /* Friendlist */ .peopleListItem_cc6179 {
