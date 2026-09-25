@@ -838,10 +838,11 @@ li[class*="channel__"] div[class*="layout__"] {
 div[class*="GridItem"] {
   content-visibility: auto;
   contain-intrinsic-size: auto 83px auto 80px;
+  transform-origin: 100% 50%;
   transition: opacity 140ms ease-out, transform 140ms ease-out !important;
 }
 
-div[class*="GridItem"]:not([class*="frameGridItem"]) {
+div[class*="GridItem"] {
   border-radius: calc(var(--lp-radius) * 0.5) !important;
   background: color-mix(in srgb, var(--lp-ambient) var(--lp-tile), transparent) !important;
 }
@@ -898,16 +899,23 @@ div[class*="frameGridItem"] [class*="previewContainer"] {
 }
 
 [class*="list__"][class*="scrollbarGutterStable__"] {
-  height: var(--lp-pick-height) !important;
-  max-height: var(--lp-pick-height) !important;
+  height: 0 !important;
+  flex: 1 1 auto !important;
+  min-height: var(--lp-pick-height) !important;
+  max-height: none !important;
 }
 
 [class*="modal_"][class*="root__"][class*="medium__"] {
   max-height: 94vh !important;
 }
 
-div[class*="GridItem"]:not([class*="frameGridItem"]):not([class*="selected"]):not([aria-pressed="true"]) {
+div[class*="GridItem"]:not([class*="selected"]):not([aria-pressed="true"]) {
   box-shadow: inset 0 0 0 var(--lp-pick-inset) var(--lp-modal) !important;
+}
+
+div[class*="GridItem"][class*="selected"],
+div[class*="GridItem"][aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--lp-accent) !important;
 }
 
 div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
