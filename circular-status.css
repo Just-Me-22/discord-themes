@@ -312,7 +312,7 @@ nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] 
   height: calc(var(--cs-avatar, 32px) * (1 - var(--cs-w)));
   rx: var(--cs-radius);
   ry: var(--cs-radius);
-  stroke: var(--cs-c, transparent);
+  stroke: var(--cs-ring-off, var(--cs-c, transparent));
   stroke-width: calc(var(--cs-avatar, 32px) * var(--cs-w));
   transition: stroke var(--cs-fade);
 }
@@ -324,6 +324,10 @@ nav[class*="privateChannels_"] {
 
 .user-profile-popout {
   --cs-size: 80px;
+}
+
+:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"]) {
+  position: relative;
 }
 
 :is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"])::before {
@@ -412,9 +416,9 @@ section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#82858f"], [fil
   animation: cs-breathe var(--cs-breath) ease-in-out infinite;
 }
 
-section[class*="panels_"] svg[class*="mask_"]:has([class*="avatarBorder__"]) rect[class*="pointerEvents_"],
 section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
   --cs-c: transparent !important;
+  --cs-ring-off: transparent;
 }
 
 [class*="voiceUser__"] [class*="userAvatar__"] {
