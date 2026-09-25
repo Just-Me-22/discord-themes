@@ -1537,14 +1537,7 @@ nav[class*="privateChannels_"] {
   z-index: 3;
 }
 
-[class*="baseLayer_"] > div[class*="base__"]:has(
-  > div[class*="bar_"]:hover,
-  nav[class*="guilds_"]:hover,
-  div[class*="sidebarList"]:hover,
-  nav[class*="privateChannels_"]:hover,
-  div[class*="chat_"] section[class*="title_"]:hover,
-  main[class*="chatContent"]:hover
-)::after {
+[class*="baseLayer_"] > div[class*="base__"].vc-region-hover::after {
   opacity: 1;
 }
 
@@ -1614,14 +1607,7 @@ main[class*="chatContent"] + div[class*="container"]::before {
   left: var(--lp-radius);
 }
 
-[class*="baseLayer_"] > div[class*="base__"]:has(
-  > div[class*="bar_"]:hover,
-  nav[class*="guilds_"]:hover,
-  div[class*="sidebarList"]:hover,
-  nav[class*="privateChannels_"]:hover,
-  div[class*="chat_"] section[class*="title_"]:hover,
-  main[class*="chatContent"]:hover
-)::before,
+[class*="baseLayer_"] > div[class*="base__"].vc-region-hover::before,
 .vc-channeltabs-container:hover::before,
 main[class*="chatContent"] + div[class*="container"]:hover::before {
   color: var(--lp-ring);
