@@ -171,7 +171,7 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
   border-radius: var(--cs-group-radius);
 }
 
-[class*="avatar_"] > [class*="container__"] {
+[class*="avatar_"] > div[class*="container__"] {
   --cs-pair-len: calc((0.3333 + 2 * var(--cs-group-spread)) * 1.4142 + 0.6667);
   --cs-pair-paint: var(--cs-group-front);
   position: relative;
@@ -248,7 +248,7 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
   }
 }
 
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"] {
+nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container__"] {
   --cs-gs-front: var(--cs-group-front);
   --cs-gs-back: var(--cs-group-back);
 }
@@ -257,11 +257,11 @@ nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"] > svg
   visibility: hidden;
 }
 
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]::before {
+nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container__"]::before {
   transition: --cs-gs-p 500ms ease-in;
 }
 
-nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > [class*="container__"]::before {
+nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > div[class*="container__"]::before {
   --cs-gs-p: 100%;
   animation: cs-gs-bump 200ms 500ms;
 }
@@ -363,14 +363,14 @@ rect[class*="pointerEvents_"]:is([fill="#82858f"], [fill="#82838b"]) { --cs-c: v
 [aria-label*=", Streaming"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-streaming); }
 [aria-label*=", Invisible"] rect[class*="pointerEvents_"] { --cs-c: var(--cs-invisible); }
 
-[class*="wrapper_"][aria-label*=", Online"] { --cs-c: var(--cs-online); }
-[class*="wrapper_"][aria-label*=", Idle"] { --cs-c: var(--cs-idle); }
-[class*="wrapper_"][aria-label*=", Do Not Disturb"] { --cs-c: var(--cs-dnd); }
-[class*="wrapper_"][aria-label*=", Offline"] { --cs-c: var(--cs-offline); }
+div[class*="wrapper_"][aria-label*=", Online"] { --cs-c: var(--cs-online); }
+div[class*="wrapper_"][aria-label*=", Idle"] { --cs-c: var(--cs-idle); }
+div[class*="wrapper_"][aria-label*=", Do Not Disturb"] { --cs-c: var(--cs-dnd); }
+div[class*="wrapper_"][aria-label*=", Offline"] { --cs-c: var(--cs-offline); }
 [class*="wrapper_"][aria-label*=", Streaming"] { --cs-c: var(--cs-streaming); }
 [class*="wrapper_"][aria-label*=", Invisible"] { --cs-c: var(--cs-invisible); }
 
-section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#45a366"], [fill="#23a55a"])) { --cs-c: var(--cs-online); }
+section[class*="panels_"] div[class*="wrapper_"]:has(rect:is([fill="#45a366"], [fill="#23a55a"])) { --cs-c: var(--cs-online); }
 section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#ffc04e"], [fill="#f0b232"])) { --cs-c: var(--cs-idle); }
 section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#da3e44"], [fill="#f23f43"])) { --cs-c: var(--cs-dnd); }
 section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#84858d"], [fill="#80848e"])) { --cs-c: var(--cs-offline); }
@@ -488,7 +488,7 @@ section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
   }
 
   [class*="avatar_"] foreignObject[mask*="facepile"] img,
-  nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"]::before {
+  nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container__"]::before {
     transition: none;
     animation: none;
   }
