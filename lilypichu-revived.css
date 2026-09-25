@@ -1607,6 +1607,15 @@ main[class*="chatContent"] + div[class*="container"]::before {
   left: var(--lp-radius);
 }
 
+.vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top)::before {
+  transition: color var(--lp-ring-ease), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top):is(:hover, .vc-channeltabs-container-revealed)::before {
+  z-index: 103;
+  transform: translateY(calc(-44px * var(--tab-height-scale, 1)));
+}
+
 [class*="baseLayer_"] > div[class*="base__"].vc-region-hover::before,
 .vc-channeltabs-container:hover::before,
 main[class*="chatContent"] + div[class*="container"]:hover::before {
