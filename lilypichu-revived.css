@@ -1789,3 +1789,116 @@ nav[class*="guilds_"] {
 [class*="systemMessage__"] a[class*="anchor__"] {
   filter: brightness(1.45) saturate(1.2);
 }
+
+/* user panel ink and media fixes */
+:is(video, img).img__8b924, :is(video, img).img__98ba8, :is(video, img).img__8f9ad, :is(video, img).img_df39b2 {
+  opacity: 1 !important;
+}
+
+:is(video, img)[class*="img_"][class*="channel_"].hover_df39b2 {
+  content-visibility: visible;
+  z-index: 3;
+}
+
+[class*="membersWrap_"] div[class*="member_"] {
+  --custom-nameplate: transparent;
+}
+
+div[class*="videoContainer_"][class*="df39b2"] {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+section[class*='panels_'] {
+  --np-ink: var(--np-plate, #8FC6D1);
+}
+
+[class*='panels_'] button svg,
+[class*='panels_'] button div[class*='icon'] {
+  color: var(--np-ink) !important;
+  fill: var(--np-ink) !important;
+}
+
+[class*='panels_'] div[class*='panelSubtextContainer'],
+[class*='panels_'] [class*='panelSubtextContainer'] * {
+  color: var(--np-ink) !important;
+}
+
+[class*="privateChannels_"] div[class*="videoContainer_"] {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+[class*="privateChannels_"] li[class*="dm_"] {
+  margin-bottom: 4px;
+}
+
+div[class*="page__"] { background-color: transparent !important; }
+
+/* spotify player */
+section[class*="panels_"] #vc-spotify-player {
+  position: relative !important;
+}
+
+section[class*="panels_"] #vc-spotify-player::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  filter: blur(var(--cover-blur, var(--lp-cover-blur, 14px))) !important;
+}
+
+section[class*="panels_"] #vc-spotify-player > * {
+  position: relative;
+  z-index: 1;
+}
+
+#vc-spotify-progress-bar [class*="bar_"],
+#vc-spotify-progress-bar .barFill__4c059 {
+  opacity: 0 !important;
+}
+
+#vc-spotify-progress-bar .grabber__4c059 {
+  opacity: 0 !important;
+  transform: scale(0.6);
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+}
+
+#vc-spotify-progress-bar:hover .grabber__4c059 {
+  opacity: 1 !important;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #vc-spotify-progress-bar .grabber__4c059 {
+    transition: none;
+  }
+}
+
+#vc-spotify-player {
+  --vc-spotify-green: var(--vc-spotify-cover-color, #1db954);
+}
+
+#vc-spotify-player .vc-spotify-button,
+#vc-spotify-player .vc-spotify-button svg,
+#vc-spotify-player .vc-spotify-button svg * {
+  color: var(--vc-spotify-cover-color, var(--interactive-icon-default)) !important;
+  fill: currentColor !important;
+}
+
+#vc-spotify-player .vc-spotify-button:hover,
+#vc-spotify-player .vc-spotify-button:hover svg,
+#vc-spotify-player .vc-spotify-button:hover svg * {
+  color: #fff !important;
+}
+
+#vc-spotify-player .vc-spotify-button:hover {
+  background: color-mix(in srgb, var(--vc-spotify-cover-color, #fff) 22%, transparent) !important;
+}
+
+/* name styles rest until hovered */
+li[class*="messageListItem"]:not(:hover) span[class*="gummyLetter_"],
+li[class*="messageListItem"]:not(:hover) [class*="dnsFont__"] span[class*="innerContainer_"],
+li[class*="messageListItem"]:not(:hover) [class*="dnsFont__"] span[class*="innerContainer_"]::before {
+  animation: none !important;
+}
