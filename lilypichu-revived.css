@@ -914,6 +914,11 @@ div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
   background: transparent !important;
 }
 
+div[class*="nameplateItem__"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 42px;
+}
+
 [class*="modal"] [class*="preview"]:not(div[class*="GridItem"] *) {
   border-radius: calc(var(--lp-radius) * 0.5) !important;
   overflow: hidden !important;
