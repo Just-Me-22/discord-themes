@@ -1522,7 +1522,7 @@ nav[class*="privateChannels_"] {
   border-width: 0 !important;
 }
 
-[class*="baseLayer_"] > div[class*="base__"]::after {
+.vc-region-ring::after {
   content: "";
   position: absolute;
   top: calc(var(--lp-shell-gap) + var(--lp-chat-drop));
@@ -1537,7 +1537,7 @@ nav[class*="privateChannels_"] {
   z-index: 3;
 }
 
-[class*="baseLayer_"] > div[class*="base__"].vc-region-hover::after {
+.vc-region-ring.vc-region-hover::after {
   opacity: 1;
 }
 
@@ -1579,7 +1579,7 @@ main[class*="chatContent"] + div[class*="container"]:hover,
   position: relative !important;
 }
 
-[class*="baseLayer_"] > div[class*="base__"]::before,
+.vc-region-ring::before,
 .vc-channeltabs-container::before,
 main[class*="chatContent"] + div[class*="container"]::before {
   position: absolute;
@@ -1595,7 +1595,7 @@ main[class*="chatContent"] + div[class*="container"]::before {
   transition: color var(--lp-ring-ease);
 }
 
-[class*="baseLayer_"] > div[class*="base__"]::before {
+.vc-region-ring::before {
   content: var(--lp-label-block);
   top: calc(var(--lp-shell-gap) + var(--lp-chat-drop) - 0.5em);
   left: calc(var(--lp-shell-gap) + var(--lp-radius));
@@ -1616,7 +1616,7 @@ main[class*="chatContent"] + div[class*="container"]::before {
   transform: translateY(calc(-44px * var(--tab-height-scale, 1)));
 }
 
-[class*="baseLayer_"] > div[class*="base__"].vc-region-hover::before,
+.vc-region-ring.vc-region-hover::before,
 .vc-channeltabs-container:hover::before,
 main[class*="chatContent"] + div[class*="container"]:hover::before {
   color: var(--lp-ring);
