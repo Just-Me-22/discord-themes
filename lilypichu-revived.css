@@ -839,12 +839,13 @@ div[class*="GridItem"] {
   content-visibility: auto;
   contain-intrinsic-size: auto 83px auto 80px;
   transform-origin: 100% 50%;
-  transition: opacity 140ms ease-out, transform 140ms ease-out !important;
+  transition: opacity 140ms ease-out, transform 140ms ease-out, background-color 140ms ease-out !important;
 }
 
 div[class*="GridItem"] {
   border-radius: calc(var(--lp-radius) * 0.5) !important;
-  background: color-mix(in srgb, var(--lp-ambient) var(--lp-tile), transparent) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
@@ -888,6 +889,7 @@ div[class*="frameGridItem"] [class*="previewContainer"] {
   opacity: 1 !important;
   transform: scale(var(--lp-pick-lift)) !important;
   z-index: 1 !important;
+  background: color-mix(in srgb, var(--lp-petal) 7%, transparent) !important;
 }
 
 [class*="list__"]:hover div[class*="GridItem"][aria-pressed="true"] {
@@ -909,13 +911,17 @@ div[class*="frameGridItem"] [class*="previewContainer"] {
   max-height: 94vh !important;
 }
 
-div[class*="GridItem"]:not([class*="selected"]):not([aria-pressed="true"]) {
-  box-shadow: inset 0 0 0 var(--lp-pick-inset) var(--lp-modal) !important;
-}
-
 div[class*="GridItem"][class*="selected"],
 div[class*="GridItem"][aria-pressed="true"] {
-  box-shadow: inset 0 0 0 2px var(--lp-accent) !important;
+  box-shadow: inset 0 -3px 0 var(--lp-accent) !important;
+}
+
+[class*="list__"][class*="scrollbarGutterStable__"] h2,
+.vc-cs-head {
+  font-family: var(--lp-pick-head-font, "Lora", Georgia, serif) !important;
+  font-style: italic !important;
+  font-size: 15px !important;
+  color: var(--lp-petal) !important;
 }
 
 div[class*="GridItem"]:not([class*="frameGridItem"]) > * {
