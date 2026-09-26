@@ -1247,7 +1247,7 @@ div[class*="modalContent_"],
 [class*="modalContent_"] > div,
 [class*="modalContent_"] > div > div,
 aside[class*="sidebar__"] + div,
-aside[class*="sidebar__"] + div > div {
+[class*="modalContent_"] aside + div > div {
   background: transparent !important;
 }
 
