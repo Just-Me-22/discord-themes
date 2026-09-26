@@ -1144,7 +1144,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* Settings List Items */ .sectionList__409aa .item_caf372:hover,
 /* Active now card */ .itemCard__7e549:hover,
 /* Activity button */ .buttonSize__124c8:hover,
-/* Friendlist */ .peopleListItem_cc6179:hover {
+/* Friendlist */ .peopleListItem_cc6179 text-md/medium_cc6179 text-md/medium_cc6179:hover {
     transform-origin: center;
     transform: scale(var(--HoverScale));
     box-shadow: var(--elevation-high);
@@ -1153,7 +1153,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* Settings List Items */ .sectionList__409aa .item_caf372,
 /* Active now card */ .itemCard__7e549,
 /* Activity button */ .buttonSize__124c8,
-/* Friendlist */ .peopleListItem_cc6179 {
+/* Friendlist */ .peopleListItem_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 {
     transition: var(--EaseType) var(--TransitionTime);
     box-shadow: none;
 }
