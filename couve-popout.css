@@ -1,0 +1,373 @@
+/**
+ * @name Couve Popout
+ * @author Just-Me-22
+ * @version 1.0.0
+ * @description A portrait-style user popout and profile card. Set the --cp- values on .user-profile-popout to change it.
+ */
+
+.user-profile-popout {
+  --cp-badges-background: rgb(0 0 0 / 0.3);
+
+  --cp-radius: 14px;
+  --cp-panel-radius: 12px;
+  --cp-chip-radius: 8px;
+  --cp-pill-radius: 999px;
+
+  --cp-panel: color-mix(in oklab, currentColor 7%, transparent);
+  --cp-panel-margin: 8px 12px 0;
+  --cp-panel-padding: 10px 12px;
+  --cp-strip-padding: 2px 12px 4px;
+  --cp-role-background: color-mix(in oklab, currentColor 12%, transparent);
+
+  --cp-button-background: color-mix(in oklab, currentColor 12%, transparent);
+  --cp-button-background-hover: color-mix(in oklab, currentColor 20%, transparent);
+  --cp-button-shadow: 0 1px 2px rgb(0 0 0 / 0.14);
+
+  --cp-lift: -2px;
+  --cp-lift-speed: 0.15s;
+
+  border-radius: var(--cp-radius);
+}
+
+.user-profile-popout [class*="inner_"] > div[class*="header_"] {
+  min-height: 220px !important;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="banner_"] {
+  position: absolute;
+  height: 200px !important;
+  min-height: unset !important;
+  overflow: visible;
+  contain: unset;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), 50% 100%, 0 calc(100% - 25px));
+  --custom-cutout-radius: 0px !important;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] [class*="banner__"] {
+  height: 200px !important;
+  min-height: unset !important;
+  mask: none;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="banner_"] foreignObject,
+.user-profile-popout div[class*="avatar_"] foreignObject {
+  mask: none !important;
+}
+
+.user-profile-popout [class*="inner_"] > div[class*="wrapper_"] {
+  flex-direction: column;
+}
+
+.user-profile-popout div[class*="avatar_"] {
+  top: 15px !important;
+  left: calc(50% - 40px) !important;
+}
+
+.user-profile-popout div[class*="avatar_"] [class*="overlay__"] {
+  top: 0;
+  left: 0;
+}
+
+.user-profile-popout div[class*="avatar_"] svg > circle,
+.user-profile-popout div[class*="avatar_"] svg > g,
+.user-profile-popout div[class*="avatar_"] rect[fill="black"] {
+  display: none;
+}
+
+.user-profile-popout [class*="outer_"] > [class*="inner_"] {
+  position: relative;
+}
+
+.user-profile-popout div[class*="body_"] {
+  position: static;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.user-profile-popout div[class*="scrollerBase"][class*="body_"] {
+  overflow-y: auto !important;
+}
+
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:first-child {
+  position: absolute;
+  top: 102px;
+  left: 0;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+[class*="fullscreenOnMobile"] .user-profile-popout [class*="scrollerBase"][class*="body_"] > div:first-child {
+  z-index: 3;
+}
+
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > section,
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:not([class]) {
+  flex-shrink: 0 !important;
+}
+
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > section:not(:first-child),
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:not([class]):not(:first-child) {
+  margin: var(--cp-panel-margin);
+  padding: var(--cp-panel-padding);
+  border-radius: var(--cp-panel-radius);
+  background: var(--cp-panel);
+}
+
+.user-profile-popout [class*="scrollerBase"][class*="body_"] > div:not([class]):last-child {
+  margin-top: 4px;
+  padding: var(--cp-strip-padding);
+}
+
+.user-profile-popout div[class*="displayNameRow"] {
+  flex-direction: column;
+  gap: 0;
+}
+
+.user-profile-popout div[class*="displayNameRow"] > div[class*="clickable"] {
+  width: 100%;
+}
+
+.user-profile-popout div[class*="displayNameRow"] [class*="clickable"] div[class*="heading-"] {
+  display: block;
+  text-align: center;
+}
+
+.user-profile-popout div[class*="displayNameRow"] [class*="nicknameIcons"],
+.user-profile-popout div[class*="displayNameRow"] > div[class*="displayNameTrailing"] {
+  display: none;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"] {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 4px;
+  margin-top: 2.5px;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"]::before {
+  content: "";
+  order: 0;
+  flex: 0 0 100%;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"] > div[class*="clickable"],
+.user-profile-popout div[class*="usernameAndPronounsRow"] > [class*="userTag"] {
+  order: -3;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"] > div[class*="dotSpacer"] {
+  order: -2;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"] > span:not([class*="pronouns"]) {
+  order: -1;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"] > span[class*="pronouns"] {
+  order: 0;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile-popout div[class*="usernameAndPronounsRow"] > div[class*="container__"] {
+  order: 1;
+  flex: 0 0 auto;
+  max-width: 100%;
+  justify-content: center;
+  margin: 4px auto 0;
+  padding: 2px 8px;
+  border: none;
+  border-radius: var(--cp-chip-radius);
+  background: var(--cp-badges-background);
+}
+
+.user-profile-popout [class*="customButtons_"] {
+  box-sizing: border-box;
+  width: auto;
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+.user-profile-popout [class*="referenceContainer_"] {
+  display: none;
+}
+
+.user-profile-popout .timezone-profile-item {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: auto;
+  bottom: auto;
+  z-index: 3;
+  width: auto;
+  margin: 0;
+  padding: 2px 9px;
+  border-radius: var(--cp-pill-radius);
+  background: var(--cp-badges-background);
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] {
+  top: unset;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  margin-inline: auto;
+  border-radius: 0;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] > [class*="outer_"] {
+  min-width: unset;
+  max-width: unset;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] > [class*="outer_"]::before,
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] > [class*="outer_"]::after {
+  display: none;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] [class*="inner_"] {
+  padding: 0;
+  background: transparent;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] [class*="content_"] {
+  max-height: none !important;
+}
+
+.user-profile-popout [class*="inner_"] > [class*="header_"] > [class*="container_"] [class*="statusText_"] {
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user-profile-popout [class*="card__"],
+.user-profile-popout [class*="backgroundCard__"] {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.user-profile-popout [class*="card__"] img:not([class*="emoji"]):not([class*="Emoji"]),
+.user-profile-popout [class*="contentImage"] {
+  border-radius: var(--cp-chip-radius);
+}
+
+.user-profile-popout [class*="card__"] button {
+  border: 0;
+  border-radius: var(--cp-chip-radius);
+  background: var(--cp-button-background);
+  box-shadow: var(--cp-button-shadow);
+}
+
+.user-profile-popout [class*="card__"] button:hover {
+  background: var(--cp-button-background-hover);
+}
+
+.user-profile-popout [class*="footer_"] button {
+  border-radius: var(--cp-chip-radius);
+}
+
+.user-profile-popout [class*="inner_"] > [class*="footer_"] button {
+  width: 100%;
+}
+
+.user-profile-popout [class*="scrollerBase"][class*="body_"] button[class*="textButton_"] {
+  height: auto;
+  min-height: 0;
+  padding: 1px 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.user-profile-popout [class*="clickableContainer"] {
+  transition: transform var(--cp-lift-speed) ease-out;
+}
+
+.user-profile-popout [class*="clickableContainer"]:hover {
+  transform: translateY(var(--cp-lift));
+}
+
+.user-profile-popout [class*="clickableContainer"]:hover,
+.user-profile-popout [class*="clickableContainer"]:hover [class*="card__"] {
+  background: transparent;
+}
+
+.user-profile-popout [class*="role_"] {
+  padding: 3px 9px;
+  border: 0;
+  border-radius: var(--cp-pill-radius);
+  background: var(--cp-role-background);
+}
+
+
+[class*="profilePreview"] .timezone-profile-item {
+  display: none;
+}
+
+[class*="profilePreview"] a > [class*="badge__"] {
+  display: none;
+}
+
+[class*="profilePreview"] [class*="banner__"] {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+[class*="profilePreview"] div[class*="avatar_"] {
+  top: 12px !important;
+  left: 12px !important;
+}
+
+[class*="profilePreview"] div[class*="avatar_"] svg > circle,
+[class*="profilePreview"] div[class*="avatar_"] svg > g {
+  display: revert;
+}
+
+[class*="profilePreview"] [class*="usernameContainer"] {
+  position: static;
+}
+
+[class*="profilePreview"] [class*="displayNameRow"] {
+  justify-content: center;
+}
+
+[class*="profilePreview"] header > [class*="container_"] {
+  position: static;
+  margin: 6px auto 0;
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+[class*="profilePreview"] header > [class*="container_"] [class*="inner_"] {
+  padding: 0;
+  background: transparent;
+}
+
+[class*="profilePreview"] header > [class*="container_"] [class*="content_"] {
+  max-height: none !important;
+}
+
+[class*="profilePreview"] header > [class*="container_"] > [class*="outer_"] {
+  min-width: unset;
+  max-width: unset;
+  border: none;
+  border-radius: var(--cp-pill-radius, 999px);
+  background: var(--cp-badges-background, rgb(0 0 0 / .3));
+  box-shadow: none;
+  padding: 2px 10px;
+}
