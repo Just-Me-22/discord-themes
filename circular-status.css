@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.22.0
+ * @version 1.22.1
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -419,12 +419,12 @@ div[class*="wrapper_"][aria-label*=", Offline"] { --cs-c: var(--cs-offline); }
 [class*="wrapper_"][aria-label*=", Streaming"] { --cs-c: var(--cs-streaming); }
 [class*="wrapper_"][aria-label*=", Invisible"] { --cs-c: var(--cs-invisible); }
 
-section[class*="panels_"] div[class*="wrapper_"]:has(rect:is([fill="#45a366"], [fill="#23a55a"])) { --cs-c: var(--cs-online); }
-section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#ffc04e"], [fill="#f0b232"])) { --cs-c: var(--cs-idle); }
-section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#da3e44"], [fill="#f23f43"])) { --cs-c: var(--cs-dnd); }
-section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#84858d"], [fill="#80848e"])) { --cs-c: var(--cs-offline); }
-section[class*="panels_"] [class*="wrapper_"]:has(rect[fill="#593695"]) { --cs-c: var(--cs-streaming); }
-section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#82858f"], [fill="#82838b"])) { --cs-c: var(--cs-invisible); }
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#45a366"], [fill="#23a55a"])) { --cs-c: var(--cs-online); }
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#ffc04e"], [fill="#f0b232"])) { --cs-c: var(--cs-idle); }
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#da3e44"], [fill="#f23f43"])) { --cs-c: var(--cs-dnd); }
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#84858d"], [fill="#80848e"])) { --cs-c: var(--cs-offline); }
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect[fill="#593695"]) { --cs-c: var(--cs-streaming); }
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82858f"], [fill="#82838b"])) { --cs-c: var(--cs-invisible); }
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] {
   overflow: visible;
@@ -461,7 +461,7 @@ section[class*="panels_"] [class*="wrapper_"]:has(rect:is([fill="#82858f"], [fil
   animation: cs-breathe var(--cs-breath) ease-in-out infinite;
 }
 
-section[class*="panels_"] [class*="wrapper_"]:has([class*="avatarBorder__"]) {
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBorder__"]) {
   --cs-c: transparent !important;
   --cs-ring-off: transparent;
 }
