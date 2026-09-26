@@ -52,6 +52,36 @@
   --cs-breath-dim: 0.55;
 }
 
+/* Apply avatar shape everywhere */
+
+#app-mount [class*="wrapper__"] foreignObject:not([mask*="facepile"]) {
+    -webkit-mask: none !important;
+    mask: none !important;
+    clip-path: none !important;
+    border-radius: var(--cs-radius) !important;
+    overflow: hidden !important;
+}
+
+#app-mount [class*="wrapper__"] foreignObject:not([mask*="facepile"]) img {
+    border-radius: var(--cs-radius) !important;
+    clip-path: inset(1px round var(--cs-radius)) !important;
+}
+
+#app-mount [class*="wrapper__"] > img,
+#app-mount [class*="wrapper__"] img[class*="avatar_"],
+#app-mount [class*="wrapper__"] img[class*="circularImage__"] {
+    border-radius: var(--cs-radius) !important;
+}
+
+/* Remove circular backdrop over profile banner */
+[class*="outer_"] [class*="banner__"][style*="--custom-cutout-radius"] {
+    --custom-cutout-radius: 0px !important;
+}
+
+@keyframes cs-arc {
+  to { transform: rotate(360deg); }
+}
+
 [class*="avatar_"] foreignObject:not([mask*="facepile"]) {
   mask: none !important;
 }
