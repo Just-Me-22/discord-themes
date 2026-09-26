@@ -666,8 +666,11 @@ section[class*="panels_"][class][class]:hover {
   transform: translateY(calc(-1 * var(--lp-userpanel-lift))) !important;
 }
 
-div[class*="base__"] {
+.vc-spotify-shown {
   --lp-music-extra: var(--lp-music-room);
+}
+
+div[class*="base__"] {
   --custom-app-panels-height: var(--lp-panel-h) !important;
 }
 
