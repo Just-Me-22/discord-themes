@@ -853,7 +853,9 @@ li[class*="channel__"] div[class*="layout__"] {
   background: transparent !important;
 }
 
-div[class*="GridItem"] {
+div[class*="decorationGridItem"],
+div[class*="effectGridItem"],
+div[class*="frameGridItem"] {
   content-visibility: auto;
   contain-intrinsic-size: auto 83px auto 80px;
   transform-origin: 100% 50%;
