@@ -10,6 +10,7 @@
   --lp-composer-a: color-mix(in srgb, var(--lp-composer-bg) var(--lp-composer), transparent);
   --lp-card-a: color-mix(in srgb, var(--lp-3) var(--lp-card), transparent);
   --lp-userpanel-a: color-mix(in srgb, var(--lp-2) var(--lp-userpanel), transparent);
+  --lp-autocomplete-a: color-mix(in srgb, var(--lp-1) var(--lp-autocomplete), transparent);
 }
 
 .theme-light,
@@ -988,7 +989,7 @@ div[class*="menu_"],
 }
 
 .autocomplete__13533, .autocomplete__6b0e0 {
-  background: var(--lp-1a) !important;
+  background: var(--lp-autocomplete-a) !important;
   backdrop-filter: var(--lp-glass) !important;
   overflow: hidden !important;
 }
