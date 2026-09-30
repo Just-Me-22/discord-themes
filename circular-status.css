@@ -434,7 +434,8 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:first-child {
   cx: calc(var(--cs-avatar, 32px) / 2 - 3.75px);
   cy: calc(var(--cs-avatar, 32px) / 2 - 5px);
-  r: calc(var(--cs-avatar, 32px) / 2);
+  r: calc(var(--cs-avatar, 32px) * 0.75);
+  clip-path: inset(calc(var(--cs-avatar, 32px) * 0.25) round calc(var(--cs-avatar, 32px) * var(--cs-corner, 0.5))) fill-box;
   fill: var(--cs-typing-scrim) !important;
   opacity: var(--cs-typing-dim) !important;
 }
