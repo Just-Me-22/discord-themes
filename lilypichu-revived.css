@@ -1076,6 +1076,19 @@ div[class*="reactions_"] {
   background: var(--lp-accent) !important;
 }
 
+.reaction__23977.reactionMe__23977 {
+  background: color-mix(in srgb, var(--lp-accent) 25%, transparent) !important;
+}
+
+.reactionMe__23977 .reactionCount__23977 {
+  color: var(--lp-petal) !important;
+}
+
+.reactionBtn__23977 {
+  background: color-mix(in srgb, var(--lp-3a) 50%, transparent) !important;
+  border-radius: 999px !important;
+}
+
 button[class*="lookFilled"][class*="colorBrand"] {
   background: var(--lp-accent) !important;
   border-radius: var(--lp-radius) !important;
