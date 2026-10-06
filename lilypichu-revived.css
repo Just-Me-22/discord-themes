@@ -1851,6 +1851,14 @@ section[class*='panels_'] {
   mask-image: none !important;
 }
 
+[class*="privateChannels_"] li[class*="dm__"],
+[class*="privateChannels_"] li[class*="dm__"] > [class*="interactive_"],
+[class*="privateChannels_"] [class*="container_df39b2"] {
+  --custom-nameplate: transparent !important;
+  --custom-nameplate-neutral: transparent !important;
+  --custom-nameplate-neutral-hovered: transparent !important;
+}
+
 [class*="privateChannels_"] li[class*="dm_"] {
   margin-bottom: 4px;
 }
