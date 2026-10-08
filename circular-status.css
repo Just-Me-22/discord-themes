@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.23.0
+ * @version 1.23.1
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -434,7 +434,7 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:first-child {
   cx: calc(var(--cs-avatar, 32px) / 2 - 3.75px);
-  cy: calc(var(--cs-avatar, 32px) / 2 - 5px);
+  cy: calc(var(--cs-avatar, 32px) / 2 - 7.5px);
   r: calc(var(--cs-avatar, 32px) * 0.75);
   clip-path: inset(calc(var(--cs-avatar, 32px) * 0.25) round calc(var(--cs-avatar, 32px) * var(--cs-corner, 0.5))) fill-box;
   fill: var(--cs-typing-scrim) !important;
@@ -443,7 +443,7 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(2),
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(3) {
-  cy: calc(var(--cs-avatar, 32px) / 2 - 5px - var(--cs-typing-dots-lift));
+  cy: calc(var(--cs-avatar, 32px) / 2 - 7.5px - var(--cs-typing-dots-lift));
 }
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(2) {
