@@ -12,6 +12,7 @@ Discord marks status by biting a notch out of the corner of an avatar and puttin
 - Group DMs stop being cropped, so both faces show whole with a ring each. They slide apart on hover, and the ring shows whether the group is open, unread, muted or in a call. Hover one with someone online and the ring traces round in their status colour
 - Voice channel avatars in the sidebar get a ring and a glow of their own
 - Avatar decorations keep working and sit in front, uncut
+- Server icons become rounded squares that get a little squarer on hover. `--cs-server-radius` sets the corners: `50%` for circles, `0` for sharp squares
 - Edits apply live, no reload needed
 
 **Import**

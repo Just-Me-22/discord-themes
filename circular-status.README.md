@@ -70,6 +70,8 @@ Paste this into **QuickCSS**.
 | `--cs-radius` | the shape. `50%` is round, `22%` is a rounded square, `0` is a sharp square |
 | `--cs-glow` | how far the glow spreads, as a share of the avatar's width. `0` switches it off |
 | `--cs-glow-core` | how much of the glow is solid before it starts to fade, same share. Raise it on a light background |
+| `--cs-server-radius` | the corners on server icons. `14px` is a rounded square, `50%` a circle, `0` a sharp square |
+| `--cs-server-squeeze` | how much squarer a server icon gets on hover |
 | `--cs-online` | the green |
 | `--cs-idle` | the yellow |
 | `--cs-dnd` | the red |
