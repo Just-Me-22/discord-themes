@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.22.1
+ * @version 1.23.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -363,7 +363,8 @@ nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] 
 }
 
 section[class*="panels_"],
-nav[class*="privateChannels_"] {
+nav[class*="privateChannels_"],
+[class*="membersWrap_"] {
   --cs-size: 32px;
 }
 
@@ -371,11 +372,11 @@ nav[class*="privateChannels_"] {
   --cs-size: 80px;
 }
 
-:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"]) {
+:is(section[class*="panels_"], nav[class*="privateChannels_"], [class*="membersWrap_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"]) {
   position: relative;
 }
 
-:is(section[class*="panels_"], nav[class*="privateChannels_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"])::before {
+:is(section[class*="panels_"], nav[class*="privateChannels_"], [class*="membersWrap_"], .user-profile-popout) :is([class*="avatar_"] [class*="wrapper_"], [class*="wrapper_"][class*="avatar_"])::before {
   content: "";
   position: absolute;
   inset: 0;
