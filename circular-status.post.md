@@ -17,12 +17,12 @@ Discord marks status by biting a notch out of the corner of an avatar and puttin
 
 **Import**
 ```css
-@import url("https://raw.githubusercontent.com/Just-Me-22/discord-themes/main/circular-status.css");
+@import url("https://cdn.jsdelivr.net/gh/Just-Me-22/discord-themes@main/circular-status.css");
 ```
 
 **Raw**
 ```
-https://raw.githubusercontent.com/Just-Me-22/discord-themes/main/circular-status.css
+https://cdn.jsdelivr.net/gh/Just-Me-22/discord-themes@main/circular-status.css
 ```
 
 **Knobs**

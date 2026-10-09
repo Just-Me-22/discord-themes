@@ -59,7 +59,7 @@ CSS only. No plugin, nothing to install besides the one line below.
 Paste this into **QuickCSS**.
 
 ```css
-@import url("https://raw.githubusercontent.com/Just-Me-22/discord-themes/main/circular-status.css");
+@import url("https://cdn.jsdelivr.net/gh/Just-Me-22/discord-themes@main/circular-status.css");
 ```
 
 ## Values you may want to change
