@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.24.0
+ * @version 1.24.1
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -92,17 +92,12 @@
 
 nav[class*="guilds_"] svg > foreignObject {
   mask: linear-gradient(#000, #000) !important;
+  clip-path: inset(0 round var(--cs-server-radius));
+  transition: clip-path 0.15s ease-out;
 }
 
-#app-mount nav[class*="guilds_"] [data-list-item-id^="guildsnav___"] > :is([class*="wrapper__"], [class*="childWrapper"]),
-#app-mount nav[class*="guilds_"] [data-list-item-id^="guildsnav___"] > [class*="wrapper__"] > img {
-  border-radius: var(--cs-server-radius) !important;
-  transition: border-radius 0.15s ease-out;
-}
-
-#app-mount nav[class*="guilds_"] [data-list-item-id^="guildsnav___"]:hover > :is([class*="wrapper__"], [class*="childWrapper"]),
-#app-mount nav[class*="guilds_"] [data-list-item-id^="guildsnav___"]:hover > [class*="wrapper__"] > img {
-  border-radius: calc(var(--cs-server-radius) - var(--cs-server-squeeze)) !important;
+nav[class*="guilds_"] svg:hover > foreignObject {
+  clip-path: inset(0 round calc(var(--cs-server-radius) - var(--cs-server-squeeze)));
 }
 
 [class*="guilds_"] [class*="folderIcon"] {
