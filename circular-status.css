@@ -1,7 +1,7 @@
 /**
  * @name Circular Status
  * @author Just-Me-22
- * @version 1.24.1
+ * @version 1.25.0
  * @description Draws Discord's status as a ring around the avatar instead of a dot bitten out of its corner and shows typing as dots over a dimmed picture.
  */
 
@@ -11,6 +11,7 @@
   --cs-radius: calc(var(--cs-corner) * 100%);
   --cs-glow: 0.1;
   --cs-glow-core: 0.03;
+  --cs-server-shape: rounded;
   --cs-server-radius: var(--lp-icon-radius, 14px);
   --cs-server-squeeze: var(--lp-icon-squeeze, 5px);
 
@@ -102,6 +103,19 @@ nav[class*="guilds_"] svg:hover > foreignObject {
 
 [class*="guilds_"] [class*="folderIcon"] {
   border-radius: var(--cs-server-radius) !important;
+}
+
+@container style(--cs-server-shape: square) {
+  nav[class*="guilds_"] {
+    --cs-server-radius: 0px;
+    --cs-server-squeeze: 0px;
+  }
+}
+
+@container style(--cs-server-shape: circle) {
+  nav[class*="guilds_"] {
+    --cs-server-radius: 50%;
+  }
 }
 
 /* Remove circular backdrop over profile banner */
@@ -344,19 +358,19 @@ nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] 
   display: none !important;
 }
 
-[class*="avatar_"] foreignObject[width="16"] ~ g { --cs-avatar: 16px; --cs-scale: 0.75; }
-[class*="avatar_"] foreignObject[width="20"] ~ g { --cs-avatar: 20px; --cs-scale: 0.8; }
-[class*="avatar_"] foreignObject[width="24"] ~ g { --cs-avatar: 24px; --cs-scale: 0.85; }
-[class*="avatar_"] foreignObject[width="32"] ~ g { --cs-avatar: 32px; --cs-scale: 1; }
-[class*="avatar_"] foreignObject[width="40"] ~ g { --cs-avatar: 40px; --cs-scale: 0.9; }
-[class*="avatar_"] foreignObject[width="44"] ~ g { --cs-avatar: 44px; --cs-scale: 0.85; }
-[class*="avatar_"] foreignObject[width="48"] ~ g { --cs-avatar: 48px; --cs-scale: 0.8; }
-[class*="avatar_"] foreignObject[width="56"] ~ g { --cs-avatar: 56px; --cs-scale: 0.72; }
-[class*="avatar_"] foreignObject[width="72"] ~ g { --cs-avatar: 72px; --cs-scale: 0.56; }
-[class*="avatar_"] foreignObject[width="80"] ~ g { --cs-avatar: 80px; --cs-scale: 0.5; }
-[class*="avatar_"] foreignObject[width="96"] ~ g { --cs-avatar: 96px; --cs-scale: 0.45; }
-[class*="avatar_"] foreignObject[width="100"] ~ g { --cs-avatar: 100px; --cs-scale: 0.43; }
-[class*="avatar_"] foreignObject[width="120"] ~ g { --cs-avatar: 120px; --cs-scale: 0.38; }
+[class*="avatar_"] foreignObject[width="16"] ~ g { --cs-avatar: 16px; --cs-scale: 0.75; --cs-status: 6px; }
+[class*="avatar_"] foreignObject[width="20"] ~ g { --cs-avatar: 20px; --cs-scale: 0.8; --cs-status: 6px; }
+[class*="avatar_"] foreignObject[width="24"] ~ g { --cs-avatar: 24px; --cs-scale: 0.85; --cs-status: 8px; }
+[class*="avatar_"] foreignObject[width="32"] ~ g { --cs-avatar: 32px; --cs-scale: 1; --cs-status: 10px; }
+[class*="avatar_"] foreignObject[width="40"] ~ g { --cs-avatar: 40px; --cs-scale: 0.9; --cs-status: 12px; }
+[class*="avatar_"] foreignObject[width="44"] ~ g { --cs-avatar: 44px; --cs-scale: 0.85; --cs-status: 12px; }
+[class*="avatar_"] foreignObject[width="48"] ~ g { --cs-avatar: 48px; --cs-scale: 0.8; --cs-status: 12px; }
+[class*="avatar_"] foreignObject[width="56"] ~ g { --cs-avatar: 56px; --cs-scale: 0.72; --cs-status: 14px; --cs-offset: 2px; }
+[class*="avatar_"] foreignObject[width="72"] ~ g { --cs-avatar: 72px; --cs-scale: 0.56; --cs-status: 16px; --cs-offset: 4px; }
+[class*="avatar_"] foreignObject[width="80"] ~ g { --cs-avatar: 80px; --cs-scale: 0.5; --cs-status: 16px; --cs-offset: 4px; }
+[class*="avatar_"] foreignObject[width="96"] ~ g { --cs-avatar: 96px; --cs-scale: 0.45; --cs-status: 20px; --cs-offset: 6px; }
+[class*="avatar_"] foreignObject[width="100"] ~ g { --cs-avatar: 100px; --cs-scale: 0.43; --cs-status: 24px; --cs-offset: 8px; }
+[class*="avatar_"] foreignObject[width="120"] ~ g { --cs-avatar: 120px; --cs-scale: 0.38; --cs-status: 24px; --cs-offset: 8px; }
 
 [class*="avatar_"] svg[class*="mask_"] > g {
   transform: none !important;
@@ -443,9 +457,28 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#84
 section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect[fill="#593695"]) { --cs-c: var(--cs-streaming); }
 section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82858f"], [fill="#82838b"])) { --cs-c: var(--cs-invisible); }
 
-[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] {
   overflow: visible;
   pointer-events: none;
+}
+
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] > foreignObject {
+  x: calc(var(--cs-status, 10px) * -0.375);
+  y: calc(var(--cs-status, 10px) * -0.75);
+  width: var(--cs-avatar, 32px);
+  height: var(--cs-avatar, 32px);
+  overflow: visible;
+  border-radius: var(--cs-radius);
+  background: color-mix(in srgb, var(--cs-typing-scrim) calc(var(--cs-typing-dim) * 100%), transparent);
+}
+
+[class*="avatar_"] svg[class*="mask_"] > g > svg[class*="dots_"] > foreignObject {
+  x: calc(var(--cs-status, 10px) * 1.375 + var(--cs-offset, 0px) - var(--cs-avatar, 32px));
+  y: calc(var(--cs-status, 10px) * 0.75 + var(--cs-offset, 0px) - var(--cs-avatar, 32px));
+}
+
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] > foreignObject > div {
+  translate: calc((var(--cs-avatar, 32px) - 1.75 * var(--cs-status, 10px)) / 2) calc((var(--cs-avatar, 32px) - 0.5 * var(--cs-status, 10px)) / 2 - var(--cs-typing-dots-lift));
 }
 
 [class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:first-child {
