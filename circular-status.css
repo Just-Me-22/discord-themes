@@ -58,7 +58,7 @@
 
 /* Apply avatar shape everywhere */
 
-#app-mount [class*="wrapper__"] svg[class*="mask_"] > foreignObject:not([mask*="facepile"]) {
+#app-mount [class*="wrapper_"] svg[class*="mask_"] > foreignObject:not([mask*="facepile"]) {
     -webkit-mask: none !important;
     mask: none !important;
     clip-path: none !important;
@@ -66,24 +66,24 @@
     overflow: hidden !important;
 }
 
-#app-mount [class*="wrapper__"] svg[class*="mask_"] > foreignObject:not([mask*="facepile"]) img {
+#app-mount [class*="wrapper_"] svg[class*="mask_"] > foreignObject:not([mask*="facepile"]) img {
     border-radius: var(--cs-radius) !important;
     clip-path: inset(1px round var(--cs-radius)) !important;
 }
 
-#app-mount [class*="wrapper__"] > img,
-#app-mount [class*="wrapper__"] img[class*="avatar_"],
-#app-mount [class*="wrapper__"] img[class*="circularImage__"] {
+#app-mount [class*="wrapper_"] > img,
+#app-mount [class*="wrapper_"] img[class*="avatar_"],
+#app-mount [class*="wrapper_"] img[class*="circularImage_"] {
     border-radius: var(--cs-radius) !important;
 }
 
-[role="img"][class*="wrapper__"]:has(> svg[class*="avatarDecoration"]) {
+[role="img"][class*="wrapper_"]:has(> svg[class*="avatarDecoration"]) {
   --cs-corner: 0.5;
   --cs-radius: 50%;
 }
 
-[class*="message__"] img[class*="avatar_"],
-[class*="message__"] img[class*="replyAvatar_"] {
+[class*="message_"] img[class*="avatar_"],
+[class*="message_"] img[class*="replyAvatar_"] {
   border-radius: var(--cs-radius);
 }
 
@@ -119,7 +119,7 @@ nav[class*="guilds_"] svg:hover > foreignObject {
 }
 
 /* Remove circular backdrop over profile banner */
-[class*="outer_"] [class*="banner__"][style*="--custom-cutout-radius"] {
+[class*="outer_"] [class*="banner_"][style*="--custom-cutout-radius"] {
     --custom-cutout-radius: 0px !important;
 }
 
@@ -139,7 +139,7 @@ nav[class*="guilds_"] svg:hover > foreignObject {
   mask: none !important;
 }
 
-[class*="avatar_"] svg[class*="svg__"],
+[class*="avatar_"] svg[class*="svg_"],
 [class*="avatar_"] foreignObject[mask*="facepile"] {
   overflow: visible !important;
 }
@@ -174,7 +174,7 @@ nav[class*="guilds_"] svg:hover > foreignObject {
   initial-value: 0;
 }
 
-[class*="avatar_"] img[class*="circularImage__"] {
+[class*="avatar_"] img[class*="circularImage_"] {
   box-sizing: border-box;
   border: var(--cs-group-w) solid var(--cs-group);
   border-radius: var(--cs-radius);
@@ -225,7 +225,7 @@ nav[class*="privateChannels_"] a[aria-label*=", Muted"] foreignObject[mask*="fac
   border-style: dashed;
 }
 
-nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] > div[class*="container__"] {
+nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] > div[class*="container_"] {
   --cs-group-front: color-mix(in oklab, var(--cs-group-call), transparent var(--cs-call-fade));
   --cs-group-back: var(--cs-group-front);
   --cs-group-w: var(--cs-group-call-w);
@@ -246,14 +246,14 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
   border-radius: var(--cs-group-radius);
 }
 
-[class*="avatar_"] > div[class*="container__"] {
+[class*="avatar_"] > div[class*="container_"] {
   --cs-pair-len: calc((0.3333 + 2 * var(--cs-group-spread)) * 1.4142 + 0.6667);
   --cs-pair-paint: var(--cs-group-front);
   position: relative;
 }
 
 @container style(--cs-group-blend: 1) {
-  [class*="avatar_"] > [class*="container__"] {
+  [class*="avatar_"] > [class*="container_"] {
     --cs-pair-paint: linear-gradient(135deg, var(--cs-group-back), var(--cs-group-front));
   }
 
@@ -285,7 +285,7 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
     background: none;
   }
 
-  [class*="avatar_"] > [class*="container__"]::before {
+  [class*="avatar_"] > [class*="container_"]::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -297,7 +297,7 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
 }
 
 @container style(--cs-group-style: capsule) {
-  [class*="avatar_"] > [class*="container__"]::before {
+  [class*="avatar_"] > [class*="container_"]::before {
     width: calc(var(--cs-pair-len) * 100% + 2 * (var(--cs-group-pad) + var(--cs-group-w)));
     height: calc(66.67% + 2 * (var(--cs-group-pad) + var(--cs-group-w)));
     padding: var(--cs-group-w);
@@ -310,7 +310,7 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
 }
 
 @container style(--cs-group-style: segments) {
-  [class*="avatar_"] > [class*="container__"]::before {
+  [class*="avatar_"] > [class*="container_"]::before {
     --cs-seg: calc(360deg / var(--cs-group-segments));
     width: calc(var(--cs-pair-len) * 100% + 2 * (var(--cs-group-pad) + var(--cs-group-w)));
     aspect-ratio: 1;
@@ -323,25 +323,25 @@ nav[class*="privateChannels_"] foreignObject[mask*="avatar-default"] img {
   }
 }
 
-nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container__"] {
+nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container_"] {
   --cs-gs-front: var(--cs-group-front);
   --cs-gs-back: var(--cs-group-back);
 }
 
-nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container__"] > svg[class*="mask_"] {
+nav[class*="privateChannels_"] [class*="avatar_"] > [class*="container_"] > svg[class*="mask_"] {
   visibility: hidden;
 }
 
-nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container__"]::before {
+nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container_"]::before {
   transition: --cs-gs-p 500ms ease-in;
 }
 
-nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > div[class*="container__"]::before {
+nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > div[class*="container_"]::before {
   --cs-gs-p: 100%;
   animation: cs-gs-bump 200ms 500ms;
 }
 
-nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > [class*="container__"] foreignObject[mask*="facepile"] img {
+nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] > [class*="container_"] foreignObject[mask*="facepile"] img {
   --cs-group-front: var(--cs-gs-c, var(--cs-gs-front));
   --cs-group-back: var(--cs-gs-c, var(--cs-gs-back));
 }
@@ -350,11 +350,11 @@ nav[class*="privateChannels_"] [class*="interactive_"]:hover [class*="avatar_"] 
   50% { scale: var(--cs-gs-bump, 1); }
 }
 
-[class*="avatar_"] [class*="wrapper__"] > svg {
+[class*="avatar_"] [class*="wrapper_"] > svg {
   overflow: visible !important;
 }
 
-[class*="avatar_"] [class*="wrapper__"] > svg > circle {
+[class*="avatar_"] [class*="wrapper_"] > svg > circle {
   display: none !important;
 }
 
@@ -481,7 +481,7 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82
   translate: calc((var(--cs-avatar, 32px) - 1.75 * var(--cs-status, 10px)) / 2) calc((var(--cs-avatar, 32px) - 0.5 * var(--cs-status, 10px)) / 2 - var(--cs-typing-dots-lift));
 }
 
-[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:first-child {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] circle:first-child {
   cx: calc(var(--cs-avatar, 32px) / 2 - 3.75px);
   cy: calc(var(--cs-avatar, 32px) / 2 - 7.5px);
   r: calc(var(--cs-avatar, 32px) * 0.75);
@@ -490,20 +490,20 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82
   opacity: var(--cs-typing-dim) !important;
 }
 
-[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(2),
-[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(3) {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] circle:nth-child(2),
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] circle:nth-child(3) {
   cy: calc(var(--cs-avatar, 32px) / 2 - 7.5px - var(--cs-typing-dots-lift));
 }
 
-[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(2) {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] circle:nth-child(2) {
   cx: calc(var(--cs-avatar, 32px) / 2 - 6.25px);
 }
 
-[class*="avatar_"] svg[class*="mask_"] svg[class*="dots__"] circle:nth-child(3) {
+[class*="avatar_"] svg[class*="mask_"] svg[class*="dots_"] circle:nth-child(3) {
   cx: calc(var(--cs-avatar, 32px) / 2 - 1.25px);
 }
 
-[class*="avatarStack__"] [class*="avatarBorder__"] {
+[class*="avatarStack_"] [class*="avatarBorder_"] {
   box-shadow: none !important;
   background: none !important;
   box-sizing: border-box !important;
@@ -512,12 +512,12 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has(rect:is([fill="#82
   animation: cs-breathe var(--cs-breath) ease-in-out infinite;
 }
 
-section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBorder__"]) {
+section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBorder_"]) {
   --cs-c: transparent !important;
   --cs-ring-off: transparent;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"] {
+[class*="voiceUser_"] [class*="userAvatar_"] {
   --cs-vr-w: var(--cs-ring-w);
   --cs-size: 24px;
   --cs-vr-o: calc(var(--cs-ring-gap) + max(var(--cs-ring-w), var(--cs-speak-w)) + var(--cs-size) / 4);
@@ -525,8 +525,8 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBor
   background-size: 0 0;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"]::before,
-[class*="voiceUser__"] [class*="userAvatar__"]::after {
+[class*="voiceUser_"] [class*="userAvatar_"]::before,
+[class*="voiceUser_"] [class*="userAvatar_"]::after {
   content: "";
   position: absolute;
   inset: calc(-1 * var(--cs-vr-o));
@@ -534,7 +534,7 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBor
   pointer-events: none;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"]::after {
+[class*="voiceUser_"] [class*="userAvatar_"]::after {
   padding: var(--cs-vr-o);
   background-image: inherit;
   background-size: cover;
@@ -544,7 +544,7 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBor
   background-clip: content-box;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"]::before {
+[class*="voiceUser_"] [class*="userAvatar_"]::before {
   --cs-vr-c: var(--cs-ring);
   --cs-vr-r: calc(var(--cs-size) / 2 + var(--cs-ring-gap) + var(--cs-vr-b) * (var(--cs-breath-scale) - 1) * (var(--cs-size) / 2 + var(--cs-ring-gap) + var(--cs-vr-w)));
   --cs-vr-e: calc(var(--cs-vr-r) + var(--cs-vr-w) + var(--cs-glow-core) * var(--cs-size));
@@ -552,12 +552,12 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBor
   transition: --cs-vr-c var(--cs-fade);
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"] {
+[class*="voiceUser_"] [class*="userAvatar_"][style*="box-shadow:"] {
   --cs-vr-w: var(--cs-speak-w);
   box-shadow: none !important;
 }
 
-[class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
+[class*="voiceUser_"] [class*="userAvatar_"][style*="box-shadow:"]::before {
   --cs-vr-c: var(--cs-speaking);
   animation: cs-vr-breathe var(--cs-breath) ease-in-out infinite;
 }
@@ -582,14 +582,14 @@ section[class*="panels_"] [role="img"][class*="wrapper_"]:has([class*="avatarBor
     transition: none;
   }
 
-  [class*="avatarStack__"] [class*="avatarBorder__"],
-  nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] > div[class*="container__"],
-  [class*="voiceUser__"] [class*="userAvatar__"][style*="box-shadow:"]::before {
+  [class*="avatarStack_"] [class*="avatarBorder_"],
+  nav[class*="privateChannels_"] a:is([aria-label*="Ongoing Call"], [aria-label*="Incoming Call"]) [class*="avatar_"] > div[class*="container_"],
+  [class*="voiceUser_"] [class*="userAvatar_"][style*="box-shadow:"]::before {
     animation: none;
   }
 
   [class*="avatar_"] foreignObject[mask*="facepile"] img,
-  nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container__"]::before {
+  nav[class*="privateChannels_"] [class*="avatar_"] > div[class*="container_"]::before {
     transition: none;
     animation: none;
   }

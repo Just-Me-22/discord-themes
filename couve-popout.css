@@ -43,7 +43,7 @@
   --custom-cutout-radius: 0px !important;
 }
 
-.user-profile-popout [class*="inner_"] > [class*="header_"] [class*="banner__"] {
+.user-profile-popout [class*="inner_"] > [class*="header_"] [class*="banner_"] {
   height: 200px !important;
   min-height: unset !important;
   mask: none;
@@ -63,7 +63,7 @@
   left: calc(50% - 40px) !important;
 }
 
-.user-profile-popout div[class*="avatar_"] [class*="overlay__"] {
+.user-profile-popout div[class*="avatar_"] [class*="overlay_"] {
   top: 0;
   left: 0;
 }
@@ -171,7 +171,7 @@
   justify-content: center;
 }
 
-.user-profile-popout div[class*="usernameAndPronounsRow"] > div[class*="container__"] {
+.user-profile-popout div[class*="usernameAndPronounsRow"] > div[class*="container_"] {
   order: 1;
   flex: 0 0 auto;
   max-width: 100%;
@@ -250,26 +250,26 @@
   text-overflow: ellipsis;
 }
 
-.user-profile-popout [class*="card__"],
-.user-profile-popout [class*="backgroundCard__"] {
+.user-profile-popout [class*="card_"],
+.user-profile-popout [class*="backgroundCard_"] {
   border: 0;
   background: transparent;
   box-shadow: none;
 }
 
-.user-profile-popout [class*="card__"] img:not([class*="emoji"]):not([class*="Emoji"]),
+.user-profile-popout [class*="card_"] img:not([class*="emoji"]):not([class*="Emoji"]),
 .user-profile-popout [class*="contentImage"] {
   border-radius: var(--cp-chip-radius);
 }
 
-.user-profile-popout [class*="card__"] button {
+.user-profile-popout [class*="card_"] button {
   border: 0;
   border-radius: var(--cp-chip-radius);
   background: var(--cp-button-background);
   box-shadow: var(--cp-button-shadow);
 }
 
-.user-profile-popout [class*="card__"] button:hover {
+.user-profile-popout [class*="card_"] button:hover {
   background: var(--cp-button-background-hover);
 }
 
@@ -299,7 +299,7 @@
 }
 
 .user-profile-popout [class*="clickableContainer"]:hover,
-.user-profile-popout [class*="clickableContainer"]:hover [class*="card__"] {
+.user-profile-popout [class*="clickableContainer"]:hover [class*="card_"] {
   background: transparent;
 }
 
@@ -315,11 +315,11 @@
   display: none;
 }
 
-[class*="profilePreview"] a > [class*="badge__"] {
+[class*="profilePreview"] a > [class*="badge_"] {
   display: none;
 }
 
-[class*="profilePreview"] [class*="banner__"] {
+[class*="profilePreview"] [class*="banner_"] {
   -webkit-mask-image: none !important;
   mask-image: none !important;
 }
