@@ -4,7 +4,7 @@
 | | |
 |---|---|
 | `moon-rabbits.css` | Moon Rabbits Dream About Virtual. Based on Tsukino Mito Album Presentation by zuzumi-f. |
-| `lilypichu-revived.css` | LilyPichu Revived. Nyria's theme, original design by @Melonturtle_. Wants `circular-status.css` alongside it for the avatar rings. |
+| `lilypichu-revived.css` | LilyPichu Revived. Nyria's theme, original design by @Melonturtle_. Wants `circular-status.css` alongside it for the avatar rings. [Wallpaper settings](lilypichu-revived.README.md). |
 | `circular-status.css` | Circular Status. Draws the status as a ring around the avatar instead of a dot in the corner. [Readme](circular-status.README.md). |
 | `couve-popout.css` | Couve Popout. A portrait-style user popout and profile card; change it with the `--cp-` values on `.user-profile-popout`. |
 

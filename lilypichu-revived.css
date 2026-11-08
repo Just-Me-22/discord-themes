@@ -106,15 +106,30 @@ div[class*="baseLayer_"],
 div[class*="layers_"],
 [class*="baseLayer_"] > div.base_pog62O {
   font-family: var(--lp-font) !important;
-  background-color: var(--lp-frame) !important;
+  background: transparent !important;
+}
+
+[class*="baseLayer_"] > div.base_pog62O {
+  isolation: isolate;
+}
+
+[class*="baseLayer_"] > div.base_pog62O::before {
+  content: "";
+  position: fixed;
+  inset: calc(var(--lp-wallpaper-blur, 0px) * -3);
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--lp-frame);
   background-image:
-    linear-gradient(rgba(255, 255, 255, var(--lp-wallpaper-light)), rgba(255, 255, 255, var(--lp-wallpaper-light))),
-    linear-gradient(rgba(0, 0, 0, var(--lp-wallpaper-dim)), rgba(0, 0, 0, var(--lp-wallpaper-dim))),
-    var(--lp-wallpaper) !important;
-  background-position: center, center, var(--lp-wallpaper-x) var(--lp-wallpaper-y) !important;
-  background-size: cover, cover, var(--lp-wallpaper-fit) !important;
-  background-repeat: no-repeat !important;
-  background-attachment: var(--lp-wallpaper-fix) !important;
+    linear-gradient(rgba(255, 255, 255, var(--lp-wallpaper-light, 0)), rgba(255, 255, 255, var(--lp-wallpaper-light, 0))),
+    linear-gradient(rgba(0, 0, 0, var(--lp-wallpaper-dim, 0)), rgba(0, 0, 0, var(--lp-wallpaper-dim, 0))),
+    var(--lp-wallpaper, none);
+  background-position: center, center, var(--lp-wallpaper-x, 50%) var(--lp-wallpaper-y, 50%);
+  background-size: cover, cover, var(--lp-wallpaper-fit, cover);
+  background-repeat: var(--lp-wallpaper-repeat, no-repeat);
+  transform: scale(var(--lp-wallpaper-zoom, 1));
+  transform-origin: var(--lp-wallpaper-x, 50%) var(--lp-wallpaper-y, 50%);
+  filter: blur(var(--lp-wallpaper-blur, 0px));
 }
 
 .vc-channeltabs-container {
