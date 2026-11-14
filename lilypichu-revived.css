@@ -1787,12 +1787,12 @@ div[class*="base_"] > .vc-channeltabs-container-top {
 }
 
 .vc-channeltabs-container-top.vc-channeltabs-container-autohide::before {
-  transition: color var(--lp-ring-ease), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color var(--lp-ring-ease), transform 0.32s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .vc-channeltabs-container-top.vc-channeltabs-container-autohide:is(:hover, .vc-channeltabs-container-revealed)::before {
   z-index: 103;
-  transform: translateY(calc(44px * var(--tab-height-scale, 1)));
+  transform: translateY(var(--vc-tabs-shift, calc(44px * var(--tab-height-scale, 1))));
   transition-delay: 0.15s;
 }
 
@@ -2044,4 +2044,16 @@ li[class*="messageListItem"]:not(:hover) span[class*="gummyLetter_"],
 li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerContainer_"],
 li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerContainer_"]::before {
   animation: none !important;
+}
+
+.vc-typing-tweaks-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  max-width: 100%;
+  padding: 1px 8px;
+  border-radius: var(--lp-inner, 8px);
+  background: color-mix(in srgb, #000 45%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--text-default, var(--text-normal, #fff));
 }
