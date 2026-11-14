@@ -547,11 +547,12 @@ div[class*="chat_"] section[class*="title_"] {
 }
 
 main.chatContent_z_gUBg + div[class*="container"] {
+  --lp-members-lift: max(var(--lp-music-extra, 0px), var(--vc-panels-h, 0px) - var(--lp-panel-h));
   position: absolute !important;
   z-index: 1 !important;
-  top: calc(var(--lp-members-top) + var(--lp-strip-drop)) !important;
+  top: max(0px, var(--lp-members-top) + var(--lp-strip-drop) - var(--lp-members-lift)) !important;
   right: calc(-1 * (var(--lp-rail) + var(--lp-column-gap)) - var(--lp-strip-shift)) !important;
-  bottom: calc(var(--lp-music-stop) + var(--lp-music-extra, 0px)) !important;
+  bottom: calc(var(--lp-music-stop) + var(--lp-members-lift)) !important;
   left: auto !important;
   height: auto !important;
   min-height: 0 !important;
