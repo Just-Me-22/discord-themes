@@ -104,16 +104,16 @@ div[class*="app_"],
 div[class*="appMount"],
 div[class*="baseLayer_"],
 div[class*="layers_"],
-[class*="baseLayer_"] > div.base_pog62O {
+[class*="baseLayer_"] div.base_pog62O {
   font-family: var(--lp-font) !important;
   background: transparent !important;
 }
 
-[class*="baseLayer_"] > div.base_pog62O {
+[class*="baseLayer_"] div.base_pog62O {
   isolation: isolate;
 }
 
-[class*="baseLayer_"] > div.base_pog62O::before {
+[class*="baseLayer_"] div.base_pog62O::before {
   content: "";
   position: fixed;
   inset: calc(var(--lp-wallpaper-blur, 0px) * -3);
@@ -152,7 +152,7 @@ div[class*="layers_"],
   bottom: auto;
 }
 
-[class*="baseLayer_"] > div.base_pog62O {
+[class*="baseLayer_"] div.base_pog62O {
   position: relative !important;
   padding: var(--lp-shell-gap) !important;
 }
@@ -199,11 +199,12 @@ nav[class*="guilds_"],
 div[class*="sidebarList"],
 nav[class*="privateChannels_"],
 div[class*="base_"] > [class*="content_"] > div[class*="chat_"],
+div[class*="page_"] > div > div[class*="chat_"],
 main.chatContent_z_gUBg + div[class*="container"] {
   backdrop-filter: var(--lp-material) !important;
 }
 
-div[class*="base_"] > [class*="content_"] > div[class*="sidebar_"] {
+:is(div[class*="base_"] > [class*="content_"], div[class*="base_"]) > div[class*="sidebar_"] {
   display: flex !important;
   flex-direction: row !important;
   column-gap: 0 !important;
@@ -213,21 +214,25 @@ div[class*="base_"] > [class*="content_"] > div[class*="sidebar_"] {
   flex: 0 0 auto !important;
 }
 
-div[class*="base_"] > [class*="content_"] > [class*="sidebar_"] > nav[class*="guilds_"] {
+:is(div[class*="base_"] > [class*="content_"], div[class*="base_"]) > [class*="sidebar_"] > nav[class*="guilds_"] {
   order: 0 !important;
   flex: 0 0 auto !important;
 }
 
-div[class*="base_"] > [class*="content_"] > [class*="sidebar_"] > .vc-betterFolders-sidebar {
+:is(div[class*="base_"] > [class*="content_"], div[class*="base_"]) > [class*="sidebar_"] > .vc-betterFolders-sidebar {
   order: 1 !important;
   flex: 0 0 auto !important;
 }
 
-div[class*="base_"] > [class*="content_"] > [class*="sidebar_"] > div[class*="sidebarList_"] {
+:is(div[class*="base_"] > [class*="content_"], div[class*="base_"]) > [class*="sidebar_"] > div[class*="sidebarList_"] {
   order: 2 !important;
   flex: 0 0 var(--lp-channels-w) !important;
   min-width: 0 !important;
   max-width: none !important;
+}
+
+div[class*="base_"] > div[class*="sidebar_"] {
+  width: 100% !important;
 }
 
 div[class*="base_"] > div[class*="content_"] {
@@ -241,7 +246,7 @@ div[class*="base_"] > [class*="content_"] > div[class*="chat_"] {
   min-width: 0 !important;
 }
 
-[class*="content_"] > div[class*="sidebar_"] {
+:is([class*="content_"], div[class*="base_"]) > div[class*="sidebar_"] {
   --bg-base-tertiary: var(--lp-list-a);
   --background-base-lowest: var(--lp-list-a);
   --app-frame-background: var(--lp-list-a);
@@ -260,7 +265,7 @@ nav[class*="guilds_"],
   border-radius: 0 !important;
 }
 
-[class*="content_"] > div[class*="sidebar_"] {
+:is([class*="content_"], div[class*="base_"]) > div[class*="sidebar_"] {
   height: auto !important;
   height: calc(100% - var(--lp-chat-lift) - var(--lp-chat-drop)) !important;
   margin-top: var(--lp-chat-drop) !important;
@@ -1839,7 +1844,7 @@ section[class*="panels_"][class][class] {
   font-size: 11px !important;
 }
 
-[class*="content_"] > div[class*="sidebar_"]::after {
+:is([class*="content_"], div[class*="base_"]) > div[class*="sidebar_"]::after {
   background-color: transparent !important;
 }
 
