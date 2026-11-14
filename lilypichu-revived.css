@@ -1664,6 +1664,15 @@ main.chatContent_z_gUBg + div[class*="container"]:hover,
   box-shadow: inset 0 0 0 var(--lp-ring-size) var(--lp-ring) !important;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  main.chatContent_z_gUBg + div[class*="container"] {
+    transition:
+      box-shadow var(--lp-ring-ease),
+      top 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      bottom 0.3s cubic-bezier(0.23, 1, 0.32, 1) !important;
+  }
+}
+
 .vc-channeltabs-container-autohide:not(.vc-channeltabs-container-top) {
   transition: box-shadow var(--lp-ring-ease), border-radius 0.15s ease !important;
 }
