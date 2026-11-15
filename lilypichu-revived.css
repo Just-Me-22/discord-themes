@@ -2052,13 +2052,28 @@ li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerC
 }
 
 .vc-typing-tweaks-line {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 0.25em;
   max-width: 100%;
-  padding: 1px 8px;
-  border-radius: var(--lp-inner, 8px);
-  background: color-mix(in srgb, #000 45%, transparent);
-  backdrop-filter: blur(6px);
+  padding: 1px 36px 1px 10px;
   color: var(--text-default, var(--text-normal, #fff));
+}
+
+.vc-typing-tweaks-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    color-mix(in srgb, var(--lp-2) 88%, transparent) 14px,
+    color-mix(in srgb, var(--lp-2) 70%, transparent) 55%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0, #000 24%, #000 76%, transparent 100%);
 }
