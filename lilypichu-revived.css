@@ -1828,6 +1828,11 @@ section[class*="panels_"] div[class*="videoContainer_"] video {
   translate: 0 var(--lp-plate-drop) !important;
 }
 
+section[class*="panels_"] :is(img, video)[class*="account_"] {
+  opacity: var(--lp-plate-opacity, 1) !important;
+  mask-image: none !important;
+}
+
 section[class*="panels_"][class][class] div[class*="panelSubtextContainer"] {
   min-width: 0 !important;
   overflow: hidden !important;
