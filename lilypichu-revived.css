@@ -30,21 +30,42 @@
 .theme-light {
   --background-primary: var(--lp-1);
   --background-secondary: var(--lp-2);
-  --background-secondary-alt: var(--lp-3);
   --background-tertiary: var(--lp-shell);
   --background-floating: var(--lp-float);
-  --background-accent: var(--lp-accent);
   --background-mobile-primary: var(--lp-1);
   --background-mobile-secondary: var(--lp-2);
   --background-modifier-hover: var(--lp-hover);
   --background-modifier-active: var(--lp-active);
   --background-modifier-selected: var(--lp-selected);
-
   --bg-base-primary: var(--lp-1);
   --bg-base-secondary: var(--lp-2);
-
   --bg-base-tertiary: var(--lp-ambient);
   --bg-surface-overlay: var(--lp-float);
+  --text-normal: var(--lp-text);
+  --header-primary: var(--lp-text);
+  --header-secondary: var(--lp-dim);
+  --interactive-normal: var(--lp-icon);
+  --interactive-hover: var(--lp-dim);
+  --interactive-active: var(--lp-dim);
+  --brand-experiment: var(--lp-accent);
+  --button-filled-brand-background: var(--lp-accent);
+  --button-filled-brand-background-hover: var(--lp-accent-hover);
+  --toast-background: var(--lp-1a);
+  --toast-header: var(--lp-3);
+  --toast-contents: var(--lp-2);
+  --toast-border: var(--lp-2);
+  --border-faint: var(--lp-border);
+  --border-subtle: var(--lp-border);
+  --border-normal: var(--lp-border);
+  --border-strong: var(--lp-border);
+  --background-modifier-accent: var(--lp-border);
+}
+
+:root:where(:not(.custom-theme-background)),
+:where(:root:not(.custom-theme-background)) .theme-dark,
+:where(:root:not(.custom-theme-background)) .theme-light {
+  --background-secondary-alt: var(--lp-3);
+  --background-accent: var(--lp-accent);
   --bg-surface-raised: var(--lp-3);
   --background-base-lowest: var(--lp-ambient);
   --background-base-lower: var(--lp-3);
@@ -53,41 +74,22 @@
   --app-frame-background: var(--lp-ambient);
   --modal-background: var(--lp-modal);
   --modal-footer-background: var(--lp-modal);
-
-  --text-normal: var(--lp-text);
   --text-default: var(--lp-text);
   --text-muted: var(--lp-dim);
   --text-link: var(--lp-accent);
-  --header-primary: var(--lp-text);
-  --header-secondary: var(--lp-dim);
-  --interactive-normal: var(--lp-icon);
-  --interactive-hover: var(--lp-dim);
-  --interactive-active: var(--lp-dim);
   --interactive-muted: var(--lp-faint);
   --channels-default: var(--lp-text);
   --channel-icon: var(--lp-icon);
-
   --brand-500: var(--lp-accent);
-  --brand-experiment: var(--lp-accent);
-  --button-filled-brand-background: var(--lp-accent);
-  --button-filled-brand-background-hover: var(--lp-accent-hover);
-
-  --toast-background: var(--lp-1a);
-  --toast-header: var(--lp-3);
-  --toast-contents: var(--lp-2);
-  --toast-border: var(--lp-2);
-
-  --border-faint: var(--lp-border);
-  --border-subtle: var(--lp-border);
-  --border-normal: var(--lp-border);
-  --border-strong: var(--lp-border);
-  --background-modifier-accent: var(--lp-border);
-
   --scrollbar-auto-thumb: var(--lp-shell);
   --scrollbar-auto-track: var(--lp-3);
   --scrollbar-thin-thumb: var(--lp-shell);
   --scrollbar-thin-track: transparent;
+}
 
+:root,
+.theme-dark,
+.theme-light {
   --radius-xs: var(--lp-radius);
   --radius-sm: var(--lp-radius);
   --radius-md: var(--lp-radius);
@@ -97,6 +99,92 @@
 
   --font-primary: var(--lp-font);
   --font-display: var(--lp-font);
+}
+
+:root.custom-theme-background {
+  --lp-1: var(--background-surface-high);
+  --lp-2: var(--background-base-low);
+  --lp-3: var(--background-base-lower);
+  --lp-shell: var(--background-base-lowest);
+  --lp-float: var(--background-surface-higher);
+  --lp-list-bg: var(--background-base-lower);
+  --lp-member-strip: var(--background-base-low);
+  --lp-modal: var(--modal-background);
+  --lp-ambient: var(--background-base-lowest);
+  --lp-text: var(--text-default);
+  --lp-dim: var(--text-muted);
+  --lp-icon: var(--interactive-icon-default);
+  --lp-faint: var(--interactive-muted);
+  --lp-petal: var(--interactive-icon-default);
+  --lp-hover: var(--background-mod-subtle);
+  --lp-active: var(--background-mod-normal);
+  --lp-selected: var(--background-mod-strong);
+  --lp-accent: var(--brand-500);
+  --lp-accent-hover: var(--brand-560);
+  --lp-badge: var(--status-danger);
+  --lp-composer-divider: var(--background-mod-normal);
+  --lp-composer-focus: var(--background-mod-strong);
+  --lp-composer-send: var(--brand-500);
+  --lp-composer-send-rest: var(--background-mod-subtle);
+
+  --lp-tint-strength: 60%;
+  --lp-tint-shade: rgb(0 0 0 / 50%);
+  --lp-tint-from: color-mix(in srgb, var(--custom-theme-primary-color, var(--brand-500)) var(--lp-tint-strength), transparent);
+  --lp-tint-to: color-mix(in srgb, var(--custom-theme-secondary-color, var(--brand-500)) var(--lp-tint-strength), transparent);
+  --lp-tint-span: calc((100vw + 100vh) * 0.7071);
+  --lp-ring: color-mix(in oklch, var(--custom-theme-primary-color, var(--brand-500)), var(--custom-theme-secondary-color, var(--brand-500)));
+
+  --background-gradient-app-frame: initial;
+  --background-gradient-chat: initial;
+  --background-gradient-lowest: initial;
+  --background-gradient-lower: initial;
+  --background-gradient-low: initial;
+  --background-gradient-high: initial;
+  --background-gradient-higher: initial;
+  --background-gradient-highest: initial;
+}
+
+:root.custom-theme-background.theme-light {
+  --lp-tint-shade: rgb(255 255 255 / 50%);
+}
+
+:root.custom-theme-background,
+:root.custom-theme-background :is(.theme-dark, .theme-darker, .theme-light, .theme-midnight) {
+  --app-frame-border: transparent !important;
+  --border-subtle: transparent !important;
+  --border-normal: transparent !important;
+  --border-strong: transparent !important;
+  --border-muted: transparent !important;
+  --chat-border: transparent !important;
+  --card-border-default: transparent !important;
+}
+
+:root.custom-theme-background .theme-dark,
+:root.custom-theme-background .theme-light {
+  --lp-1: inherit;
+  --lp-2: inherit;
+  --lp-3: inherit;
+  --lp-shell: inherit;
+  --lp-float: inherit;
+  --lp-list-bg: inherit;
+  --lp-member-strip: inherit;
+  --lp-modal: inherit;
+  --lp-ambient: inherit;
+  --lp-text: inherit;
+  --lp-dim: inherit;
+  --lp-icon: inherit;
+  --lp-faint: inherit;
+  --lp-petal: inherit;
+  --lp-hover: inherit;
+  --lp-active: inherit;
+  --lp-selected: inherit;
+  --lp-accent: inherit;
+  --lp-accent-hover: inherit;
+  --lp-badge: inherit;
+  --lp-composer-divider: inherit;
+  --lp-composer-focus: inherit;
+  --lp-composer-send: inherit;
+  --lp-composer-send-rest: inherit;
 }
 
 body,
@@ -155,6 +243,10 @@ div[class*="layers_"],
 [class*="baseLayer_"] div.base_pog62O {
   position: relative !important;
   padding: var(--lp-shell-gap) !important;
+}
+
+div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) {
+  z-index: 2;
 }
 
 div[class*="base_"] > div[class*="bar_"] {
@@ -286,6 +378,7 @@ div[class*="chat_"],
 }
 
 .page_pog62O > * > div[class*="chat_"] {
+  border-width: 0 !important;
   position: relative !important;
   margin-top: var(--lp-chat-drop) !important;
   margin-left: calc(var(--lp-seam) + var(--lp-chat-nudge)) !important;
@@ -696,6 +789,10 @@ div.base_pog62O {
   --custom-app-panels-height: var(--lp-panel-h) !important;
 }
 
+div[class*="base_"] > div[class*="sidebar_"] {
+  --custom-app-panels-height: 0px !important;
+}
+
 section[class*="panels_"] #vc-spotify-player {
   --blur-amount: var(--lp-cover-blur);
   background: transparent !important;
@@ -830,7 +927,9 @@ nav[class*="guilds_"] div[class*="folderIcon"]:hover {
 
 nav[class*="guilds_"] div[class*="scroller"],
 [class*="tree_"] > div[class*="scroller"] {
-  padding: 8px 8px 130px !important;
+  padding: 8px 0 130px !important;
+  scrollbar-width: none !important;
+  scrollbar-gutter: auto !important;
 }
 
 div[class*="numberBadge"] {
@@ -2076,4 +2175,180 @@ li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerC
     transparent 100%
   );
   mask-image: linear-gradient(to bottom, transparent 0, #000 24%, #000 76%, transparent 100%);
+}
+
+:root.custom-theme-background :is(
+  .vc-channeltabs-container,
+  div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]),
+  div[class*="chat_"],
+  .peopleColumn_zrUwGA,
+  .page_pog62O > [class*="shop_"],
+  .page_pog62O > div[class*="container_"],
+  main.chatContent_z_gUBg + div[class*="container"],
+  section[class*="panels_"][class][class]
+) {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-width: 0 !important;
+  isolation: isolate;
+}
+
+:root.custom-theme-background :is([class*="content_"], div[class*="base_"]) > div[class*="sidebar_"] {
+  background-image: none !important;
+}
+
+:root.custom-theme-background div[class*="sidebar_"] :is(nav[class*="guilds_"], div[class*="sidebarList"]) {
+  --bg-base-tertiary: transparent;
+  --background-base-lowest: transparent;
+  --app-frame-background: transparent;
+  position: relative;
+  isolation: isolate;
+  background-image: none !important;
+}
+
+:root.custom-theme-background div[class*="sidebar_"] nav[class*="guilds_"] {
+  --lp-tint-at: 160px;
+}
+
+:root.custom-theme-background div[class*="sidebar_"] .vc-betterFolders-sidebar nav[class*="guilds_"] {
+  --lp-tint-at: 250px;
+}
+
+:root.custom-theme-background div[class*="sidebar_"] div[class*="sidebarList"] {
+  --lp-tint-at: 300px;
+}
+
+:root.custom-theme-background :is(nav[class*="privateChannels_"], div[class*="sidebarList"]) [class*="searchBar_"] {
+  background: transparent !important;
+}
+
+:root.custom-theme-background :is(
+  nav[class*="guilds_"],
+  div[class*="sidebarList"],
+  nav[class*="privateChannels_"],
+  div[class*="sidebarList"] > nav[class*="container_"],
+  div[class*="sidebar_"] > [class*="container_"],
+  div[class*="sidebarList"] header:is(h3, header)[class*="header_"],
+  nav[class*="privateChannels_"] :is(h3, header)[class*="header_"],
+  main[class*="chatContent"]
+) {
+  background-color: transparent !important;
+}
+
+:root.custom-theme-background .vc-channeltabs-container {
+  --lp-tint-at: 18px;
+}
+
+:root.custom-theme-background .vc-channeltabs-container-autohide .vc-channeltabs-tab-container {
+  --lp-tint-at: 58px;
+  background-color: transparent !important;
+  isolation: isolate;
+}
+
+:root.custom-theme-background :is(
+  .vc-channeltabs-container,
+  .vc-channeltabs-container-autohide .vc-channeltabs-tab-container,
+  div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]),
+  div[class*="sidebar_"] nav[class*="guilds_"],
+  div[class*="sidebar_"] div[class*="sidebarList"],
+  div[class*="chat_"],
+  .peopleColumn_zrUwGA,
+  .page_pog62O > [class*="shop_"],
+  .page_pog62O > div[class*="container_"],
+  main.chatContent_z_gUBg + div[class*="container"],
+  section[class*="panels_"][class][class]
+)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--lp-tint-shade), var(--lp-tint-shade)),
+    repeating-linear-gradient(135deg in oklch, var(--lp-tint-from) calc(var(--lp-tint-at, 0px) * -0.7071), var(--lp-tint-to) calc(var(--lp-tint-span) - var(--lp-tint-at, 0px) * 0.7071), var(--lp-tint-from) calc(var(--lp-tint-span) * 2 - var(--lp-tint-at, 0px) * 0.7071));
+  background-size: 100% 100%, calc(100% + (100vw + 100vh) * 2) 100%;
+  background-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root.custom-theme-background :is(
+    .vc-channeltabs-container,
+    .vc-channeltabs-container-autohide .vc-channeltabs-tab-container,
+    div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]),
+    div[class*="sidebar_"] nav[class*="guilds_"],
+    div[class*="sidebar_"] div[class*="sidebarList"],
+    div[class*="chat_"],
+    .peopleColumn_zrUwGA,
+    .page_pog62O > [class*="shop_"],
+    .page_pog62O > div[class*="container_"],
+    main.chatContent_z_gUBg + div[class*="container"],
+    section[class*="panels_"][class][class]
+  )::after {
+    animation: lp-tint-drift 60s linear infinite;
+  }
+}
+
+@keyframes lp-tint-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 0, calc((100vw + 100vh) * -2) 0;
+  }
+}
+
+:root.custom-theme-background section[class*="panels_"][class][class]::after {
+  inset: auto 0 var(--lp-panel-h) 0;
+  height: 100vh;
+  border-radius: 0;
+}
+
+:root.custom-theme-background :is(.vc-channeltabs-tab-selected, .vc-channeltabs-group-selected) {
+  background-color: color-mix(in srgb, var(--vc-channeltabs-guild, transparent) 26%, var(--background-mod-strong));
+  border-color: transparent;
+}
+
+:root.custom-theme-background div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) {
+  --lp-tint-at: 120px;
+}
+
+:root.custom-theme-background .vc-channeltabs-tab.vc-channeltabs-tab-mention {
+  outline-color: var(--lp-ring);
+  background-color: color-mix(in srgb, var(--lp-ring) 22%, transparent);
+}
+
+:root.custom-theme-background :is(div[class*="chat_"], .peopleColumn_zrUwGA, .page_pog62O > [class*="shop_"], .page_pog62O > div[class*="container_"]) {
+  --lp-tint-at: calc(var(--lp-channels-w) + 300px);
+}
+
+:root.custom-theme-background main.chatContent_z_gUBg + div[class*="container"] {
+  --lp-tint-at: calc(100vw - var(--lp-shell-gap) - var(--lp-chat-trim) + var(--lp-strip-shift) - var(--lp-rail) + 185px);
+}
+
+:root.custom-theme-background section[class*="panels_"][class][class] {
+  --lp-tint-at: calc(100vw - var(--lp-shell-gap) - var(--lp-chat-trim) + var(--lp-strip-shift) - var(--lp-rail) - var(--lp-shell-gap) - var(--lp-chat-lift) + var(--lp-strip-drop) - var(--lp-panel-h));
+  background-image: linear-gradient(var(--lp-userpanel-a), var(--lp-userpanel-a)) !important;
+  background-size: 100% var(--lp-panel-h) !important;
+  background-position: bottom !important;
+  background-repeat: no-repeat !important;
+}
+
+:root.custom-theme-background section[class*="panels_"][class][class] > :not(:last-child) {
+  --background-surface-high: transparent;
+  --background-surface-higher: transparent;
+  --background-surface-highest: transparent;
+  --background-base-low: transparent;
+  --background-base-lower: transparent;
+  --background-base-lowest: transparent;
+}
+
+:root.custom-theme-background section[class*="panels_"][class][class] > :not(:last-child),
+:root.custom-theme-background section[class*="panels_"][class][class] > :not(:last-child) > div {
+  background-color: transparent !important;
+}
+
+:root.custom-theme-background section[class*="panels_"] [class*="postEnrollmentBackground"] {
+  background: transparent !important;
+  border-color: transparent !important;
 }
