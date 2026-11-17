@@ -2380,6 +2380,8 @@ li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerC
   --lp-island-b: color-mix(in srgb, var(--lp-ring) var(--lp-island-tint), transparent);
   --lp-island-c: color-mix(in srgb, var(--lp-island-to) var(--lp-island-tint), transparent);
   --lp-island-sheen: linear-gradient(rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
+  --lp-glint: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.26), transparent);
+  --lp-reply-ring: linear-gradient(90deg in oklch, var(--lp-island-from), var(--lp-ring), var(--lp-island-to));
   --lp-island-bg: var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-a), var(--lp-island-c));
   --lp-island-shadow: none;
   --lp-island-from: var(--lp-accent);
@@ -2438,7 +2440,7 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   height: var(--lp-island-size) !important;
   padding: 0 !important;
   border-radius: 50% !important;
-  background: var(--lp-island-sheen), linear-gradient(var(--lp-island-a), var(--lp-island-a)) !important;
+  background: var(--lp-glint) var(--lp-glint-x) 0 / 120px 100% no-repeat, var(--lp-island-sheen), linear-gradient(var(--lp-island-a), var(--lp-island-a)) !important;
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"] [class*="attachButton"] {
@@ -2459,7 +2461,7 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   position: relative !important;
   padding: 6px 18px !important;
   border-radius: calc(var(--lp-island-size) / 2) !important;
-  background: var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-a), var(--lp-island-b)) !important;
+  background: var(--lp-glint) var(--lp-glint-x) 0 / 120px 100% no-repeat, var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-a), var(--lp-island-b)) !important;
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::before,
@@ -2479,7 +2481,9 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::after {
-  background: linear-gradient(90deg in oklch, var(--lp-ring), var(--lp-island-to));
+  --lp-turn: var(--vc-composer-turn, 0deg);
+  --lp-wheel: conic-gradient(from calc(var(--lp-turn) + 0 * var(--vc-composer-turn)) in oklch, var(--lp-island-from), var(--lp-island-to) 25%, var(--lp-island-from) 50%, var(--lp-island-to) 75%, var(--lp-island-from));
+  background: var(--lp-wheel, linear-gradient(90deg in oklch, var(--lp-ring), var(--lp-island-to)));
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]:focus-within::before {
@@ -2525,6 +2529,14 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
     transition: opacity 0.35s ease;
   }
 
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::after {
+    transition: opacity 0.35s ease, --lp-turn 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"] {
+    transition: border-radius 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
   main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[aria-label="Send Message"] {
     transition: transform var(--lp-island-ease), filter var(--lp-island-ease) !important;
   }
@@ -2538,7 +2550,15 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   }
 
   main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] .stackedBars_2x8-Qn > * {
-    animation: lp-reply-in 0.16s cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation: lp-reply-in 0.22s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="replyBar_"] > * {
+    animation: lp-reply-text 0.18s cubic-bezier(0.23, 1, 0.32, 1) 0.06s backwards;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] > [class*="characterCount_"] {
+    animation: lp-count-in 0.16s cubic-bezier(0.23, 1, 0.32, 1) both;
   }
 }
 
@@ -2604,7 +2624,7 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]) {
-  background: var(--lp-island-send) !important;
+  background: var(--lp-glint) var(--lp-glint-x) 0 / 120px 100% no-repeat, var(--lp-island-send) !important;
   color: #fff !important;
   transform: none !important;
 }
@@ -2680,7 +2700,7 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   inset: 0 calc(var(--lp-island-size) + var(--lp-island-gap)) 0 0;
   z-index: -1;
   border-radius: calc(var(--lp-island-size) / 2);
-  background: var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-b), var(--lp-island-c));
+  background: var(--lp-glint) var(--lp-glint-x) 0 / 120px 100% no-repeat, var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-b), var(--lp-island-c));
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]::after {
@@ -2716,22 +2736,52 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   height: var(--lp-island-size) !important;
   margin: 0 0 0 var(--lp-island-gap) !important;
   border-radius: 50% !important;
-  background: var(--lp-island-sheen), linear-gradient(var(--lp-island-c), var(--lp-island-c)) !important;
+  position: relative !important;
+  background: var(--lp-glint) var(--lp-glint-x) 0 / 120px 100% no-repeat, var(--lp-island-sheen), linear-gradient(var(--lp-island-c), var(--lp-island-c)) !important;
   box-shadow: none !important;
 }
 
 @keyframes lp-reply-in {
   from {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes lp-reply-text {
+  from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(6px);
+  }
+}
+
+@keyframes lp-count-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
   }
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="clipContainer_"] > [class*="container_"] {
   position: relative !important;
+  padding-top: 4px !important;
   border-radius: 16px 16px 0 0 !important;
-  background: linear-gradient(rgb(0 0 0 / 0.18), rgb(0 0 0 / 0.18)), var(--lp-island-bg) !important;
+  background: linear-gradient(rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.08)), linear-gradient(90deg in oklch, var(--lp-island-a), var(--lp-island-b)) !important;
   box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="threadSuggestionBar_"] {
+  border-top: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] :is([class*="replyBar_"], [class*="threadSuggestionBar_"]) [class*="text_"] {
+  margin-inline-start: 18px !important;
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="clipContainer_"] > [class*="container_"]::after {
@@ -2741,9 +2791,13 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   padding: 2px 2px 0;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(90deg in oklch, var(--lp-ring), var(--lp-island-to));
+  background: var(--lp-reply-ring);
   opacity: 0.6;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] [class*="clipContainer_"] > [class*="container_"]::after {
+  opacity: 1;
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"] {
@@ -2757,10 +2811,11 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"]::after {
   padding-top: 0;
+  background: var(--lp-reply-ring);
   opacity: 0.6;
 }
 
-main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"]:focus-within::after {
+main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"]::after {
   opacity: 1;
 }
 
@@ -2805,15 +2860,30 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.4) !important;
 }
 
-main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="characterCount_"] {
-  top: -8px !important;
-  bottom: auto !important;
-  inset-inline-end: 18px !important;
-  padding: 1px 8px !important;
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="charCountShowing_"] div[class*="textArea_"] {
+  padding-bottom: 32px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] > [class*="characterCount_"] {
+  top: auto !important;
+  bottom: 6px !important;
+  inset-inline-end: calc(var(--vc-composer-end-w, var(--lp-island-end)) + var(--lp-island-gap) + 12px) !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  height: 22px !important;
+  padding: 0 9px !important;
   border-radius: 999px !important;
-  background: color-mix(in srgb, var(--lp-shell) 90%, transparent) !important;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)), color-mix(in srgb, var(--lp-shell) 85%, transparent) !important;
   box-shadow: none !important;
-  font-size: 12px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] > [class*="characterCount_"] [class*="flairContainer_"] {
+  height: auto !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] > [class*="characterCount_"] [class*="upsell_"] {
+  margin: 0 !important;
 }
 
 main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="channelTextAreaDisabled"] :is([class*="attachWrapper"], div[class*="buttons_"]) {
@@ -2838,6 +2908,224 @@ main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] 
   border-radius: 0 !important;
   background: transparent !important;
   overflow: visible !important;
+}
+
+@property --lp-turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --lp-fill {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --lp-glint-x {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: -140px;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :not(:last-child) {
+  opacity: 0;
+  transform: translateX(12px) scale(0.8);
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]:is(:hover, :focus-within) > :not(:last-child) {
+  opacity: 1;
+  transform: none;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(2 of div:not([class*="separator_"])) {
+  --lp-i: 0;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(3 of div:not([class*="separator_"])) {
+  --lp-i: 1;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(4 of div:not([class*="separator_"])) {
+  --lp-i: 2;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(5 of div:not([class*="separator_"])) {
+  --lp-i: 3;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(6 of div:not([class*="separator_"])) {
+  --lp-i: 4;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(7 of div:not([class*="separator_"])) {
+  --lp-i: 5;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :nth-last-child(n + 8 of div:not([class*="separator_"])) {
+  --lp-i: 6;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :last-child::after {
+  --lp-fill: var(--vc-composer-fill, 0);
+  --lp-charge: var(--lp-ring);
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(var(--lp-charge) calc(var(--lp-fill) * 1turn), rgb(255 255 255 / 0.12) 0);
+  opacity: clamp(0, calc(var(--lp-fill) * 1000), 1);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="charCountShowing_"] div[class*="buttons_"] > :last-child::after {
+  --lp-charge: var(--status-warning, #f0b232);
+}
+
+main[class*="chatContent"] > form[class*="form_"][data-vc-composer-over] div[class*="channelTextArea"] div[class*="buttons_"] > :last-child::after {
+  --lp-charge: var(--status-danger, #da373c);
+}
+
+main[class*="chatContent"] > form[class*="form_"][data-vc-composer-over] div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]) {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--status-danger, #da373c) 70%, #000), var(--status-danger, #da373c)) !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :not(:last-child) {
+    transition: opacity 0.1s cubic-bezier(0.23, 1, 0.32, 1), transform 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]:is(:hover, :focus-within) > :not(:last-child) {
+    transition: opacity 0.24s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--lp-i, 6) * 35ms), transform 0.24s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--lp-i, 6) * 35ms);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :last-child::after {
+    transition: --lp-fill 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"][data-vc-composer-over] div[class*="channelTextArea"] div[class*="buttons_"] > :last-child {
+    animation: lp-send-no 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] [class*="attachWrapper"] {
+    animation: lp-glint 0.6s cubic-bezier(0.23, 1, 0.32, 1), lp-breathe-left 0.36s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] div[class*="textArea_"] {
+    animation: lp-glint 0.6s cubic-bezier(0.23, 1, 0.32, 1) 70ms;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] div[class*="buttons_"] {
+    animation: lp-breathe-right 0.36s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] div[class*="buttons_"]::before {
+    animation: lp-glint 0.6s cubic-bezier(0.23, 1, 0.32, 1) 140ms;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] div[class*="buttons_"] > :last-child,
+  main[class*="chatContent"] > form[class*="form_"]:focus-within div[class*="channelTextArea"] [aria-label="Send Message"] {
+    animation: lp-glint 0.6s cubic-bezier(0.23, 1, 0.32, 1) 210ms;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] [aria-label="Send a gift"]:hover [class*="lottieIcon_"],
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] .vc-chatbar-button:hover svg {
+    animation: lp-tool-hop 0.34s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] [aria-label="Open GIF picker"]:hover [class*="lottieIcon_"] {
+    animation: lp-tool-flip 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] [class*="stickerButton_"]:hover [class*="lottieIcon_"] {
+    transform-origin: 20% 80%;
+    animation: lp-tool-peel 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] [class*="emojiButton_"]:hover [class*="spriteContainer_"] {
+    animation: lp-tool-wiggle 0.42s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] .app-launcher-entrypoint:hover [class*="lottieIcon_"] {
+    animation: lp-tool-turn 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@keyframes lp-glint {
+  to {
+    --lp-glint-x: calc(100% + 140px);
+  }
+}
+
+@keyframes lp-breathe-left {
+  40% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes lp-breathe-right {
+  40% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes lp-send-no {
+  20% {
+    transform: translateX(-4px);
+  }
+
+  45% {
+    transform: translateX(4px);
+  }
+
+  70% {
+    transform: translateX(-2px);
+  }
+}
+
+@keyframes lp-tool-hop {
+  35% {
+    transform: translateY(-4px) rotate(-12deg);
+  }
+
+  70% {
+    transform: translateY(0) rotate(4deg);
+  }
+}
+
+@keyframes lp-tool-flip {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes lp-tool-peel {
+  45% {
+    transform: rotate(10deg) scale(1.14);
+  }
+}
+
+@keyframes lp-tool-wiggle {
+  25% {
+    transform: rotate(-12deg);
+  }
+
+  55% {
+    transform: rotate(9deg);
+  }
+
+  80% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes lp-tool-turn {
+  to {
+    transform: rotate(90deg);
+  }
 }
 
 @property --lp-drop-turn {
