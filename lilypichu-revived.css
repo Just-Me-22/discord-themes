@@ -251,12 +251,11 @@ div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) {
   z-index: 2;
 }
 
-div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]),
-div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) > [class*="title_"] {
-  -webkit-app-region: no-drag !important;
+div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) {
+  -webkit-app-region: initial !important;
 }
 
-div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) [class*="title_"] > [class*="title_"] {
+div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) > [class*="title_"] {
   -webkit-app-region: drag !important;
 }
 
