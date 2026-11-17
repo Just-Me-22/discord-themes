@@ -133,6 +133,8 @@
   --lp-tint-to: color-mix(in srgb, var(--custom-theme-secondary-color, var(--brand-500)) var(--lp-tint-strength), transparent);
   --lp-tint-span: calc((100vw + 100vh) * 0.7071);
   --lp-ring: color-mix(in oklch, var(--custom-theme-primary-color, var(--brand-500)), var(--custom-theme-secondary-color, var(--brand-500)));
+  --lp-island-from: var(--custom-theme-primary-color, var(--brand-500));
+  --lp-island-to: var(--custom-theme-secondary-color, var(--brand-500));
 
   --background-gradient-app-frame: initial;
   --background-gradient-chat: initial;
@@ -247,6 +249,15 @@ div[class*="layers_"],
 
 div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) {
   z-index: 2;
+}
+
+div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]),
+div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) > [class*="title_"] {
+  -webkit-app-region: no-drag !important;
+}
+
+div[class*="base_"] > div[class*="bar_"]:not([class*="sidebar_"]) [class*="title_"] > [class*="title_"] {
+  -webkit-app-region: drag !important;
 }
 
 div[class*="base_"] > div[class*="bar_"] {
@@ -2322,6 +2333,10 @@ li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerC
   --lp-tint-at: calc(var(--lp-channels-w) + 300px);
 }
 
+:root.custom-theme-background .page_pog62O > * > div[class*="chat_"] {
+  isolation: auto;
+}
+
 :root.custom-theme-background main.chatContent_z_gUBg + div[class*="container"] {
   --lp-tint-at: calc(100vw - var(--lp-shell-gap) - var(--lp-chat-trim) + var(--lp-strip-shift) - var(--lp-rail) + 185px);
 }
@@ -2351,4 +2366,530 @@ li[class*="messageListItem"]:not(:hover) [class*="dnsFont_"] span[class*="innerC
 :root.custom-theme-background section[class*="panels_"] [class*="postEnrollmentBackground"] {
   background: transparent !important;
   border-color: transparent !important;
+}
+
+:root {
+  --lp-island-width: 92%;
+  --lp-island-hang: -8px;
+  --lp-island-size: 44px;
+  --lp-island-gap: 8px;
+  --lp-island-end: 82px;
+  --lp-island-open: 460px;
+  --lp-island-tint: 16%;
+  --lp-island-a: color-mix(in srgb, var(--lp-island-from) var(--lp-island-tint), transparent);
+  --lp-island-b: color-mix(in srgb, var(--lp-ring) var(--lp-island-tint), transparent);
+  --lp-island-c: color-mix(in srgb, var(--lp-island-to) var(--lp-island-tint), transparent);
+  --lp-island-sheen: linear-gradient(rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
+  --lp-island-bg: var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-a), var(--lp-island-c));
+  --lp-island-shadow: none;
+  --lp-island-from: var(--lp-accent);
+  --lp-island-to: var(--lp-composer-send);
+  --lp-island-send: linear-gradient(135deg in oklch, var(--lp-island-from), var(--lp-island-to));
+  --lp-island-ease: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+div[class*="chat_"] main[class*="chatContent"][class] {
+  overflow: visible !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] {
+  --lp-composer-hint: 0.5;
+  z-index: 4;
+  margin-bottom: calc(-1 * var(--lp-island-hang)) !important;
+  padding-bottom: 0 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] {
+  max-width: var(--lp-island-width);
+  margin-inline: auto !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="scrollableContainer"][class][class] {
+  margin: -8px -12px -16px !important;
+  padding: 8px 12px 16px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  scrollbar-width: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="inner_"] {
+  flex-wrap: nowrap !important;
+  align-items: flex-end !important;
+  gap: var(--lp-island-gap) !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] :is([class*="attachWrapper"], div[class*="textArea_"], div[class*="buttons_"]) {
+  box-sizing: border-box !important;
+  min-height: var(--lp-island-size) !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: var(--lp-island-shadow) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"] {
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 var(--lp-island-size) !important;
+  width: var(--lp-island-size) !important;
+  height: var(--lp-island-size) !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: var(--lp-island-sheen), linear-gradient(var(--lp-island-a), var(--lp-island-a)) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"] [class*="attachButton"] {
+  position: static !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"] {
+  order: 0 !important;
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  position: relative !important;
+  padding: 6px 18px !important;
+  border-radius: calc(var(--lp-island-size) / 2) !important;
+  background: var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-a), var(--lp-island-b)) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::before,
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::before {
+  background: linear-gradient(90deg in oklch, var(--lp-island-from), color-mix(in oklch, var(--lp-island-from), var(--lp-ring)));
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::after {
+  background: linear-gradient(90deg in oklch, var(--lp-ring), var(--lp-island-to));
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]:focus-within::before {
+  opacity: 1;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]:not(:has([class*="placeholder"]))::before {
+  opacity: 0;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]:not(:has([class*="placeholder"]))::after {
+  opacity: 0.6;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]:not(:has([class*="placeholder"])):focus-within::after {
+  opacity: 1;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"]:hover,
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]:hover {
+  filter: brightness(1.2);
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"]:hover svg {
+  transform: rotate(90deg);
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"]:active {
+  transform: scale(0.94);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] :is([class*="attachWrapper"], div[class*="buttons_"]) {
+    transition: filter var(--lp-island-ease), transform var(--lp-island-ease) !important;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="attachWrapper"] svg {
+    transition: transform var(--lp-island-ease);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::before,
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"]::after {
+    transition: opacity 0.35s ease;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[aria-label="Send Message"] {
+    transition: transform var(--lp-island-ease), filter var(--lp-island-ease) !important;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] {
+    transition: max-width var(--lp-island-ease), filter var(--lp-island-ease) !important;
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]::after {
+    transition: transform var(--lp-island-ease);
+  }
+
+  main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] .stackedBars_2x8-Qn > * {
+    animation: lp-reply-in 0.16s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] .stackedBars_2x8-Qn {
+  width: auto !important;
+  margin: 0 calc(var(--vc-composer-end-w, var(--lp-island-end)) + var(--lp-island-gap)) 0 calc(var(--lp-island-size) + var(--lp-island-gap)) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="channelAttachmentArea"] {
+  margin: 0 calc(var(--vc-composer-end-w, var(--lp-island-end)) + var(--lp-island-gap)) var(--lp-island-gap) calc(var(--lp-island-size) + var(--lp-island-gap)) !important;
+  padding: 14px !important;
+  border-radius: calc(var(--lp-island-size) / 2) !important;
+  background: var(--lp-island-bg) !important;
+  box-shadow: var(--lp-island-shadow) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] [class*="typing_"] {
+  top: auto !important;
+  bottom: calc(100% + 4px) !important;
+  left: calc(4% + var(--lp-island-size) + var(--lp-island-gap) + 8px) !important;
+  right: 8% !important;
+  height: auto !important;
+  overflow: visible !important;
+  background: transparent !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] .vc-typing-tweaks-line {
+  padding: 3px 14px 3px 10px;
+  border-radius: 999px;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)), color-mix(in srgb, var(--lp-shell) 70%, transparent);
+}
+
+main[class*="chatContent"] > form[class*="form_"] .vc-typing-tweaks-line::before {
+  content: none;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] button {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="textArea_"] div[class*="placeholder"] {
+  left: 18px !important;
+  right: 18px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[aria-label="Send Message"] {
+  justify-content: center !important;
+  width: calc(var(--lp-island-size) - 8px) !important;
+  height: calc(var(--lp-island-size) - 8px) !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[aria-label="Send Message"]::before {
+  content: none;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[aria-label="Send Message"][class*="disabled"] {
+  transform: scale(0.86) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]) {
+  background: var(--lp-island-send) !important;
+  color: #fff !important;
+  transform: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]):hover {
+  filter: brightness(1.15);
+  transform: scale(1.06) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [aria-label="Send Message"]:not([class*="disabled"]):active {
+  transform: translateX(2px) scale(0.94) !important;
+}
+
+:root {
+  --lp-glass-top: rgb(255 255 255 / 0.14);
+  --lp-glass-bottom: rgb(255 255 255 / 0.05);
+  --lp-glass-edge: inset 0 1px 0 rgb(255 255 255 / 0.18);
+}
+
+section[class*="panels_"] [class*="actionButtons_"] [class*="buttonColor_"] {
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)), color-mix(in srgb, var(--lp-shell) 30%, transparent) !important;
+  box-shadow: var(--lp-glass-edge) !important;
+  color: var(--lp-text) !important;
+  transition: filter var(--lp-composer-ease), transform var(--lp-composer-ease) !important;
+}
+
+section[class*="panels_"] [class*="actionButtons_"] [class*="buttonColor_"]:hover {
+  filter: brightness(1.25);
+}
+
+section[class*="panels_"] [class*="actionButtons_"] [class*="buttonColor_"]:active {
+  transform: scale(0.97);
+}
+
+section[class*="panels_"] [class*="actionButtons_"] [class*="buttonActive_"] {
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)), color-mix(in srgb, var(--lp-ring) 60%, transparent) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="inner_"] > :is([class*="uploadInput"], [class*="hiddenAppLauncherAnchor"]) {
+  position: absolute !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] :is([class*="attachWrapper"], div[class*="buttons_"]) {
+  align-self: flex-end !important;
+  top: auto !important;
+  bottom: 0 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] {
+  isolation: isolate;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0 !important;
+  max-width: var(--lp-island-end) !important;
+  height: auto !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border-radius: calc(var(--lp-island-size) / 2) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]:is(:hover, :focus-within) {
+  max-width: var(--lp-island-open) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(var(--lp-island-size) + var(--lp-island-gap)) 0 0;
+  z-index: -1;
+  border-radius: calc(var(--lp-island-size) / 2);
+  background: var(--lp-island-sheen), linear-gradient(90deg in oklch, var(--lp-island-b), var(--lp-island-c));
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]::after {
+  content: "";
+  order: 1;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  background: currentColor;
+  opacity: 0.7;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 6l-6 6 6 6'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"]:is(:hover, :focus-within)::after {
+  transform: scaleX(-1);
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > * {
+  flex-shrink: 0 !important;
+  margin: 0 4px 0 0 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :first-child {
+  margin-left: 8px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] > :last-child {
+  order: 2 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: var(--lp-island-size) !important;
+  height: var(--lp-island-size) !important;
+  margin: 0 0 0 var(--lp-island-gap) !important;
+  border-radius: 50% !important;
+  background: var(--lp-island-sheen), linear-gradient(var(--lp-island-c), var(--lp-island-c)) !important;
+  box-shadow: none !important;
+}
+
+@keyframes lp-reply-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="clipContainer_"] > [class*="container_"] {
+  position: relative !important;
+  border-radius: 16px 16px 0 0 !important;
+  background: linear-gradient(rgb(0 0 0 / 0.18), rgb(0 0 0 / 0.18)), var(--lp-island-bg) !important;
+  box-shadow: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="clipContainer_"] > [class*="container_"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px 2px 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(90deg in oklch, var(--lp-ring), var(--lp-island-to));
+  opacity: 0.6;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"] {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"]::before {
+  opacity: 0;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"]::after {
+  padding-top: 0;
+  opacity: 0.6;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="hasStackedBar_"] div[class*="textArea_"]:focus-within::after {
+  opacity: 1;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="replyBar_"] [class*="actions_"] {
+  align-items: center !important;
+  gap: 6px;
+  margin-right: 8px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="replyBar_"] [class*="closeButton_"] {
+  display: grid !important;
+  place-items: center !important;
+  width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)) !important;
+  box-shadow: var(--lp-glass-edge) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="replyBar_"] [class*="closeButton_"] svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="replyBar_"] [class*="mentionButton_"] {
+  padding: 2px 10px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)) !important;
+  box-shadow: var(--lp-glass-edge) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="replyBar_"] [class*="name_"] {
+  font-weight: 800 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="autocomplete_"] {
+  margin-inline: calc(var(--lp-island-size) + var(--lp-island-gap)) calc(var(--vc-composer-end-w, var(--lp-island-end)) + var(--lp-island-gap)) !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)), color-mix(in srgb, var(--lp-shell) 88%, transparent) !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.4) !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] [class*="characterCount_"] {
+  top: -8px !important;
+  bottom: auto !important;
+  inset-inline-end: 18px !important;
+  padding: 1px 8px !important;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--lp-shell) 90%, transparent) !important;
+  box-shadow: none !important;
+  font-size: 12px !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="channelTextAreaDisabled"] :is([class*="attachWrapper"], div[class*="buttons_"]) {
+  display: none !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="channelTextAreaDisabled"] div[class*="textArea_"] {
+  opacity: 0.7;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="channelTextAreaDisabled"] div[class*="textArea_"]::before,
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="channelTextAreaDisabled"] div[class*="textArea_"]::after {
+  content: none;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"][class*="channelTextAreaDisabled"] div[class*="placeholder"] {
+  text-align: center !important;
+  opacity: 1 !important;
+}
+
+main[class*="chatContent"] > form[class*="form_"] div[class*="channelTextArea"] div[class*="buttons_"] :is([class*="spriteContainer"], [class*="lottieIcon"]) {
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+@property --lp-drop-turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+[class*="uploadArea_"][class*="uploadModalIn_"] {
+  background: rgb(0 0 0 / 0.5) !important;
+}
+
+[class*="uploadDropModal_"] [class*="bgScale_"] {
+  border-radius: 28px !important;
+  background: linear-gradient(var(--lp-glass-top), var(--lp-glass-bottom)), color-mix(in srgb, var(--lp-shell) 84%, transparent) !important;
+  box-shadow: var(--lp-glass-edge), 0 18px 50px rgb(0 0 0 / 0.5) !important;
+}
+
+[class*="uploadDropModal_"] [class*="bgScale_"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(from var(--lp-drop-turn), var(--lp-island-from), var(--lp-ring), var(--lp-island-to), var(--lp-ring), var(--lp-island-from));
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [class*="uploadDropModal_"] [class*="bgScale_"]::after {
+    animation: lp-drop-turn 5s linear infinite;
+  }
+}
+
+@keyframes lp-drop-turn {
+  to {
+    --lp-drop-turn: 360deg;
+  }
+}
+
+[class*="uploadDropModal_"] [class*="inner_"] {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+[class*="uploadDropModal_"] [class*="title_"] {
+  color: var(--lp-text) !important;
+  font-family: var(--lp-font) !important;
+  font-weight: 800 !important;
+}
+
+[class*="uploadDropModal_"] [class*="instructions_"] {
+  color: var(--lp-dim) !important;
 }
