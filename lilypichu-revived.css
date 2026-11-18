@@ -3180,3 +3180,37 @@ main[class*="chatContent"] > form[class*="form_"][data-vc-composer-over] div[cla
 [class*="uploadDropModal_"] [class*="instructions_"] {
   color: var(--lp-dim) !important;
 }
+
+:root {
+  --lp-glass-fill: var(--lp-2a);
+  --lp-text-halo: 0 1px 2px rgb(0 0 0 / 0.5);
+}
+
+.theme-light {
+  --lp-text-halo: 0 1px 2px rgb(255 255 255 / 0.65);
+}
+
+div[class*="base_"] > div[class*="bar_"],
+.vc-channeltabs-container,
+div[class*="chat_"],
+.page_pog62O > * > div[class*="chat_"] {
+  background: var(--lp-glass-fill) !important;
+}
+
+:is([class*="content_"], div[class*="base_"]) > div[class*="sidebar_"] {
+  background-image: linear-gradient(var(--lp-glass-fill), var(--lp-glass-fill)) !important;
+}
+
+div[class*="sidebarList"],
+div[class*="sidebarList"] > nav[class*="container_"],
+div[class*="sidebar_"] > [class*="container_"],
+div[class*="sidebarList"] header:is(h3, header)[class*="header_"] {
+  background: transparent !important;
+}
+
+div[class*="base_"] > div[class*="bar_"],
+.vc-channeltabs-container,
+div[class*="sidebarList"],
+div[class*="chat_"] {
+  text-shadow: var(--lp-text-halo);
+}
