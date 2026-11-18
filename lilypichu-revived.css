@@ -3214,3 +3214,7 @@ div[class*="sidebarList"],
 div[class*="chat_"] {
   text-shadow: var(--lp-text-halo);
 }
+
+:is([class*="withDisplayNameStyles"], [class*="withDisplayNameStyles"] *, [class*="gradient" i], [class*="username" i], [class*="username" i] *) {
+  text-shadow: none !important;
+}
