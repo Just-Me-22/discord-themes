@@ -3226,3 +3226,17 @@ div[class*="chat_"] {
 [class*="privateChannels_"] li[style*="--vc-plate-tint"] > [class*="interactive_"] > div[class*="container_"] {
   background: linear-gradient(90deg, transparent 42%, color-mix(in srgb, var(--vc-plate-tint) var(--lp-plate-backing, 70%), transparent) 88%) !important;
 }
+
+[class*="membersWrap_"] div[class*="member_"] div[class*="container_"][style*="linear-gradient"] {
+  background: none !important;
+}
+
+[class*="membersWrap_"] div[class*="member_"][style*="--vc-plate-tint"] div[class*="container_"][style*="linear-gradient"] {
+  background: linear-gradient(90deg, transparent 42%, color-mix(in srgb, var(--vc-plate-tint) var(--lp-plate-backing, 70%), transparent) 88%) !important;
+}
+
+:root,
+.theme-dark,
+.theme-light {
+  --chat-text-muted: var(--lp-faint);
+}
