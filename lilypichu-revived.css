@@ -3219,13 +3219,10 @@ div[class*="chat_"] {
   text-shadow: none !important;
 }
 
-[style*="--custom-nameplate"] {
-  --custom-nameplate-neutral: transparent !important;
-  --custom-nameplate-neutral-hovered: transparent !important;
+[class*="privateChannels_"] [class*="interactive_"] > div[class*="container_"][style*="linear-gradient"] {
+  background: none !important;
 }
 
-[class*="privateChannels_"] [class*="tabBackgroundImage_"] {
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  opacity: var(--lp-plate-opacity, 1) !important;
+[class*="privateChannels_"] li[style*="--vc-plate-tint"] > [class*="interactive_"] > div[class*="container_"] {
+  background: linear-gradient(90deg, transparent 42%, color-mix(in srgb, var(--vc-plate-tint) var(--lp-plate-backing, 70%), transparent) 88%) !important;
 }
