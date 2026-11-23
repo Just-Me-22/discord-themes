@@ -3218,3 +3218,14 @@ div[class*="chat_"] {
 :is([class*="withDisplayNameStyles"], [class*="withDisplayNameStyles"] *, [class*="gradient" i], [class*="username" i], [class*="username" i] *) {
   text-shadow: none !important;
 }
+
+[style*="--custom-nameplate"] {
+  --custom-nameplate-neutral: transparent !important;
+  --custom-nameplate-neutral-hovered: transparent !important;
+}
+
+[class*="privateChannels_"] [class*="tabBackgroundImage_"] {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  opacity: var(--lp-plate-opacity, 1) !important;
+}
