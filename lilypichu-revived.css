@@ -3240,3 +3240,74 @@ div[class*="chat_"] {
 .theme-light {
   --chat-text-muted: var(--lp-faint);
 }
+
+/* native channel tabs, dressed like ChannelTabs */
+div[class*="bar_"] [class*="tabBar_"] {
+  --custom-channel-tab-background: transparent;
+  gap: 0;
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="tab_"] {
+  margin: 0 4px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--vc-ntt-tint, transparent) 14%, transparent);
+  box-shadow: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="tab_"]::before {
+  display: none;
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="tab_"]:hover {
+  border-color: var(--vc-ntt-tint, var(--border-subtle));
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="tabActive_"],
+div[class*="bar_"] [class*="tabBar_"] > [class*="tabActive_"]:hover {
+  border-color: var(--background-mod-muted);
+  background-color: color-mix(in srgb, var(--vc-ntt-tint, transparent) 26%, var(--background-base-low));
+  background-image: linear-gradient(var(--lp-accent, var(--brand-500)), var(--lp-accent, var(--brand-500)));
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: calc(100% - 6px) 2px;
+  box-shadow: none;
+}
+
+div[class*="bar_"] [class*="tabBar_"] [class*="channelName_"] {
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="tab_"]:hover [class*="channelName_"] {
+  color: var(--text-default);
+}
+
+div[class*="bar_"] [class*="tabBar_"] > :is([class*="tabActive_"], [class*="tabUnread_"]) [class*="channelName_"] {
+  color: var(--interactive-active, var(--text-strong));
+}
+
+div[class*="bar_"] [class*="tabBar_"] [class*="trailButton_"] {
+  border-radius: 6px;
+}
+
+div[class*="bar_"] [class*="tabBar_"] [class*="trailButton_"]:hover {
+  background-color: var(--background-mod-subtle);
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="newTabButton_"] {
+  margin: 0 4px;
+}
+
+div[class*="bar_"] [class*="tabBar_"] > [class*="newTabButton_"] [role="button"],
+div[class*="bar_"] [class*="tabBar_"] > [class*="newTabButton_"] button {
+  border-radius: 6px;
+}
+
+/* second tab row, styled like the other panels */
+.vc-ntt-row {
+  background: var(--lp-3a) !important;
+  border-radius: var(--lp-inner, 10px) !important;
+}
