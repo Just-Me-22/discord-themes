@@ -275,7 +275,7 @@
 }
 
 /* All App */
-#app-mount .bar_c38106:not(.systemBar_c38106) {
+#app-mount .bar_3zSH5d:not(.systemBar_3zSH5d) {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     min-height: 36px;
     border: var(--border-width) solid var(--border-color);
@@ -288,7 +288,7 @@
 
 /* the strip and the content are siblings that together draw one frame, so any space
    between them is a hole in the left and right edges rather than a gap between boxes */
-#app-mount .content__5e434:not(:has(.fullScreen_cb9592)) {
+#app-mount .content_pog62O:not(:has(.fullScreen_cb9592)) {
     margin-top: 0;
     /* the box itself paints nothing, so a pixel of the page gradient was showing between
        the frame and the chat wherever the children did not reach the edge */
@@ -299,53 +299,53 @@
     border-bottom-right-radius: var(--round-corners);
 }
 
-#app-mount .sidebar__5e434 {
+#app-mount .sidebar_pog62O {
     border-bottom-right-radius: var(--round-corners);
 }
-#app-mount .page__5e434:not(:has(.fullScreen_cb9592)) {
+#app-mount .page_pog62O:not(:has(.fullScreen_cb9592)) {
     border-bottom-left-radius: var(--round-corners);
 }
 
 /* Like Another Window */
-#app-mount .base__5e434:not(:has(.fullScreen_cb9592)) {
+#app-mount .base_pog62O:not(:has(.fullScreen_cb9592)) {
     /* left = gutter 12 + card + its borders + 18 of gap, so the chat card follows the dm card */
     /* the layer is already 24 in, so this is card + its borders + a 20px gap */
     margin: var(--chat-top) var(--chat-right) var(--chat-bottom) var(--chat-left);
 }
-#app-mount .winButtons_c38106 {
+#app-mount .winButtons_3zSH5d {
     left: calc(calc((308px + (var(--border-width)*2)) + 18px) + (14px + var(--border-width)));
     top: calc(36px + (var(--border-width)*2));
 }
 
 /* Fullscreen */
-#app-mount .content__5e434:has(.fullScreen_cb9592) {
+#app-mount .content_pog62O:has(.fullScreen_cb9592) {
     box-shadow: var(--frame);
     border-radius: var(--round-corners);
 }
 
-#app-mount .page__5e434:has(.fullScreen_cb9592) {
+#app-mount .page_pog62O:has(.fullScreen_cb9592) {
     border-radius: var(--round-corners);
 }
 
-#app-mount .base__5e434:has(.fullScreen_cb9592) {
+#app-mount .base_pog62O:has(.fullScreen_cb9592) {
     margin: 12px;
 }
 
 /* the buttons and the --custom-text title were fixed to the top of the WINDOW while the
    bar they belong on sits inside the app, so the two drifted apart by however much was
    stacked above. */
-#app-mount .bar_c38106 {
+#app-mount .bar_3zSH5d {
     position: relative;
     display: flex;
     align-items: center;
 }
 /* the buttons live inside .trailing, so trailing has to stay unpositioned or the
    buttons anchor to it and end up on the right. */
-#app-mount .title_c38106,
-#app-mount .bar_c38106 .trailing_c38106 {
+#app-mount .title_3zSH5d,
+#app-mount .bar_3zSH5d .trailing_3zSH5d {
     position: static;
 }
-#app-mount .winButtons_c38106 {
+#app-mount .winButtons_3zSH5d {
     position: absolute;
     left: 12px;
     top: 50%;
@@ -355,13 +355,13 @@
  /* discord's own 32px system bar at the very top carries a second copy of the window
    buttons. the themed ones live on the chat bar, so these are hidden. channeltabs draws
    its tab row into that bar's space, so only the channeltabs strip gets painted. */
-#app-mount .systemBar_c38106 .winButtons_c38106 {
+#app-mount .systemBar_3zSH5d .winButtons_3zSH5d {
     display: none;
 }
 /* the bar is 32px of nothing sitting at z-index 999999 across the whole top row, and the
    tab row channeltabs draws underneath it is exactly that tall, so every tab was only
    clickable on the few... */
-#app-mount .systemBar_c38106 {
+#app-mount .systemBar_3zSH5d {
     pointer-events: none;
 }
 
@@ -398,26 +398,26 @@
 
 /* the nameplate picture is made for a 300px wide panel. cover keeps its shape when the
    panel is wider instead of stretching it. */
-#app-mount .accountPopoutButtonWrapper__37e49.plated img,
-#app-mount .accountPopoutButtonWrapper__37e49.plated video {
+#app-mount .accountPopoutButtonWrapper_g6VwXp.plated img,
+#app-mount .accountPopoutButtonWrapper_g6VwXp.plated video {
     object-fit: cover;
     object-position: right center;
 }
 
 /* WinButtons */
-.winButtons_c38106 {
+.winButtons_3zSH5d {
     position: fixed;
     left: calc(9px + var(--border-width));
     top: calc(12px + (var(--border-width)*2));
     flex-direction: row-reverse;
     -webkit-app-region: no-drag;
 }
-.leading_c38106,
-.winButtonsWithDivider_c38106:before {
+.leading_3zSH5d,
+.winButtonsWithDivider_3zSH5d:before {
     display: none;
 }
 
-.winButton_c38106 {
+.winButton_3zSH5d {
     color: transparent !important;
     border-radius: 50%;
     width: 12px !important;
@@ -426,19 +426,19 @@
     margin-right: 3px;
 }
 
-.winButton_c38106:nth-child(3) {
+.winButton_3zSH5d:nth-child(3) {
     background: var(--close-color);
 }
-.winButton_c38106:nth-child(2) {
+.winButton_3zSH5d:nth-child(2) {
     background: var(--max-color);
 }
-.winButton_c38106:nth-child(1) {
+.winButton_3zSH5d:nth-child(1) {
     background: var(--min-color);
 }
 
-.winButton_c38106:nth-child(3):hover,
-.winButton_c38106:nth-child(2):hover,
-.winButton_c38106:nth-child(1):hover {
+.winButton_3zSH5d:nth-child(3):hover,
+.winButton_3zSH5d:nth-child(2):hover,
+.winButton_3zSH5d:nth-child(1):hover {
     transform: scale(1.14);
 }
 
@@ -446,7 +446,7 @@
 /* the drag strip was a static block with a min-height and no anchor, so canary stretched
    it to the full height of the card and discord's own list painted over it. both cards
    are position:fixed, so... */
-.panels__5e434::before {
+.panels_pog62O::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
     content: "";
@@ -463,7 +463,7 @@
 }
 /* the same width as the dm list above it, so the two cards line up. it used to be
    332px, which is the whole gutter, so it stuck out past the list and under the app. */
-#app-mount .panels__5e434 {
+#app-mount .panels_pog62O {
     width: var(--card-width) !important;
     border-radius: var(--round-corners);
 }
@@ -471,8 +471,8 @@
 /* discord washes every nameplate with a dark neutral so its own text stays readable.
    on a light theme that reads as a grey block over the art, so it is turned off on the
    user panel and on the dm rows. the value is set inline, hence the !important. */
-#app-mount .accountPopoutButtonWrapper__37e49.plated,
-#app-mount .link__972a0 {
+#app-mount .accountPopoutButtonWrapper_g6VwXp.plated,
+#app-mount .link_zln_tS {
     --custom-nameplate-neutral: transparent !important;
     --custom-nameplate-neutral-hovered: transparent !important;
 }
@@ -480,14 +480,14 @@
 /* the chat used to paint discord's white under the picture, so any opacity below 1
    washed it out. the picture sits on the card itself now and the knobs above do
    the lightening. */
-#app-mount .chatContent_f75fb0 {
+#app-mount .chatContent_z_gUBg {
     background: transparent;
 }
 
 /* chat text picks its colour from --bg-dark: light text on a dark picture, discord's
    own dark text on a light one. only the chat card is touched, the rest of the light
    theme stays as it is. */
-#app-mount .chat_f75fb0 {
+#app-mount .chat_z_gUBg {
     --on-picture: color-mix(in srgb, #f2f3f5 calc(var(--bg-dark) * 100%), #313d40);
     --text-default: var(--on-picture);
     --text-strong: var(--on-picture);
@@ -501,14 +501,14 @@
     --interactive-icon-active: var(--on-picture);
 }
 /* the white fade discord paints behind the typing row, gone so the picture shows */
-#app-mount .form_f75fb0::before {
+#app-mount .form_z_gUBg::before {
     background: none;
 }
 
 /* the name row's nameplate runs square into the card's rounded corners */
 /* the row is 56px inside a taller card, so the nameplate stopped short and left the
    card's own colour showing under it. filling the height takes the art to the bottom. */
-#app-mount .panels__5e434 .container__37e49 {
+#app-mount .panels_pog62O .container_g6VwXp {
     border-radius: 0 0 var(--round-corners) var(--round-corners);
     height: 100%;
     align-items: center;
@@ -518,7 +518,7 @@
 /* the dm list and the user bar are both lifted out of the app and fixed into the gutter
    on the left. --custom-app-panels-height is discord's own measurement of the user
    panel, live: it read 271.65px... */
-#app-mount .sidebarList__5e434 {
+#app-mount .sidebarList_pog62O {
     position: fixed;
     left: 24px;
     /* level with the chat window's own top edge: both are --chat-top plus whatever is
@@ -537,11 +537,11 @@
        box slid up under it. this puts the 32px back. */
     padding-top: 32px;
 }
-.sidebarResizeHandle__5e434 {
+.sidebarResizeHandle_pog62O {
     display: none;
 }
 
-.panels__5e434 {
+.panels_pog62O {
     position: fixed;
     left: 24px;
     top: auto !important;
@@ -555,18 +555,18 @@
     padding-top: 32px;
     box-sizing: border-box;
 }
-.content__5e434 {
+.content_pog62O {
     display: flex;
     flex-direction: row-reverse;
 }
-.sidebar__5e434 {
+.sidebar_pog62O {
     width: calc(69px + var(--border-width));
 }
 
 /* betterfolders replaces the server rail with its own container and gives it an inline
-   width, so the theme's rules for .wrapper_ef3116 land inside a box that is already the
+   width, so the theme's rules for .wrapper_5dqHTG land inside a box that is already the
    wrong size and nothing moves. */
-#app-mount .sidebar__5e434 {
+#app-mount .sidebar_pog62O {
     position: relative !important;
 }
 #app-mount .vc-betterFolders-sidebar {
@@ -575,7 +575,7 @@
     bottom: 0 !important;
     height: auto !important;
 }
-.wrapper_ef3116 {
+.wrapper_5dqHTG {
     top: 0px;
     height: 100%;
     position: absolute;
@@ -585,7 +585,7 @@
 /* the drag strip was a static block with a min-height and no anchor, so canary stretched
    it to the full height of the card and discord's own list painted over it. both cards
    are position:fixed, so... */
-.sidebarList__5e434::before {
+.sidebarList_pog62O::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
     content: "";
@@ -600,22 +600,22 @@
     border-top-right-radius: var(--round-corners);
     -webkit-app-region: drag;
 }
-.sidebarList__5e434 {
+.sidebarList_pog62O {
     border-radius: var(--round-corners);
 }
 
-.bannerVisible_f37cb1 .headerEllipseForeground_f37cb1 {
+.bannerVisible_XH4OpX .headerEllipseForeground_XH4OpX {
     display: none;
 }
 
-.content_f75fb0:not(:has(.outer_c0bea0)){
+.content_z_gUBg:not(:has(.outer_P1YEjQ)){
     flex-direction: row-reverse;
 }
 
 /* the ground behind everything. the tint is a flat layer over the picture, so the blur
    leaves it alone and only softens what is underneath. the scale pushes the blur's soft
    rim off the edges of the window, where it would otherwise show as a pale border. */
-.bg__960e4 {
+.bg_Fd0FEH {
     background:
         linear-gradient(var(--glass-tint), var(--glass-tint)),
         var(--page-bg) center / var(--page-bg-size) no-repeat fixed;
@@ -624,15 +624,15 @@
 }
 
 /* Top Icons */
-#app-mount .bar_c38106 .trailing_c38106 {
+#app-mount .bar_3zSH5d .trailing_3zSH5d {
     margin-left: auto;
     margin-right: calc(13px + var(--border-width));
 }
-#app-mount .bar_c38106 svg:not(.winButtons_c38106 svg) {
+#app-mount .bar_3zSH5d svg:not(.winButtons_3zSH5d svg) {
     color: #fff;
 }
 
-#app-mount .title_c38106::before {
+#app-mount .title_3zSH5d::before {
     content: var(--custom-text);
     text-align: center;
     position: absolute;
@@ -644,32 +644,32 @@
     font-weight: 600;
     color: #fff;
 }
-#app-mount .title_c38106 div,
-#app-mount .title_c38106 svg {
+#app-mount .title_3zSH5d div,
+#app-mount .title_3zSH5d svg {
     display: none;
 }
 
 /* Server List */
-#app-mount .wrapper_ef3116 {
+#app-mount .wrapper_5dqHTG {
     left: unset;
     right: 0;
 }
-#app-mount .wrapper_ef3116 .wrapper__58105 {
+#app-mount .wrapper_5dqHTG .wrapper__o8_Xq {
     left: 60px;
     flex-direction: row-reverse;
 }
-#app-mount .wrapper_ef3116 .item__58105 {
+#app-mount .wrapper_5dqHTG .item__o8_Xq {
     border-radius: 4px;
     margin-left: unset;
     width: 4px;
 }
 
-.sidebar__5e434:after {
+.sidebar_pog62O:after {
     height: 15px;
 }
 
 /* Bar Alert */
-#app-mount .notice__6e2b9 {
+#app-mount .notice_Q02kKo {
     border-radius: 100px;
     width: 50%;
     justify-self: center;
@@ -677,25 +677,25 @@
 }
 
 /* DM List */
-#app-mount .scroller__99e7c {
+#app-mount .scroller_Bce46W {
     margin-bottom: 0;
     padding-bottom: 0;
 }
 
 /* Server Name */
-.guildDropdown_f37cb1:not(.hasBanner_f37cb1.bannerVisible_f37cb1 .guildDropdown_f37cb1) {
+.guildDropdown_XH4OpX:not(.hasBanner_XH4OpX.bannerVisible_XH4OpX .guildDropdown_XH4OpX) {
     background-color: var(--name-bg) !important;
     border-radius: 4px;
     width: 100%;
     box-shadow: none;
 }
-.header_f37cb1 .name_f37cb1 {
+.header_XH4OpX .name_XH4OpX {
     color: #fff !important;
 }
-.header_f37cb1 .headerChildren_f37cb1 path {
+.header_XH4OpX .headerChildren_XH4OpX path {
     fill: #fff !important;
 }
-.header_f37cb1 .guildBadgeAndName_f37cb1::before {
+.header_XH4OpX .guildBadgeAndName_XH4OpX::before {
     opacity: 1;
     content: ">";
     color: #fff;
@@ -705,21 +705,21 @@
     left: 0;
     transition: all 200ms;
 }
-.header_f37cb1:hover .guildBadgeAndName_f37cb1::before {
+.header_XH4OpX:hover .guildBadgeAndName_XH4OpX::before {
     left: 3px;
     transition: all 200ms;
 }
 
 /* Channel List */
-#app-mount .scroller__629e4 {
+#app-mount .scroller_ysO7Gy {
     margin-bottom: 0;
 }
 
-#app-mount .container__2637a {
+#app-mount .container_H5ozaj {
     padding-bottom: 0;
 }
 
-#app-mount .bottom__7aaec {
+#app-mount .bottom_t1P8Sn {
     bottom: 0;
 }
 
@@ -729,20 +729,20 @@
 }
 
 /* Mini Profile */
-.layerContainer__59d0d .user-profile-popout {
+.layerContainer_VVADeK .user-profile-popout {
     margin: 0 26px 0 0;
     height: calc(100% - 24px);
 }
 
-#app-mount .profileEffects__0dd08,
-#app-mount .profileEffects__0dd08 .inner__0dd08 {
+#app-mount .profileEffects_ZjcCyW,
+#app-mount .profileEffects_ZjcCyW .inner_ZjcCyW {
     border-radius: var(--round-corners);
 }
 
 /* same drag strip fix as the two left hand cards: a static block with only a min-height
    had nothing anchoring its top and nothing capping its height, so it grew to the whole
    popout and the content... */
-.popoutContainer_ce8328 .outer_c0bea0::before {
+.popoutContainer_nitlyF .outer_P1YEjQ::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     content: "";
     position: absolute;
@@ -757,17 +757,17 @@
     -webkit-app-region: drag;
 }
 /* the banner's own corners are square and cut into the frame's curve */
-.popoutContainer_ce8328 .header__5be3e {
+.popoutContainer_nitlyF .header_NOlkhE {
     border-radius: var(--round-corners) var(--round-corners) 0 0;
     overflow: hidden;
 }
 /* the avatar sits 15px below the card top and the drag strip is 32px, so the strip cut
    across the top of the profile frame. */
-.popoutContainer_ce8328 .avatar__75742 {
+.popoutContainer_nitlyF .avatar_WRLIGC {
     z-index: 2;
 }
 
-.popoutContainer_ce8328 .outer_c0bea0 {
+.popoutContainer_nitlyF .outer_P1YEjQ {
     position: relative;
     box-shadow: var(--frame);
     border-radius: var(--round-corners);
@@ -778,7 +778,7 @@
     --custom-user-profile-theme-padding: 0 !important;
 }
 
-#app-mount .inner_c0bea0 {
+#app-mount .inner_P1YEjQ {
     border-radius: 0 0 var(--round-corners) var(--round-corners);
 }
 
@@ -799,7 +799,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* discord's profile wash is translucent by design, so whatever sits behind a profile
    card shows through it: the chat in the modal, and a near black rgb(45, 6, 18) on the
    widgets column. */
-#app-mount .outer_c0bea0 {
+#app-mount .outer_P1YEjQ {
     background: var(--modal-ground);
     max-height: calc(100vh - var(--top-offset) - 56px) !important;
 }
@@ -807,31 +807,31 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* the widget cards in the profile modal are near white, which glares next to the pink
    everywhere else. a wash of the drag gradient takes the edge off and still leaves the
    cards distinct from the column behind them. */
-#app-mount .widgetContainer__0ea1a .root__01fb0 {
+#app-mount .widgetContainer__0ea1a .root_BQi7pE {
     background: color-mix(in srgb, var(--drag-gradient2) var(--profile-card-tint), var(--profile-card-base));
     border-radius: var(--widget-corners);
     overflow: hidden;
 }
-#app-mount .banner__68edb {
+#app-mount .banner_s9bWOi {
     border-radius: 0;
 }
 
 /* the effect was pushed 32px down and cut 32px short so the drag strip would not paint
    over it. the strip sits at z-index 1 now, so the clamp was costing the effect the top
    of the card for nothing. */
-#app-mount .profileEffects__0dd08 {
+#app-mount .profileEffects_ZjcCyW {
     top: 0;
     height: 100%;
     z-index: 3;
 }
 
-.userTagUsername__26b1f {
+.userTagUsername_C2XpHA {
     background-color: var(--name-bg);
     border-radius: 2px;
     padding-right: 6px;
     padding-left: 9px;
 }
-.userTagUsername__26b1f::before {
+.userTagUsername_C2XpHA::before {
     opacity: 1;
     content: ">";
     color: #fff;
@@ -840,10 +840,10 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 }
 
 /* Big Profile */
-#app-mount .user-profile-modal-v2 .profile__9c3be {
+#app-mount .user-profile-modal-v2 .profile_s3DB6Y {
     border-radius: var(--round-corners);
 }
-#app-mount .user-profile-modal-v2 .profileHeader__9c3be {
+#app-mount .user-profile-modal-v2 .profileHeader_s3DB6Y {
     border-radius: 0;
 }
 
@@ -851,12 +851,12 @@ html.theme-dark #app-mount .custom-user-profile-theme {
    gets position:relative so the strip anchors to it rather than to whatever discord
    has positioned further up. */
 /* measured: the profile card runs x=808..1214 and the widgets column x=1172..2013, both
-   inside .layoutContainer__9c3be at x=832..2034. the frame and the strip used to be on
+   inside .layoutContainer_s3DB6Y at x=832..2034. the frame and the strip used to be on
    the widgets column alone, which left the card outside them. */
-/* measured on the open modal, 2026-09-08: .layoutContainer__9c3be 1500 wide, x 683..2183
-   .editingPanel__9c3be 242 wide, x 646..887 an <aside>, overhangs 37px left
-   .outer_c0bea0 1252 wide, x... */
-#app-mount .layoutContainer__9c3be {
+/* measured on the open modal, 2026-09-08: .layoutContainer_s3DB6Y 1500 wide, x 683..2183
+   .editingPanel_s3DB6Y 242 wide, x 646..887 an <aside>, overhangs 37px left
+   .outer_P1YEjQ 1252 wide, x... */
+#app-mount .layoutContainer_s3DB6Y {
     position: relative;
     border: none;
     border-radius: 0;
@@ -865,8 +865,8 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     overflow: visible;
 }
 
-#app-mount .layoutContainer__9c3be .outer_c0bea0,
-#app-mount .layoutContainer__9c3be .editingPanel__9c3be {
+#app-mount .layoutContainer_s3DB6Y .outer_P1YEjQ,
+#app-mount .layoutContainer_s3DB6Y .editingPanel_s3DB6Y {
     position: relative;
     box-shadow: var(--frame);
     border-radius: var(--round-corners);
@@ -877,21 +877,21 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* the profile effect is drawn well outside the card on purpose: discord hands it
    --custom-profile-frame-overflow-top: 304 and 56 to each side, so the card is never
    clipped and the box inside it... */
-#app-mount .layoutContainer__9c3be .inner_c0bea0,
-#app-mount .layoutContainer__9c3be .backgroundImage__9c3be {
+#app-mount .layoutContainer_s3DB6Y .inner_P1YEjQ,
+#app-mount .layoutContainer_s3DB6Y .backgroundImage_s3DB6Y {
     border-radius: 0 0 var(--round-corners) var(--round-corners);
 }
 
 /* the settings panel sat flush against the card. moved with a transform so it costs no
    layout, which matters here because this modal is already expensive to lay out. */
-#app-mount .layoutContainer__9c3be .editingPanel__9c3be {
+#app-mount .layoutContainer_s3DB6Y .editingPanel_s3DB6Y {
     transform: translateX(-16px);
     width: var(--editor-panel-width);
     flex: 0 0 var(--editor-panel-width);
 }
 
-#app-mount .layoutContainer__9c3be .outer_c0bea0::before,
-#app-mount .layoutContainer__9c3be .editingPanel__9c3be::before {
+#app-mount .layoutContainer_s3DB6Y .outer_P1YEjQ::before,
+#app-mount .layoutContainer_s3DB6Y .editingPanel_s3DB6Y::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     content: "";
     position: absolute;
@@ -913,11 +913,11 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* the strip only has to sit above the card's own ground. everything the card holds
    belongs in front of it, and the frame overflows the top by 304px so it is the one
    thing that meets the strip at all. */
-#app-mount .layoutContainer__9c3be .outer_c0bea0 > * {
+#app-mount .layoutContainer_s3DB6Y .outer_P1YEjQ > * {
     z-index: 2;
 }
 
-#app-mount .layoutContainer__9c3be .profile__9c3be {
+#app-mount .layoutContainer_s3DB6Y .profile_s3DB6Y {
     transform: translateX(calc(var(--profile-gap) * -1));
     /* a transform makes this a stacking context, so the effect's own z-index stops at
        the column's edge and the drag strip above it cut the frame off. lifting the
@@ -932,38 +932,38 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 
 /* discord works the whole modal out from these, including how wide each column gets,
    so growing it is one number rather than three hand set widths that fight each other */
-#app-mount .layoutContainer__9c3be {
+#app-mount .layoutContainer_s3DB6Y {
     --custom-modal-v2-width: var(--modal-width);
     --custom-modal-v2-height: min(var(--modal-height), calc(100vh - 96px));
 }
 
-#app-mount .user-profile-modal-v2 .inner_c0bea0 {
+#app-mount .user-profile-modal-v2 .inner_P1YEjQ {
     height: calc(100% - 32px);
     padding-top: 0;
 }
 
-#app-mount .user-profile-modal-v2 .tabBarPanel__37bfc {
+#app-mount .user-profile-modal-v2 .tabBarPanel_y4ZEM5 {
     padding: 0;
 }
 
-#app-mount .user-profile-modal-v2 .tabBarPanel__37bfc .imageGridPositioner__01fb0 {
+#app-mount .user-profile-modal-v2 .tabBarPanel_y4ZEM5 .imageGridPositioner_BQi7pE {
     height: 240px;
 }
-#app-mount .user-profile-modal-v2 .tabBarPanel__37bfc .image__01fb0 {
+#app-mount .user-profile-modal-v2 .tabBarPanel_y4ZEM5 .image_BQi7pE {
     width: auto;
     height: 100%;
     right: 0;
     position: absolute;
 }
 
-#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be {
+#app-mount .layoutContainer_s3DB6Y.editingPanelEnabled_s3DB6Y {
     z-index: 9;
 }
-#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be .editingPanel__9c3be {
+#app-mount .layoutContainer_s3DB6Y.editingPanelEnabled_s3DB6Y .editingPanel_s3DB6Y {
     box-shadow: var(--frame);
     border-radius: var(--round-corners);
 }
-#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be .editingPanel__9c3be::before {
+#app-mount .layoutContainer_s3DB6Y.editingPanelEnabled_s3DB6Y .editingPanel_s3DB6Y::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
     content: "";
@@ -978,21 +978,21 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     border-top-right-radius: var(--round-corners);
     -webkit-app-region: drag;
 }
-#app-mount .layoutContainer__9c3be.editingPanelEnabled__9c3be .editingPanel__9c3be .panelInner_b08638 {
+#app-mount .layoutContainer_s3DB6Y.editingPanelEnabled_s3DB6Y .editingPanel_s3DB6Y .panelInner_BfN7RR {
     padding-top: 32px;
 }
 
-.editingPanelExpandButtonDefaultContainer__9c3be {
+.editingPanelExpandButtonDefaultContainer_s3DB6Y {
     position: fixed;
     left: -53px;
 }
-.modalHeaderButtons_b92f52 {
+.modalHeaderButtons_ZhNJfE {
     top: -20px;
     right: -40px;
 }
 
 /* DM profile */
-.content_f75fb0 .user-profile-sidebar::before {
+.content_z_gUBg .user-profile-sidebar::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
     content: "";
@@ -1007,17 +1007,17 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     border-top-right-radius: var(--round-corners);
     -webkit-app-region: drag;
 }
-.content_f75fb0 .user-profile-sidebar {
+.content_z_gUBg .user-profile-sidebar {
     position: relative;
     box-shadow: var(--frame);
     border-radius: var(--round-corners);
 }
-#app-mount .user-profile-sidebar .inner_c0bea0 {
+#app-mount .user-profile-sidebar .inner_P1YEjQ {
     border-radius: 0 0 var(--round-corners) var(--round-corners);
 }
 
 /* Settings */
-.modalContent_e44912:has(.container_a28278)::before {
+.modalContent__F9ieB:has(.container_9AraPt)::before {
     background: linear-gradient(var(--drag-gradient1), var(--drag-gradient2));
     display: block;
     content: "";
@@ -1029,31 +1029,31 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     border-top-right-radius: var(--round-corners);
     -webkit-app-region: drag;
 }
-#app-mount .modalContent_e44912:has(.container_a28278) {
+#app-mount .modalContent__F9ieB:has(.container_9AraPt) {
     box-shadow: var(--frame);
     border-radius: var(--round-corners);
 }
 
-.modalContentInner_e44912 {
+.modalContentInner__F9ieB {
     height: calc(100% - 32px);
 }
-#app-mount .container_a28278 .contentBody__43da9 {
+#app-mount .container_9AraPt .contentBody_AOdYmi {
     border-bottom-right-radius: var(--round-corners);
 }
-#app-mount .modalContentInner_e44912:has(.container_a28278) {
+#app-mount .modalContentInner__F9ieB:has(.container_9AraPt) {
     height: calc(100% - 32px);
 }
 
 /* Chat */
-.chat_f75fb0 .search__49676 {
+.chat_z_gUBg .search_bWCaDq {
     position: absolute;
     left: 0;
     margin: 0 8px;
 }
-.chat_f75fb0 .search__49676 .searchBar_c322aa {
+.chat_z_gUBg .search_bWCaDq .searchBar_i16Ad0 {
     width: 248px;
 }
-.chat_f75fb0 .children__9293f:not(.noChat_cb9592 .children__9293f, .fullScreen_cb9592 .children__9293f) {
+.chat_z_gUBg .children_ybUK7Z:not(.noChat_cb9592 .children_ybUK7Z, .fullScreen_cb9592 .children_ybUK7Z) {
     margin-left: calc(248px + 8px);
 }
 
@@ -1061,64 +1061,64 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 #app-mount .chatGradient__36d07 {
     background: transparent;
 }
-#app-mount .channelTextArea__74017 {
+#app-mount .channelTextArea_2x8-Qn {
     background: transparent;
     border: none;
 }
-#app-mount .channelTextArea__74017 .themedBackground__74017 {
+#app-mount .channelTextArea_2x8-Qn .themedBackground_2x8-Qn {
     background: var(--textarea-background);
     border-radius: 50px;
     border: 1px solid var(--border-color);
     margin: 0 8px 8px;
     transition: box-shadow 180ms ease-out, border-color 180ms ease-out;
 }
-#app-mount .channelTextArea__74017 .themedBackground__74017:hover {
+#app-mount .channelTextArea_2x8-Qn .themedBackground_2x8-Qn:hover {
     border-color: color-mix(in srgb, var(--border-color) 70%, #fff);
 }
-#app-mount .channelTextArea__74017 .themedBackground__74017:focus-within {
+#app-mount .channelTextArea_2x8-Qn .themedBackground_2x8-Qn:focus-within {
     border-color: color-mix(in srgb, var(--border-color) 45%, #fff);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-color) 38%, transparent);
 }
 
-#app-mount .channelTextArea__74017 .slateTextArea_ec4baf {
+#app-mount .channelTextArea_2x8-Qn .slateTextArea_q99V_- {
     font-weight: 500;
     caret-color: var(--text-color);
     color: var(--text-color);
 }
 
-#app-mount .channelTextArea__74017 svg:not(.stackedBars__74017 svg) {
+#app-mount .channelTextArea_2x8-Qn svg:not(.stackedBars_2x8-Qn svg) {
     color: var(--icon-color);
 }
-#app-mount .channelTextArea__74017 .spriteGreyscale__04eed {
+#app-mount .channelTextArea_2x8-Qn .spriteGreyscale_SjG8Ug {
     background-color: var(--icon-color);
 }
 
-#app-mount .channelTextArea__74017 .stackedBars__74017 {
+#app-mount .channelTextArea_2x8-Qn .stackedBars_2x8-Qn {
     margin: 8px;
     border: 1px solid var(--border-color);
     border-radius: var(--round-corners);
 }
-#app-mount .channelTextArea__74017 .clipContainer__841c8 {
+#app-mount .channelTextArea_2x8-Qn .clipContainer_rE8-46 {
     padding: 0;
 }
 
 /* Settings switch */
-.switchIndicator_a28278[style*="background-color: rgb(88, 101, 242)"] {
+.switchIndicator_9AraPt[style*="background-color: rgb(88, 101, 242)"] {
     background-color: var(--blue-new-30) !important;
 }
 
 
 /* Like Another Window */
-#app-mount .typeWindows__421ed {
+#app-mount .typeWindows_gnMEnp {
     margin: var(--chat-top) var(--chat-right) 0;
 }
-#app-mount .typeWindows__421ed::after {
+#app-mount .typeWindows_gnMEnp::after {
     top: calc(30px + var(--border-width));
     width: calc((100% - var(--border-width)*2) - 24px*2);
 }
 /* the shadow came from when the whole app was one window. the cards are their own
    boxes now, so it only showed as a faint rectangle behind them. */
-#app-mount .layers__960e4 > [class*="layer_"]:first-child {
+#app-mount .layers_Fd0FEH > [class*="layer_"]:first-child {
     /* the 24px on the left is the gutter's own edge, where the two cards start, not the
        chat's. the chat clears them with --chat-left. */
     margin: 0 var(--chat-right) var(--chat-bottom) 24px;
@@ -1126,7 +1126,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 }
 
 /* MacOS window */
-#app-mount .typeMacOS__421ed {
+#app-mount .typeMacOS_gnMEnp {
     margin-top: 24px;
     margin-left: 24px;
     border-top-left-radius: var(--round-corners);
@@ -1141,19 +1141,19 @@ html.theme-dark #app-mount .custom-user-profile-theme {
     --EaseType: cubic-bezier(0, 0.75, 0, 1.75);
 }
 
-/* Settings List Items */ .sectionList__409aa .item_caf372:hover,
-/* Active now card */ .itemCard__7e549:hover,
+/* Settings List Items */ .sectionList_cR4ic2 .item_xyJHva:hover,
+/* Active now card */ .itemCard_-7KzVR:hover,
 /* Activity button */ .buttonSize__124c8:hover,
-/* Friendlist */ .peopleListItem_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179:hover {
+/* Friendlist */ .peopleListItem_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179:hover {
     transform-origin: center;
     transform: scale(var(--HoverScale));
     box-shadow: var(--elevation-high);
 }
 
-/* Settings List Items */ .sectionList__409aa .item_caf372,
-/* Active now card */ .itemCard__7e549,
+/* Settings List Items */ .sectionList_cR4ic2 .item_xyJHva,
+/* Active now card */ .itemCard_-7KzVR,
 /* Activity button */ .buttonSize__124c8,
-/* Friendlist */ .peopleListItem_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 {
+/* Friendlist */ .peopleListItem_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 text-md/medium_cc6179 {
     transition: var(--EaseType) var(--TransitionTime);
     box-shadow: none;
 }
@@ -1161,7 +1161,7 @@ html.theme-dark #app-mount .custom-user-profile-theme {
 /* ===================================================================== background-
    image.css the picture behind the chat. */
 /* Chat Background */
-#app-mount .chatContent_f75fb0::before {
+#app-mount .chatContent_z_gUBg::before {
     display: block;
     position: absolute;
     content: "";
@@ -1571,11 +1571,11 @@ section[class*="panels_"] .vc-spotify-lyrics-next {
 }
 
 /* the heading over the dm list. */
-#app-mount .privateChannelsHeaderContainer__99e7c .headerText__99e7c {
+#app-mount .privateChannelsHeaderContainer_Bce46W .headerText_Bce46W {
     visibility: hidden;
     position: relative;
 }
-#app-mount .privateChannelsHeaderContainer__99e7c .headerText__99e7c::before {
+#app-mount .privateChannelsHeaderContainer_Bce46W .headerText_Bce46W::before {
     content: var(--dm-header);
     visibility: visible;
     position: absolute;
